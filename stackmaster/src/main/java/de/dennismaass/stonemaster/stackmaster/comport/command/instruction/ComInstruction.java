@@ -44,7 +44,7 @@ public class ComInstruction extends AComCommand {
 
 	@Override
 	public String toString() {
-		return "Instruction(" + (address & 0xff) + ", " + (instruction & 0xff) + ", " + type + ", " + motor + ", "
+		return "instruction(" + (address & 0xff) + ", " + (instruction & 0xff) + ", " + type + ", " + motor + ", "
 				+ value + ", " + (getChecksum() & 0xff) + ")";
 	}
 
