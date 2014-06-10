@@ -1,0 +1,16 @@
+#Mon May 12 23:07:02 CEST 2014
+lastStep=0.01
+slowDownSpeed=100
+middleUpSpeed=500
+stepsPerMm=64025
+sleepPictureMovement=1000
+slowUpSpeed=100
+fastDownSpeed=1000
+sleepMovementMirror=1000
+microstepResolutionMode=4
+sleepMirrorPicture=1000
+fastUpSpeed=1000
+sleepWhileMove=3000
+middleDownSpeed=500
+reverse=false
+pulseDuration=500
