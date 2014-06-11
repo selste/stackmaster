@@ -49,9 +49,13 @@ import de.dennismaass.stonemaster.stackmaster.comport.connection.ConnectionThrea
 import de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler;
 
 //TODO:
-//windows und mac profile in maven einbauen
+
+//Bugs:
 //Validierung aller Textfelder
 //Kein Absturz mehr nach Trennen vom USB-Anschluss
+
+//Features:
+//windows und mac profile in maven einbauen
 //Start-Ende (Rückkanal)
 //Baukasten
 public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
@@ -145,6 +149,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		propertiesHandler = new PropertiesHandler();
 		connectionProperties = propertiesHandler.loadConnectionProperties(defaultFile);
 		defaultConnectionProperties = propertiesHandler.loadConnectionProperties(defaultFileBackup);
+
 		propertiesDialog = createPropertiesDialog(connectionProperties, defaultConnectionProperties);
 		setTitle(TITLE + " - defaults");
 
@@ -173,6 +178,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		setAllComponentsDisableState(true);
 
+		setNewConnectionProperties(defaultConnectionProperties);
 		LOGGER.info("user interface builded");
 	}
 
@@ -209,7 +215,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		connectButton.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(final ActionEvent e) {
+			public void actionPerformed(final ActionEvent actionEvent) {
 				LOGGER.info("click connect button");
 
 				if (communicator == null) {
@@ -239,8 +245,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 					boolean connect = false;
 					try {
 						connect = communicator.connect();
-					} catch (final PortInUseException e1) {
-						e1.printStackTrace();
+					} catch (final PortInUseException e) {
+						e.printStackTrace();
 						stateLine.setText(communicator.getComPort() + " wird von einem anderen Programm verwendet");
 					}
 					if (connect) {
@@ -420,7 +426,6 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 			final ComConnectionProperties defaultConnectionProperties) {
 		propertiesDialog = new PropertiesDialog(connectionProperties, defaultConnectionProperties);
 		propertiesDialog.addComConnectionPropertiesListener(this);
-		// propertiesDialog.loadConnectionProperties(defaultFile);
 		return propertiesDialog;
 	}
 

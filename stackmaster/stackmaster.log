@@ -265,3 +265,535 @@
 2014-06-04 23:43:37 INFO  PropertiesHandler:22 - try loading properties
 2014-06-04 23:43:37 INFO  PropertiesHandler:26 - properties loaded
 2014-06-04 23:43:40 INFO  SwingStarter:374 - chosen file: C:\Users\Dennis\Documents\test.stackmaster
+2014-06-11 21:21:50 INFO  SwingStarter:114 - Start SwingStarter
+2014-06-11 21:21:50 INFO  SwingStarter:116 - OS_ARCH amd64
+2014-06-11 21:21:50 INFO  SwingStarter:117 - OS_NAME windows 8.1
+2014-06-11 21:21:50 INFO  SwingStarter:118 - OS_VERSION 6.3
+2014-06-11 21:21:50 INFO  SwingStarter:134 - try building user interface
+2014-06-11 21:21:50 INFO  PropertiesHandler:22 - try loading properties
+2014-06-11 21:21:50 INFO  PropertiesHandler:26 - properties loaded
+2014-06-11 21:21:50 INFO  PropertiesHandler:22 - try loading properties
+2014-06-11 21:21:50 INFO  PropertiesHandler:26 - properties loaded
+2014-06-11 21:21:50 ERROR SwingStarter:531 - Error in main-methode by creating SwingStarter object
+java.lang.NullPointerException
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.setNewConnectionProperties(SwingStarter.java:546)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:152)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:528)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 21:22:15 INFO  SwingStarter:114 - Start SwingStarter
+2014-06-11 21:22:15 INFO  SwingStarter:116 - OS_ARCH amd64
+2014-06-11 21:22:15 INFO  SwingStarter:117 - OS_NAME windows 8.1
+2014-06-11 21:22:15 INFO  SwingStarter:118 - OS_VERSION 6.3
+2014-06-11 21:22:15 INFO  SwingStarter:134 - try building user interface
+2014-06-11 21:22:15 INFO  PropertiesHandler:22 - try loading properties
+2014-06-11 21:22:15 INFO  PropertiesHandler:26 - properties loaded
+2014-06-11 21:22:15 INFO  PropertiesHandler:22 - try loading properties
+2014-06-11 21:22:15 INFO  PropertiesHandler:26 - properties loaded
+2014-06-11 21:22:16 INFO  SwingStarter:505 - resize icon to 15 x 15
+2014-06-11 21:22:16 INFO  SwingStarter:505 - resize icon to 15 x 15
+2014-06-11 21:22:16 INFO  RelativPosPanel:350 - resize icon to 70x70
+2014-06-11 21:22:16 INFO  RelativPosPanel:350 - resize icon to 50x50
+2014-06-11 21:22:16 INFO  RelativPosPanel:350 - resize icon to 30x30
+2014-06-11 21:22:16 INFO  RelativPosPanel:350 - resize icon to 30x30
+2014-06-11 21:22:16 INFO  RelativPosPanel:350 - resize icon to 50x50
+2014-06-11 21:22:16 INFO  RelativPosPanel:350 - resize icon to 70x70
+2014-06-11 21:22:16 INFO  SwingStarter:443 - build connection thread
+2014-06-11 21:22:16 INFO  SwingStarter:290 - set all components disable
+2014-06-11 21:22:16 INFO  StepPanel:425 - set all components disable
+2014-06-11 21:22:16 INFO  RelativPosPanel:362 - set all components disable
+2014-06-11 21:22:16 INFO  SwingStarter:182 - user interface builded
+2014-06-11 22:53:21 INFO  SwingStarter:114 - Start SwingStarter
+2014-06-11 22:53:21 INFO  SwingStarter:116 - OS_ARCH amd64
+2014-06-11 22:53:21 INFO  SwingStarter:117 - OS_NAME windows 8.1
+2014-06-11 22:53:21 INFO  SwingStarter:118 - OS_VERSION 6.3
+2014-06-11 22:53:21 INFO  SwingStarter:134 - try building user interface
+2014-06-11 22:53:21 INFO  PropertiesHandler:36 - try loading properties
+2014-06-11 22:53:21 ERROR PropertiesHandler:50 - Error before or while reading properties file
+java.util.zip.ZipException: error in opening zip file
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:215)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:145)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:159)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.readProperties(PropertiesHandler.java:37)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:58)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 22:53:21 ERROR PropertiesHandler:66 - error by parsing fastUpSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:63)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 22:53:21 ERROR PropertiesHandler:73 - error by parsing middleUpSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:70)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 22:53:21 ERROR PropertiesHandler:80 - error by parsing slowUpSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:77)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 22:53:21 ERROR PropertiesHandler:87 - error by parsing slowDownSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:84)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 22:53:21 ERROR PropertiesHandler:94 - error by parsing middleDownSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:91)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 22:53:21 ERROR PropertiesHandler:101 - error by parsing fastDownSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:98)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 22:53:21 ERROR PropertiesHandler:108 - error by parsing stepsPerMm
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:105)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 22:53:21 ERROR PropertiesHandler:122 - error by parsing microstepResolutionMode
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:119)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 22:53:21 ERROR SwingStarter:532 - Error in main-methode by creating SwingStarter object
+java.lang.NullPointerException
+	at sun.misc.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:1008)
+	at java.lang.Double.parseDouble(Double.java:540)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:126)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 23:01:04 INFO  SwingStarter:114 - Start SwingStarter
+2014-06-11 23:01:04 INFO  SwingStarter:116 - OS_ARCH amd64
+2014-06-11 23:01:04 INFO  SwingStarter:117 - OS_NAME windows 8.1
+2014-06-11 23:01:04 INFO  SwingStarter:118 - OS_VERSION 6.3
+2014-06-11 23:01:04 INFO  SwingStarter:134 - try building user interface
+2014-06-11 23:01:05 INFO  PropertiesHandler:36 - try loading properties
+2014-06-11 23:01:05 ERROR PropertiesHandler:50 - Error before or while reading properties file
+java.io.FileNotFoundException: stackmaster.properties (Das System kann die angegebene Datei nicht finden)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:146)
+	at java.io.FileInputStream.<init>(FileInputStream.java:101)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.readProperties(PropertiesHandler.java:43)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:58)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 23:01:05 ERROR PropertiesHandler:66 - error by parsing fastUpSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:63)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 23:01:05 ERROR PropertiesHandler:73 - error by parsing middleUpSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:70)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 23:01:05 ERROR PropertiesHandler:80 - error by parsing slowUpSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:77)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 23:01:05 ERROR PropertiesHandler:87 - error by parsing slowDownSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:84)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 23:01:05 ERROR PropertiesHandler:94 - error by parsing middleDownSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:91)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 23:01:05 ERROR PropertiesHandler:101 - error by parsing fastDownSpeed
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:98)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 23:01:05 ERROR PropertiesHandler:108 - error by parsing stepsPerMm
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:105)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 23:01:05 ERROR PropertiesHandler:122 - error by parsing microstepResolutionMode
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:119)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 23:01:05 ERROR SwingStarter:532 - Error in main-methode by creating SwingStarter object
+java.lang.NullPointerException
+	at sun.misc.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:1008)
+	at java.lang.Double.parseDouble(Double.java:540)
+	at de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler.loadConnectionProperties(PropertiesHandler.java:126)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter.<init>(SwingStarter.java:150)
+	at de.dennismaass.stonemaster.stackmaster.ui.swing.SwingStarter$9.run(SwingStarter.java:529)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-11 23:07:34 INFO  SwingStarter:114 - Start SwingStarter
+2014-06-11 23:07:34 INFO  SwingStarter:116 - OS_ARCH amd64
+2014-06-11 23:07:34 INFO  SwingStarter:117 - OS_NAME windows 8.1
+2014-06-11 23:07:34 INFO  SwingStarter:118 - OS_VERSION 6.3
+2014-06-11 23:07:34 INFO  SwingStarter:134 - try building user interface
+2014-06-11 23:07:34 INFO  PropertiesHandler:35 - try loading properties
+2014-06-11 23:07:34 INFO  PropertiesHandler:47 - properties loaded
+2014-06-11 23:07:34 INFO  PropertiesHandler:35 - try loading properties
+2014-06-11 23:07:34 INFO  PropertiesHandler:47 - properties loaded
+2014-06-11 23:07:34 INFO  SwingStarter:505 - resize icon to 15 x 15
+2014-06-11 23:07:34 INFO  SwingStarter:505 - resize icon to 15 x 15
+2014-06-11 23:07:34 INFO  RelativPosPanel:350 - resize icon to 70x70
+2014-06-11 23:07:34 INFO  RelativPosPanel:350 - resize icon to 50x50
+2014-06-11 23:07:34 INFO  RelativPosPanel:350 - resize icon to 30x30
+2014-06-11 23:07:34 INFO  RelativPosPanel:350 - resize icon to 30x30
+2014-06-11 23:07:34 INFO  RelativPosPanel:350 - resize icon to 50x50
+2014-06-11 23:07:34 INFO  RelativPosPanel:350 - resize icon to 70x70
+2014-06-11 23:07:34 INFO  SwingStarter:443 - build connection thread
+2014-06-11 23:07:34 INFO  SwingStarter:290 - set all components disable
+2014-06-11 23:07:34 INFO  StepPanel:425 - set all components disable
+2014-06-11 23:07:34 INFO  RelativPosPanel:362 - set all components disable
+2014-06-11 23:07:34 INFO  SwingStarter:182 - user interface builded
+2014-06-11 23:10:22 INFO  SwingStarter:114 - Start SwingStarter
+2014-06-11 23:10:22 INFO  SwingStarter:116 - OS_ARCH amd64
+2014-06-11 23:10:22 INFO  SwingStarter:117 - OS_NAME windows 8.1
+2014-06-11 23:10:22 INFO  SwingStarter:118 - OS_VERSION 6.3
+2014-06-11 23:10:22 INFO  SwingStarter:134 - try building user interface
+2014-06-11 23:10:22 INFO  PropertiesHandler:35 - try loading properties
+2014-06-11 23:10:22 INFO  PropertiesHandler:47 - properties loaded
+2014-06-11 23:10:22 INFO  PropertiesHandler:35 - try loading properties
+2014-06-11 23:10:22 INFO  PropertiesHandler:47 - properties loaded
+2014-06-11 23:10:22 INFO  SwingStarter:505 - resize icon to 15 x 15
+2014-06-11 23:10:22 INFO  SwingStarter:505 - resize icon to 15 x 15
+2014-06-11 23:10:22 INFO  RelativPosPanel:350 - resize icon to 70x70
+2014-06-11 23:10:22 INFO  RelativPosPanel:350 - resize icon to 50x50
+2014-06-11 23:10:22 INFO  RelativPosPanel:350 - resize icon to 30x30
+2014-06-11 23:10:22 INFO  RelativPosPanel:350 - resize icon to 30x30
+2014-06-11 23:10:22 INFO  RelativPosPanel:350 - resize icon to 50x50
+2014-06-11 23:10:22 INFO  RelativPosPanel:350 - resize icon to 70x70
+2014-06-11 23:10:22 INFO  SwingStarter:443 - build connection thread
+2014-06-11 23:10:22 INFO  SwingStarter:290 - set all components disable
+2014-06-11 23:10:22 INFO  StepPanel:425 - set all components disable
+2014-06-11 23:10:22 INFO  RelativPosPanel:362 - set all components disable
+2014-06-11 23:10:22 INFO  SwingStarter:182 - user interface builded
+2014-06-11 23:10:52 INFO  SwingStarter:380 - chosen file: C:\Users\Dennis\Desktop\writeTest.stackmaster

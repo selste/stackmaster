@@ -7,13 +7,14 @@ public class ComConnectionProperties {
 	private boolean reverse = false;
 	private int microstepResolutionMode = 4;
 
-	private double lastStep = 0.01;
-
 	private long sleepMovementMirror = 1000;
 	private long sleepMirrorPicture = 1000;
 	private long sleepWhileMove = 1000;
 	private long sleepPictureMovement = 1000;
 	private long pulseDuration = 1000;
+
+	private double lastStep = 0.01;
+	private int lastPictureCount;
 
 	public int getFastUpSpeed() {
 		return fastUpSpeed;

@@ -1,12 +1,14 @@
 package de.dennismaass.stonemaster.stackmaster.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.Properties;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.log4j.Logger;
 
@@ -18,11 +20,30 @@ public class PropertiesHandler {
 	public Properties readProperties(final File fileName) {
 		final Properties properties = new Properties();
 
+		// try {
+		// LOGGER.info("try loading properties");
+		// final BufferedInputStream stream = new BufferedInputStream(new FileInputStream(fileName));
+		// properties.load(stream);
+		// stream.close();
+		// LOGGER.info("properties loaded");
+		// } catch (final IOException e) {
+		// LOGGER.error("Error before or while reading properties file", e);
+		// e.printStackTrace();
+		// }
+
 		try {
 			LOGGER.info("try loading properties");
-			final BufferedInputStream stream = new BufferedInputStream(new FileInputStream(fileName));
-			properties.load(stream);
-			stream.close();
+			final ZipFile zipFile = new ZipFile(fileName);
+			final Enumeration<? extends ZipEntry> entries = zipFile.entries();
+
+			while (entries.hasMoreElements()) {
+				final ZipEntry zipEntry = entries.nextElement();
+
+				final InputStream inputStream = zipFile.getInputStream(zipEntry);
+				properties.load(inputStream);
+				inputStream.close();
+			}
+			zipFile.close();
 			LOGGER.info("properties loaded");
 		} catch (final IOException e) {
 			LOGGER.error("Error before or while reading properties file", e);
@@ -147,51 +168,70 @@ public class PropertiesHandler {
 	}
 
 	public void writeConnectionProperties(final File file, final ComConnectionProperties comConnectionProperties) {
+
+		final Properties properties = new Properties();
+		// final BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
+
+		final int fastUpSpeed = comConnectionProperties.getFastUpSpeed();
+		properties.setProperty("fastUpSpeed", Integer.toString(fastUpSpeed));
+		final int middleUpSpeed = comConnectionProperties.getMiddleUpSpeed();
+		properties.setProperty("middleUpSpeed", Integer.toString(middleUpSpeed));
+		final int slowUpSpeed = comConnectionProperties.getSlowUpSpeed();
+		properties.setProperty("slowUpSpeed", Integer.toString(slowUpSpeed));
+		final int fastDownSpeed = comConnectionProperties.getFastDownSpeed();
+		properties.setProperty("fastDownSpeed", Integer.toString(fastDownSpeed));
+		final int middleDownSpeed = comConnectionProperties.getMiddleDownSpeed();
+		properties.setProperty("middleDownSpeed", Integer.toString(middleDownSpeed));
+		final int slowDownSpeed = comConnectionProperties.getSlowDownSpeed();
+		properties.setProperty("slowDownSpeed", Integer.toString(slowDownSpeed));
+		final int stepsPerMm = comConnectionProperties.getStepsPerMm();
+		properties.setProperty("stepsPerMm", Integer.toString(stepsPerMm));
+		final boolean reverse = comConnectionProperties.isReverse();
+		properties.setProperty("reverse", Boolean.toString(reverse));
+		final int microstepResolutionMode = comConnectionProperties.getMicrostepResolutionMode();
+		properties.setProperty("microstepResolutionMode", Integer.toString(microstepResolutionMode));
+		final long pulseDuration = comConnectionProperties.getPulseDuration();
+		properties.setProperty("pulseDuration", Long.toString(pulseDuration));
+
+		final long sleepPictureMovement = comConnectionProperties.getSleepPictureMovement();
+		properties.setProperty("sleepPictureMovement", Long.toString(sleepPictureMovement));
+
+		final long sleepWhileMove = comConnectionProperties.getSleepWhileMove();
+		properties.setProperty("sleepWhileMove", Long.toString(sleepWhileMove));
+
+		final long sleepMirrorPicture = comConnectionProperties.getSleepMirrorPicture();
+		properties.setProperty("sleepMirrorPicture", Long.toString(sleepMirrorPicture));
+
+		final long sleepMovementMirror = comConnectionProperties.getSleepMovementMirror();
+		properties.setProperty("sleepMovementMirror", Long.toString(sleepMovementMirror));
+
+		final double lastStep = comConnectionProperties.getLastStep();
+		properties.setProperty("lastStep", Double.toString(lastStep));
+
+		// byte[] buffer = new byte[1024];
+
 		try {
-			final Properties properties = new Properties();
-			final BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
 
-			final int fastUpSpeed = comConnectionProperties.getFastUpSpeed();
-			properties.setProperty("fastUpSpeed", Integer.toString(fastUpSpeed));
-			final int middleUpSpeed = comConnectionProperties.getMiddleUpSpeed();
-			properties.setProperty("middleUpSpeed", Integer.toString(middleUpSpeed));
-			final int slowUpSpeed = comConnectionProperties.getSlowUpSpeed();
-			properties.setProperty("slowUpSpeed", Integer.toString(slowUpSpeed));
-			final int fastDownSpeed = comConnectionProperties.getFastDownSpeed();
-			properties.setProperty("fastDownSpeed", Integer.toString(fastDownSpeed));
-			final int middleDownSpeed = comConnectionProperties.getMiddleDownSpeed();
-			properties.setProperty("middleDownSpeed", Integer.toString(middleDownSpeed));
-			final int slowDownSpeed = comConnectionProperties.getSlowDownSpeed();
-			properties.setProperty("slowDownSpeed", Integer.toString(slowDownSpeed));
-			final int stepsPerMm = comConnectionProperties.getStepsPerMm();
-			properties.setProperty("stepsPerMm", Integer.toString(stepsPerMm));
-			final boolean reverse = comConnectionProperties.isReverse();
-			properties.setProperty("reverse", Boolean.toString(reverse));
-			final int microstepResolutionMode = comConnectionProperties.getMicrostepResolutionMode();
-			properties.setProperty("microstepResolutionMode", Integer.toString(microstepResolutionMode));
-			final long pulseDuration = comConnectionProperties.getPulseDuration();
-			properties.setProperty("pulseDuration", Long.toString(pulseDuration));
+			final FileOutputStream fos = new FileOutputStream(file);
+			final ZipOutputStream zos = new ZipOutputStream(fos);
+			final ZipEntry ze = new ZipEntry("stackmaster.properties");
+			zos.putNextEntry(ze);
 
-			final long sleepPictureMovement = comConnectionProperties.getSleepPictureMovement();
-			properties.setProperty("sleepPictureMovement", Long.toString(sleepPictureMovement));
+			// int len;
+			// while ((len = in.read(buffer)) > 0) {
+			// zos.write(buffer, 0, len);
+			// }
+			properties.storeToXML(zos, "stackmaster properties", "UTF-8");
 
-			final long sleepWhileMove = comConnectionProperties.getSleepWhileMove();
-			properties.setProperty("sleepWhileMove", Long.toString(sleepWhileMove));
+			zos.closeEntry();
 
-			final long sleepMirrorPicture = comConnectionProperties.getSleepMirrorPicture();
-			properties.setProperty("sleepMirrorPicture", Long.toString(sleepMirrorPicture));
+			// remember close it
+			zos.close();
 
-			final long sleepMovementMirror = comConnectionProperties.getSleepMovementMirror();
-			properties.setProperty("sleepMovementMirror", Long.toString(sleepMovementMirror));
-
-			final double lastStep = comConnectionProperties.getLastStep();
-			properties.setProperty("lastStep", Double.toString(lastStep));
-
-			properties.store(stream, null);
-
-		} catch (final IOException e) {
-			e.printStackTrace();
+		} catch (final IOException ex) {
+			ex.printStackTrace();
 		}
+
 	}
 
 }
