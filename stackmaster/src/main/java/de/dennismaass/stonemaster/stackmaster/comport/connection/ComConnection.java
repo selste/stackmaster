@@ -21,6 +21,7 @@ import java.util.TooManyListenersException;
 import de.dennismaass.stonemaster.stackmaster.comport.command.ComInstructionID;
 import de.dennismaass.stonemaster.stackmaster.comport.connection.bytemessage.ByteMessageEvent;
 import de.dennismaass.stonemaster.stackmaster.comport.connection.bytemessage.ByteMessageListener;
+import de.dennismaass.stonemaster.stackmaster.comport.connection.exception.ChecksumException;
 import de.dennismaass.stonemaster.stackmaster.util.RxtxUtils;
 
 public class ComConnection implements SerialPortEventListener {
@@ -44,6 +45,8 @@ public class ComConnection implements SerialPortEventListener {
 	// private final byte[] readBuffer = new byte[9];
 
 	private final List<ByteMessageListener> byteEventListener = new ArrayList<>();
+
+	private boolean stopWhenChecksumError = true;
 
 	private ComConnection(final String comPortName) {
 		super();
@@ -174,7 +177,7 @@ public class ComConnection implements SerialPortEventListener {
 		return connected;
 	}
 
-	public byte[] receive() {
+	public byte[] receive() throws ChecksumException {
 		final byte[] buffer = new byte[9];
 		final byte[] temp = new byte[9];
 		int dataIndex = 0;
@@ -203,13 +206,15 @@ public class ComConnection implements SerialPortEventListener {
 						if (checksum == buffer[8]) {
 							return buffer;
 						} else {
+							if (isStopWhenChecksumError()) {
+								send(1, ComInstructionID.MOTOR_STOP, 0, 0, 0);
+							}
+							throw new ChecksumException("Checksum-Error in " + buffer);
 							// String buff = "";
 							// for (int k = 0; k < 8; k++) {
 							// buff += buffer[k] + ", ";
 							// }
 							// buff += buffer[8];
-							send(1, ComInstructionID.MOTOR_STOP, 0, 0, 0);
-							return null;
 						}
 					}
 				} else {
@@ -228,8 +233,13 @@ public class ComConnection implements SerialPortEventListener {
 	@Override
 	public void serialEvent(final SerialPortEvent event) {
 		if (event.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
-			final byte[] answer = receive();
-			sendEvent(answer);
+			byte[] answer;
+			try {
+				answer = receive();
+				sendEvent(answer);
+			} catch (final ChecksumException e) {
+				e.printStackTrace();
+			}
 		} else {
 			System.out.println("Eventtype: " + event.getEventType());
 		}
@@ -251,6 +261,14 @@ public class ComConnection implements SerialPortEventListener {
 
 	public void setComPortName(final String comPortName) {
 		this.comPortName = comPortName;
+	}
+
+	public boolean isStopWhenChecksumError() {
+		return stopWhenChecksumError;
+	}
+
+	public void setStopWhenChecksumError(final boolean stopWhenChecksumError) {
+		this.stopWhenChecksumError = stopWhenChecksumError;
 	}
 
 }

@@ -88,7 +88,7 @@ public class StepPanel extends JPanel {
 		add(autoStepSizeTitle, "cell 0 0,alignx trailing");
 
 		stepsizeTF = new JSpinner();
-		stepsizeTF.setModel(new SpinnerNumberModel(properties.getLastStep(), 0.001, 250.0, 0.001));
+		stepsizeTF.setModel(new SpinnerNumberModel(properties.getStepSize(), 0.001, 250.0, 0.001));
 		add(stepsizeTF, "cell 1 0,growx");
 		stepsizeTF.addChangeListener(new ChangeListener() {
 
@@ -403,9 +403,9 @@ public class StepPanel extends JPanel {
 	}
 
 	public void setVariablesFromProperties(final ComConnectionProperties properties) {
-		lastManStep = properties.getLastStep();
+		lastManStep = properties.getStepSize();
 
-		reverseStep = properties.isReverse();
+		reverseStep = properties.isReverseSteps();
 		sleepMovementMirror = properties.getSleepMovementMirror();
 		sleepMirrorPicture = properties.getSleepMirrorPicture();
 		sleepWhileMove = properties.getSleepWhileMove();
@@ -415,7 +415,7 @@ public class StepPanel extends JPanel {
 	}
 
 	protected void setPropertiesFromVariables(final ComConnectionProperties properties) {
-		properties.setLastStep(lastManStep);
+		properties.setStepSize(lastManStep);
 	}
 
 	public void setAllComponentsDisableState(final boolean disableState) {

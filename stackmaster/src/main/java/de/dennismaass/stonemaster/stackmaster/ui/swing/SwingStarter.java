@@ -39,6 +39,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.log4j.Logger;
 
+import de.dennismaass.stonemaster.stackmaster.comport.command.ComInstructionID;
 import de.dennismaass.stonemaster.stackmaster.comport.command.answer.ComAnswerEvent;
 import de.dennismaass.stonemaster.stackmaster.comport.command.answer.ComAnswerListener;
 import de.dennismaass.stonemaster.stackmaster.comport.communicator.ComCommunicator;
@@ -46,7 +47,10 @@ import de.dennismaass.stonemaster.stackmaster.comport.connection.ComConnectionPr
 import de.dennismaass.stonemaster.stackmaster.comport.connection.CommPortIdentifierNotificationEvent;
 import de.dennismaass.stonemaster.stackmaster.comport.connection.CommPortIdentifierNotificationListener;
 import de.dennismaass.stonemaster.stackmaster.comport.connection.ConnectionThread;
-import de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler;
+import de.dennismaass.stonemaster.stackmaster.profile.Profile;
+import de.dennismaass.stonemaster.stackmaster.profile.ProfileFileHandler;
+import de.dennismaass.stonemaster.stackmaster.properties.UiProperties;
+import de.dennismaass.stonemaster.stackmaster.util.ImageUtils;
 
 //TODO:
 
@@ -58,6 +62,7 @@ import de.dennismaass.stonemaster.stackmaster.util.PropertiesHandler;
 //windows und mac profile in maven einbauen
 //Start-Ende (Rückkanal)
 //Baukasten
+//Mehrsprachigkeit
 public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
 		ComConnectionPropertiesListener {
 
@@ -84,8 +89,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 	private JLabel stateLine;
 
 	/* Properties */
-	private final ComConnectionProperties connectionProperties;
-	private final ComConnectionProperties defaultConnectionProperties;
+	private final Profile profile;
+	private final Profile defaultProfile;
 	private final int microstepResolutionMode = 4;
 
 	private final int stepsPerMm = 64025;
@@ -101,11 +106,11 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 	private JMenuItem mntmProfilSpeichernAls;
 
 	private PropertiesDialog propertiesDialog;
-	private boolean startPropertiesfileLoaded = true;
+
 	private final File defaultFileBackup = new File("default.stackmaster.backup");
 	private final File defaultFile = new File("default.stackmaster");
-	private File actualOpenedPropertiesFileName = defaultFile;
-	private final PropertiesHandler propertiesHandler;
+	private File actualOpenedProfileFileName = defaultFile;
+	private final ProfileFileHandler propertiesHandler;
 
 	/**
 	 * Create the frame.
@@ -127,7 +132,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 					communicator.disconnect();
 				}
 
-				stepPanel.setPropertiesFromVariables(connectionProperties);
+				stepPanel.setPropertiesFromVariables(profile.getProperties());
 			}
 		});
 
@@ -146,11 +151,12 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		setBounds(100, 100, 550, 520);
 
-		propertiesHandler = new PropertiesHandler();
-		connectionProperties = propertiesHandler.loadConnectionProperties(defaultFile);
-		defaultConnectionProperties = propertiesHandler.loadConnectionProperties(defaultFileBackup);
+		propertiesHandler = new ProfileFileHandler();
+		profile = propertiesHandler.readProfile(defaultFile);
+		defaultProfile = propertiesHandler.readProfile(defaultFileBackup);
 
-		propertiesDialog = createPropertiesDialog(connectionProperties, defaultConnectionProperties);
+		propertiesDialog = createPropertiesDialog(profile.getProperties(),
+				defaultProfile.getProperties());
 		setTitle(TITLE + " - defaults");
 
 		initMenu();
@@ -167,10 +173,10 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		final JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
-		relativPosPanel = new RelativPosPanel(connectionProperties, stateLine);
+		relativPosPanel = new RelativPosPanel(profile.getProperties(), stateLine);
 		tabbedPane.addTab("relativ", null, relativPosPanel, null);
 
-		stepPanel = new StepPanel(connectionProperties, stateLine);
+		stepPanel = new StepPanel(profile.getProperties(), stateLine);
 		tabbedPane.addTab("Schritte", null, stepPanel, null);
 
 		connectThread = newConnectionThread();
@@ -178,7 +184,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		setAllComponentsDisableState(true);
 
-		setNewConnectionProperties(defaultConnectionProperties);
+		setNewConnectionProperties(defaultProfile.getProperties());
 		LOGGER.info("user interface builded");
 	}
 
@@ -305,7 +311,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		final URL deleteURL = getClass().getResource(IMAGES + "delete-icon.png");
 		final ImageIcon deleteIcon = new ImageIcon(deleteURL);
-		final ImageIcon resizedDeleteIcon = getResizedImage(deleteIcon, 15, 15);
+		final ImageIcon resizedDeleteIcon = ImageUtils.getResizedImage(deleteIcon, 15, 15);
 
 		final JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.setIcon(resizedDeleteIcon);
@@ -331,12 +337,11 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 					final File selectedFile = chooser.getSelectedFile();
 					if (selectedFile != null) {
 						LOGGER.info("chosen file: " + selectedFile);
-						actualOpenedPropertiesFileName = selectedFile;
-						final ComConnectionProperties loadedConnectionProperties = propertiesHandler
-								.loadConnectionProperties(actualOpenedPropertiesFileName);
-						setNewConnectionProperties(loadedConnectionProperties);
+						actualOpenedProfileFileName = selectedFile;
+						final Profile loadedConnectionProperties = propertiesHandler
+								.readProfile(actualOpenedProfileFileName);
+						setNewConnectionProperties(loadedConnectionProperties.getProperties());
 						setTitle(TITLE + " - " + selectedFile.getAbsolutePath());
-						startPropertiesfileLoaded = false;
 						mntmProfilSpeichern.setEnabled(true);
 					}
 				}
@@ -351,8 +356,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-				LOGGER.info("chosen file: " + actualOpenedPropertiesFileName.getAbsolutePath());
-				propertiesHandler.writeConnectionProperties(actualOpenedPropertiesFileName, connectionProperties);
+				LOGGER.info("chosen file: " + actualOpenedProfileFileName.getAbsolutePath());
+				propertiesHandler.writeProfile(actualOpenedProfileFileName, profile);
 				// propertiesDialog.loadConnectionProperties(actualOpenedPropertiesFileName);
 			}
 
@@ -378,9 +383,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 							selectedFile = new File(absolutePath);
 						}
 						LOGGER.info("chosen file: " + absolutePath);
-						actualOpenedPropertiesFileName = selectedFile;
-						propertiesHandler.writeConnectionProperties(actualOpenedPropertiesFileName,
-								connectionProperties);
+						actualOpenedProfileFileName = selectedFile;
+						propertiesHandler.writeProfile(actualOpenedProfileFileName, profile);
 						setTitle(TITLE + " - " + absolutePath);
 						mntmProfilSpeichern.setEnabled(true);
 					}
@@ -393,7 +397,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		final URL helpURL = getClass().getResource(IMAGES + "info-icon.png");
 		final ImageIcon helpIcon = new ImageIcon(helpURL);
-		final ImageIcon resizedHelpIcon = getResizedImage(helpIcon, 15, 15);
+
+		final ImageIcon resizedHelpIcon = ImageUtils.getResizedImage(helpIcon, 15, 15);
 
 		final JMenu mnEinstellungen = new JMenu("Extras");
 		menuBar.add(mnEinstellungen);
@@ -422,8 +427,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		/** Menu Ende */
 	}
 
-	protected PropertiesDialog createPropertiesDialog(final ComConnectionProperties connectionProperties,
-			final ComConnectionProperties defaultConnectionProperties) {
+	protected PropertiesDialog createPropertiesDialog(final UiProperties connectionProperties,
+			final UiProperties defaultConnectionProperties) {
 		propertiesDialog = new PropertiesDialog(connectionProperties, defaultConnectionProperties);
 		propertiesDialog.addComConnectionPropertiesListener(this);
 		return propertiesDialog;
@@ -487,27 +492,19 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 	@Override
 	public void handleAnswer(final ComAnswerEvent e) {
-
+		if (e.getInstruction() == ComInstructionID.MOVE_POSITION) {
+			System.out.println(e.getValueInMillimeter());
+		}
 	}
 
 	protected void exit() {
-		LOGGER.info("Exit Cusa");
+		LOGGER.info("Exit StackMaster");
 
 		if (communicator != null) {
 			communicator.stop();
 			communicator.disconnect();
 		}
 		System.exit(0);
-	}
-
-	// TODO: auslagern
-	protected ImageIcon getResizedImage(ImageIcon icon, final int width, final int height) {
-		LOGGER.info("resize icon to " + width + " x " + height);
-
-		final Image img = icon.getImage();
-		final Image newimg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
-		icon = new ImageIcon(newimg);
-		return icon;
 	}
 
 	/**
@@ -552,7 +549,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		if (communicator != null) {
 			communicator.setStepsPerMm(connectionProperties.getStepsPerMm());
-			communicator.setReverse(connectionProperties.isReverse());
+			communicator.setReverse(connectionProperties.isReverseSteps());
 			communicator.setMicrostepResolution(connectionProperties.getMicrostepResolutionMode());
 		}
 	}

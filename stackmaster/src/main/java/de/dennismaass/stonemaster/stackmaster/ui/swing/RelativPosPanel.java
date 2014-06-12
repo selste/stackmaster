@@ -314,7 +314,7 @@ public class RelativPosPanel extends JPanel {
 		slowDownSpeed = properties.getSlowDownSpeed();
 		middleDownSpeed = properties.getMiddleDownSpeed();
 		fastDownSpeed = properties.getFastDownSpeed();
-		reverseRelativ = properties.isReverse();
+		reverseRelativ = properties.isReverseSteps();
 	}
 
 	protected void initIcons() {

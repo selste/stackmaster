@@ -55,11 +55,7 @@ public class ComCommunicator implements ByteMessageListener {
 	}
 
 	protected void doInit() {
-		pause(100);
-		setMaxSpeed(MAX_SPEED);
-		pause(100);
-		enableInterrupts();
-		pause(100);
+
 	}
 
 	public void setPositionReached(final int positionInSteps) {

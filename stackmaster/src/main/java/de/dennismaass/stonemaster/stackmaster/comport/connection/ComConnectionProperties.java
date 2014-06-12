@@ -3,8 +3,10 @@ package de.dennismaass.stonemaster.stackmaster.comport.connection;
 public class ComConnectionProperties {
 	private int fastUpSpeed = 1500, middleUpSpeed = 500, slowUpSpeed = 10;
 	private int slowDownSpeed = 10, middleDownSpeed = 500, fastDownSpeed = 1500;
+	private final boolean reverseRelativ = false;
+
 	private int stepsPerMm = 66000;
-	private boolean reverse = false;
+	private boolean reverseSteps = false;
 	private int microstepResolutionMode = 4;
 
 	private long sleepMovementMirror = 1000;
@@ -13,8 +15,10 @@ public class ComConnectionProperties {
 	private long sleepPictureMovement = 1000;
 	private long pulseDuration = 1000;
 
-	private double lastStep = 0.01;
-	private int lastPictureCount;
+	private double stepSize = 0.01;
+	private final int pictureCount = 0;
+	private final boolean mirrorActivated = false;
+	private int actualPos;
 
 	public int getFastUpSpeed() {
 		return fastUpSpeed;
@@ -72,12 +76,12 @@ public class ComConnectionProperties {
 		this.stepsPerMm = stepsPerMm;
 	}
 
-	public boolean isReverse() {
-		return reverse;
+	public boolean isReverseSteps() {
+		return reverseSteps;
 	}
 
-	public void setReverse(final boolean reverse) {
-		this.reverse = reverse;
+	public void setReverseSteps(final boolean reverseSteps) {
+		this.reverseSteps = reverseSteps;
 	}
 
 	public int getMicrostepResolutionMode() {
@@ -128,12 +132,12 @@ public class ComConnectionProperties {
 		this.pulseDuration = pulseDuration;
 	}
 
-	public double getLastStep() {
-		return lastStep;
+	public double getStepSize() {
+		return stepSize;
 	}
 
-	public void setLastStep(final double lastStep) {
-		this.lastStep = lastStep;
+	public void setStepSize(final double stepSize) {
+		this.stepSize = stepSize;
 	}
 
 }

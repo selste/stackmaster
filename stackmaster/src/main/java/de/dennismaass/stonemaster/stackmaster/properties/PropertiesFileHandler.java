@@ -1,4 +1,4 @@
-package de.dennismaass.stonemaster.stackmaster.util;
+package de.dennismaass.stonemaster.stackmaster.properties;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,24 +12,11 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.log4j.Logger;
 
-import de.dennismaass.stonemaster.stackmaster.comport.connection.ComConnectionProperties;
+public class PropertiesFileHandler {
+	private static final Logger LOGGER = Logger.getLogger(PropertiesFileHandler.class);
 
-public class PropertiesHandler {
-	private static final Logger LOGGER = Logger.getLogger(PropertiesHandler.class);
-
-	public Properties readProperties(final File fileName) {
+	protected Properties readProperties(final File fileName) {
 		final Properties properties = new Properties();
-
-		// try {
-		// LOGGER.info("try loading properties");
-		// final BufferedInputStream stream = new BufferedInputStream(new FileInputStream(fileName));
-		// properties.load(stream);
-		// stream.close();
-		// LOGGER.info("properties loaded");
-		// } catch (final IOException e) {
-		// LOGGER.error("Error before or while reading properties file", e);
-		// e.printStackTrace();
-		// }
 
 		try {
 			LOGGER.info("try loading properties");
@@ -53,10 +40,10 @@ public class PropertiesHandler {
 		return properties;
 	}
 
-	public ComConnectionProperties loadConnectionProperties(final File fileName) {
-		final Properties properties = readProperties(fileName);
+	public UiProperties readConnectionProperties(final File file) {
+		final Properties properties = readProperties(file);
 
-		final ComConnectionProperties comConnectionProperties = new ComConnectionProperties();
+		final UiProperties comConnectionProperties = new UiProperties();
 
 		try {
 			final Integer fastUpSpeed = Integer.parseInt(properties.getProperty("fastUpSpeed"));
@@ -109,7 +96,7 @@ public class PropertiesHandler {
 
 		try {
 			final Boolean reverse = Boolean.parseBoolean(properties.getProperty("reverse"));
-			comConnectionProperties.setReverse(reverse);
+			comConnectionProperties.setReverseSteps(reverse);
 		} catch (final NumberFormatException e) {
 			LOGGER.error("error by parsing reverse", e);
 		}
@@ -123,7 +110,7 @@ public class PropertiesHandler {
 
 		try {
 			final Double lastStep = Double.parseDouble(properties.getProperty("lastStep"));
-			comConnectionProperties.setLastStep(lastStep);
+			comConnectionProperties.setStepSize(lastStep);
 		} catch (final NumberFormatException e) {
 			LOGGER.error("error by parsing lastStep", e);
 		}
@@ -167,7 +154,7 @@ public class PropertiesHandler {
 
 	}
 
-	public void writeConnectionProperties(final File file, final ComConnectionProperties comConnectionProperties) {
+	public void writeConnectionProperties(final File file, final UiProperties comConnectionProperties) {
 
 		final Properties properties = new Properties();
 		// final BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
@@ -186,7 +173,7 @@ public class PropertiesHandler {
 		properties.setProperty("slowDownSpeed", Integer.toString(slowDownSpeed));
 		final int stepsPerMm = comConnectionProperties.getStepsPerMm();
 		properties.setProperty("stepsPerMm", Integer.toString(stepsPerMm));
-		final boolean reverse = comConnectionProperties.isReverse();
+		final boolean reverse = comConnectionProperties.isReverseSteps();
 		properties.setProperty("reverse", Boolean.toString(reverse));
 		final int microstepResolutionMode = comConnectionProperties.getMicrostepResolutionMode();
 		properties.setProperty("microstepResolutionMode", Integer.toString(microstepResolutionMode));
@@ -205,7 +192,7 @@ public class PropertiesHandler {
 		final long sleepMovementMirror = comConnectionProperties.getSleepMovementMirror();
 		properties.setProperty("sleepMovementMirror", Long.toString(sleepMovementMirror));
 
-		final double lastStep = comConnectionProperties.getLastStep();
+		final double lastStep = comConnectionProperties.getStepSize();
 		properties.setProperty("lastStep", Double.toString(lastStep));
 
 		// byte[] buffer = new byte[1024];

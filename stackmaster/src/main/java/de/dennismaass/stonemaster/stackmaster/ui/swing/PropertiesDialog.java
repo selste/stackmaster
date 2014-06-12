@@ -194,7 +194,7 @@ public class PropertiesDialog extends JDialog {
 
 		reverseCB = new JCheckBox();
 		panel_1.add(reverseCB, "cell 1 0,grow");
-		reverseCB.setSelected(actualConnectionProperties.isReverse());
+		reverseCB.setSelected(actualConnectionProperties.isReverseSteps());
 
 		final JLabel lblNewLabel_9 = new JLabel("Pause (Bew. - Spiegel) [ms]");
 		panel_1.add(lblNewLabel_9, "cell 0 1,alignx trailing");
@@ -301,7 +301,7 @@ public class PropertiesDialog extends JDialog {
 		fastDownSpeedTF.setValue(actualConnectionProperties.getFastDownSpeed());
 		middleDownSpeedTF.setValue(actualConnectionProperties.getMiddleDownSpeed());
 		slowDownSpeedTF.setValue(actualConnectionProperties.getSlowDownSpeed());
-		reverseCB.setSelected(actualConnectionProperties.isReverse());
+		reverseCB.setSelected(actualConnectionProperties.isReverseSteps());
 		sleepMirrorPictureTF.setValue(actualConnectionProperties.getSleepMirrorPicture());
 		sleepMovementMirrorTF.setValue(actualConnectionProperties.getSleepMovementMirror());
 		sleepPictureMovementTF.setValue(actualConnectionProperties.getSleepPictureMovement());
@@ -423,7 +423,7 @@ public class PropertiesDialog extends JDialog {
 			fastDownSpeedTF.setBackground(Color.white);
 		}
 
-		connectionProperties.setReverse(reverseCB.isSelected());
+		connectionProperties.setReverseSteps(reverseCB.isSelected());
 
 		final long sleepMovementMirror = (long) sleepMovementMirrorTF.getValue();
 		if (!isValidSleep(sleepMovementMirror)) {
