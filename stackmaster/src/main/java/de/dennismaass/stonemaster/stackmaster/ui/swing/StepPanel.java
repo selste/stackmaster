@@ -85,9 +85,11 @@ public class StepPanel extends JPanel {
 		setVariablesFromProperties(properties);
 
 		final JLabel autoStepSizeTitle = new JLabel("Schrittgröße [mm]");
+		autoStepSizeTitle.setFont(SwingStarter.FONT);
 		add(autoStepSizeTitle, "cell 0 0,alignx trailing");
 
 		stepsizeTF = new JSpinner();
+		stepsizeTF.setFont(SwingStarter.FONT);
 		stepsizeTF.setModel(new SpinnerNumberModel(properties.getStepSize(), 0.001, 250.0, 0.001));
 		add(stepsizeTF, "cell 1 0,growx");
 		stepsizeTF.addChangeListener(new ChangeListener() {
@@ -99,9 +101,11 @@ public class StepPanel extends JPanel {
 		});
 
 		final JLabel autoCountOfRepeatsTitle = new JLabel("Anzahl Bilder");
+		autoCountOfRepeatsTitle.setFont(SwingStarter.FONT);
 		add(autoCountOfRepeatsTitle, "cell 0 1,alignx trailing");
 
 		autoCountOfRepeatsTF = new JSpinner();
+		autoCountOfRepeatsTF.setFont(SwingStarter.FONT);
 		autoCountOfRepeatsTF.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		autoCountOfRepeatsTF.addChangeListener(new ChangeListener() {
 
@@ -115,6 +119,7 @@ public class StepPanel extends JPanel {
 		add(autoCountOfRepeatsTF, "cell 1 1,growx");
 
 		mirrorCB = new JCheckBox("Spiegel vorauslösung");
+		mirrorCB.setFont(SwingStarter.FONT);
 		mirrorCB.addChangeListener(new ChangeListener() {
 
 			@Override
@@ -126,6 +131,7 @@ public class StepPanel extends JPanel {
 		add(mirrorCB, "cell 1 2");
 
 		executionBT = new JButton("ausführen");
+		executionBT.setFont(SwingStarter.FONT);
 		add(executionBT, "flowx,cell 1 3");
 		executionBT.addActionListener(new ActionListener() {
 
@@ -184,18 +190,23 @@ public class StepPanel extends JPanel {
 		});
 
 		final JLabel autoCountOfDoneRepeatsTitle = new JLabel("Anzahl getätigter Fahrten");
+		autoCountOfDoneRepeatsTitle.setFont(SwingStarter.FONT);
 		add(autoCountOfDoneRepeatsTitle, "cell 0 7,alignx right");
 
 		autoCountOfDoneRepeatsLb = new JLabel("0");
+		autoCountOfDoneRepeatsLb.setFont(SwingStarter.FONT);
 		add(autoCountOfDoneRepeatsLb, "cell 1 7");
 
 		final JLabel autoStepsizeSumTitle = new JLabel("bisher zurückgelegter Weg[mm]");
+		autoStepsizeSumTitle.setFont(SwingStarter.FONT);
 		add(autoStepsizeSumTitle, "cell 0 8,alignx trailing");
 
 		autoStepsizeSumLb = new JLabel("0.0");
+		autoStepsizeSumLb.setFont(SwingStarter.FONT);
 		add(autoStepsizeSumLb, "cell 1 8");
 
 		stopBT = new JButton("stop");
+		stopBT.setFont(SwingStarter.FONT);
 		stopBT.setEnabled(false);
 		stopBT.addActionListener(new ActionListener() {
 
@@ -214,6 +225,7 @@ public class StepPanel extends JPanel {
 		add(stopBT, "cell 1 3");
 
 		btnPause = new JButton("pause");
+		btnPause.setFont(SwingStarter.FONT);
 		btnPause.addActionListener(new ActionListener() {
 
 			@Override
@@ -226,18 +238,23 @@ public class StepPanel extends JPanel {
 		add(btnPause, "cell 1 3");
 
 		resetBT = new JButton("reset");
+		resetBT.setFont(SwingStarter.FONT);
 		add(resetBT, "cell 1 9");
 
 		geschaetzteDauerLb = new JLabel("geschätzte Dauer");
+		geschaetzteDauerLb.setFont(SwingStarter.FONT);
 		add(geschaetzteDauerLb, "cell 0 11,alignx trailing");
 
 		geschaetzteDauerValueLb = new JLabel("0 ms");
+		geschaetzteDauerValueLb.setFont(SwingStarter.FONT);
 		add(geschaetzteDauerValueLb, "cell 1 11");
 
 		lblErfolderlicherWeg = new JLabel("erfolderlicher Weg");
+		lblErfolderlicherWeg.setFont(SwingStarter.FONT);
 		add(lblErfolderlicherWeg, "cell 0 12,alignx trailing");
 
 		lblMm = new JLabel("0.0 mm");
+		lblMm.setFont(SwingStarter.FONT);
 		add(lblMm, "cell 1 12");
 
 		resetBT.addActionListener(new ActionListener() {

@@ -8,6 +8,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -112,10 +113,13 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 	private File actualOpenedProfileFileName = defaultFile;
 	private final ProfileFileHandler propertiesHandler;
 
+	public static final Font FONT = new Font("Arial", Font.PLAIN, 20);
+
 	/**
 	 * Create the frame.
 	 */
 	public SwingStarter() {
+		setFont(SwingStarter.FONT);
 		LOGGER.info("Start SwingStarter");
 
 		LOGGER.info("OS_ARCH " + OS_ARCH);
@@ -149,14 +153,13 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		setTitle(TITLE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(100, 100, 550, 520);
+		setBounds(100, 100, 650, 520);
 
 		propertiesHandler = new ProfileFileHandler();
 		profile = propertiesHandler.readProfile(defaultFile);
 		defaultProfile = propertiesHandler.readProfile(defaultFileBackup);
 
-		propertiesDialog = createPropertiesDialog(profile.getProperties(),
-				defaultProfile.getProperties());
+		propertiesDialog = createPropertiesDialog(profile.getProperties(), defaultProfile.getProperties());
 		setTitle(TITLE + " - defaults");
 
 		initMenu();
@@ -171,6 +174,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		initStatePanel();
 
 		final JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
+		tabbedPane.setFont(SwingStarter.FONT);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
 		relativPosPanel = new RelativPosPanel(profile.getProperties(), stateLine);
@@ -206,6 +210,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		connectionComboBox = new JComboBox<>();
+		connectionComboBox.setFont(SwingStarter.FONT);
 		connectionComboBox.setPreferredSize(new Dimension(100, 22));
 		connectionComboBox.setMinimumSize(new Dimension(100, 22));
 		connectionComboBox.setMaximumSize(new Dimension(100, 32767));
@@ -215,6 +220,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		connectionComboBox.setRenderer(new CommPortIdentifierListRenderer());
 
 		connectButton = new JButton("Verbinden");
+		connectButton.setFont(SwingStarter.FONT);
 		connectButton.setEnabled(false);
 		connectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel.add(connectButton);
@@ -307,6 +313,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		setJMenuBar(menuBar);
 
 		final JMenu mnDatei = new JMenu("Datei");
+		mnDatei.setFont(SwingStarter.FONT);
 		menuBar.add(mnDatei);
 
 		final URL deleteURL = getClass().getResource(IMAGES + "delete-icon.png");
@@ -314,6 +321,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		final ImageIcon resizedDeleteIcon = ImageUtils.getResizedImage(deleteIcon, 15, 15);
 
 		final JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.setFont(SwingStarter.FONT);
 		mntmExit.setIcon(resizedDeleteIcon);
 		mntmExit.addActionListener(new ActionListener() {
 
@@ -325,6 +333,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		});
 
 		final JMenuItem mntmLaden = new JMenuItem("Profil laden");
+		mntmLaden.setFont(SwingStarter.FONT);
 		mntmLaden.addActionListener(new ActionListener() {
 
 			@Override
@@ -351,6 +360,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		mnDatei.add(mntmLaden);
 
 		mntmProfilSpeichern = new JMenuItem("Profil speichern");
+		mntmProfilSpeichern.setFont(SwingStarter.FONT);
 		mntmProfilSpeichern.setEnabled(false);
 		mntmProfilSpeichern.addActionListener(new ActionListener() {
 
@@ -365,6 +375,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		mnDatei.add(mntmProfilSpeichern);
 
 		mntmProfilSpeichernAls = new JMenuItem("Profil speichern unter...");
+		mntmProfilSpeichernAls.setFont(SwingStarter.FONT);
 		mntmProfilSpeichernAls.addActionListener(new ActionListener() {
 
 			@Override
@@ -401,9 +412,11 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		final ImageIcon resizedHelpIcon = ImageUtils.getResizedImage(helpIcon, 15, 15);
 
 		final JMenu mnEinstellungen = new JMenu("Extras");
+		mnEinstellungen.setFont(SwingStarter.FONT);
 		menuBar.add(mnEinstellungen);
 
 		final JMenuItem mntmEinstellungen = new JMenuItem("Einstellungen");
+		mntmEinstellungen.setFont(SwingStarter.FONT);
 		mnEinstellungen.add(mntmEinstellungen);
 		mntmEinstellungen.addActionListener(new ActionListener() {
 
@@ -415,13 +428,18 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		});
 
 		final JMenuItem mntmberCusa = new JMenuItem("\u00DCber");
+		mntmberCusa.setFont(SwingStarter.FONT);
 		mnEinstellungen.add(mntmberCusa);
 		mntmberCusa.setIcon(resizedHelpIcon);
 		mntmberCusa.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-				JOptionPane.showMessageDialog(getFrame(), "stonemaster", "Über", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane
+						.showMessageDialog(
+								getFrame(),
+								"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte",
+								"Über", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
 		/** Menu Ende */
