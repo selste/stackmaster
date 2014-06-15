@@ -1543,3 +1543,83 @@ java.lang.NullPointerException
 2014-06-15 21:20:29 INFO  StepPanel:446 - set all components disable
 2014-06-15 21:20:29 INFO  RelativPosPanel:355 - set all components disable
 2014-06-15 21:20:29 INFO  SwingStarter:192 - user interface builded
+2014-06-15 22:12:19 INFO  SwingStarter:123 - Start SwingStarter
+2014-06-15 22:12:19 INFO  SwingStarter:125 - OS_ARCH amd64
+2014-06-15 22:12:19 INFO  SwingStarter:126 - OS_NAME windows 8.1
+2014-06-15 22:12:19 INFO  SwingStarter:127 - OS_VERSION 6.3
+2014-06-15 22:12:19 INFO  SwingStarter:143 - try building user interface
+2014-06-15 22:12:19 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-15 22:12:19 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-15 22:12:19 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-15 22:12:19 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-15 22:12:19 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-06-15 22:12:19 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-06-15 22:12:19 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-06-15 22:12:19 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-06-15 22:12:19 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-06-15 22:12:19 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-06-15 22:12:19 INFO  SwingStarter:466 - build connection thread
+2014-06-15 22:12:19 INFO  SwingStarter:302 - set all components disable
+2014-06-15 22:12:19 INFO  StepPanel:446 - set all components disable
+2014-06-15 22:12:19 INFO  RelativPosPanel:355 - set all components disable
+2014-06-15 22:12:19 INFO  SwingStarter:192 - user interface builded
+2014-06-15 22:16:21 INFO  SwingStarter:123 - Start SwingStarter
+2014-06-15 22:16:21 INFO  SwingStarter:125 - OS_ARCH amd64
+2014-06-15 22:16:21 INFO  SwingStarter:126 - OS_NAME windows 8.1
+2014-06-15 22:16:21 INFO  SwingStarter:127 - OS_VERSION 6.3
+2014-06-15 22:16:21 INFO  SwingStarter:143 - try building user interface
+2014-06-15 22:16:21 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-15 22:16:21 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-15 22:16:21 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-15 22:16:21 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-15 22:16:21 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-06-15 22:16:21 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-06-15 22:16:21 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-06-15 22:16:21 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-06-15 22:16:21 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-06-15 22:16:21 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-06-15 22:16:21 INFO  SwingStarter:466 - build connection thread
+2014-06-15 22:16:21 INFO  SwingStarter:302 - set all components disable
+2014-06-15 22:16:21 INFO  StepPanel:446 - set all components disable
+2014-06-15 22:16:21 INFO  RelativPosPanel:355 - set all components disable
+2014-06-15 22:16:21 INFO  SwingStarter:192 - user interface builded
+2014-06-15 22:22:25 INFO  SwingStarter:123 - Start SwingStarter
+2014-06-15 22:22:25 INFO  SwingStarter:125 - OS_ARCH amd64
+2014-06-15 22:22:25 INFO  SwingStarter:126 - OS_NAME windows 8.1
+2014-06-15 22:22:25 INFO  SwingStarter:127 - OS_VERSION 6.3
+2014-06-15 22:22:25 INFO  SwingStarter:143 - try building user interface
+2014-06-15 22:22:25 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-15 22:22:25 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-15 22:22:25 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-15 22:22:25 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-15 22:22:25 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-06-15 22:22:25 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-06-15 22:22:25 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-06-15 22:22:25 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-06-15 22:22:25 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-06-15 22:22:25 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-06-15 22:22:25 INFO  SwingStarter:466 - build connection thread
+2014-06-15 22:22:25 INFO  SwingStarter:302 - set all components disable
+2014-06-15 22:22:25 INFO  StepPanel:446 - set all components disable
+2014-06-15 22:22:25 INFO  RelativPosPanel:355 - set all components disable
+2014-06-15 22:22:25 INFO  SwingStarter:192 - user interface builded
+2014-06-15 22:28:51 INFO  SwingStarter:123 - Start SwingStarter
+2014-06-15 22:28:51 INFO  SwingStarter:125 - OS_ARCH amd64
+2014-06-15 22:28:51 INFO  SwingStarter:126 - OS_NAME windows 8.1
+2014-06-15 22:28:51 INFO  SwingStarter:127 - OS_VERSION 6.3
+2014-06-15 22:28:51 INFO  SwingStarter:143 - try building user interface
+2014-06-15 22:28:51 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-15 22:28:51 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-15 22:28:51 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-15 22:28:51 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-15 22:28:52 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-06-15 22:28:52 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-06-15 22:28:52 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-06-15 22:28:52 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-06-15 22:28:52 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-06-15 22:28:52 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-06-15 22:28:52 INFO  SwingStarter:466 - build connection thread
+2014-06-15 22:28:52 INFO  SwingStarter:302 - set all components disable
+2014-06-15 22:28:52 INFO  StepPanel:446 - set all components disable
+2014-06-15 22:28:52 INFO  RelativPosPanel:355 - set all components disable
+2014-06-15 22:28:52 INFO  SwingStarter:192 - user interface builded
