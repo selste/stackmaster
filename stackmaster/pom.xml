@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.dennismaass.emp</groupId>
-	<artifactId>stackmaster</artifactId>
+	<groupId>de.dennismaass.emp.stonemaster</groupId>
+	<artifactId>stackmastercontroller</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>StackMaster</name>
+	<name>StackMaster Controller</name>
 	<organization>
 		<name>stonemaster</name>
 		<url>www.stonemaster.eu</url>

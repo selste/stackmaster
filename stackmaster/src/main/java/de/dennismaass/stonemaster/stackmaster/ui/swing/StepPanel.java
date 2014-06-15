@@ -69,6 +69,7 @@ public class StepPanel extends JPanel {
 	private final JLabel geschaetzteDauerValueLb;
 	private final JLabel lblErfolderlicherWeg;
 	private final JLabel lblMm;
+	private final JLabel label_6;
 
 	/**
 	 * Create the panel.
@@ -80,7 +81,7 @@ public class StepPanel extends JPanel {
 		this.properties = properties;
 		setVariablesFromProperties(properties);
 		setStateLine(stateLine);
-		setLayout(new MigLayout("", "[][grow]", "[][][][][][][][][][][][][]"));
+		setLayout(new MigLayout("", "[][][grow]", "[][][][][grow 200][][][][grow 50][][]"));
 
 		setVariablesFromProperties(properties);
 
@@ -91,7 +92,7 @@ public class StepPanel extends JPanel {
 		stepsizeTF = new JSpinner();
 		stepsizeTF.setFont(SwingStarter.FONT);
 		stepsizeTF.setModel(new SpinnerNumberModel(properties.getStepSize(), 0.001, 250.0, 0.001));
-		add(stepsizeTF, "cell 1 0,growx");
+		add(stepsizeTF, "cell 2 0,growx");
 		stepsizeTF.addChangeListener(new ChangeListener() {
 
 			@Override
@@ -116,7 +117,7 @@ public class StepPanel extends JPanel {
 			}
 
 		});
-		add(autoCountOfRepeatsTF, "cell 1 1,growx");
+		add(autoCountOfRepeatsTF, "cell 2 1,growx");
 
 		mirrorCB = new JCheckBox("Spiegel vorauslösung");
 		mirrorCB.setFont(SwingStarter.FONT);
@@ -128,11 +129,11 @@ public class StepPanel extends JPanel {
 				refreshSleep();
 			}
 		});
-		add(mirrorCB, "cell 1 2");
+		add(mirrorCB, "cell 2 2,alignx center");
 
 		executionBT = new JButton("ausführen");
 		executionBT.setFont(SwingStarter.FONT);
-		add(executionBT, "flowx,cell 1 3");
+		add(executionBT, "flowx,cell 2 3,alignx center");
 		executionBT.addActionListener(new ActionListener() {
 
 			@Override
@@ -189,22 +190,6 @@ public class StepPanel extends JPanel {
 
 		});
 
-		final JLabel autoCountOfDoneRepeatsTitle = new JLabel("Anzahl getätigter Fahrten");
-		autoCountOfDoneRepeatsTitle.setFont(SwingStarter.FONT);
-		add(autoCountOfDoneRepeatsTitle, "cell 0 7,alignx right");
-
-		autoCountOfDoneRepeatsLb = new JLabel("0");
-		autoCountOfDoneRepeatsLb.setFont(SwingStarter.FONT);
-		add(autoCountOfDoneRepeatsLb, "cell 1 7");
-
-		final JLabel autoStepsizeSumTitle = new JLabel("bisher zurückgelegter Weg[mm]");
-		autoStepsizeSumTitle.setFont(SwingStarter.FONT);
-		add(autoStepsizeSumTitle, "cell 0 8,alignx trailing");
-
-		autoStepsizeSumLb = new JLabel("0.0");
-		autoStepsizeSumLb.setFont(SwingStarter.FONT);
-		add(autoStepsizeSumLb, "cell 1 8");
-
 		stopBT = new JButton("stop");
 		stopBT.setFont(SwingStarter.FONT);
 		stopBT.setEnabled(false);
@@ -222,7 +207,7 @@ public class StepPanel extends JPanel {
 				}
 			}
 		});
-		add(stopBT, "cell 1 3");
+		add(stopBT, "cell 2 3");
 
 		btnPause = new JButton("pause");
 		btnPause.setFont(SwingStarter.FONT);
@@ -235,27 +220,27 @@ public class StepPanel extends JPanel {
 			}
 		});
 		btnPause.setEnabled(false);
-		add(btnPause, "cell 1 3");
+		add(btnPause, "cell 2 3");
+
+		final JLabel autoCountOfDoneRepeatsTitle = new JLabel("Anzahl getätigter Fahrten");
+		autoCountOfDoneRepeatsTitle.setFont(SwingStarter.FONT);
+		add(autoCountOfDoneRepeatsTitle, "cell 0 5,alignx right");
+
+		autoCountOfDoneRepeatsLb = new JLabel("0");
+		autoCountOfDoneRepeatsLb.setFont(SwingStarter.FONT);
+		add(autoCountOfDoneRepeatsLb, "cell 2 5");
+
+		final JLabel autoStepsizeSumTitle = new JLabel("bisher zurückgelegter Weg[mm]");
+		autoStepsizeSumTitle.setFont(SwingStarter.FONT);
+		add(autoStepsizeSumTitle, "cell 0 6,alignx trailing");
+
+		autoStepsizeSumLb = new JLabel("0.0");
+		autoStepsizeSumLb.setFont(SwingStarter.FONT);
+		add(autoStepsizeSumLb, "cell 2 6");
 
 		resetBT = new JButton("reset");
 		resetBT.setFont(SwingStarter.FONT);
-		add(resetBT, "cell 1 9");
-
-		geschaetzteDauerLb = new JLabel("geschätzte Dauer");
-		geschaetzteDauerLb.setFont(SwingStarter.FONT);
-		add(geschaetzteDauerLb, "cell 0 11,alignx trailing");
-
-		geschaetzteDauerValueLb = new JLabel("0 ms");
-		geschaetzteDauerValueLb.setFont(SwingStarter.FONT);
-		add(geschaetzteDauerValueLb, "cell 1 11");
-
-		lblErfolderlicherWeg = new JLabel("erfolderlicher Weg");
-		lblErfolderlicherWeg.setFont(SwingStarter.FONT);
-		add(lblErfolderlicherWeg, "cell 0 12,alignx trailing");
-
-		lblMm = new JLabel("0.0 mm");
-		lblMm.setFont(SwingStarter.FONT);
-		add(lblMm, "cell 1 12");
+		add(resetBT, "cell 2 7");
 
 		resetBT.addActionListener(new ActionListener() {
 
@@ -266,6 +251,25 @@ public class StepPanel extends JPanel {
 
 			}
 		});
+
+		label_6 = new JLabel(" ");
+		add(label_6, "cell 0 8");
+
+		geschaetzteDauerLb = new JLabel("geschätzte Dauer");
+		geschaetzteDauerLb.setFont(SwingStarter.FONT);
+		add(geschaetzteDauerLb, "cell 0 9,alignx trailing");
+
+		geschaetzteDauerValueLb = new JLabel("0 ms");
+		geschaetzteDauerValueLb.setFont(SwingStarter.FONT);
+		add(geschaetzteDauerValueLb, "cell 2 9");
+
+		lblErfolderlicherWeg = new JLabel("erfolderlicher Weg");
+		lblErfolderlicherWeg.setFont(SwingStarter.FONT);
+		add(lblErfolderlicherWeg, "cell 0 10,alignx trailing");
+
+		lblMm = new JLabel("0.0 mm");
+		lblMm.setFont(SwingStarter.FONT);
+		add(lblMm, "cell 2 10");
 	}
 
 	public void refreshDistance() {

@@ -153,7 +153,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		setTitle(TITLE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(100, 100, 650, 520);
+		setBounds(100, 100, 650, 620);
 
 		propertiesHandler = new ProfileFileHandler();
 		profile = propertiesHandler.readProfile(defaultFile);

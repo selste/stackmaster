@@ -7,12 +7,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
 
 import org.apache.log4j.Logger;
 
@@ -56,6 +56,7 @@ public class RelativPosPanel extends JPanel {
 	private static final String IMAGES = "/images/";
 
 	private JLabel stateLine;
+	private final JPanel panel;
 
 	/**
 	 * Create the panel.
@@ -66,25 +67,74 @@ public class RelativPosPanel extends JPanel {
 		setStateLine(stateLine);
 
 		initIcons();
+		setLayout(new MigLayout("", "[grow,center]", "[grow,center]"));
 
-		/** Relativ Tab */
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		panel = new JPanel();
+		add(panel, "cell 0 0,alignx center,aligny center");
+		panel.setLayout(new MigLayout("", "[100px]", "[70px][50px][30px][30px][50px][70px]"));
 
 		doubleUpButton = new JButton(doubleUpIcon);
+		panel.add(doubleUpButton, "cell 0 0,alignx center,aligny center");
 		doubleUpButton.setToolTipText(upFastTooltip);
 		doubleUpButton.setOpaque(false);
 		doubleUpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		doubleUpButton.setPreferredSize(new Dimension(100, 70));
 		doubleUpButton.setMinimumSize(new Dimension(10, 10));
 		doubleUpButton.setMaximumSize(new Dimension(100, 70));
-		add(doubleUpButton);
-		doubleUpButton.addMouseListener(new MouseAdapter() {
+
+		upBigButton = new JButton(upBigIcon);
+		panel.add(upBigButton, "cell 0 1,alignx center,aligny center");
+		upBigButton.setToolTipText(upMiddleTooltip);
+		upBigButton.setOpaque(false);
+		upBigButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		upBigButton.setPreferredSize(new Dimension(100, 50));
+		upBigButton.setMinimumSize(new Dimension(10, 10));
+		upBigButton.setMaximumSize(new Dimension(100, 50));
+
+		upSmallButton = new JButton(upSmallIcon);
+		panel.add(upSmallButton, "cell 0 2,alignx center,aligny center");
+		upSmallButton.setToolTipText(upSlowTooltip);
+		upSmallButton.setOpaque(false);
+		upSmallButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		upSmallButton.setMaximumSize(new Dimension(100, 30));
+		upSmallButton.setMinimumSize(new Dimension(10, 10));
+		upSmallButton.setPreferredSize(new Dimension(100, 30));
+		upSmallButton.setSize(new Dimension(0, 50));
+
+		downSmallButton = new JButton(downSmallIcon);
+		panel.add(downSmallButton, "cell 0 3,alignx center,aligny center");
+		downSmallButton.setToolTipText(downSlowTooltip);
+		downSmallButton.setOpaque(false);
+		downSmallButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		downSmallButton.setPreferredSize(new Dimension(100, 30));
+		downSmallButton.setMinimumSize(new Dimension(10, 10));
+		downSmallButton.setMaximumSize(new Dimension(100, 30));
+
+		downBigButton = new JButton(downBigIcon);
+		panel.add(downBigButton, "cell 0 4,alignx center,aligny center");
+		downBigButton.setToolTipText(downMiddleTooltip);
+		downBigButton.setOpaque(false);
+		downBigButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		downBigButton.setPreferredSize(new Dimension(100, 50));
+		downBigButton.setMinimumSize(new Dimension(10, 10));
+		downBigButton.setMaximumSize(new Dimension(100, 50));
+
+		doubleDownButton = new JButton(doubleDownIcon);
+		panel.add(doubleDownButton, "cell 0 5,alignx center,aligny center");
+		doubleDownButton.setToolTipText(downFastTooltip);
+		doubleDownButton.setOpaque(false);
+		doubleDownButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		doubleDownButton.setMaximumSize(new Dimension(100, 70));
+		doubleDownButton.setMinimumSize(new Dimension(10, 10));
+		doubleDownButton.setPreferredSize(new Dimension(100, 70));
+		doubleDownButton.setSize(new Dimension(50, 50));
+		doubleDownButton.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mousePressed(final MouseEvent e) {
 				if (communicator != null) {
-					LOGGER.info("send rotate right command with speed: " + fastUpSpeed);
-					communicator.rotateRight(fastUpSpeed);
+					LOGGER.info("send rotate left command with speed: " + fastDownSpeed);
+					communicator.rotateLeft(fastDownSpeed);
 				}
 			}
 
@@ -106,17 +156,90 @@ public class RelativPosPanel extends JPanel {
 				}
 			}
 		});
+		downBigButton.addMouseListener(new MouseAdapter() {
 
-		add(Box.createVerticalStrut(2));
+			@Override
+			public void mousePressed(final MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("send rotate left command with speed: " + middleDownSpeed);
+					communicator.rotateLeft(middleDownSpeed);
+				}
+			}
 
-		upBigButton = new JButton(upBigIcon);
-		upBigButton.setToolTipText(upMiddleTooltip);
-		upBigButton.setOpaque(false);
-		upBigButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		upBigButton.setPreferredSize(new Dimension(100, 50));
-		upBigButton.setMinimumSize(new Dimension(10, 10));
-		upBigButton.setMaximumSize(new Dimension(100, 50));
-		add(upBigButton);
+			@Override
+			public void mouseReleased(final MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("stop motor");
+					communicator.stop();
+				}
+			}
+
+			@Override
+			public void mouseExited(final MouseEvent e) {
+				if (communicator != null) {
+					if (communicator.isActiv()) {
+						LOGGER.info("stop motor");
+						communicator.stop();
+					}
+				}
+			}
+		});
+		downSmallButton.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mousePressed(final MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("send rotate left command with speed: " + slowDownSpeed);
+					communicator.rotateLeft(slowDownSpeed);
+				}
+			}
+
+			@Override
+			public void mouseReleased(final MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("stop motor");
+					communicator.stop();
+				}
+			}
+
+			@Override
+			public void mouseExited(final MouseEvent e) {
+				if (communicator != null) {
+					if (communicator.isActiv()) {
+						LOGGER.info("stop motor");
+						communicator.stop();
+					}
+				}
+			}
+		});
+		upSmallButton.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mousePressed(final MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("send rotate right command with speed: " + slowUpSpeed);
+					communicator.rotateRight(slowUpSpeed);
+				}
+			}
+
+			@Override
+			public void mouseReleased(final MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("stop motor");
+					communicator.stop();
+				}
+			}
+
+			@Override
+			public void mouseExited(final MouseEvent e) {
+				if (communicator != null) {
+					if (communicator.isActiv()) {
+						LOGGER.info("stop motor");
+						communicator.stop();
+					}
+				}
+			}
+		});
 		upBigButton.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -146,143 +269,13 @@ public class RelativPosPanel extends JPanel {
 
 			}
 		});
-
-		add(Box.createVerticalStrut(2));
-
-		upSmallButton = new JButton(upSmallIcon);
-		upSmallButton.setToolTipText(upSlowTooltip);
-		upSmallButton.setOpaque(false);
-		upSmallButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		upSmallButton.setMaximumSize(new Dimension(100, 30));
-		upSmallButton.setMinimumSize(new Dimension(10, 10));
-		upSmallButton.setPreferredSize(new Dimension(100, 30));
-		upSmallButton.setSize(new Dimension(0, 50));
-		add(upSmallButton);
-		upSmallButton.addMouseListener(new MouseAdapter() {
+		doubleUpButton.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mousePressed(final MouseEvent e) {
 				if (communicator != null) {
-					LOGGER.info("send rotate right command with speed: " + slowUpSpeed);
-					communicator.rotateRight(slowUpSpeed);
-				}
-			}
-
-			@Override
-			public void mouseReleased(final MouseEvent e) {
-				if (communicator != null) {
-					LOGGER.info("stop motor");
-					communicator.stop();
-				}
-			}
-
-			@Override
-			public void mouseExited(final MouseEvent e) {
-				if (communicator != null) {
-					if (communicator.isActiv()) {
-						LOGGER.info("stop motor");
-						communicator.stop();
-					}
-				}
-			}
-		});
-
-		add(Box.createVerticalStrut(20));
-
-		downSmallButton = new JButton(downSmallIcon);
-		downSmallButton.setToolTipText(downSlowTooltip);
-		downSmallButton.setOpaque(false);
-		downSmallButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		downSmallButton.setPreferredSize(new Dimension(100, 30));
-		downSmallButton.setMinimumSize(new Dimension(10, 10));
-		downSmallButton.setMaximumSize(new Dimension(100, 30));
-		add(downSmallButton);
-		downSmallButton.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mousePressed(final MouseEvent e) {
-				if (communicator != null) {
-					LOGGER.info("send rotate left command with speed: " + slowDownSpeed);
-					communicator.rotateLeft(slowDownSpeed);
-				}
-			}
-
-			@Override
-			public void mouseReleased(final MouseEvent e) {
-				if (communicator != null) {
-					LOGGER.info("stop motor");
-					communicator.stop();
-				}
-			}
-
-			@Override
-			public void mouseExited(final MouseEvent e) {
-				if (communicator != null) {
-					if (communicator.isActiv()) {
-						LOGGER.info("stop motor");
-						communicator.stop();
-					}
-				}
-			}
-		});
-
-		add(Box.createVerticalStrut(2));
-
-		downBigButton = new JButton(downBigIcon);
-		downBigButton.setToolTipText(downMiddleTooltip);
-		downBigButton.setOpaque(false);
-		downBigButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		downBigButton.setPreferredSize(new Dimension(100, 50));
-		downBigButton.setMinimumSize(new Dimension(10, 10));
-		downBigButton.setMaximumSize(new Dimension(100, 50));
-		add(downBigButton);
-		downBigButton.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mousePressed(final MouseEvent e) {
-				if (communicator != null) {
-					LOGGER.info("send rotate left command with speed: " + middleDownSpeed);
-					communicator.rotateLeft(middleDownSpeed);
-				}
-			}
-
-			@Override
-			public void mouseReleased(final MouseEvent e) {
-				if (communicator != null) {
-					LOGGER.info("stop motor");
-					communicator.stop();
-				}
-			}
-
-			@Override
-			public void mouseExited(final MouseEvent e) {
-				if (communicator != null) {
-					if (communicator.isActiv()) {
-						LOGGER.info("stop motor");
-						communicator.stop();
-					}
-				}
-			}
-		});
-
-		add(Box.createVerticalStrut(2));
-
-		doubleDownButton = new JButton(doubleDownIcon);
-		doubleDownButton.setToolTipText(downFastTooltip);
-		doubleDownButton.setOpaque(false);
-		add(doubleDownButton);
-		doubleDownButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		doubleDownButton.setMaximumSize(new Dimension(100, 70));
-		doubleDownButton.setMinimumSize(new Dimension(10, 10));
-		doubleDownButton.setPreferredSize(new Dimension(100, 70));
-		doubleDownButton.setSize(new Dimension(50, 50));
-		doubleDownButton.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mousePressed(final MouseEvent e) {
-				if (communicator != null) {
-					LOGGER.info("send rotate left command with speed: " + fastDownSpeed);
-					communicator.rotateLeft(fastDownSpeed);
+					LOGGER.info("send rotate right command with speed: " + fastUpSpeed);
+					communicator.rotateRight(fastUpSpeed);
 				}
 			}
 
