@@ -1,12 +1,256 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.dennismaass.emp.stonemaster</groupId>
-	<artifactId>stackmasterconfigurator</artifactId>
+	<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
+	<artifactId>configurator</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>StackMaster Configurator</name>
 	<organization>
 		<name>stonemaster</name>
 		<url>www.stonemaster.eu</url>
 	</organization>
+	
+	
+
+	<properties>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mainClass.swing>de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter</mainClass.swing>
+		<log4j.log4j.version>1.2.17</log4j.log4j.version>
+		<com.miglayout.miglayout.version>3.7.4</com.miglayout.miglayout.version>
+		<org.apache.commons.commons-lang3.version> 3.3.2</org.apache.commons.commons-lang3.version>
+		<icon.path>${basedir}/src/main/resources/images/stackmaster.ico</icon.path>
+	</properties>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>launch4j-xml-plugin-repo</id>
+			<name>launch4j-xml-plugin Repository for Maven</name>
+			<url>https://launch4j-xml-plugin.googlecode.com/svn/repo</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${org.apache.commons.commons-lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.miglayout</groupId>
+			<artifactId>miglayout</artifactId>
+			<version>${com.miglayout.miglayout.version}</version>
+		</dependency>
+	</dependencies>
+
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<includes>
+						<include>**/*Test.class</include>
+					</includes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>ps1</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<executions>
+					<execution>
+						<id>stackmaster</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>${mainClass.swing}</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+
+	<profiles>
+
+
+		<profile>
+			<id>windows</id>
+			<activation>
+				<os>
+					<family>windows</family>
+					<arch>amd64</arch>
+				</os>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-shade-plugin</artifactId>
+						<version>2.2</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>shade</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<shadedArtifactAttached>true</shadedArtifactAttached>
+							<shadedClassifierName>shaded</shadedClassifierName>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>${mainClass.swing}</mainClass>
+								</transformer>
+							</transformers>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.bluestemsoftware.open.maven.plugin</groupId>
+						<artifactId>launch4j-plugin</artifactId>
+						<version>1.5.0.0</version>
+						<executions>
+							<execution>
+								<id>l4j-gui</id>
+								<phase>package</phase>
+								<goals>
+									<goal>launch4j</goal>
+								</goals>
+								<configuration>
+									<headerType>gui</headerType>
+									<outfile>target/configurator.exe</outfile>
+									<jar>target/configurator-1.0.0-SNAPSHOT-shaded.jar</jar>
+									<errTitle>configurator error</errTitle>
+									<icon>${icon.path}</icon>
+									<jre>
+										<path>/jre</path>
+										<minVersion>1.7.0</minVersion>
+										<initialHeapSize>128</initialHeapSize>
+										<maxHeapSize>256</maxHeapSize>
+									</jre>
+									<versionInfo>
+										<fileVersion>1.0.0.0</fileVersion>
+										<txtFileVersion>1.0.0.0</txtFileVersion>
+										<fileDescription>Desc</fileDescription>
+										<copyright>C</copyright>
+										<productVersion>1.0.0.0</productVersion>
+										<txtProductVersion>1.0.0.0</txtProductVersion>
+										<productName>StackMaster Configurator</productName>
+										<internalName>StackMaster Configurator</internalName>
+										<originalFilename>configurator.exe</originalFilename>
+									</versionInfo>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>mac</id>
+			<activation>
+				<os>
+					<family>mac</family>
+					<arch>x64</arch>
+				</os>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-shade-plugin</artifactId>
+						<version>2.2</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>shade</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<shadedArtifactAttached>true</shadedArtifactAttached>
+							<shadedClassifierName>shaded</shadedClassifierName>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>${mainClass.swing}</mainClass>
+								</transformer>
+							</transformers>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>osxappbundle-maven-plugin</artifactId>
+						<version>1.0-alpha-2</version>
+						<configuration>
+							<mainClass>${mainClass.swing}</mainClass>
+							<javaApplicationStub>D:/rainer/produkte/stackmaster/jre/x64/macosx/jre-7u51-macosx-x64.dmg</javaApplicationStub>
+							<iconFile>${icon.path}</iconFile>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>bundle</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
