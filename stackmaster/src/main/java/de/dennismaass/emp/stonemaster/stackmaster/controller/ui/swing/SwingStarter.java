@@ -40,17 +40,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.log4j.Logger;
 
+import de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile;
+import de.dennismaass.emp.stonemaster.stackmaster.common.profile.ProfileFileHandler;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionPropertiesChangeEvent;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionPropertiesListener;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.UiProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.ComInstructionID;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer.ComAnswerEvent;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer.ComAnswerListener;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
-import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.CommPortIdentifierNotificationEvent;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.CommPortIdentifierNotificationListener;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.ConnectionThread;
-import de.dennismaass.emp.stonemaster.stackmaster.controller.profile.Profile;
-import de.dennismaass.emp.stonemaster.stackmaster.controller.profile.ProfileFileHandler;
-import de.dennismaass.emp.stonemaster.stackmaster.controller.properties.UiProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 
 //TODO:
@@ -491,6 +493,17 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 			if (!commPortIdentifierList.contains(commPortIdentifier)) {
 				LOGGER.info("remove Connection " + commPortIdentifier.getName());
 				connectionComboBox.removeItem(commPortIdentifier);
+			}
+		}
+
+		final String comConnectionName = profile.getProperties().getComConnectionName();
+		if (comConnectionName != null) {
+			final int itemCount = connectionComboBox.getItemCount();
+			for (int i = 0; i < itemCount; i++) {
+				final CommPortIdentifier connectionComboBoxEntry = connectionComboBox.getItemAt(i);
+				if (connectionComboBoxEntry.getName().equals(comConnectionName)) {
+					connectionComboBox.setSelectedItem(connectionComboBoxEntry);
+				}
 			}
 
 		}

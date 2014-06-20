@@ -1,8 +1,8 @@
-package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
+package de.dennismaass.emp.stonemaster.stackmaster.common.properties;
 
 import java.util.EventObject;
 
-import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.ComConnectionProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionProperties;
 
 public class ComConnectionPropertiesChangeEvent extends EventObject {
 	private static final long serialVersionUID = -4766066275663476550L;

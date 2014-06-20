@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
+	<artifactId>parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>StackMaster parent project</name>
+	<description>This is the StackMaster parent project which contains shared things</description>
+	<packaging>pom</packaging>
+	<organization>
+		<name>stonemaster</name>
+		<url>www.stonemaster.eu</url>
+	</organization>
+
+	<modules>
+		<module>
+			../stackmasterconfigurator
+		</module>
+		<module>
+			../stackmaster
+		</module>
+		<module>
+			../common
+		</module>
+	</modules>
+
+
+	<properties>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<org.rxtx.version>2.2pre2</org.rxtx.version>
+		<log4j.log4j.version>1.2.17</log4j.log4j.version>
+		<com.miglayout.miglayout.version>3.7.4</com.miglayout.miglayout.version>
+		<org.apache.commons.commons-lang3.version> 3.3.2</org.apache.commons.commons-lang3.version>
+		<icon.path>${basedir}/src/main/resources/images/stackmaster.ico</icon.path>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>swt-repo</id>
+			<url>https://swt-repo.googlecode.com/svn/repo/</url>
+		</repository>
+		<repository>
+			<id>mbari-maven-repository</id>
+			<name>MBARI Maven Repository</name>
+			<url>http://mbari-maven-repository.googlecode.com/svn/repository/</url>
+		</repository>
+	</repositories>
+
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>launch4j-xml-plugin-repo</id>
+			<name>launch4j-xml-plugin Repository for Maven</name>
+			<url>https://launch4j-xml-plugin.googlecode.com/svn/repo</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
+				<artifactId>common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${org.apache.commons.commons-lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>rxtx</groupId>
+				<artifactId>rxtx</artifactId>
+				<version>${org.rxtx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.miglayout</groupId>
+				<artifactId>miglayout</artifactId>
+				<version>${com.miglayout.miglayout.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

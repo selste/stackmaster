@@ -1,11 +1,11 @@
-package de.dennismaass.emp.stonemaster.stackmaster.controller.profile;
+package de.dennismaass.emp.stonemaster.stackmaster.common.profile;
 
 import java.io.File;
 
 import org.apache.log4j.Logger;
 
-import de.dennismaass.emp.stonemaster.stackmaster.controller.properties.PropertiesFileHandler;
-import de.dennismaass.emp.stonemaster.stackmaster.controller.properties.UiProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.PropertiesFileHandler;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.UiProperties;
 
 public class ProfileFileHandler {
 	private static final Logger LOGGER = Logger.getLogger(ProfileFileHandler.class);

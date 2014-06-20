@@ -1,54 +1,51 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
 	<artifactId>configurator</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<name>StackMaster Configurator</name>
 	<organization>
 		<name>stonemaster</name>
 		<url>www.stonemaster.eu</url>
 	</organization>
-	
-	
+
+	<parent>
+		<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../parent/pom.xml</relativePath>
+	</parent>
+
 
 	<properties>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<mainClass.swing>de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter</mainClass.swing>
-		<log4j.log4j.version>1.2.17</log4j.log4j.version>
-		<com.miglayout.miglayout.version>3.7.4</com.miglayout.miglayout.version>
-		<org.apache.commons.commons-lang3.version> 3.3.2</org.apache.commons.commons-lang3.version>
-		<icon.path>${basedir}/src/main/resources/images/stackmaster.ico</icon.path>
+		<icon.path>${basedir}/src/main/resources/images/setting_icon_win.ico</icon.path>
 	</properties>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>launch4j-xml-plugin-repo</id>
-			<name>launch4j-xml-plugin Repository for Maven</name>
-			<url>https://launch4j-xml-plugin.googlecode.com/svn/repo</url>
-		</pluginRepository>
-	</pluginRepositories>
+
+
 
 
 
 
 	<dependencies>
 		<dependency>
+			<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
+			<artifactId>common</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>${org.apache.commons.commons-lang3.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>${log4j.log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.miglayout</groupId>
 			<artifactId>miglayout</artifactId>
-			<version>${com.miglayout.miglayout.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -170,8 +167,8 @@
 								</goals>
 								<configuration>
 									<headerType>gui</headerType>
-									<outfile>target/configurator.exe</outfile>
-									<jar>target/configurator-1.0.0-SNAPSHOT-shaded.jar</jar>
+									<outfile>C:/Users/Dennis/git/stackmaster/stackmasterconfigurator/target/configurator.exe</outfile>
+									<jar>C:/Users/Dennis/git/stackmaster/stackmasterconfigurator/target/configurator-1.0.0-SNAPSHOT-shaded.jar</jar>
 									<errTitle>configurator error</errTitle>
 									<icon>${icon.path}</icon>
 									<jre>
@@ -253,4 +250,5 @@
 			</build>
 		</profile>
 	</profiles>
+
 </project>

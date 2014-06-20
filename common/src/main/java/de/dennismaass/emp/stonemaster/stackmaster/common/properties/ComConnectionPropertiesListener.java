@@ -1,4 +1,4 @@
-package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
+package de.dennismaass.emp.stonemaster.stackmaster.common.properties;
 
 public interface ComConnectionPropertiesListener {
 

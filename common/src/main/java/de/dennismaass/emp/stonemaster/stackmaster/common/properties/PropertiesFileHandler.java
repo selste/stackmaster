@@ -1,4 +1,4 @@
-package de.dennismaass.emp.stonemaster.stackmaster.controller.properties;
+package de.dennismaass.emp.stonemaster.stackmaster.common.properties;
 
 import java.io.File;
 import java.io.FileOutputStream;

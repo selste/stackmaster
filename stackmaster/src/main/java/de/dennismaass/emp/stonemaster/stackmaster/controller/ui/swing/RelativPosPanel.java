@@ -16,8 +16,8 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.log4j.Logger;
 
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
-import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.ComConnectionProperties;
 
 public class RelativPosPanel extends JPanel {
 

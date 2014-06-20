@@ -1,4 +1,4 @@
-package de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection;
+package de.dennismaass.emp.stonemaster.stackmaster.common.properties;
 
 public class ComConnectionProperties {
 	private int fastUpSpeed = 1500, middleUpSpeed = 500, slowUpSpeed = 10;
@@ -19,6 +19,9 @@ public class ComConnectionProperties {
 	private final int pictureCount = 0;
 	private final boolean mirrorActivated = false;
 	private int actualPos;
+	private String comConnectionName;
+	private String firstName;
+	private String lastName;
 
 	public int getFastUpSpeed() {
 		return fastUpSpeed;
@@ -138,6 +141,30 @@ public class ComConnectionProperties {
 
 	public void setStepSize(final double stepSize) {
 		this.stepSize = stepSize;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getComConnectionName() {
+		return comConnectionName;
+	}
+
+	public void setComConnectionName(String comConnectionName) {
+		this.comConnectionName = comConnectionName;
 	}
 
 }

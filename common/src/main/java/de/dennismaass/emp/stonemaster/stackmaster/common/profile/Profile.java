@@ -1,6 +1,6 @@
-package de.dennismaass.emp.stonemaster.stackmaster.controller.profile;
+package de.dennismaass.emp.stonemaster.stackmaster.common.profile;
 
-import de.dennismaass.emp.stonemaster.stackmaster.controller.properties.UiProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.UiProperties;
 
 public class Profile {
 	private UiProperties properties;

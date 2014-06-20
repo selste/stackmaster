@@ -6,8 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -26,8 +27,11 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.log4j.Logger;
 
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionPropertiesChangeEvent;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionPropertiesListener;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.PropertiesValidator;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
-import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.ComConnectionProperties;
 
 //TODO: 
 // Als "new default" setzen
@@ -51,6 +55,10 @@ public class PropertiesDialog extends JDialog {
 	final JSpinner pulseDurationTF;
 
 	boolean cancel = false;
+	private final JTextField textField;
+	private final JTextField textField_1;
+
+	private final PropertiesValidator validator = new PropertiesValidator();
 
 	/**
 	 * Create the dialog.
@@ -70,34 +78,13 @@ public class PropertiesDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		addWindowListener(new WindowListener() {
-
-			@Override
-			public void windowOpened(final WindowEvent e) {
-
-			}
-
-			@Override
-			public void windowIconified(final WindowEvent e) {
-
-			}
-
-			@Override
-			public void windowDeiconified(final WindowEvent e) {
-
-			}
+		addWindowListener(new WindowAdapter() {
 
 			@Override
 			public void windowDeactivated(final WindowEvent e) {
-
 				if (cancel) {
 					cancel();
 				}
-			}
-
-			@Override
-			public void windowClosing(final WindowEvent e) {
-
 			}
 
 			@Override
@@ -105,17 +92,37 @@ public class PropertiesDialog extends JDialog {
 				if (cancel) {
 					cancel();
 				}
-
 			}
 
-			@Override
-			public void windowActivated(final WindowEvent e) {
-
-			}
 		});
 		final JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 		tabbedPane.setFont(SwingStarter.FONT);
 		contentPanel.add(tabbedPane);
+
+		final JPanel allgemein = new JPanel();
+		tabbedPane.addTab("Allgemein", null, allgemein, null);
+		allgemein.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
+
+		final JLabel lblVorname = new JLabel("Vorname");
+		lblVorname.setFont(SwingStarter.FONT);
+		allgemein.add(lblVorname, "cell 0 0,alignx trailing");
+
+		textField = new JTextField();
+		textField.setFont(SwingStarter.FONT);
+		allgemein.add(textField, "cell 1 0,growx");
+		textField.setColumns(10);
+
+		final JLabel lblNachname = new JLabel("Nachname");
+		lblNachname.setFont(SwingStarter.FONT);
+		allgemein.add(lblNachname, "cell 0 1,alignx trailing");
+
+		textField_1 = new JTextField();
+		textField_1.setFont(SwingStarter.FONT);
+		allgemein.add(textField_1, "cell 1 1,growx");
+		textField_1.setColumns(10);
+
+		final JLabel label = new JLabel(" ");
+		allgemein.add(label, "cell 0 2");
 
 		final JPanel panel = new JPanel();
 		tabbedPane.addTab("Relativ-Panel", null, panel, null);
@@ -269,7 +276,7 @@ public class PropertiesDialog extends JDialog {
 			public void actionPerformed(final ActionEvent e) {
 
 				final ComConnectionProperties comConnectionProperties = setVariablesFromTF(actualConnectionProperties);
-				final boolean allValid = areValidConnectionProperties(comConnectionProperties);
+				final boolean allValid = validator.validate(comConnectionProperties);
 				LOGGER.info("try to save properties");
 				LOGGER.info("properties are valid: " + allValid);
 				if (allValid) {
@@ -339,65 +346,10 @@ public class PropertiesDialog extends JDialog {
 		cancel();
 	}
 
-	protected boolean isValidSpeed(final int value) {
-		if (value >= ComCommunicator.MIN_SPEED && value <= ComCommunicator.MAX_SPEED) {
-			return true;
-		}
-		return false;
-	}
-
-	protected boolean isValidSleep(final long value) {
-		if (value >= ComCommunicator.MIN_SLEEP && value <= ComCommunicator.MAX_SLEEP) {
-			return true;
-		}
-		return false;
-	}
-
-	protected boolean isValidStepcount(final int value) {
-		return true;
-	}
-
-	protected boolean isValidMicrostepResolutionMode(final int value) {
-		if (value >= ComCommunicator.MIN_MODE && value <= ComCommunicator.MAX_MODE) {
-			return true;
-		}
-		return false;
-	}
-
-	protected boolean areValidConnectionProperties(final ComConnectionProperties comConnectionProperties) {
-		if (!isValidSpeed(comConnectionProperties.getFastUpSpeed())) {
-			return false;
-		}
-		if (!isValidSpeed(comConnectionProperties.getMiddleUpSpeed())) {
-			return false;
-		}
-		if (!isValidSpeed(comConnectionProperties.getSlowUpSpeed())) {
-			return false;
-		}
-		if (!isValidSpeed(comConnectionProperties.getFastDownSpeed())) {
-			return false;
-		}
-		if (!isValidSpeed(comConnectionProperties.getMiddleDownSpeed())) {
-			return false;
-		}
-		if (!isValidSpeed(comConnectionProperties.getSlowDownSpeed())) {
-			return false;
-		}
-		if (!isValidStepcount(comConnectionProperties.getStepsPerMm())) {
-			return false;
-		}
-		if (!isValidMicrostepResolutionMode(comConnectionProperties.getMicrostepResolutionMode())) {
-			return false;
-		}
-		// TODO: reverse, sleeps
-
-		return true;
-	}
-
 	protected ComConnectionProperties setVariablesFromTF(final ComConnectionProperties connectionProperties) {
 
 		final int fastUpSpeed = (int) fastUpSpeedTF.getValue();
-		if (!isValidSpeed(fastUpSpeed)) {
+		if (!validator.isValidSpeed(fastUpSpeed)) {
 			fastUpSpeedTF.setBackground(Color.red);
 			LOGGER.error("error by parsing fastUpSpeed  from Spinner");
 		} else {
@@ -406,7 +358,7 @@ public class PropertiesDialog extends JDialog {
 		}
 
 		final int middleUpSpeed = (int) middleUpSpeedTF.getValue();
-		if (!isValidSpeed(middleUpSpeed)) {
+		if (!validator.isValidSpeed(middleUpSpeed)) {
 			middleUpSpeedTF.setBackground(Color.red);
 			LOGGER.error("error by parsing middleUpSpeed  from Spinner");
 		} else {
@@ -415,7 +367,7 @@ public class PropertiesDialog extends JDialog {
 		}
 
 		final int slowUpSpeed = (int) slowUpSpeedTF.getValue();
-		if (!isValidSpeed(slowUpSpeed)) {
+		if (!validator.isValidSpeed(slowUpSpeed)) {
 			slowUpSpeedTF.setBackground(Color.red);
 			LOGGER.error("error by parsing slowUpSpeed from Spinner");
 		} else {
@@ -424,7 +376,7 @@ public class PropertiesDialog extends JDialog {
 		}
 
 		final int slowDownSpeed = (int) slowDownSpeedTF.getValue();
-		if (!isValidSpeed(slowDownSpeed)) {
+		if (!validator.isValidSpeed(slowDownSpeed)) {
 			slowDownSpeedTF.setBackground(Color.red);
 			LOGGER.error("error by parsing slowDownSpeed from Spinner");
 		} else {
@@ -433,7 +385,7 @@ public class PropertiesDialog extends JDialog {
 		}
 
 		final int middleDownSpeed = (int) middleDownSpeedTF.getValue();
-		if (!isValidSpeed(middleDownSpeed)) {
+		if (!validator.isValidSpeed(middleDownSpeed)) {
 			middleDownSpeedTF.setBackground(Color.red);
 			LOGGER.error("error by parsing middleDownSpeed from Spinner");
 		} else {
@@ -442,7 +394,7 @@ public class PropertiesDialog extends JDialog {
 		}
 
 		final int fastDownSpeed = (int) fastDownSpeedTF.getValue();
-		if (!isValidSpeed(fastDownSpeed)) {
+		if (!validator.isValidSpeed(fastDownSpeed)) {
 			fastDownSpeedTF.setBackground(Color.red);
 			LOGGER.error("error by parsing fastDownSpeed from Spinner");
 		} else {
@@ -453,7 +405,7 @@ public class PropertiesDialog extends JDialog {
 		connectionProperties.setReverseSteps(reverseCB.isSelected());
 
 		final long sleepMovementMirror = (long) sleepMovementMirrorTF.getValue();
-		if (!isValidSleep(sleepMovementMirror)) {
+		if (!validator.isValidSleep(sleepMovementMirror)) {
 			sleepMovementMirrorTF.setBackground(Color.red);
 			LOGGER.error("error by parsing sleepMovementMirror Spinner");
 		} else {
@@ -462,7 +414,7 @@ public class PropertiesDialog extends JDialog {
 		}
 
 		final long sleepMirrorPicture = (long) sleepMirrorPictureTF.getValue();
-		if (!isValidSleep(sleepMirrorPicture)) {
+		if (!validator.isValidSleep(sleepMirrorPicture)) {
 			sleepMirrorPictureTF.setBackground(Color.red);
 			LOGGER.error("error by parsing sleepMirrorPicture from Spinner");
 		} else {
@@ -471,7 +423,7 @@ public class PropertiesDialog extends JDialog {
 		}
 
 		final long sleepPictureMovement = (long) sleepPictureMovementTF.getValue();
-		if (!isValidSleep(sleepPictureMovement)) {
+		if (!validator.isValidSleep(sleepPictureMovement)) {
 			sleepPictureMovementTF.setBackground(Color.red);
 			LOGGER.error("error by parsing sleepPictureMovement from Spinner");
 		} else {
@@ -480,7 +432,7 @@ public class PropertiesDialog extends JDialog {
 		}
 
 		final long pulseDuration = (long) pulseDurationTF.getValue();
-		if (!isValidSleep(pulseDuration)) {
+		if (!validator.isValidSleep(pulseDuration)) {
 			pulseDurationTF.setBackground(Color.red);
 			LOGGER.error("error by parsing pulseDuration from Spinner");
 		} else {
