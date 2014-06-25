@@ -4,8 +4,8 @@ import java.io.File;
 
 import org.apache.log4j.Logger;
 
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.PropertiesFileHandler;
-import de.dennismaass.emp.stonemaster.stackmaster.common.properties.UiProperties;
 
 public class ProfileFileHandler {
 	private static final Logger LOGGER = Logger.getLogger(ProfileFileHandler.class);
@@ -13,7 +13,7 @@ public class ProfileFileHandler {
 	private final PropertiesFileHandler propertiesFileHandler = new PropertiesFileHandler();
 
 	public Profile readProfile(final File file) {
-		final UiProperties connectionProperties = propertiesFileHandler.readConnectionProperties(file);
+		final ComConnectionProperties connectionProperties = propertiesFileHandler.readConnectionProperties(file);
 
 		final Profile profile = new Profile();
 		profile.setProperties(connectionProperties);

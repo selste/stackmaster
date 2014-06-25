@@ -1,15 +1,15 @@
 package de.dennismaass.emp.stonemaster.stackmaster.common.profile;
 
-import de.dennismaass.emp.stonemaster.stackmaster.common.properties.UiProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionProperties;
 
 public class Profile {
-	private UiProperties properties;
+	private ComConnectionProperties properties;
 
-	public UiProperties getProperties() {
+	public ComConnectionProperties getProperties() {
 		return properties;
 	}
 
-	public void setProperties(final UiProperties properties) {
+	public void setProperties(final ComConnectionProperties properties) {
 		this.properties = properties;
 	}
 

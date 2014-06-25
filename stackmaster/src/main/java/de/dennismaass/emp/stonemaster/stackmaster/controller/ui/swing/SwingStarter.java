@@ -36,7 +36,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.log4j.Logger;
 
@@ -45,7 +44,7 @@ import de.dennismaass.emp.stonemaster.stackmaster.common.profile.ProfileFileHand
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionPropertiesChangeEvent;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionPropertiesListener;
-import de.dennismaass.emp.stonemaster.stackmaster.common.properties.UiProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.ui.swing.PropertiesFileChooser;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.ComInstructionID;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer.ComAnswerEvent;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer.ComAnswerListener;
@@ -58,6 +57,8 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 //TODO:
 
 //Bugs:
+//DefaultFiles in XML speichern
+//Erst Bild dann fahren
 //Validierung aller Textfelder
 //Kein Absturz mehr nach Trennen vom USB-Anschluss
 
@@ -69,12 +70,16 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
 		ComConnectionPropertiesListener {
 
-	private static final String FILE_ENDING = ".stackmaster";
-
-	/* Konstanten */
 	private static final long serialVersionUID = -811339745631798835L;
 
 	private static final Logger LOGGER = Logger.getLogger(SwingStarter.class);
+
+	private static final String DELETE_ICON_NAME = "delete-icon.png";
+
+	private static final String FILE_ENDING = ".stackmaster";
+
+	/* Konstanten */
+
 	private static final String TITLE = "StackMaster";
 
 	private static final String IMAGES = "/images/";
@@ -190,7 +195,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		setAllComponentsDisableState(true);
 
-		setNewConnectionProperties(defaultProfile.getProperties());
+		setConnectionProperties(defaultProfile.getProperties());
 		LOGGER.info("user interface builded");
 	}
 
@@ -318,7 +323,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		mnDatei.setFont(SwingStarter.FONT);
 		menuBar.add(mnDatei);
 
-		final URL deleteURL = getClass().getResource(IMAGES + "delete-icon.png");
+		final URL deleteURL = getClass().getResource(IMAGES + DELETE_ICON_NAME);
 		final ImageIcon deleteIcon = new ImageIcon(deleteURL);
 		final ImageIcon resizedDeleteIcon = ImageUtils.getResizedImage(deleteIcon, 15, 15);
 
@@ -329,7 +334,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-				exit();
+				handleExit();
 			}
 
 		});
@@ -340,23 +345,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-				final JFileChooser chooser = new JFileChooser();
-				final FileNameExtensionFilter filter = new FileNameExtensionFilter("StackMaster Dateien", "stackmaster");
-				chooser.setFileFilter(filter);
-				final int returnVal = chooser.showOpenDialog(null);
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					final File selectedFile = chooser.getSelectedFile();
-					if (selectedFile != null) {
-						LOGGER.info("chosen file: " + selectedFile);
-						actualOpenedProfileFileName = selectedFile;
-						final Profile loadedConnectionProperties = propertiesHandler
-								.readProfile(actualOpenedProfileFileName);
-						setNewConnectionProperties(loadedConnectionProperties.getProperties());
-						setTitle(TITLE + " - " + selectedFile.getAbsolutePath());
-						mntmProfilSpeichern.setEnabled(true);
-					}
-				}
-
+				handleLoadProperties();
 			}
 		});
 		mnDatei.add(mntmLaden);
@@ -368,9 +357,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-				LOGGER.info("chosen file: " + actualOpenedProfileFileName.getAbsolutePath());
-				propertiesHandler.writeProfile(actualOpenedProfileFileName, profile);
-				// propertiesDialog.loadConnectionProperties(actualOpenedPropertiesFileName);
+				handleSaveProperties();
 			}
 
 		});
@@ -382,26 +369,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-				final JFileChooser chooser = new JFileChooser();
-				final FileNameExtensionFilter filter = new FileNameExtensionFilter("StackMaster Dateien", "stackmaster");
-				chooser.setFileFilter(filter);
-				final int returnVal = chooser.showSaveDialog(null);
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					File selectedFile = chooser.getSelectedFile();
-					if (selectedFile != null) {
-						String absolutePath = selectedFile.getAbsolutePath();
-
-						if (!absolutePath.endsWith(FILE_ENDING)) {
-							absolutePath = absolutePath + FILE_ENDING;
-							selectedFile = new File(absolutePath);
-						}
-						LOGGER.info("chosen file: " + absolutePath);
-						actualOpenedProfileFileName = selectedFile;
-						propertiesHandler.writeProfile(actualOpenedProfileFileName, profile);
-						setTitle(TITLE + " - " + absolutePath);
-						mntmProfilSpeichern.setEnabled(true);
-					}
-				}
+				handleSaveAsProperties();
 
 			}
 		});
@@ -437,18 +405,15 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 			@Override
 			public void actionPerformed(final ActionEvent e) {
-				JOptionPane
-						.showMessageDialog(
-								getFrame(),
-								"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte",
-								"Über", JOptionPane.PLAIN_MESSAGE);
+				handleOverUs();
 			}
+
 		});
 		/** Menu Ende */
 	}
 
-	protected PropertiesDialog createPropertiesDialog(final UiProperties connectionProperties,
-			final UiProperties defaultConnectionProperties) {
+	protected PropertiesDialog createPropertiesDialog(final ComConnectionProperties connectionProperties,
+			final ComConnectionProperties defaultConnectionProperties) {
 		propertiesDialog = new PropertiesDialog(connectionProperties, defaultConnectionProperties);
 		propertiesDialog.addComConnectionPropertiesListener(this);
 		return propertiesDialog;
@@ -528,7 +493,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		}
 	}
 
-	protected void exit() {
+	protected void handleExit() {
 		LOGGER.info("Exit StackMaster");
 
 		if (communicator != null) {
@@ -536,6 +501,14 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 			communicator.disconnect();
 		}
 		System.exit(0);
+	}
+
+	protected void handleOverUs() {
+		JOptionPane
+				.showMessageDialog(
+						getFrame(),
+						"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte",
+						"Über", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	/**
@@ -567,11 +540,11 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 	@Override
 	public void handleComConnectionPropertiesChangeEvent(final ComConnectionPropertiesChangeEvent event) {
 		final ComConnectionProperties connectionProperties = event.getConnectionProperties();
-		setNewConnectionProperties(connectionProperties);
+		setConnectionProperties(connectionProperties);
 
 	}
 
-	public void setNewConnectionProperties(final ComConnectionProperties connectionProperties) {
+	public void setConnectionProperties(final ComConnectionProperties connectionProperties) {
 		stepPanel.setVariablesFromProperties(connectionProperties);
 		stepPanel.refreshDistance();
 		stepPanel.refreshSleep();
@@ -582,6 +555,53 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 			communicator.setStepsPerMm(connectionProperties.getStepsPerMm());
 			communicator.setReverse(connectionProperties.isReverseSteps());
 			communicator.setMicrostepResolution(connectionProperties.getMicrostepResolutionMode());
+		}
+
+		profile.setProperties(connectionProperties);
+	}
+
+	protected void handleSaveProperties() {
+		LOGGER.info("chosen file: " + actualOpenedProfileFileName.getAbsolutePath());
+		propertiesHandler.writeProfile(actualOpenedProfileFileName, defaultProfile);
+	}
+
+	protected void handleLoadProperties() {
+		final JFileChooser chooser = new PropertiesFileChooser();
+
+		final int returnVal = chooser.showOpenDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			final File selectedFile = chooser.getSelectedFile();
+			if (selectedFile != null) {
+				LOGGER.info("chosen file: " + selectedFile);
+				actualOpenedProfileFileName = selectedFile;
+				final Profile loadedConnectionProperties = propertiesHandler.readProfile(actualOpenedProfileFileName);
+				setConnectionProperties(loadedConnectionProperties.getProperties());
+				setTitle(TITLE + " - " + selectedFile.getAbsolutePath());
+				mntmProfilSpeichern.setEnabled(true);
+			}
+		}
+	}
+
+	protected void handleSaveAsProperties() {
+		final JFileChooser chooser = new PropertiesFileChooser();
+
+		final int returnVal = chooser.showSaveDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = chooser.getSelectedFile();
+
+			if (selectedFile != null) {
+				String absolutePath = selectedFile.getAbsolutePath();
+
+				if (!absolutePath.endsWith(FILE_ENDING)) {
+					absolutePath = absolutePath + FILE_ENDING;
+					selectedFile = new File(absolutePath);
+				}
+				LOGGER.info("chosen file: " + absolutePath);
+				actualOpenedProfileFileName = selectedFile;
+				propertiesHandler.writeProfile(actualOpenedProfileFileName, defaultProfile);
+				setTitle(TITLE + " - " + absolutePath);
+				mntmProfilSpeichern.setEnabled(true);
+			}
 		}
 	}
 

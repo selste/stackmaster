@@ -27,7 +27,7 @@ public class PropertiesFileHandler {
 				final ZipEntry zipEntry = entries.nextElement();
 
 				final InputStream inputStream = zipFile.getInputStream(zipEntry);
-				properties.load(inputStream);
+				properties.loadFromXML(inputStream);
 				inputStream.close();
 			}
 			zipFile.close();
@@ -40,10 +40,10 @@ public class PropertiesFileHandler {
 		return properties;
 	}
 
-	public UiProperties readConnectionProperties(final File file) {
+	public ComConnectionProperties readConnectionProperties(final File file) {
 		final Properties properties = readProperties(file);
 
-		final UiProperties comConnectionProperties = new UiProperties();
+		final ComConnectionProperties comConnectionProperties = new ComConnectionProperties();
 
 		try {
 			final Integer fastUpSpeed = Integer.parseInt(properties.getProperty("fastUpSpeed"));
@@ -154,10 +154,9 @@ public class PropertiesFileHandler {
 
 	}
 
-	public void writeConnectionProperties(final File file, final UiProperties comConnectionProperties) {
+	public void writeConnectionProperties(final File file, final ComConnectionProperties comConnectionProperties) {
 
 		final Properties properties = new Properties();
-		// final BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
 
 		final int fastUpSpeed = comConnectionProperties.getFastUpSpeed();
 		properties.setProperty("fastUpSpeed", Integer.toString(fastUpSpeed));
@@ -195,24 +194,16 @@ public class PropertiesFileHandler {
 		final double lastStep = comConnectionProperties.getStepSize();
 		properties.setProperty("lastStep", Double.toString(lastStep));
 
-		// byte[] buffer = new byte[1024];
-
 		try {
 
 			final FileOutputStream fos = new FileOutputStream(file);
 			final ZipOutputStream zos = new ZipOutputStream(fos);
 			final ZipEntry ze = new ZipEntry("stackmaster.properties");
 			zos.putNextEntry(ze);
-
-			// int len;
-			// while ((len = in.read(buffer)) > 0) {
-			// zos.write(buffer, 0, len);
-			// }
 			properties.storeToXML(zos, "stackmaster properties", "UTF-8");
 
 			zos.closeEntry();
 
-			// remember close it
 			zos.close();
 
 		} catch (final IOException ex) {

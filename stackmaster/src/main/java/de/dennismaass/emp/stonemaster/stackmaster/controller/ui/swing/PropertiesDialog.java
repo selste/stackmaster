@@ -275,37 +275,10 @@ public class PropertiesDialog extends JDialog {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
 
-				final ComConnectionProperties comConnectionProperties = setVariablesFromTF(actualConnectionProperties);
-				final boolean allValid = validator.validate(comConnectionProperties);
-				LOGGER.info("try to save properties");
-				LOGGER.info("properties are valid: " + allValid);
-				if (allValid) {
-					setBackgroundOfAllTextFields(Color.white);
-
-					for (final ComConnectionPropertiesListener listener : listenerList) {
-						final ComConnectionPropertiesChangeEvent event = new ComConnectionPropertiesChangeEvent(this,
-								comConnectionProperties);
-						listener.handleComConnectionPropertiesChangeEvent(event);
-					}
-
-					dispose();
-				}
+				handleOkayButton();
 
 			}
 
-			protected void setBackgroundOfAllTextFields(final Color color) {
-				fastUpSpeedTF.setBackground(color);
-				middleUpSpeedTF.setBackground(color);
-				slowUpSpeedTF.setBackground(color);
-				fastDownSpeedTF.setBackground(color);
-				middleDownSpeedTF.setBackground(color);
-				slowDownSpeedTF.setBackground(color);
-				reverseCB.setBackground(color);
-				sleepMirrorPictureTF.setBackground(color);
-				sleepMovementMirrorTF.setBackground(color);
-				sleepPictureMovementTF.setBackground(color);
-				pulseDurationTF.setBackground(color);
-			}
 		});
 		okButton.setActionCommand("OK");
 		buttonPane.add(okButton);
@@ -328,119 +301,163 @@ public class PropertiesDialog extends JDialog {
 
 	}
 
+	protected void handleOkayButton() {
+		final boolean allValid = validateUserSettings();
+		LOGGER.info("try to save properties");
+		LOGGER.info("properties are valid: " + allValid);
+		if (allValid) {
+			final ComConnectionProperties newConnectionProperties = getNewConnectionProperties();
+			setConnectionProperties(newConnectionProperties);
+
+			for (final ComConnectionPropertiesListener listener : listenerList) {
+				final ComConnectionPropertiesChangeEvent event = new ComConnectionPropertiesChangeEvent(this,
+						newConnectionProperties);
+				listener.handleComConnectionPropertiesChangeEvent(event);
+			}
+
+			dispose();
+		}
+	}
+
 	private void cancel() {
-		fastUpSpeedTF.setValue(actualConnectionProperties.getFastUpSpeed());
-		middleUpSpeedTF.setValue(actualConnectionProperties.getMiddleUpSpeed());
-		slowUpSpeedTF.setValue(actualConnectionProperties.getSlowUpSpeed());
-		fastDownSpeedTF.setValue(actualConnectionProperties.getFastDownSpeed());
-		middleDownSpeedTF.setValue(actualConnectionProperties.getMiddleDownSpeed());
-		slowDownSpeedTF.setValue(actualConnectionProperties.getSlowDownSpeed());
-		reverseCB.setSelected(actualConnectionProperties.isReverseSteps());
-		sleepMirrorPictureTF.setValue(actualConnectionProperties.getSleepMirrorPicture());
-		sleepMovementMirrorTF.setValue(actualConnectionProperties.getSleepMovementMirror());
-		sleepPictureMovementTF.setValue(actualConnectionProperties.getSleepPictureMovement());
-		pulseDurationTF.setValue(actualConnectionProperties.getPulseDuration());
+		setConnectionPropertiesValues(actualConnectionProperties);
 	}
 
-	public void refresh() {
-		cancel();
-	}
-
-	protected ComConnectionProperties setVariablesFromTF(final ComConnectionProperties connectionProperties) {
+	public ComConnectionProperties getNewConnectionProperties() {
+		final ComConnectionProperties comConnectionProperties = new ComConnectionProperties();
 
 		final int fastUpSpeed = (int) fastUpSpeedTF.getValue();
+		comConnectionProperties.setFastUpSpeed(fastUpSpeed);
+
+		final int middleUpSpeed = (int) middleUpSpeedTF.getValue();
+		comConnectionProperties.setMiddleUpSpeed(middleUpSpeed);
+
+		final int slowUpSpeed = (int) slowUpSpeedTF.getValue();
+		comConnectionProperties.setSlowUpSpeed(slowUpSpeed);
+
+		final int slowDownSpeed = (int) slowDownSpeedTF.getValue();
+		comConnectionProperties.setSlowDownSpeed(slowDownSpeed);
+
+		final int middleDownSpeed = (int) middleDownSpeedTF.getValue();
+		comConnectionProperties.setMiddleDownSpeed(middleDownSpeed);
+
+		final int fastDownSpeed = (int) fastDownSpeedTF.getValue();
+		comConnectionProperties.setFastDownSpeed(fastDownSpeed);
+
+		final long sleepMovementMirror = (long) sleepMovementMirrorTF.getValue();
+		comConnectionProperties.setSleepMovementMirror(sleepMovementMirror);
+
+		final long sleepMirrorPicture = (long) sleepMirrorPictureTF.getValue();
+		comConnectionProperties.setSleepMirrorPicture(sleepMirrorPicture);
+
+		final long sleepPictureMovement = (long) sleepPictureMovementTF.getValue();
+		comConnectionProperties.setSleepPictureMovement(sleepPictureMovement);
+
+		final long pulseDuration = (long) pulseDurationTF.getValue();
+		comConnectionProperties.setPulseDuration(pulseDuration);
+
+		final boolean reverseSteps = reverseCB.isSelected();
+		comConnectionProperties.setReverseSteps(reverseSteps);
+
+		return comConnectionProperties;
+
+	}
+
+	protected boolean validateUserSettings() {
+		boolean allValid = true;
+
+		final int fastUpSpeed = (int) fastUpSpeedTF.getValue();
+
 		if (!validator.isValidSpeed(fastUpSpeed)) {
+			allValid = false;
 			fastUpSpeedTF.setBackground(Color.red);
-			LOGGER.error("error by parsing fastUpSpeed  from Spinner");
+			LOGGER.error("error by parsing fastUpSpeed from Spinner");
 		} else {
-			connectionProperties.setFastUpSpeed(fastUpSpeed);
 			fastUpSpeedTF.setBackground(Color.white);
 		}
 
 		final int middleUpSpeed = (int) middleUpSpeedTF.getValue();
 		if (!validator.isValidSpeed(middleUpSpeed)) {
+			allValid = false;
 			middleUpSpeedTF.setBackground(Color.red);
-			LOGGER.error("error by parsing middleUpSpeed  from Spinner");
+			LOGGER.error("error by parsing middleUpSpeed from Spinner");
 		} else {
-			connectionProperties.setMiddleUpSpeed(middleUpSpeed);
 			middleUpSpeedTF.setBackground(Color.white);
 		}
 
 		final int slowUpSpeed = (int) slowUpSpeedTF.getValue();
 		if (!validator.isValidSpeed(slowUpSpeed)) {
+			allValid = false;
 			slowUpSpeedTF.setBackground(Color.red);
 			LOGGER.error("error by parsing slowUpSpeed from Spinner");
 		} else {
-			connectionProperties.setSlowUpSpeed(slowUpSpeed);
 			slowUpSpeedTF.setBackground(Color.white);
 		}
 
 		final int slowDownSpeed = (int) slowDownSpeedTF.getValue();
 		if (!validator.isValidSpeed(slowDownSpeed)) {
+			allValid = false;
 			slowDownSpeedTF.setBackground(Color.red);
 			LOGGER.error("error by parsing slowDownSpeed from Spinner");
 		} else {
-			connectionProperties.setSlowDownSpeed(slowDownSpeed);
 			slowDownSpeedTF.setBackground(Color.white);
 		}
 
 		final int middleDownSpeed = (int) middleDownSpeedTF.getValue();
 		if (!validator.isValidSpeed(middleDownSpeed)) {
+			allValid = false;
 			middleDownSpeedTF.setBackground(Color.red);
 			LOGGER.error("error by parsing middleDownSpeed from Spinner");
 		} else {
-			connectionProperties.setMiddleDownSpeed(middleDownSpeed);
 			middleDownSpeedTF.setBackground(Color.white);
 		}
 
 		final int fastDownSpeed = (int) fastDownSpeedTF.getValue();
 		if (!validator.isValidSpeed(fastDownSpeed)) {
+			allValid = false;
 			fastDownSpeedTF.setBackground(Color.red);
 			LOGGER.error("error by parsing fastDownSpeed from Spinner");
 		} else {
-			connectionProperties.setFastDownSpeed(fastDownSpeed);
 			fastDownSpeedTF.setBackground(Color.white);
 		}
 
-		connectionProperties.setReverseSteps(reverseCB.isSelected());
-
 		final long sleepMovementMirror = (long) sleepMovementMirrorTF.getValue();
 		if (!validator.isValidSleep(sleepMovementMirror)) {
+			allValid = false;
 			sleepMovementMirrorTF.setBackground(Color.red);
 			LOGGER.error("error by parsing sleepMovementMirror Spinner");
 		} else {
-			connectionProperties.setSleepMovementMirror(sleepMovementMirror);
 			sleepMovementMirrorTF.setBackground(Color.white);
 		}
 
 		final long sleepMirrorPicture = (long) sleepMirrorPictureTF.getValue();
 		if (!validator.isValidSleep(sleepMirrorPicture)) {
+			allValid = false;
 			sleepMirrorPictureTF.setBackground(Color.red);
 			LOGGER.error("error by parsing sleepMirrorPicture from Spinner");
 		} else {
-			connectionProperties.setSleepMirrorPicture(sleepMirrorPicture);
 			sleepMirrorPictureTF.setBackground(Color.white);
 		}
 
 		final long sleepPictureMovement = (long) sleepPictureMovementTF.getValue();
 		if (!validator.isValidSleep(sleepPictureMovement)) {
+			allValid = false;
 			sleepPictureMovementTF.setBackground(Color.red);
 			LOGGER.error("error by parsing sleepPictureMovement from Spinner");
 		} else {
-			connectionProperties.setSleepPictureMovement(sleepPictureMovement);
 			sleepPictureMovementTF.setBackground(Color.white);
 		}
 
 		final long pulseDuration = (long) pulseDurationTF.getValue();
 		if (!validator.isValidSleep(pulseDuration)) {
+			allValid = false;
 			pulseDurationTF.setBackground(Color.red);
 			LOGGER.error("error by parsing pulseDuration from Spinner");
 		} else {
-			connectionProperties.setPulseDuration(pulseDuration);
 			pulseDurationTF.setBackground(Color.white);
 		}
 
-		return connectionProperties;
+		return allValid;
 
 	}
 
@@ -458,6 +475,20 @@ public class PropertiesDialog extends JDialog {
 
 	public void setConnectionProperties(final ComConnectionProperties connectionProperties) {
 		actualConnectionProperties = connectionProperties;
-		refresh();
+		setConnectionPropertiesValues(actualConnectionProperties);
+	}
+
+	protected void setConnectionPropertiesValues(final ComConnectionProperties connectionProperties) {
+		fastUpSpeedTF.setValue(connectionProperties.getFastUpSpeed());
+		middleUpSpeedTF.setValue(connectionProperties.getMiddleUpSpeed());
+		slowUpSpeedTF.setValue(connectionProperties.getSlowUpSpeed());
+		fastDownSpeedTF.setValue(connectionProperties.getFastDownSpeed());
+		middleDownSpeedTF.setValue(connectionProperties.getMiddleDownSpeed());
+		slowDownSpeedTF.setValue(connectionProperties.getSlowDownSpeed());
+		reverseCB.setSelected(connectionProperties.isReverseSteps());
+		sleepMirrorPictureTF.setValue(connectionProperties.getSleepMirrorPicture());
+		sleepMovementMirrorTF.setValue(connectionProperties.getSleepMovementMirror());
+		sleepPictureMovementTF.setValue(connectionProperties.getSleepPictureMovement());
+		pulseDurationTF.setValue(connectionProperties.getPulseDuration());
 	}
 }

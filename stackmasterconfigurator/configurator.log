@@ -450,3 +450,60 @@ java.lang.NullPointerException
 2014-06-20 23:35:52 INFO  PropertiesFileHandler:34 - properties loaded
 2014-06-20 23:35:52 INFO  PropertiesFileHandler:22 - try loading properties
 2014-06-20 23:35:52 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 21:22:20 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 21:22:20 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 21:22:20 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 21:22:20 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 21:23:54 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 21:23:54 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 21:23:54 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 21:23:54 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:18:46 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:18:46 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:18:46 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:18:46 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:48:32 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:48:32 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:48:32 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:48:32 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:51:00 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:51:00 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:51:00 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:51:00 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:52:43 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:52:43 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:52:43 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:52:43 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:55:21 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:55:21 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:55:21 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:55:21 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:55:21 ERROR SwingStarter:445 - Error in main-methode by creating SwingStarter object
+java.lang.NullPointerException
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.cancel(SwingStarter.java:352)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.refresh(SwingStarter.java:372)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.setConnectionProperties(SwingStarter.java:348)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.<init>(SwingStarter.java:99)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter$3.run(SwingStarter.java:442)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-06-25 22:55:51 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:55:51 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:55:51 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:55:51 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:56:10 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:56:10 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-25 22:56:10 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-25 22:56:10 INFO  PropertiesFileHandler:34 - properties loaded
