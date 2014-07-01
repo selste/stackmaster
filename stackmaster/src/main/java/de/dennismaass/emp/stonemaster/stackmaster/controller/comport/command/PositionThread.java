@@ -1,15 +1,18 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command;
 
+import lombok.Getter;
+import lombok.Setter;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
 
+@Getter
+@Setter
 public class PositionThread extends Thread {
 
-	private final ComCommunicator communicator;
-
+	private ComCommunicator communicator;
 	private boolean running = true;
 	private long delay = 10;
 
-	public PositionThread(final ComCommunicator communicator) {
+	public PositionThread(ComCommunicator communicator) {
 		this.communicator = communicator;
 	}
 
@@ -26,32 +29,12 @@ public class PositionThread extends Thread {
 		}
 	}
 
-	protected void pause(final long delayInMillis) {
+	protected void pause(long delayInMillis) {
 		try {
 			Thread.sleep(delayInMillis);
-		} catch (final InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public long getDelay() {
-		return delay;
-	}
-
-	public void setDelay(final long delay) {
-		this.delay = delay;
-	}
-
-	public ComCommunicator getCommunicator() {
-		return communicator;
-	}
-
-	public boolean isRunning() {
-		return running;
-	}
-
-	public void setRunning(final boolean running) {
-		this.running = running;
 	}
 
 }

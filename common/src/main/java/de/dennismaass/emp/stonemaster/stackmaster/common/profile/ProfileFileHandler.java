@@ -4,24 +4,25 @@ import java.io.File;
 
 import org.apache.log4j.Logger;
 
-import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionProperties;
-import de.dennismaass.emp.stonemaster.stackmaster.common.properties.PropertiesFileHandler;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionPropertiesFileHandler;
 
 public class ProfileFileHandler {
-	private static final Logger LOGGER = Logger.getLogger(ProfileFileHandler.class);
+	private static Logger LOGGER = Logger.getLogger(ProfileFileHandler.class);
 
-	private final PropertiesFileHandler propertiesFileHandler = new PropertiesFileHandler();
+	private ComConnectionPropertiesFileHandler propertiesFileHandler = new ComConnectionPropertiesFileHandler();
 
-	public Profile readProfile(final File file) {
-		final ComConnectionProperties connectionProperties = propertiesFileHandler.readConnectionProperties(file);
+	public Profile readProfile(File file) {
+		ComConnectionProperties connectionProperties = propertiesFileHandler.read(file);
 
-		final Profile profile = new Profile();
+		Profile profile = new Profile();
 		profile.setProperties(connectionProperties);
 
 		return profile;
 	}
 
-	public void writeProfile(final File file, final Profile profile) {
-		propertiesFileHandler.writeConnectionProperties(file, profile.getProperties());
+	public void writeProfile(File file, Profile profile) {
+		LOGGER.info("write profile " + profile + " in file " + file);
+		propertiesFileHandler.write(file, profile.getProperties());
 	}
 }

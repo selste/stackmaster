@@ -6,10 +6,10 @@ import java.util.EventObject;
 import java.util.List;
 
 public class CommPortIdentifierNotificationEvent extends EventObject {
-	private static final long serialVersionUID = -4766066275663476550L;
-	private final List<CommPortIdentifier> commPortIdentifierList;
+	private static long serialVersionUID = -4766066275663476550L;
+	private List<CommPortIdentifier> commPortIdentifierList;
 
-	public CommPortIdentifierNotificationEvent(final Object source, final List<CommPortIdentifier> commPortIdentifierList) {
+	public CommPortIdentifierNotificationEvent(Object source, List<CommPortIdentifier> commPortIdentifierList) {
 		super(source);
 		this.commPortIdentifierList = commPortIdentifierList;
 	}

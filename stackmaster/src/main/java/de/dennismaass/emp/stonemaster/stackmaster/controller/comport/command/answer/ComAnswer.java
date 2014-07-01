@@ -1,14 +1,15 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer;
 
+import lombok.Getter;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.AComCommand;
 
+@Getter
 public class ComAnswer extends AComCommand {
-	private final int host;
-	private final int status;
-	private final int checksum;
+	private int host;
+	private int status;
+	private int checksum;
 
-	public ComAnswer(final int host, final int address, final int instruction, final int status, final int value,
-			final int checksum) {
+	public ComAnswer(int host, int address, int instruction, int status, int value, int checksum) {
 		super(address, instruction, value);
 
 		this.host = host;
@@ -16,23 +17,11 @@ public class ComAnswer extends AComCommand {
 		this.checksum = checksum;
 	}
 
-	public int getChecksum() {
-		return checksum;
-	}
-
-	public int getHost() {
-		return host;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
 	@Override
 	public byte[] toByteMessage() {
-		final int value = getValue();
+		int value = getValue();
 
-		final byte[] bytes = new byte[9];
+		byte[] bytes = new byte[9];
 		bytes[0] = (byte) (getAddress() & 0xff);
 		bytes[1] = (byte) (getInstruction() & 0xff);
 		bytes[2] = (byte) (getStatus() & 0xff);
@@ -52,15 +41,15 @@ public class ComAnswer extends AComCommand {
 				+ (getInstruction() & 0xff) + ", " + getValue() + ", " + (getChecksum() & 0xff) + ")";
 	}
 
-	public static ComAnswer build(final byte[] bytes) {
+	public static ComAnswer build(byte[] bytes) {
 		ComAnswer answer = null;
 		if (bytes != null && bytes.length == 9) {
-			final byte checksum = bytes[8];
-			final byte host = bytes[0];
-			final byte address = bytes[1];
-			final byte status = bytes[2];
-			final byte instruction = bytes[3];
-			final int value = (bytes[4] & 0xff) << 24 | (bytes[5] & 0xff) << 16 | (bytes[6] & 0xff) << 8
+			byte checksum = bytes[8];
+			byte host = bytes[0];
+			byte address = bytes[1];
+			byte status = bytes[2];
+			byte instruction = bytes[3];
+			int value = (bytes[4] & 0xff) << 24 | (bytes[5] & 0xff) << 16 | (bytes[6] & 0xff) << 8
 					| (bytes[7] & 0xff) << 0;
 			answer = new ComAnswer(host, address, instruction, status, value, checksum);
 

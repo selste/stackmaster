@@ -30,6 +30,7 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.rxtx.version>2.2pre2</org.rxtx.version>
+		<org.projectlombok.lombok.version>1.14.2</org.projectlombok.lombok.version>
 		<log4j.log4j.version>1.2.17</log4j.log4j.version>
 		<com.miglayout.miglayout.version>3.7.4</com.miglayout.miglayout.version>
 		<org.apache.commons.commons-lang3.version> 3.3.2</org.apache.commons.commons-lang3.version>
@@ -60,6 +61,12 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${org.projectlombok.lombok.version}</version>
+				<scope>provided</scope>
+			</dependency>
 			<dependency>
 				<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
 				<artifactId>common</artifactId>

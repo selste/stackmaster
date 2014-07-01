@@ -1,12 +1,14 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.instruction;
 
+import lombok.Getter;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.AComCommand;
 
+@Getter
 public class ComInstruction extends AComCommand {
-	protected final int type;
-	protected final int motor;
+	protected int type;
+	protected int motor;
 
-	public ComInstruction(final int address, final int instruction, final int type, final int motor, final int value) {
+	public ComInstruction(int address, int instruction, int type, int motor, int value) {
 		super(address, instruction, value);
 
 		this.type = type;
@@ -18,17 +20,9 @@ public class ComInstruction extends AComCommand {
 				+ (byte) (value >> 8 & 0xff) + (byte) (value & 0xff));
 	}
 
-	public int getType() {
-		return type;
-	}
-
-	public int getMotor() {
-		return motor;
-	}
-
 	@Override
 	public byte[] toByteMessage() {
-		final byte[] bytes = new byte[9];
+		byte[] bytes = new byte[9];
 		bytes[0] = (byte) (address & 0xff);
 		bytes[1] = (byte) (instruction & 0xff);
 		bytes[2] = (byte) (type & 0xff);

@@ -16,27 +16,27 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.log4j.Logger;
 
-import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
 
 public class RelativPosPanel extends JPanel {
 
-	private static final long serialVersionUID = 287824350037456067L;
+	private static long serialVersionUID = 287824350037456067L;
 
-	private static final Logger LOGGER = Logger.getLogger(RelativPosPanel.class);
+	private static Logger LOGGER = Logger.getLogger(RelativPosPanel.class);
 
-	protected static final String upSlowTooltip = "langsam [hoch]";
-	protected static final String upMiddleTooltip = "mittel [hoch]";
-	protected static final String upFastTooltip = "schnell [hoch]";
+	protected static String upSlowTooltip = "langsam [hoch]";
+	protected static String upMiddleTooltip = "mittel [hoch]";
+	protected static String upFastTooltip = "schnell [hoch]";
 
-	protected static final String downSlowTooltip = "langsam [runter]";
-	protected static final String downMiddleTooltip = "mittel [runter]";
-	protected static final String downFastTooltip = "schnell [runter]";
+	protected static String downSlowTooltip = "langsam [runter]";
+	protected static String downMiddleTooltip = "mittel [runter]";
+	protected static String downFastTooltip = "schnell [runter]";
 
-	private final JButton doubleUpButton;
-	private final JButton upBigButton;
-	private final JButton upSmallButton;
-	private final JButton doubleDownButton, downBigButton, downSmallButton;
+	private JButton doubleUpButton;
+	private JButton upBigButton;
+	private JButton upSmallButton;
+	private JButton doubleDownButton, downBigButton, downSmallButton;
 
 	private ImageIcon doubleUpIcon;
 	private ImageIcon upBigIcon;
@@ -47,21 +47,21 @@ public class RelativPosPanel extends JPanel {
 
 	private ComCommunicator communicator;
 
-	private final ComConnectionProperties properties;
+	private ComConnectionProperties properties;
 	private int fastUpSpeed = 1000, middleUpSpeed = 500, slowUpSpeed = 100;
 	private int slowDownSpeed = 100, middleDownSpeed = 500, fastDownSpeed = 1000;
 
 	private boolean reverseRelativ = false;
 
-	private static final String IMAGES = "/images/";
+	private static String IMAGES = "/images/";
 
 	private JLabel stateLine;
-	private final JPanel panel;
+	private JPanel panel;
 
 	/**
 	 * Create the panel.
 	 */
-	public RelativPosPanel(final ComConnectionProperties properties, final JLabel stateLine) {
+	public RelativPosPanel(ComConnectionProperties properties, JLabel stateLine) {
 		this.properties = properties;
 		setVariablesFromProperties(properties);
 		setStateLine(stateLine);
@@ -131,7 +131,7 @@ public class RelativPosPanel extends JPanel {
 		doubleDownButton.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mousePressed(final MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("send rotate left command with speed: " + fastDownSpeed);
 					communicator.rotateLeft(fastDownSpeed);
@@ -139,7 +139,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseReleased(final MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("stop motor");
 					communicator.stop();
@@ -147,7 +147,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseExited(final MouseEvent e) {
+			public void mouseExited(MouseEvent e) {
 				if (communicator != null) {
 					if (communicator.isActiv()) {
 						LOGGER.info("stop motor");
@@ -159,7 +159,7 @@ public class RelativPosPanel extends JPanel {
 		downBigButton.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mousePressed(final MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("send rotate left command with speed: " + middleDownSpeed);
 					communicator.rotateLeft(middleDownSpeed);
@@ -167,7 +167,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseReleased(final MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("stop motor");
 					communicator.stop();
@@ -175,7 +175,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseExited(final MouseEvent e) {
+			public void mouseExited(MouseEvent e) {
 				if (communicator != null) {
 					if (communicator.isActiv()) {
 						LOGGER.info("stop motor");
@@ -187,7 +187,7 @@ public class RelativPosPanel extends JPanel {
 		downSmallButton.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mousePressed(final MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("send rotate left command with speed: " + slowDownSpeed);
 					communicator.rotateLeft(slowDownSpeed);
@@ -195,7 +195,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseReleased(final MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("stop motor");
 					communicator.stop();
@@ -203,7 +203,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseExited(final MouseEvent e) {
+			public void mouseExited(MouseEvent e) {
 				if (communicator != null) {
 					if (communicator.isActiv()) {
 						LOGGER.info("stop motor");
@@ -215,7 +215,7 @@ public class RelativPosPanel extends JPanel {
 		upSmallButton.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mousePressed(final MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("send rotate right command with speed: " + slowUpSpeed);
 					communicator.rotateRight(slowUpSpeed);
@@ -223,7 +223,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseReleased(final MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("stop motor");
 					communicator.stop();
@@ -231,7 +231,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseExited(final MouseEvent e) {
+			public void mouseExited(MouseEvent e) {
 				if (communicator != null) {
 					if (communicator.isActiv()) {
 						LOGGER.info("stop motor");
@@ -243,7 +243,7 @@ public class RelativPosPanel extends JPanel {
 		upBigButton.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mousePressed(final MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("send rotate right command with speed: " + middleUpSpeed);
 					communicator.rotateRight(middleUpSpeed);
@@ -251,7 +251,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseReleased(final MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("stop motor");
 					communicator.stop();
@@ -259,7 +259,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseExited(final MouseEvent e) {
+			public void mouseExited(MouseEvent e) {
 				if (communicator != null) {
 					if (communicator.isActiv()) {
 						LOGGER.info("stop motor");
@@ -272,7 +272,7 @@ public class RelativPosPanel extends JPanel {
 		doubleUpButton.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mousePressed(final MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("send rotate right command with speed: " + fastUpSpeed);
 					communicator.rotateRight(fastUpSpeed);
@@ -280,7 +280,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseReleased(final MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("stop motor");
 					communicator.stop();
@@ -288,7 +288,7 @@ public class RelativPosPanel extends JPanel {
 			}
 
 			@Override
-			public void mouseExited(final MouseEvent e) {
+			public void mouseExited(MouseEvent e) {
 				if (communicator != null) {
 					if (communicator.isActiv()) {
 						LOGGER.info("stop motor");
@@ -300,7 +300,7 @@ public class RelativPosPanel extends JPanel {
 		/** Relativ Tab Ende */
 	}
 
-	public void setVariablesFromProperties(final ComConnectionProperties properties) {
+	public void setVariablesFromProperties(ComConnectionProperties properties) {
 		fastUpSpeed = properties.getFastUpSpeed();
 		middleUpSpeed = properties.getMiddleUpSpeed();
 		slowUpSpeed = properties.getSlowUpSpeed();
@@ -312,43 +312,43 @@ public class RelativPosPanel extends JPanel {
 
 	protected void initIcons() {
 		/** Icons */
-		final URL doubleUpURL = getClass().getResource(IMAGES + "up_blue2.png");
+		URL doubleUpURL = getClass().getResource(IMAGES + "up_blue2.png");
 		doubleUpIcon = new ImageIcon(doubleUpURL);
 		doubleUpIcon = getResizedImage(doubleUpIcon, 70, 70);
 
-		final URL upBigURL = getClass().getResource(IMAGES + "up_blue2.png");
+		URL upBigURL = getClass().getResource(IMAGES + "up_blue2.png");
 		upBigIcon = new ImageIcon(upBigURL);
 		upBigIcon = getResizedImage(upBigIcon, 50, 50);
 
-		final URL upSmallURL = getClass().getResource(IMAGES + "up_blue2.png");
+		URL upSmallURL = getClass().getResource(IMAGES + "up_blue2.png");
 		upSmallIcon = new ImageIcon(upSmallURL);
 		upSmallIcon = getResizedImage(upSmallIcon, 30, 30);
 
-		final URL downSmallURL = getClass().getResource(IMAGES + "down_blue2.png");
+		URL downSmallURL = getClass().getResource(IMAGES + "down_blue2.png");
 		downSmallIcon = new ImageIcon(downSmallURL);
 		downSmallIcon = getResizedImage(downSmallIcon, 30, 30);
 
-		final URL downBigURL = getClass().getResource(IMAGES + "down_blue2.png");
+		URL downBigURL = getClass().getResource(IMAGES + "down_blue2.png");
 		downBigIcon = new ImageIcon(downBigURL);
 		downBigIcon = getResizedImage(downBigIcon, 50, 50);
 
-		final URL doubleDownURL = getClass().getResource(IMAGES + "down_blue2.png");
+		URL doubleDownURL = getClass().getResource(IMAGES + "down_blue2.png");
 		doubleDownIcon = new ImageIcon(doubleDownURL);
 		doubleDownIcon = getResizedImage(doubleDownIcon, 70, 70);
 		/** Icons Ende */
 	}
 
 	// TODO: auslagern
-	protected ImageIcon getResizedImage(ImageIcon icon, final int width, final int height) {
+	protected ImageIcon getResizedImage(ImageIcon icon, int width, int height) {
 		LOGGER.info("resize icon to " + width + "x" + height);
 
-		final Image img = icon.getImage();
-		final Image newimg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+		Image img = icon.getImage();
+		Image newimg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
 		icon = new ImageIcon(newimg);
 		return icon;
 	}
 
-	public void setAllComponentsDisableState(final boolean disableState) {
+	public void setAllComponentsDisableState(boolean disableState) {
 		if (!disableState) {
 			LOGGER.info("set all components enable");
 		} else {
@@ -367,7 +367,7 @@ public class RelativPosPanel extends JPanel {
 		return communicator;
 	}
 
-	public void setCommunicator(final ComCommunicator communicator) {
+	public void setCommunicator(ComCommunicator communicator) {
 		this.communicator = communicator;
 	}
 
@@ -375,7 +375,7 @@ public class RelativPosPanel extends JPanel {
 		return stateLine;
 	}
 
-	public void setStateLine(final JLabel stateLine) {
+	public void setStateLine(JLabel stateLine) {
 		this.stateLine = stateLine;
 	}
 }

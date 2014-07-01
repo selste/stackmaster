@@ -6,9 +6,9 @@ import javax.swing.ImageIcon;
 
 public class ImageUtils {
 
-	public static ImageIcon getResizedImage(ImageIcon icon, final int width, final int height) {
-		final Image img = icon.getImage();
-		final Image newimg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+	public static ImageIcon getResizedImage(ImageIcon icon, int width, int height) {
+		Image img = icon.getImage();
+		Image newimg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
 		icon = new ImageIcon(newimg);
 		return icon;
 	}

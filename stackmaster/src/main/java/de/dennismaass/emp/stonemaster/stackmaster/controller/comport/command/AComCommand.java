@@ -1,28 +1,19 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command;
 
+import lombok.Getter;
+
+@Getter
 public abstract class AComCommand {
 
-	protected final int address;
-	protected final int instruction;
-	protected final int value;
+	protected int address;
+	protected int instruction;
+	protected int value;
 
-	public AComCommand(final int address, final int instruction, final int value) {
+	public AComCommand(int address, int instruction, int value) {
 		super();
 		this.address = address;
 		this.instruction = instruction;
 		this.value = value;
-	}
-
-	public int getAddress() {
-		return address;
-	}
-
-	public int getInstruction() {
-		return instruction;
-	}
-
-	public int getValue() {
-		return value;
 	}
 
 	public abstract byte[] toByteMessage();

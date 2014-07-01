@@ -2,28 +2,23 @@ package de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.an
 
 import java.util.EventObject;
 
+import lombok.Getter;
+
+@Getter
 public class ComAnswerEvent extends EventObject {
-	private static final long serialVersionUID = 8359647564190790477L;
+	private final static long serialVersionUID = 8359647564190790477L;
 
-	private final ComAnswer answer;
-	private final double valueInMillimeter;
+	private ComAnswer answer;
+	private double valueInMillimeter;
 
-	public ComAnswerEvent(final Object source, final ComAnswer answer, final double valueInMillimeter) {
+	public ComAnswerEvent(Object source, ComAnswer answer, double valueInMillimeter) {
 		super(source);
 		this.answer = answer;
 		this.valueInMillimeter = valueInMillimeter;
 	}
 
-	public ComAnswer getAnswer() {
-		return answer;
-	}
-
 	public int getAdress() {
 		return answer.getAddress();
-	}
-
-	public double getValueInMillimeter() {
-		return valueInMillimeter;
 	}
 
 	public int getHost() {

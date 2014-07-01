@@ -2,19 +2,18 @@ package de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection
 
 import java.util.EventObject;
 
+import lombok.Getter;
+
+@Getter
 public class ByteMessageEvent extends EventObject {
-	private static final long serialVersionUID = -4766066275663476550L;
+	private final static long serialVersionUID = -4766066275663476550L;
 
 	/** Equals the byte message **/
-	private final byte[] byteArray;
+	private byte[] byteArray;
 
-	public ByteMessageEvent(final Object source, final byte[] byteArray) {
+	public ByteMessageEvent(Object source, byte[] byteArray) {
 		super(source);
 		this.byteArray = byteArray;
-	}
-
-	public byte[] getByteArray() {
-		return byteArray;
 	}
 
 }

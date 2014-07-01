@@ -1,21 +1,21 @@
-package de.dennismaass.emp.stonemaster.stackmaster.common.properties;
+package de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection;
 
 public class PropertiesValidator {
 
-	public static final int MIN_MODE = 1;
-	public static final int MAX_MODE = 8;
+	public static int MIN_MODE = 1;
+	public static int MAX_MODE = 8;
 
-	public static final long MIN_SLEEP = 1;
-	public static final long MAX_SLEEP = Long.MAX_VALUE;
+	public static long MIN_SLEEP = 1;
+	public static long MAX_SLEEP = Long.MAX_VALUE;
 
-	public static final int MIN_SPEED = 1;
-	public static final int MAX_SPEED = 2047;
+	public static int MIN_SPEED = 1;
+	public static int MAX_SPEED = 2047;
 
 	public PropertiesValidator() {
 
 	}
 
-	public boolean validate(final ComConnectionProperties comConnectionProperties) {
+	public boolean validate(ComConnectionProperties comConnectionProperties) {
 		if (!isValidSpeed(comConnectionProperties.getFastUpSpeed())) {
 			return false;
 		}
@@ -45,25 +45,25 @@ public class PropertiesValidator {
 		return true;
 	}
 
-	public boolean isValidSpeed(final int value) {
+	public boolean isValidSpeed(int value) {
 		if (value >= PropertiesValidator.MIN_SPEED && value <= PropertiesValidator.MAX_SPEED) {
 			return true;
 		}
 		return false;
 	}
 
-	public boolean isValidSleep(final long value) {
+	public boolean isValidSleep(long value) {
 		if (value >= PropertiesValidator.MIN_SLEEP && value <= PropertiesValidator.MAX_SLEEP) {
 			return true;
 		}
 		return false;
 	}
 
-	public boolean isValidStepcount(final int value) {
+	public boolean isValidStepcount(int value) {
 		return true;
 	}
 
-	public boolean isValidMicrostepResolutionMode(final int value) {
+	public boolean isValidMicrostepResolutionMode(int value) {
 		if (value >= PropertiesValidator.MIN_MODE && value <= PropertiesValidator.MAX_MODE) {
 			return true;
 		}

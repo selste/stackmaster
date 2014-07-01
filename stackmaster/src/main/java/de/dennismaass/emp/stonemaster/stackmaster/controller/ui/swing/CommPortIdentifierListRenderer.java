@@ -9,16 +9,16 @@ import javax.swing.JList;
 
 public class CommPortIdentifierListRenderer extends DefaultListCellRenderer {
 
-	private static final long serialVersionUID = 1224386119871442113L;
+	private static long serialVersionUID = 1224386119871442113L;
 	protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
 	@Override
-	public Component getListCellRendererComponent(final JList list, final Object value, final int index,
-			final boolean isSelected, final boolean cellHasFocus) {
+	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+			boolean cellHasFocus) {
 		String label = "";
 
 		if (value != null && value instanceof CommPortIdentifier) {
-			final CommPortIdentifier commPortIdentifier = (CommPortIdentifier) value;
+			CommPortIdentifier commPortIdentifier = (CommPortIdentifier) value;
 			label = commPortIdentifier.getName();
 		}
 

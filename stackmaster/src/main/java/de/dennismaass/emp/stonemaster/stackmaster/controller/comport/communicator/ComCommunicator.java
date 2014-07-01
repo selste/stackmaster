@@ -20,35 +20,35 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.
 
 public class ComCommunicator implements ByteMessageListener {
 
-	private static final Map<String, ComCommunicator> communicatorMap = new HashMap<>();
+	private static Map<String, ComCommunicator> communicatorMap = new HashMap<>();
 
-	public static final int MIN_MODE = 1;
-	public static final int MAX_MODE = 8;
+	public static int MIN_MODE = 1;
+	public static int MAX_MODE = 8;
 
-	public static final long MIN_SLEEP = 1;
-	public static final long MAX_SLEEP = Long.MAX_VALUE;
+	public static long MIN_SLEEP = 1;
+	public static long MAX_SLEEP = Long.MAX_VALUE;
 
-	public static final int MIN_SPEED = 1;
-	public static final int MAX_SPEED = 2047;
+	public static int MIN_SPEED = 1;
+	public static int MAX_SPEED = 2047;
 
-	private final ComConnection connector;
+	private ComConnection connector;
 
 	private Calculator calculator;
 	private boolean activMotor;
-	private final List<ComAnswerListener> answerListener = new ArrayList<>();
+	private List<ComAnswerListener> answerListener = new ArrayList<>();
 
 	private boolean reverse = false;
 
-	private ComCommunicator(final String comPort, final double stepsPerMm) {
+	private ComCommunicator(String comPort, double stepsPerMm) {
 		super();
 		connector = ComConnection.getInstance(comPort);
 		calculator = new Calculator(stepsPerMm, 1.0);
 		doInit();
 	}
 
-	public static ComCommunicator getInstance(final String comPortName, final double stepsPerMm) {
+	public static ComCommunicator getInstance(String comPortName, double stepsPerMm) {
 		if (!communicatorMap.containsKey(comPortName)) {
-			final ComCommunicator communicator = new ComCommunicator(comPortName, stepsPerMm);
+			ComCommunicator communicator = new ComCommunicator(comPortName, stepsPerMm);
 			communicatorMap.put(comPortName, communicator);
 		}
 		return communicatorMap.get(comPortName);
@@ -58,7 +58,7 @@ public class ComCommunicator implements ByteMessageListener {
 
 	}
 
-	public void setPositionReached(final int positionInSteps) {
+	public void setPositionReached(int positionInSteps) {
 		send(1, ComInstructionID.SET_AXIS_PARAMETER, ComInstructionID.SET_AXIS_PARAMETER_POSITION_REACHED, 0,
 				positionInSteps);
 	}
@@ -67,23 +67,23 @@ public class ComCommunicator implements ByteMessageListener {
 		send(1, ComInstructionID.ENABLE_INTERRUPTS, ComInstructionID.ENABLE_INTERRUPTS_POSITION_REACHED, 0, 0);
 	}
 
-	public void setMaxSpeed(final int speed) {
+	public void setMaxSpeed(int speed) {
 		send(1, ComInstructionID.SET_AXIS_PARAMETER, ComInstructionID.SET_AXIS_PARAMETER_MAX_SPEED, 0, speed);
 	}
 
-	protected void pause(final long delayInMillis) {
+	protected void pause(long delayInMillis) {
 		try {
 			Thread.sleep(delayInMillis);
-		} catch (final InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void addAnswerListener(final ComAnswerListener listener) {
+	public void addAnswerListener(ComAnswerListener listener) {
 		answerListener.add(listener);
 	}
 
-	public void removeAnswerListener(final ComAnswerListener listener) {
+	public void removeAnswerListener(ComAnswerListener listener) {
 		answerListener.remove(listener);
 	}
 
@@ -95,12 +95,12 @@ public class ComCommunicator implements ByteMessageListener {
 		send(1, ComInstructionID.GET_AXIS_PARAMETER, ComInstructionID.GET_AXIS_PARAMETER_ACTUAL_POSITION, 0, 0);
 	}
 
-	public void rotate(final int direction, final int speed) {
+	public void rotate(int direction, int speed) {
 		activMotor = true;
 		send(1, direction, 0, 0, speed);
 	}
 
-	public void rotateRight(final int speed) {
+	public void rotateRight(int speed) {
 		if (!isReverse()) {
 			rotate(ComInstructionID.ROTATE_LEFT, speed);
 		} else {
@@ -108,7 +108,7 @@ public class ComCommunicator implements ByteMessageListener {
 		}
 	}
 
-	public void rotateLeft(final int speed) {
+	public void rotateLeft(int speed) {
 		if (!isReverse()) {
 			rotate(ComInstructionID.ROTATE_RIGHT, speed);
 		} else {
@@ -118,46 +118,46 @@ public class ComCommunicator implements ByteMessageListener {
 
 	public void stop() {
 		if (activMotor) {
-			final StopComInstruction stop = new StopComInstruction(1, 0);
+			StopComInstruction stop = new StopComInstruction(1, 0);
 			send(stop);
 			activMotor = false;
 		}
 	}
 
-	public void moveTo(final int positionInSteps) {
+	public void moveTo(int positionInSteps) {
 		activMotor = true;
 		send(1, ComInstructionID.MOVE_POSITION, ComInstructionID.MOVE_POSITION_ABSOLUTE, 0, positionInSteps);
 	}
 
-	public void moveTo(final double positionInMillimeter) {
+	public void moveTo(double positionInMillimeter) {
 		activMotor = true;
 
-		final double countOfNumerator = calculator.getCountOfNumerator(positionInMillimeter);
-		final int countOfNumeratorInt = (int) Math.rint(countOfNumerator);
+		double countOfNumerator = calculator.getCountOfNumerator(positionInMillimeter);
+		int countOfNumeratorInt = (int) Math.rint(countOfNumerator);
 
 		send(1, ComInstructionID.MOVE_POSITION, ComInstructionID.MOVE_POSITION_ABSOLUTE, 0, countOfNumeratorInt);
 	}
 
-	public void move(final int steps) {
+	public void move(int steps) {
 		activMotor = true;
 
 		send(1, ComInstructionID.MOVE_POSITION, ComInstructionID.MOVE_POSITION_RELATIVE, 0, steps);
 	}
 
-	public void move(final double millimeter) {
+	public void move(double millimeter) {
 		activMotor = true;
 
-		final double countOfNumerator = calculator.getCountOfNumerator(millimeter);
-		final int countOfNumeratorInt = (int) Math.rint(countOfNumerator);
+		double countOfNumerator = calculator.getCountOfNumerator(millimeter);
+		int countOfNumeratorInt = (int) Math.rint(countOfNumerator);
 
 		send(1, ComInstructionID.MOVE_POSITION, ComInstructionID.MOVE_POSITION_RELATIVE, 0, countOfNumeratorInt);
 	}
 
-	public void send(final int address, final int instruction, final int type, final int motor, final int value) {
+	public void send(int address, int instruction, int type, int motor, int value) {
 		connector.send(address, instruction, type, motor, value);
 	}
 
-	public void send(final ComInstruction command) {
+	public void send(ComInstruction command) {
 		connector.send(command.toByteMessage());
 	}
 
@@ -188,27 +188,27 @@ public class ComCommunicator implements ByteMessageListener {
 		return connector.connect();
 	}
 
-	protected void sendEvent(final ComAnswer answer) {
-		for (final ComAnswerListener listener : answerListener) {
+	protected void sendEvent(ComAnswer answer) {
+		for (ComAnswerListener listener : answerListener) {
 			listener.handleAnswer(new ComAnswerEvent(this, answer, calculator.getCountOfDenominator(answer.getValue())));
 		}
 	}
 
 	@Override
-	public void handleByteMessageEvent(final ByteMessageEvent event) {
-		final byte[] byteArray = event.getByteArray();
+	public void handleByteMessageEvent(ByteMessageEvent event) {
+		byte[] byteArray = event.getByteArray();
 		if (byteArray != null && byteArray.length > 0) {
-			final ComAnswer answer = ComAnswer.build(byteArray);
+			ComAnswer answer = ComAnswer.build(byteArray);
 			sendEvent(answer);
 		}
 
 	}
 
-	public void storePosition(final int position) {
+	public void storePosition(int position) {
 		send(1, ComInstructionID.STORE_AXIS_PARAMETER, ComInstructionID.GET_AXIS_PARAMETER_ACTUAL_POSITION, 0, position);
 	}
 
-	public void setMicrostepResolution(final int mode) {
+	public void setMicrostepResolution(int mode) {
 		if (mode >= 1 && mode <= 8) {
 			activMotor = true;
 			send(1, ComInstructionID.SET_AXIS_PARAMETER, ComInstructionID.SET_AXIS_PARAMETER_MICROSTEP_RESOLUTION, 0,
@@ -217,7 +217,7 @@ public class ComCommunicator implements ByteMessageListener {
 		}
 	}
 
-	public void setSIO(final int number, final boolean on) {
+	public void setSIO(int number, boolean on) {
 		if (number >= 0 && number <= 4) {
 			int value;
 			if (on) {
@@ -233,7 +233,7 @@ public class ComCommunicator implements ByteMessageListener {
 		return connector.getComPortName();
 	}
 
-	public void setComPort(final String comPort) {
+	public void setComPort(String comPort) {
 		connector.setComPortName(comPort);
 	}
 
@@ -241,7 +241,7 @@ public class ComCommunicator implements ByteMessageListener {
 		return reverse;
 	}
 
-	public void setReverse(final boolean reverse) {
+	public void setReverse(boolean reverse) {
 		this.reverse = reverse;
 	}
 
@@ -249,7 +249,7 @@ public class ComCommunicator implements ByteMessageListener {
 		return calculator.getNumerator();
 	}
 
-	public void setStepsPerMm(final double stepsPerMm) {
+	public void setStepsPerMm(double stepsPerMm) {
 		calculator = new Calculator(stepsPerMm, 1.0);
 	}
 

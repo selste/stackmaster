@@ -507,3 +507,393 @@ java.lang.NullPointerException
 2014-06-25 22:56:10 INFO  PropertiesFileHandler:34 - properties loaded
 2014-06-25 22:56:10 INFO  PropertiesFileHandler:22 - try loading properties
 2014-06-25 22:56:10 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 18:37:07 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 18:37:07 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 18:37:07 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 18:37:07 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:50:06 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:50:06 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:50:06 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:50:06 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:50:18 INFO  SwingStarter:381 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-06-29 20:50:18 INFO  SwingStarter:384 - try to save properties
+2014-06-29 20:50:18 INFO  SwingStarter:385 - properties are valid: true
+2014-06-29 20:50:18 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@7f775e79 in file default.stackmaster
+2014-06-29 20:50:35 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:50:35 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:50:35 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:50:35 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:50:54 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:50:54 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:50:54 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:50:54 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:51:00 INFO  SwingStarter:381 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-06-29 20:51:00 INFO  SwingStarter:384 - try to save properties
+2014-06-29 20:51:00 INFO  SwingStarter:385 - properties are valid: true
+2014-06-29 20:51:00 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@3b28f0f9 in file default.stackmaster
+2014-06-29 20:51:10 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:51:10 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:51:10 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:51:10 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:51:18 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:51:18 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:51:18 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:51:18 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:51:32 INFO  SwingStarter:381 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-06-29 20:51:32 INFO  SwingStarter:384 - try to save properties
+2014-06-29 20:51:32 INFO  SwingStarter:385 - properties are valid: true
+2014-06-29 20:51:32 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@2ddaed02 in file default.stackmaster
+2014-06-29 20:53:14 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:53:14 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:53:14 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:53:14 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:53:36 INFO  SwingStarter:381 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-06-29 20:53:36 INFO  SwingStarter:384 - try to save properties
+2014-06-29 20:53:36 INFO  SwingStarter:385 - properties are valid: true
+2014-06-29 20:53:36 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@66976434 in file default.stackmaster
+2014-06-29 20:53:38 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:53:38 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 20:53:38 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 20:53:38 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:05:10 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:05:10 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:05:10 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:05:10 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:05:13 INFO  SwingStarter:381 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-06-29 21:05:13 INFO  SwingStarter:384 - try to save properties
+2014-06-29 21:05:13 INFO  SwingStarter:385 - properties are valid: true
+2014-06-29 21:05:13 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@1a275a2e in file default.stackmaster
+2014-06-29 21:05:17 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:05:17 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:05:17 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:05:17 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:05:59 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:05:59 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:05:59 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:05:59 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:06:13 INFO  SwingStarter:382 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-06-29 21:06:13 INFO  SwingStarter:385 - try to save properties
+2014-06-29 21:06:13 INFO  SwingStarter:386 - properties are valid: true
+2014-06-29 21:06:13 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@4f5f0269 in file default.stackmaster
+2014-06-29 21:06:16 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:06:16 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:06:16 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:06:16 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:06:50 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:06:50 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:06:50 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:06:50 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:06:53 INFO  SwingStarter:382 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-06-29 21:06:53 INFO  SwingStarter:385 - try to save properties
+2014-06-29 21:06:53 INFO  SwingStarter:386 - properties are valid: true
+2014-06-29 21:06:53 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@d918f6c in file default.stackmaster
+2014-06-29 21:09:40 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:09:40 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:09:40 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:09:40 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:10:45 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:10:45 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:10:45 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:10:45 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:10:49 INFO  SwingStarter:385 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-06-29 21:10:49 INFO  SwingStarter:388 - try to save properties
+2014-06-29 21:10:49 INFO  SwingStarter:389 - properties are valid: true
+2014-06-29 21:10:49 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@722fbdd3 in file default.stackmaster
+2014-06-29 21:11:00 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:11:00 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:11:00 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:11:00 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:20:59 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:20:59 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:20:59 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:20:59 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:21:14 INFO  SwingStarter:385 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-06-29 21:21:14 INFO  SwingStarter:388 - try to save properties
+2014-06-29 21:21:14 INFO  SwingStarter:389 - properties are valid: true
+2014-06-29 21:21:14 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@1c57a236 in file default.stackmaster
+2014-06-29 21:21:20 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:21:20 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:21:20 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:21:20 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:49:43 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:49:43 INFO  PropertiesFileHandler:34 - properties loaded
+2014-06-29 21:49:43 INFO  PropertiesFileHandler:22 - try loading properties
+2014-06-29 21:49:43 INFO  PropertiesFileHandler:34 - properties loaded
+2014-07-01 20:38:06 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:06 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:38:06 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:06 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:38:06 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:06 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:38:18 INFO  SwingStarter:380 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-01 20:38:18 INFO  SwingStarter:383 - try to save properties
+2014-07-01 20:38:18 INFO  SwingStarter:384 - properties are valid: true
+2014-07-01 20:38:18 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@2a67dc5b in file default.stackmaster
+2014-07-01 20:38:30 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:30 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:38:30 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:30 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:38:30 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:30 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:38:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:38:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:38:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:38:36 INFO  SwingStarter:380 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-01 20:38:36 INFO  SwingStarter:383 - try to save properties
+2014-07-01 20:38:36 INFO  SwingStarter:384 - properties are valid: true
+2014-07-01 20:38:36 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@5e91f604 in file default.stackmaster
+2014-07-01 20:38:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:38:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:38:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:38:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:42:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:42:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:42:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:42:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 20:42:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 20:42:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:00:09 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:00:09 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:00:09 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:00:09 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:00:09 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:00:09 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:00:12 INFO  SwingStarter:378 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-01 21:00:12 INFO  SwingStarter:381 - try to save properties
+2014-07-01 21:00:12 INFO  SwingStarter:382 - properties are valid: true
+2014-07-01 21:00:12 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@20349e80 in file default.stackmaster
+2014-07-01 21:00:25 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:00:25 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:00:25 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:00:25 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:00:25 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:00:25 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:00:29 INFO  SwingStarter:378 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-01 21:00:29 INFO  SwingStarter:381 - try to save properties
+2014-07-01 21:00:29 INFO  SwingStarter:382 - properties are valid: true
+2014-07-01 21:00:29 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@5e91f604 in file default.stackmaster
+2014-07-01 21:01:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:01:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:01:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:01:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:01:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:01:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:01:37 INFO  SwingStarter:378 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-01 21:01:37 INFO  SwingStarter:381 - try to save properties
+2014-07-01 21:01:37 INFO  SwingStarter:382 - properties are valid: true
+2014-07-01 21:01:37 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@432dfa20 in file default.stackmaster
+2014-07-01 21:01:37 INFO  ApplicationPropertiesFileHandler:44 - write applicationProperties to C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\application.profile
+2014-07-01 21:03:24 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:03:24 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:03:24 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:03:24 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:03:24 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:03:24 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:03:57 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:03:57 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:03:57 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:03:57 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:03:57 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:03:57 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:47:27 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:47:27 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:47:27 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:47:27 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:47:27 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:47:27 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:49:37 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:49:37 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:49:37 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:49:37 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:49:37 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:49:37 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:49:51 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:49:51 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:49:51 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:49:51 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:49:51 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:49:51 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:50:23 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:50:23 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:50:23 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:50:23 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:50:23 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:50:23 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:51:32 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:51:32 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:51:32 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:51:32 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:51:32 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:51:32 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:52:09 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:52:09 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:52:09 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:52:09 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:52:09 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:52:09 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:54:59 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:54:59 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:54:59 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:54:59 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:54:59 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:54:59 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:55:55 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:55:55 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:55:55 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:55:55 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:55:55 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:55:55 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:56:54 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:56:54 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:56:54 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:56:54 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:56:54 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:56:54 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:57:17 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:57:17 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:57:17 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:57:17 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:57:17 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:57:17 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:59:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:59:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:59:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:59:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 21:59:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 21:59:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:00:56 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:00:56 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:00:56 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:00:56 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:00:56 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:00:56 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:02:13 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:02:13 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:02:13 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:02:13 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:02:13 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:02:13 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:03:13 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:03:13 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:03:13 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:03:13 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:03:13 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:03:13 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:04:00 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:04:00 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:04:00 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:04:00 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:04:00 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:04:00 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:07:07 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:07:07 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:07:07 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:07:07 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:07:07 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:07:07 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:11:02 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:11:02 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:11:02 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:11:02 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:11:02 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:11:02 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:11:48 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:11:48 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:11:48 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:11:48 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:11:48 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:11:48 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:12:41 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:12:41 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:12:41 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:12:41 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:12:41 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:12:41 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:13:01 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:13:01 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:13:01 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:13:01 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:13:01 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:13:01 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:13:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:13:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:13:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:13:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:13:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:13:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:14:54 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:14:54 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:14:54 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:14:54 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:14:54 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:14:54 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:16:43 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:16:43 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:16:43 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:16:43 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:16:43 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:16:43 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:18:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:18:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:18:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:18:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:18:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:18:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:20:05 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:20:05 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:20:05 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:20:05 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:20:05 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:20:05 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:21:07 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:21:07 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:21:07 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:21:07 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:21:07 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:21:07 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:24:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:24:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:24:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:24:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:24:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:24:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:24:58 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:24:58 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:24:58 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:24:58 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:24:58 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:24:58 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:25:14 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:25:14 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:25:14 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:25:14 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:25:14 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:25:14 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:26:19 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:26:19 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:26:19 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:26:19 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:26:19 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:26:19 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:27:13 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:27:13 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:27:13 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:27:13 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:27:13 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:27:14 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:27:16 INFO  SwingStarter:546 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-01 22:27:16 INFO  SwingStarter:549 - try to save properties
+2014-07-01 22:27:16 INFO  SwingStarter:550 - properties are valid: true
+2014-07-01 22:27:16 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@3bcd4840 in file default.stackmaster
+2014-07-01 22:27:16 INFO  ApplicationPropertiesFileHandler:44 - write applicationProperties to C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\application.profile
+2014-07-01 22:27:19 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:27:19 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:27:19 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:27:19 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-01 22:27:19 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-01 22:27:19 INFO  PropertiesFileHandler:51 - properties loaded

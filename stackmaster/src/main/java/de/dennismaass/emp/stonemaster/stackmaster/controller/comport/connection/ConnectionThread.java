@@ -8,13 +8,13 @@ import java.util.List;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
 
 public class ConnectionThread extends Thread {
-	private final List<CommPortIdentifier> portList = new ArrayList<>();
-	private final List<CommPortIdentifierNotificationListener> commPortIdentifierListenerList = new ArrayList<>();
+	private List<CommPortIdentifier> portList = new ArrayList<>();
+	private List<CommPortIdentifierNotificationListener> commPortIdentifierListenerList = new ArrayList<>();
 
 	private long delay = 1000;
 	private boolean running = true;
 
-	public ConnectionThread(final int delay) {
+	public ConnectionThread(int delay) {
 		this();
 		this.delay = delay;
 	}
@@ -30,14 +30,14 @@ public class ConnectionThread extends Thread {
 
 			try {
 				Thread.sleep(getDelay());
-			} catch (final InterruptedException e) {
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
 	protected void refreshConnections() {
-		final List<CommPortIdentifier> actualPortList = RxtxUtils.getCommPortIdentifier();
+		List<CommPortIdentifier> actualPortList = RxtxUtils.getCommPortIdentifier();
 
 		if (!actualPortList.equals(portList)) {
 			portList.clear();
@@ -46,19 +46,19 @@ public class ConnectionThread extends Thread {
 		}
 	}
 
-	protected void sendEvent(final List<CommPortIdentifier> actualPortList) {
-		for (final CommPortIdentifierNotificationListener listener : commPortIdentifierListenerList) {
-			final CommPortIdentifierNotificationEvent event = new CommPortIdentifierNotificationEvent(this, actualPortList);
+	protected void sendEvent(List<CommPortIdentifier> actualPortList) {
+		for (CommPortIdentifierNotificationListener listener : commPortIdentifierListenerList) {
+			CommPortIdentifierNotificationEvent event = new CommPortIdentifierNotificationEvent(this, actualPortList);
 			listener.handleCommPortIdentifierNotificationEvent(event);
 		}
 
 	}
 
-	public void addCommPortIdentifierListener(final CommPortIdentifierNotificationListener listener) {
+	public void addCommPortIdentifierListener(CommPortIdentifierNotificationListener listener) {
 		commPortIdentifierListenerList.add(listener);
 	}
 
-	public void removeCommPortIdentifierListener(final CommPortIdentifierNotificationListener listener) {
+	public void removeCommPortIdentifierListener(CommPortIdentifierNotificationListener listener) {
 		commPortIdentifierListenerList.remove(listener);
 	}
 
@@ -66,7 +66,7 @@ public class ConnectionThread extends Thread {
 		return running;
 	}
 
-	public void setRunning(final boolean running) {
+	public void setRunning(boolean running) {
 		this.running = running;
 	}
 
@@ -74,7 +74,7 @@ public class ConnectionThread extends Thread {
 		return delay;
 	}
 
-	public void setDelay(final long delay) {
+	public void setDelay(long delay) {
 		this.delay = delay;
 	}
 }

@@ -1,35 +1,26 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.calculator;
 
-public class Calculator {
-	private final double factor;
-	private final double numerator;
-	private final double denominator;
+import lombok.Getter;
 
-	public Calculator(final double numerator, final double denominator) {
+@Getter
+public class Calculator {
+	private double factor;
+	private double numerator;
+	private double denominator;
+
+	public Calculator(double numerator, double denominator) {
 		this.numerator = numerator;
 		this.denominator = denominator;
 
 		factor = numerator / denominator;
 	}
 
-	public double getCountOfDenominator(final double numerator) {
+	public double getCountOfDenominator(double numerator) {
 		return numerator / factor;
 	}
 
-	public double getCountOfNumerator(final double denominator) {
+	public double getCountOfNumerator(double denominator) {
 		return denominator * factor;
-	}
-
-	public double getFactor() {
-		return factor;
-	}
-
-	public double getNumerator() {
-		return numerator;
-	}
-
-	public double getDenominator() {
-		return denominator;
 	}
 
 }

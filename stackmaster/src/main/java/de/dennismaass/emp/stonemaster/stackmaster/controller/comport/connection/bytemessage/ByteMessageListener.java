@@ -2,5 +2,5 @@ package de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection
 
 public interface ByteMessageListener {
 
-	public void handleByteMessageEvent(final ByteMessageEvent event);
+	public void handleByteMessageEvent(ByteMessageEvent event);
 }

@@ -2,16 +2,23 @@ package de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.Locale;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -21,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
@@ -30,85 +38,143 @@ import org.apache.log4j.Logger;
 
 import de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile;
 import de.dennismaass.emp.stonemaster.stackmaster.common.profile.ProfileFileHandler;
-import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionProperties;
-import de.dennismaass.emp.stonemaster.stackmaster.common.properties.PropertiesValidator;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.ApplicationProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.ApplicationPropertiesFileHandler;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.PropertiesValidator;
 
 public class SwingStarter extends JFrame {
-	private static final Logger LOGGER = Logger.getLogger(SwingStarter.class);
+	private final static long serialVersionUID = -6032729218147398086L;
 
-	private static final String OSVERSION_PROPERTY_NAME = "os.version";
-	private static final String OSARCH_PROPERTY_NAME = "os.arch";
-	private static final String OSNAME_PROPERTY_NAME = "os.name";
+	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
 
-	private static final String TITLE = "StackMaster";
+	private static String OSVERSION_PROPERTY_NAME = "os.version";
+	private static String OSARCH_PROPERTY_NAME = "os.arch";
+	private static String OSNAME_PROPERTY_NAME = "os.name";
 
-	private static final String FONT_NAME = "Arial";
-	public static final Font FONT = new Font(FONT_NAME, Font.PLAIN, 20);
-	private static final String FILE_ENDING = ".stackmaster";
-	private static final String DEFAULT_BACKUP_PROFILE_NAME = "default.stackmaster.backup";
-	private static final String DEFAULT_PROFILE_NAME = "default.stackmaster";
-	private final Profile defaultBackupProfile;
-	private final File defaultFileBackup = new File(DEFAULT_BACKUP_PROFILE_NAME);
+	private static String TITLE = "StackMaster Configurator";
 
-	private final Profile defaultProfile;
-	private final File defaultFile = new File(DEFAULT_PROFILE_NAME);
+	private static String FONT_NAME = "Arial";
+	public static Font FONT = new Font(FONT_NAME, Font.PLAIN, 20);
 
-	private final File actualOpenedProfileFileName = defaultFile;
+	private static String DEFAULT_BACKUP_PROFILE_NAME = "default.stackmaster.backup";
+	private static String DEFAULT_PROFILE_NAME = "default.stackmaster";
+	private Profile defaultBackupProfile;
+	private File defaultFileBackup = new File(DEFAULT_BACKUP_PROFILE_NAME);
 
-	private final ComConnectionProperties defaultConnectionProperties;
-	private ComConnectionProperties actualConnectionProperties;
+	private Profile defaultProfile;
+	private File defaultFile = new File(DEFAULT_PROFILE_NAME);
 
-	private final ProfileFileHandler propertiesHandler;
+	private ComConnectionProperties defaultBackupConnectionProperties;
+	private ComConnectionProperties defaultConnectionProperties;
 
-	private final JTextField firstNameTF;
-	private final JTextField lastNameTF;
+	private ProfileFileHandler propertiesHandler;
 
-	private final JMenuItem mntmProfilSpeichern;
-	// private final JMenuItem mntmProfilSpeichernAls;
+	private JTextField firstNameTF;
+	private JTextField lastNameTF;
 
-	public static final String OS_NAME = System.getProperty(OSNAME_PROPERTY_NAME).toLowerCase(Locale.US);
-	public static final String OS_ARCH = System.getProperty(OSARCH_PROPERTY_NAME).toLowerCase(Locale.US);
-	public static final String OS_VERSION = System.getProperty(OSVERSION_PROPERTY_NAME).toLowerCase(Locale.US);
+	private JMenuItem mntmProfilSpeichern;
 
-	private final JTextField comConnectionNameTF;
+	public static String OS_NAME = System.getProperty(OSNAME_PROPERTY_NAME).toLowerCase(Locale.US);
+	public static String OS_ARCH = System.getProperty(OSARCH_PROPERTY_NAME).toLowerCase(Locale.US);
+	public static String OS_VERSION = System.getProperty(OSVERSION_PROPERTY_NAME).toLowerCase(Locale.US);
 
-	private final JSpinner fastUpSpeedTF;
-	private final JSpinner middleUpSpeedTF;
-	private final JSpinner slowUpSpeedTF;
-	private final JSpinner fastDownSpeedTF;
-	private final JSpinner middleDownSpeedTF;
-	private final JSpinner slowDownSpeedTF;
-	private final JSpinner countOfStepPerMmTF;
-	private final JComboBox<Integer> connectionModeCB;
-	private final JCheckBox reverseCB;
-	private final JSpinner sleepMirrorPictureTF;
-	private final JSpinner sleepMovementMirrorTF;
-	private final JSpinner sleepPictureMovementTF;
-	private final JSpinner pulseDurationTF;
+	private JTextField comConnectionNameTF;
 
-	private final PropertiesValidator validator = new PropertiesValidator();
+	private JSpinner fastUpSpeedTF;
+	private JSpinner middleUpSpeedTF;
+	private JSpinner slowUpSpeedTF;
+	private JSpinner fastDownSpeedTF;
+	private JSpinner middleDownSpeedTF;
+	private JSpinner slowDownSpeedTF;
+	private JSpinner countOfStepPerMmTF;
+	private JComboBox<Integer> connectionModeCB;
+	private JCheckBox reverseCB;
+	private JSpinner sleepMirrorPictureTF;
+	private JSpinner sleepMovementMirrorTF;
+	private JSpinner sleepPictureMovementTF;
+	private JSpinner pulseDurationTF;
+
+	private PropertiesValidator validator = new PropertiesValidator();
+
+	private static ApplicationProperties applicationProperties;
+	private File applicationPropertyFile = new File("application.profile");
+	private ApplicationPropertiesFileHandler applicationPropertiesFileHandler = new ApplicationPropertiesFileHandler();;
+
+	private JCheckBox checkBoxFirstUse;
+
+	private JComboBox<Integer> checkBoxFontSize;
+
+	private JMenuItem mntmExit;
+
+	private JLabel lblModus;
+
+	private JLabel lblNewLabel_15;
+
+	private JLabel lblFirstUse;
+
+	private JLabel lblSchriftgre;
+
+	private JLabel lblNewLabel;
+
+	private JLabel lblNewLabel_1;
+
+	private JLabel lblNewLabel_2;
+
+	private JLabel lblNewLabel_3;
+
+	private JLabel lblNewLabel_4;
+
+	private JLabel lblNewLabel_6;
+
+	private JLabel lblNewLabel_7;
+
+	private JLabel lblNewLabel_8;
+
+	private JLabel lblNewLabel_9;
+
+	private JLabel lblNewLabel_10;
+
+	private JLabel lblNewLabel_11;
+
+	private JLabel lblNewLabel_12;
+
+	private JMenu menu;
+
+	private JLabel lblNewLabel_14;
+
+	private JLabel lblSchritteProMillimeter;
+
+	private JLabel lblNewLabel_13;
+
+	private JLabel lblNewLabel_5;
+
+	private JTabbedPane tabbedPane;
 
 	public SwingStarter() {
+		applicationProperties = applicationPropertiesFileHandler.read(applicationPropertyFile);
+
+		setTitle(TITLE);
 		propertiesHandler = new ProfileFileHandler();
 
 		defaultProfile = propertiesHandler.readProfile(defaultFile);
 		defaultBackupProfile = propertiesHandler.readProfile(defaultFileBackup);
 
-		actualConnectionProperties = defaultProfile.getProperties();
-		defaultConnectionProperties = defaultBackupProfile.getProperties();
+		defaultConnectionProperties = defaultProfile.getProperties();
+		defaultBackupConnectionProperties = defaultBackupProfile.getProperties();
 
 		setSize(430, 420);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
-		final JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
+		tabbedPane = new JTabbedPane(SwingConstants.TOP);
 		tabbedPane.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		getContentPane().add(tabbedPane, BorderLayout.NORTH);
 
-		final JPanel generalPanel = new JPanel();
+		JPanel generalPanel = new JPanel();
 		tabbedPane.addTab("Allgemein", null, generalPanel, null);
-		generalPanel.setLayout(new MigLayout("", "[][grow]", "[][][][][][]"));
+		generalPanel.setLayout(new MigLayout("", "[][grow]", "[][][][][][][][]"));
 
-		final JLabel lblNewLabel_13 = new JLabel("Vorname");
+		lblNewLabel_13 = new JLabel("Vorname");
 		lblNewLabel_13.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		generalPanel.add(lblNewLabel_13, "cell 0 0,alignx left");
 
@@ -117,7 +183,7 @@ public class SwingStarter extends JFrame {
 		generalPanel.add(firstNameTF, "cell 1 0,growx");
 		firstNameTF.setColumns(10);
 
-		final JLabel lblNewLabel_14 = new JLabel("Nachname");
+		lblNewLabel_14 = new JLabel("Nachname");
 		lblNewLabel_14.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		generalPanel.add(lblNewLabel_14, "cell 0 1,alignx left");
 
@@ -126,10 +192,10 @@ public class SwingStarter extends JFrame {
 		generalPanel.add(lastNameTF, "cell 1 1,growx");
 		lastNameTF.setColumns(10);
 
-		final JLabel label = new JLabel(" ");
+		JLabel label = new JLabel(" ");
 		generalPanel.add(label, "cell 0 2");
 
-		final JLabel lblSchritteProMillimeter = new JLabel("Schritte pro Millimeter");
+		lblSchritteProMillimeter = new JLabel("Schritte pro Millimeter");
 		lblSchritteProMillimeter.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		generalPanel.add(lblSchritteProMillimeter, "cell 0 3,alignx left");
 
@@ -138,7 +204,7 @@ public class SwingStarter extends JFrame {
 		countOfStepPerMmTF.setMinimumSize(new Dimension(100, 22));
 		generalPanel.add(countOfStepPerMmTF, "cell 1 3");
 
-		final JLabel lblModus = new JLabel("Modus");
+		lblModus = new JLabel("Modus");
 		lblModus.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		generalPanel.add(lblModus, "cell 0 4,alignx left");
 
@@ -154,7 +220,7 @@ public class SwingStarter extends JFrame {
 		connectionModeCB.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		generalPanel.add(connectionModeCB, "cell 1 4,growx");
 
-		final JLabel lblNewLabel_15 = new JLabel("COM-Anschluss");
+		lblNewLabel_15 = new JLabel("COM-Anschluss");
 		lblNewLabel_15.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		generalPanel.add(lblNewLabel_15, "cell 0 5,alignx left");
 
@@ -163,179 +229,191 @@ public class SwingStarter extends JFrame {
 		generalPanel.add(comConnectionNameTF, "cell 1 5,growx");
 		comConnectionNameTF.setColumns(10);
 
-		final JPanel relativPanel = new JPanel();
+		lblFirstUse = new JLabel("Erster Start");
+		lblFirstUse.setFont(new Font("Arial", Font.PLAIN, 20));
+		generalPanel.add(lblFirstUse, "cell 0 6,alignx left");
+
+		checkBoxFirstUse = new JCheckBox("");
+		generalPanel.add(checkBoxFirstUse, "cell 1 6");
+
+		lblSchriftgre = new JLabel("Schriftgröße");
+		lblSchriftgre.setFont(new Font("Arial", Font.PLAIN, 20));
+		generalPanel.add(lblSchriftgre, "cell 0 7,alignx left");
+
+		checkBoxFontSize = new JComboBox<Integer>();
+		checkBoxFontSize.setFont(FONT);
+		checkBoxFontSize.addItem(15);
+		checkBoxFontSize.addItem(16);
+		checkBoxFontSize.addItem(17);
+		checkBoxFontSize.addItem(18);
+		checkBoxFontSize.addItem(19);
+		checkBoxFontSize.addItem(20);
+		checkBoxFontSize.addItem(21);
+		checkBoxFontSize.addItem(22);
+		generalPanel.add(checkBoxFontSize, "cell 1 7,growx");
+		checkBoxFontSize.setSelectedItem(20);
+
+		checkBoxFontSize.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					setNewFont((int) e.getItem());
+				}
+			}
+
+		});
+
+		JPanel relativPanel = new JPanel();
 		tabbedPane.addTab("Relativ-Panel", null, relativPanel, null);
 		relativPanel.setLayout(new MigLayout("", "[][]", "[][][][][][][][][]"));
 
-		final JLabel lblNewLabel = new JLabel("Hoch");
+		lblNewLabel = new JLabel("Hoch");
 		lblNewLabel.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		relativPanel.add(lblNewLabel, "cell 0 0");
+		relativPanel.add(lblNewLabel, "cell 0 0,alignx left");
 
-		final JLabel lblNewLabel_1 = new JLabel("schnelle Geschw.");
+		lblNewLabel_1 = new JLabel("schnelle Geschw.");
 		lblNewLabel_1.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		relativPanel.add(lblNewLabel_1, "cell 0 1");
+		relativPanel.add(lblNewLabel_1, "cell 0 1,alignx left");
 
 		fastUpSpeedTF = new JSpinner();
 		fastUpSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		fastUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		relativPanel.add(fastUpSpeedTF, "cell 1 1");
 
-		final JLabel lblNewLabel_2 = new JLabel("mittlere Geschw.");
+		lblNewLabel_2 = new JLabel("mittlere Geschw.");
 		lblNewLabel_2.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		relativPanel.add(lblNewLabel_2, "cell 0 2");
+		relativPanel.add(lblNewLabel_2, "cell 0 2,alignx left");
 
 		middleUpSpeedTF = new JSpinner();
 		middleUpSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		middleUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		relativPanel.add(middleUpSpeedTF, "cell 1 2");
 
-		final JLabel lblNewLabel_3 = new JLabel("langsame Geschw.");
+		lblNewLabel_3 = new JLabel("langsame Geschw.");
 		lblNewLabel_3.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		relativPanel.add(lblNewLabel_3, "cell 0 3");
+		relativPanel.add(lblNewLabel_3, "cell 0 3,alignx left");
 
 		slowUpSpeedTF = new JSpinner();
 		slowUpSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		slowUpSpeedTF.setPreferredSize(new Dimension(100, 22));
 		relativPanel.add(slowUpSpeedTF, "cell 1 3");
 
-		final JLabel label_1 = new JLabel(" ");
+		JLabel label_1 = new JLabel(" ");
 		relativPanel.add(label_1, "cell 0 4");
 
-		final JLabel lblNewLabel_4 = new JLabel("Runter");
+		lblNewLabel_4 = new JLabel("Runter");
 		lblNewLabel_4.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		relativPanel.add(lblNewLabel_4, "cell 0 5");
+		relativPanel.add(lblNewLabel_4, "cell 0 5,alignx left");
 
-		final JLabel lblNewLabel_5 = new JLabel("schnelle Geschw.");
+		lblNewLabel_5 = new JLabel("schnelle Geschw.");
 		lblNewLabel_5.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		relativPanel.add(lblNewLabel_5, "cell 0 6");
+		relativPanel.add(lblNewLabel_5, "cell 0 6,alignx left");
 
 		fastDownSpeedTF = new JSpinner();
 		fastDownSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		fastDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		relativPanel.add(fastDownSpeedTF, "cell 1 6");
 
-		final JLabel lblNewLabel_6 = new JLabel("mittlere Geschw.");
+		lblNewLabel_6 = new JLabel("mittlere Geschw.");
 		lblNewLabel_6.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		relativPanel.add(lblNewLabel_6, "cell 0 7");
+		relativPanel.add(lblNewLabel_6, "cell 0 7,alignx left");
 
 		middleDownSpeedTF = new JSpinner();
 		middleDownSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		middleDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		relativPanel.add(middleDownSpeedTF, "cell 1 7");
 
-		final JLabel lblNewLabel_7 = new JLabel("langsame Geschw.");
+		lblNewLabel_7 = new JLabel("langsame Geschw.");
 		lblNewLabel_7.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		relativPanel.add(lblNewLabel_7, "cell 0 8");
+		relativPanel.add(lblNewLabel_7, "cell 0 8,alignx left");
 
 		slowDownSpeedTF = new JSpinner();
 		slowDownSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		slowDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		relativPanel.add(slowDownSpeedTF, "cell 1 8");
 
-		final JPanel stepPanel = new JPanel();
+		JPanel stepPanel = new JPanel();
 		tabbedPane.addTab("Step-Panel", null, stepPanel, null);
 		stepPanel.setLayout(new MigLayout("", "[][]", "[][][][][]"));
 
-		final JLabel lblNewLabel_8 = new JLabel("Richtung umdrehen");
+		lblNewLabel_8 = new JLabel("Richtung umdrehen");
 		lblNewLabel_8.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		stepPanel.add(lblNewLabel_8, "cell 0 0");
+		stepPanel.add(lblNewLabel_8, "cell 0 0,alignx left");
 
 		reverseCB = new JCheckBox("");
 		stepPanel.add(reverseCB, "cell 1 0");
 
-		final JLabel lblNewLabel_9 = new JLabel("Pause (Bew. - Spiegel) [ms]");
+		lblNewLabel_9 = new JLabel("Pause (Bew. - Spiegel) [ms]");
 		lblNewLabel_9.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		stepPanel.add(lblNewLabel_9, "cell 0 1");
+		stepPanel.add(lblNewLabel_9, "cell 0 1,alignx left");
 
 		sleepMovementMirrorTF = new JSpinner();
 		sleepMovementMirrorTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		sleepMovementMirrorTF.setPreferredSize(new Dimension(100, 22));
 		stepPanel.add(sleepMovementMirrorTF, "cell 1 1");
 
-		final JLabel lblNewLabel_10 = new JLabel("Pause (Spiegel - Bild) [ms]");
+		lblNewLabel_10 = new JLabel("Pause (Spiegel - Bild) [ms]");
 		lblNewLabel_10.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		stepPanel.add(lblNewLabel_10, "cell 0 2");
+		stepPanel.add(lblNewLabel_10, "cell 0 2,alignx left");
 
 		sleepMirrorPictureTF = new JSpinner();
 		sleepMirrorPictureTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		sleepMirrorPictureTF.setPreferredSize(new Dimension(100, 22));
 		stepPanel.add(sleepMirrorPictureTF, "cell 1 2");
 
-		final JLabel lblNewLabel_11 = new JLabel("Pause (Bild - Bew.) [ms]");
+		lblNewLabel_11 = new JLabel("Pause (Bild - Bew.) [ms]");
 		lblNewLabel_11.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		stepPanel.add(lblNewLabel_11, "cell 0 3");
+		stepPanel.add(lblNewLabel_11, "cell 0 3,alignx left");
 
 		sleepPictureMovementTF = new JSpinner();
 		sleepPictureMovementTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		sleepPictureMovementTF.setPreferredSize(new Dimension(100, 22));
 		stepPanel.add(sleepPictureMovementTF, "cell 1 3");
 
-		final JLabel lblNewLabel_12 = new JLabel("Impulsdauer [ms]");
+		lblNewLabel_12 = new JLabel("Impulsdauer [ms]");
 		lblNewLabel_12.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		stepPanel.add(lblNewLabel_12, "cell 0 4");
+		stepPanel.add(lblNewLabel_12, "cell 0 4,alignx left");
 
 		pulseDurationTF = new JSpinner();
 		pulseDurationTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		pulseDurationTF.setPreferredSize(new Dimension(100, 22));
 		stepPanel.add(pulseDurationTF, "cell 1 4");
 
-		final JMenuBar menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		final JMenu menu = new JMenu("Datei");
+		menu = new JMenu("Datei");
 		menu.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		menuBar.add(menu);
 
-		// final JMenuItem mntmLaden = new JMenuItem("Profil laden");
-		// mntmLaden.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		// mntmLaden.addActionListener(new ActionListener() {
-		//
-		// @Override
-		// public void actionPerformed(final ActionEvent e) {
-		// handleLoadProperties();
-		// }
-		//
-		// });
-		// menu.add(mntmLaden);
-
 		mntmProfilSpeichern = new JMenuItem("Profil speichern");
+		mntmProfilSpeichern.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 		mntmProfilSpeichern.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		mntmProfilSpeichern.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(final ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				handleSaveProperties();
 			}
 
 		});
-		// mntmProfilSpeichern.setEnabled(false);
 		menu.add(mntmProfilSpeichern);
 
-		// mntmProfilSpeichernAls = new JMenuItem("Profil speichern unter...");
-		// mntmProfilSpeichernAls.addActionListener(new ActionListener() {
-		//
-		// @Override
-		// public void actionPerformed(final ActionEvent e) {
-		// handleSaveAsProperties();
-		// }<S
-		//
-		// });
-		// mntmProfilSpeichernAls.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
-		// menu.add(mntmProfilSpeichernAls);
-
-		final JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit = new JMenuItem("Exit");
 		mntmExit.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		mntmExit.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(final ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				handleExit();
 			}
 
 		});
 		menu.add(mntmExit);
 
-		setConnectionProperties(actualConnectionProperties);
+		setConnectionProperties(defaultConnectionProperties);
+		setApplicationProperties(applicationProperties);
 	}
 
 	protected void handleExit() {
@@ -344,29 +422,120 @@ public class SwingStarter extends JFrame {
 		System.exit(0);
 	}
 
-	public void setConnectionProperties(final ComConnectionProperties connectionProperties) {
-		actualConnectionProperties = connectionProperties;
+	public void setConnectionProperties(ComConnectionProperties connectionProperties) {
+		defaultConnectionProperties = connectionProperties;
+		defaultProfile.setProperties(defaultConnectionProperties);
+		refresh();
+	}
+
+	public void setApplicationProperties(ApplicationProperties connectionProperties) {
+		applicationProperties = connectionProperties;
 		refresh();
 	}
 
 	private void cancel() {
-		firstNameTF.setText(actualConnectionProperties.getFirstName());
-		lastNameTF.setText(actualConnectionProperties.getLastName());
-		comConnectionNameTF.setText(actualConnectionProperties.getComConnectionName());
-		connectionModeCB.setSelectedItem(actualConnectionProperties.getMicrostepResolutionMode());
-		countOfStepPerMmTF.setValue(actualConnectionProperties.getStepsPerMm());
+		firstNameTF.setText(applicationProperties.getFirstName());
+		lastNameTF.setText(applicationProperties.getLastName());
+		checkBoxFirstUse.setSelected(applicationProperties.isFirstUse());
 
-		fastUpSpeedTF.setValue(actualConnectionProperties.getFastUpSpeed());
-		middleUpSpeedTF.setValue(actualConnectionProperties.getMiddleUpSpeed());
-		slowUpSpeedTF.setValue(actualConnectionProperties.getSlowUpSpeed());
-		fastDownSpeedTF.setValue(actualConnectionProperties.getFastDownSpeed());
-		middleDownSpeedTF.setValue(actualConnectionProperties.getMiddleDownSpeed());
-		slowDownSpeedTF.setValue(actualConnectionProperties.getSlowDownSpeed());
-		reverseCB.setSelected(actualConnectionProperties.isReverseSteps());
-		sleepMirrorPictureTF.setValue(actualConnectionProperties.getSleepMirrorPicture());
-		sleepMovementMirrorTF.setValue(actualConnectionProperties.getSleepMovementMirror());
-		sleepPictureMovementTF.setValue(actualConnectionProperties.getSleepPictureMovement());
-		pulseDurationTF.setValue(actualConnectionProperties.getPulseDuration());
+		comConnectionNameTF.setText(defaultConnectionProperties.getComConnectionName());
+		connectionModeCB.setSelectedItem(defaultConnectionProperties.getMicrostepResolutionMode());
+		countOfStepPerMmTF.setValue(defaultConnectionProperties.getStepsPerMm());
+
+		fastUpSpeedTF.setValue(defaultConnectionProperties.getFastUpSpeed());
+		middleUpSpeedTF.setValue(defaultConnectionProperties.getMiddleUpSpeed());
+		slowUpSpeedTF.setValue(defaultConnectionProperties.getSlowUpSpeed());
+		fastDownSpeedTF.setValue(defaultConnectionProperties.getFastDownSpeed());
+		middleDownSpeedTF.setValue(defaultConnectionProperties.getMiddleDownSpeed());
+		slowDownSpeedTF.setValue(defaultConnectionProperties.getSlowDownSpeed());
+		reverseCB.setSelected(defaultConnectionProperties.isReverseSteps());
+		sleepMirrorPictureTF.setValue(defaultConnectionProperties.getSleepMirrorPicture());
+		sleepMovementMirrorTF.setValue(defaultConnectionProperties.getSleepMovementMirror());
+		sleepPictureMovementTF.setValue(defaultConnectionProperties.getSleepPictureMovement());
+		pulseDurationTF.setValue(defaultConnectionProperties.getPulseDuration());
+	}
+
+	public void changeFont(Component component, int fontSize) {
+		Font f = component.getFont();
+		component.setFont(new Font(f.getName(), f.getStyle(), fontSize));
+		if (component instanceof Container) {
+			for (Component child : ((Container) component).getComponents()) {
+				changeFont(child, fontSize);
+			}
+		}
+	}
+
+	private void setNewFont(int fontSize) {
+		changeFont(this, fontSize);
+		// firstNameTF.setFont(font);
+		// lastNameTF.setFont(font);
+		// checkBoxFirstUse.setFont(font);
+		//
+		// comConnectionNameTF.setFont(font);
+		// connectionModeCB.setFont(font);
+		//
+		// JSpinner.NumberEditor countOfStepPerMm = (JSpinner.NumberEditor) countOfStepPerMmTF.getEditor();
+		// countOfStepPerMm.getTextField().setFont(font);
+		//
+		// JSpinner.NumberEditor fastUpSpeed = (JSpinner.NumberEditor) fastUpSpeedTF.getEditor();
+		// fastUpSpeed.getTextField().setFont(font);
+		//
+		// JSpinner.NumberEditor middleUpSpeed = (JSpinner.NumberEditor) middleUpSpeedTF.getEditor();
+		// middleUpSpeed.getTextField().setFont(font);
+		//
+		// JSpinner.NumberEditor slowUpSpeed = (JSpinner.NumberEditor) slowUpSpeedTF.getEditor();
+		// slowUpSpeed.getTextField().setFont(font);
+		//
+		// JSpinner.NumberEditor fastDownSpeed = (JSpinner.NumberEditor) fastDownSpeedTF.getEditor();
+		// fastDownSpeed.getTextField().setFont(font);
+		//
+		// JSpinner.NumberEditor middleDownSpeed = (JSpinner.NumberEditor) middleDownSpeedTF.getEditor();
+		// middleDownSpeed.getTextField().setFont(font);
+		//
+		// JSpinner.NumberEditor slowDownSpeed = (JSpinner.NumberEditor) slowDownSpeedTF.getEditor();
+		// slowDownSpeed.getTextField().setFont(font);
+		//
+		// reverseCB.setFont(font);
+		//
+		// JSpinner.NumberEditor sleepMirrorPicture = (JSpinner.NumberEditor) sleepMirrorPictureTF.getEditor();
+		// sleepMirrorPicture.getTextField().setFont(font);
+		//
+		// JSpinner.NumberEditor sleepMovementMirror = (JSpinner.NumberEditor) sleepMovementMirrorTF.getEditor();
+		// sleepMovementMirror.getTextField().setFont(font);
+		//
+		// JSpinner.NumberEditor sleepPictureMovement = (JSpinner.NumberEditor) sleepPictureMovementTF.getEditor();
+		// sleepPictureMovement.getTextField().setFont(font);
+		//
+		// JSpinner.NumberEditor pulseDuration = (JSpinner.NumberEditor) pulseDurationTF.getEditor();
+		// pulseDuration.getTextField().setFont(font);
+		//
+		Font f = getFont();
+		mntmProfilSpeichern.setFont(new Font(f.getName(), f.getStyle(), fontSize));
+		mntmExit.setFont(new Font(f.getName(), f.getStyle(), fontSize));
+		// checkBoxFontSize.setFont(font);
+		// menu.setFont(font);
+		// lblModus.setFont(font);
+		// lblNewLabel_15.setFont(font);
+		// lblFirstUse.setFont(font);
+		// lblSchriftgre.setFont(font);
+		// lblNewLabel.setFont(font);
+		// lblNewLabel_1.setFont(font);
+		// lblNewLabel_2.setFont(font);
+		// lblNewLabel_3.setFont(font);
+		// lblNewLabel_4.setFont(font);
+		// lblNewLabel_5.setFont(font);
+		// lblNewLabel_6.setFont(font);
+		// lblNewLabel_7.setFont(font);
+		// lblNewLabel_8.setFont(font);
+		// lblNewLabel_9.setFont(font);
+		// lblNewLabel_10.setFont(font);
+		// lblNewLabel_11.setFont(font);
+		// lblNewLabel_12.setFont(font);
+		// lblNewLabel_14.setFont(font);
+		// lblSchritteProMillimeter.setFont(font);
+		// lblNewLabel_13.setFont(font);
+		//
+		// tabbedPane.setFont(font);
 	}
 
 	public void refresh() {
@@ -374,64 +543,27 @@ public class SwingStarter extends JFrame {
 	}
 
 	protected void handleSaveProperties() {
-		LOGGER.info("chosen file: " + actualOpenedProfileFileName.getAbsolutePath());
+		LOGGER.info("chosen file: " + defaultFile.getAbsolutePath());
 
-		final boolean allValid = validateUserSettings();
+		boolean allValid = validateUserSettings();
 		LOGGER.info("try to save properties");
 		LOGGER.info("properties are valid: " + allValid);
 		if (allValid) {
-			final ComConnectionProperties newConnectionProperties = getNewConnectionProperties();
+			ComConnectionProperties newConnectionProperties = getNewConnectionProperties();
 			setConnectionProperties(newConnectionProperties);
+			propertiesHandler.writeProfile(defaultFile, defaultProfile);
 
-			propertiesHandler.writeProfile(actualOpenedProfileFileName, defaultProfile);
+			ApplicationProperties newApplicationProperties = getNewApplicationProperties();
+			setApplicationProperties(newApplicationProperties);
+			applicationPropertiesFileHandler.write(applicationPropertyFile, applicationProperties);
 		}
 	}
 
-	// protected void handleLoadProperties() {
-	// final JFileChooser chooser = new PropertiesFileChooser();
-	//
-	// final int returnVal = chooser.showOpenDialog(null);
-	// if (returnVal == JFileChooser.APPROVE_OPTION) {
-	// final File selectedFile = chooser.getSelectedFile();
-	// if (selectedFile != null) {
-	// LOGGER.info("chosen file: " + selectedFile);
-	// actualOpenedProfileFileName = selectedFile;
-	// final Profile loadedConnectionProperties = propertiesHandler.readProfile(actualOpenedProfileFileName);
-	// setConnectionProperties(loadedConnectionProperties.getProperties());
-	// setTitle(TITLE + " - " + selectedFile.getAbsolutePath());
-	// mntmProfilSpeichern.setEnabled(true);
-	// }
-	// }
-	// }
-
-	// protected void handleSaveAsProperties() {
-	// final JFileChooser chooser = new PropertiesFileChooser();
-	//
-	// final int returnVal = chooser.showSaveDialog(null);
-	// if (returnVal == JFileChooser.APPROVE_OPTION) {
-	// File selectedFile = chooser.getSelectedFile();
-	//
-	// if (selectedFile != null) {
-	// String absolutePath = selectedFile.getAbsolutePath();
-	//
-	// if (!absolutePath.endsWith(FILE_ENDING)) {
-	// absolutePath = absolutePath + FILE_ENDING;
-	// selectedFile = new File(absolutePath);
-	// }
-	// LOGGER.info("chosen file: " + absolutePath);
-	// actualOpenedProfileFileName = selectedFile;
-	// propertiesHandler.writeProfile(actualOpenedProfileFileName, defaultProfile);
-	// setTitle(TITLE + " - " + absolutePath);
-	// mntmProfilSpeichern.setEnabled(true);
-	// }
-	// }
-	// }
-
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (final Exception e) {
+		} catch (Exception e) {
 			LOGGER.error("SystemLookAndFeel not available", e);
 			e.printStackTrace();
 		}
@@ -440,9 +572,9 @@ public class SwingStarter extends JFrame {
 			@Override
 			public void run() {
 				try {
-					final SwingStarter frame = new SwingStarter();
+					SwingStarter frame = new SwingStarter();
 					frame.setVisible(true);
-				} catch (final Exception e) {
+				} catch (Exception e) {
 					LOGGER.error("Error in main-methode by creating SwingStarter object", e);
 					e.printStackTrace();
 				}
@@ -450,40 +582,64 @@ public class SwingStarter extends JFrame {
 		});
 	}
 
-	public ComConnectionProperties getNewConnectionProperties() {
-		final ComConnectionProperties comConnectionProperties = new ComConnectionProperties();
+	public ApplicationProperties getNewApplicationProperties() {
+		ApplicationProperties comConnectionProperties = new ApplicationProperties();
 
-		final int fastUpSpeed = (int) fastUpSpeedTF.getValue();
+		String firstName = firstNameTF.getText();
+		comConnectionProperties.setFirstName(firstName);
+
+		String lastName = lastNameTF.getText();
+		comConnectionProperties.setLastName(lastName);
+
+		boolean firstUse = checkBoxFirstUse.isSelected();
+		comConnectionProperties.setFirstUse(firstUse);
+
+		return comConnectionProperties;
+	}
+
+	public ComConnectionProperties getNewConnectionProperties() {
+		ComConnectionProperties comConnectionProperties = new ComConnectionProperties();
+
+		String comConnectionName = comConnectionNameTF.getText();
+		comConnectionProperties.setComConnectionName(comConnectionName);
+
+		int comConnectionMode = (int) connectionModeCB.getSelectedItem();
+		comConnectionProperties.setMicrostepResolutionMode(comConnectionMode);
+
+		int countOfStepsPerMm = (int) countOfStepPerMmTF.getValue();
+		comConnectionProperties.setStepsPerMm(countOfStepsPerMm);
+
+		int fastUpSpeed = (int) fastUpSpeedTF.getValue();
 		comConnectionProperties.setFastUpSpeed(fastUpSpeed);
 
-		final int middleUpSpeed = (int) middleUpSpeedTF.getValue();
+		int middleUpSpeed = (int) middleUpSpeedTF.getValue();
 		comConnectionProperties.setMiddleUpSpeed(middleUpSpeed);
 
-		final int slowUpSpeed = (int) slowUpSpeedTF.getValue();
+		int slowUpSpeed = (int) slowUpSpeedTF.getValue();
 		comConnectionProperties.setSlowUpSpeed(slowUpSpeed);
 
-		final int slowDownSpeed = (int) slowDownSpeedTF.getValue();
+		int slowDownSpeed = (int) slowDownSpeedTF.getValue();
 		comConnectionProperties.setSlowDownSpeed(slowDownSpeed);
 
-		final int middleDownSpeed = (int) middleDownSpeedTF.getValue();
+		int middleDownSpeed = (int) middleDownSpeedTF.getValue();
 		comConnectionProperties.setMiddleDownSpeed(middleDownSpeed);
 
-		final int fastDownSpeed = (int) fastDownSpeedTF.getValue();
+		int fastDownSpeed = (int) fastDownSpeedTF.getValue();
 		comConnectionProperties.setFastDownSpeed(fastDownSpeed);
 
-		final long sleepMovementMirror = (long) sleepMovementMirrorTF.getValue();
+		long sleepMovementMirror = (long) sleepMovementMirrorTF.getValue();
 		comConnectionProperties.setSleepMovementMirror(sleepMovementMirror);
 
-		final long sleepMirrorPicture = (long) sleepMirrorPictureTF.getValue();
+		long sleepMirrorPicture = (long) sleepMirrorPictureTF.getValue();
 		comConnectionProperties.setSleepMirrorPicture(sleepMirrorPicture);
 
-		final long sleepPictureMovement = (long) sleepPictureMovementTF.getValue();
+		long sleepPictureMovement = (long) sleepPictureMovementTF.getValue();
 		comConnectionProperties.setSleepPictureMovement(sleepPictureMovement);
 
-		final long pulseDuration = (long) pulseDurationTF.getValue();
+		long pulseDuration = (long) pulseDurationTF.getValue();
 		comConnectionProperties.setPulseDuration(pulseDuration);
 
-		final boolean reverseSteps = reverseCB.isSelected();
+		boolean reverseSteps = reverseCB.isSelected();
 		comConnectionProperties.setReverseSteps(reverseSteps);
 
 		return comConnectionProperties;
@@ -493,99 +649,96 @@ public class SwingStarter extends JFrame {
 	protected boolean validateUserSettings() {
 		boolean allValid = true;
 
-		final int fastUpSpeed = (int) fastUpSpeedTF.getValue();
+		int connectionMode = (int) connectionModeCB.getSelectedItem();
+		allValid = validateMode(connectionMode, connectionModeCB);
 
-		if (!validator.isValidSpeed(fastUpSpeed)) {
-			allValid = false;
-			fastUpSpeedTF.setBackground(Color.red);
-			LOGGER.error("error by parsing fastUpSpeed from Spinner");
-		} else {
-			fastUpSpeedTF.setBackground(Color.white);
-		}
+		int countOfStepPerMm = (int) countOfStepPerMmTF.getValue();
+		allValid = validateStepCount(countOfStepPerMm, countOfStepPerMmTF);
 
-		final int middleUpSpeed = (int) middleUpSpeedTF.getValue();
-		if (!validator.isValidSpeed(middleUpSpeed)) {
-			allValid = false;
-			middleUpSpeedTF.setBackground(Color.red);
-			LOGGER.error("error by parsing middleUpSpeed from Spinner");
-		} else {
-			middleUpSpeedTF.setBackground(Color.white);
-		}
+		int fastUpSpeed = (int) fastUpSpeedTF.getValue();
+		allValid = validateSpeed(fastUpSpeed, fastUpSpeedTF);
 
-		final int slowUpSpeed = (int) slowUpSpeedTF.getValue();
-		if (!validator.isValidSpeed(slowUpSpeed)) {
-			allValid = false;
-			slowUpSpeedTF.setBackground(Color.red);
-			LOGGER.error("error by parsing slowUpSpeed from Spinner");
-		} else {
-			slowUpSpeedTF.setBackground(Color.white);
-		}
+		int middleUpSpeed = (int) middleUpSpeedTF.getValue();
+		allValid = validateSpeed(middleUpSpeed, middleUpSpeedTF);
 
-		final int slowDownSpeed = (int) slowDownSpeedTF.getValue();
-		if (!validator.isValidSpeed(slowDownSpeed)) {
-			allValid = false;
-			slowDownSpeedTF.setBackground(Color.red);
-			LOGGER.error("error by parsing slowDownSpeed from Spinner");
-		} else {
-			slowDownSpeedTF.setBackground(Color.white);
-		}
+		int slowUpSpeed = (int) slowUpSpeedTF.getValue();
+		allValid = validateSpeed(slowUpSpeed, slowUpSpeedTF);
 
-		final int middleDownSpeed = (int) middleDownSpeedTF.getValue();
-		if (!validator.isValidSpeed(middleDownSpeed)) {
-			allValid = false;
-			middleDownSpeedTF.setBackground(Color.red);
-			LOGGER.error("error by parsing middleDownSpeed from Spinner");
-		} else {
-			middleDownSpeedTF.setBackground(Color.white);
-		}
+		int slowDownSpeed = (int) slowDownSpeedTF.getValue();
+		allValid = validateSpeed(slowDownSpeed, slowDownSpeedTF);
 
-		final int fastDownSpeed = (int) fastDownSpeedTF.getValue();
-		if (!validator.isValidSpeed(fastDownSpeed)) {
-			allValid = false;
-			fastDownSpeedTF.setBackground(Color.red);
-			LOGGER.error("error by parsing fastDownSpeed from Spinner");
-		} else {
-			fastDownSpeedTF.setBackground(Color.white);
-		}
+		int middleDownSpeed = (int) middleDownSpeedTF.getValue();
+		allValid = validateSpeed(middleDownSpeed, middleDownSpeedTF);
 
-		final long sleepMovementMirror = (long) sleepMovementMirrorTF.getValue();
-		if (!validator.isValidSleep(sleepMovementMirror)) {
-			allValid = false;
-			sleepMovementMirrorTF.setBackground(Color.red);
-			LOGGER.error("error by parsing sleepMovementMirror Spinner");
-		} else {
-			sleepMovementMirrorTF.setBackground(Color.white);
-		}
+		int fastDownSpeed = (int) fastDownSpeedTF.getValue();
+		allValid = validateSpeed(fastDownSpeed, fastDownSpeedTF);
 
-		final long sleepMirrorPicture = (long) sleepMirrorPictureTF.getValue();
-		if (!validator.isValidSleep(sleepMirrorPicture)) {
-			allValid = false;
-			sleepMirrorPictureTF.setBackground(Color.red);
-			LOGGER.error("error by parsing sleepMirrorPicture from Spinner");
-		} else {
-			sleepMirrorPictureTF.setBackground(Color.white);
-		}
+		long sleepMovementMirror = (long) sleepMovementMirrorTF.getValue();
+		allValid = validateSleep(sleepMovementMirror, sleepMovementMirrorTF);
 
-		final long sleepPictureMovement = (long) sleepPictureMovementTF.getValue();
-		if (!validator.isValidSleep(sleepPictureMovement)) {
-			allValid = false;
-			sleepPictureMovementTF.setBackground(Color.red);
-			LOGGER.error("error by parsing sleepPictureMovement from Spinner");
-		} else {
-			sleepPictureMovementTF.setBackground(Color.white);
-		}
+		long sleepMirrorPicture = (long) sleepMirrorPictureTF.getValue();
+		allValid = validateSleep(sleepMirrorPicture, sleepMirrorPictureTF);
 
-		final long pulseDuration = (long) pulseDurationTF.getValue();
-		if (!validator.isValidSleep(pulseDuration)) {
-			allValid = false;
-			pulseDurationTF.setBackground(Color.red);
-			LOGGER.error("error by parsing pulseDuration from Spinner");
-		} else {
-			pulseDurationTF.setBackground(Color.white);
-		}
+		long sleepPictureMovement = (long) sleepPictureMovementTF.getValue();
+		allValid = validateSleep(sleepPictureMovement, sleepPictureMovementTF);
+
+		long pulseDuration = (long) pulseDurationTF.getValue();
+		allValid = validateSleep(pulseDuration, pulseDurationTF);
 
 		return allValid;
 
+	}
+
+	protected boolean validateSpeed(int speed, JComponent component) {
+		boolean allValid = false;
+
+		if (!validator.isValidSpeed(speed)) {
+			component.setBackground(Color.red);
+			LOGGER.error("error by parsing " + component.getName());
+		} else {
+			allValid = true;
+			component.setBackground(Color.white);
+		}
+		return allValid;
+	}
+
+	protected boolean validateSleep(long sleep, JComponent component) {
+		boolean allValid = false;
+
+		if (!validator.isValidSleep(sleep)) {
+			component.setBackground(Color.red);
+			LOGGER.error("error by parsing " + component.getName());
+		} else {
+			allValid = true;
+			component.setBackground(Color.white);
+		}
+		return allValid;
+	}
+
+	protected boolean validateMode(int mode, JComponent component) {
+		boolean allValid = false;
+
+		if (!validator.isValidMicrostepResolutionMode(mode)) {
+			component.setBackground(Color.red);
+			LOGGER.error("error by parsing " + component.getName());
+		} else {
+			allValid = true;
+			component.setBackground(Color.white);
+		}
+		return allValid;
+	}
+
+	protected boolean validateStepCount(int stepCount, JComponent component) {
+		boolean allValid = false;
+
+		if (!validator.isValidStepcount(stepCount)) {
+			component.setBackground(Color.red);
+			LOGGER.error("error by parsing " + component.getName());
+		} else {
+			allValid = true;
+			component.setBackground(Color.white);
+		}
+		return allValid;
 	}
 
 }

@@ -28,6 +28,10 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
 			<artifactId>common</artifactId>
 		</dependency>

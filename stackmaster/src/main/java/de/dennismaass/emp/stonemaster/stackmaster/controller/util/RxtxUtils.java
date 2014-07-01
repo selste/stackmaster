@@ -7,16 +7,16 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
-public final class RxtxUtils {
+public class RxtxUtils {
 
 	private RxtxUtils() {
 
 	}
 
-	public static CommPortIdentifier getCommPortIdentifier(final String portName) {
+	public static CommPortIdentifier getCommPortIdentifier(String portName) {
 		CommPortIdentifier serialPortId = null;
 
-		final Enumeration<?> enumComm = CommPortIdentifier.getPortIdentifiers();
+		Enumeration<?> enumComm = CommPortIdentifier.getPortIdentifiers();
 		while (enumComm.hasMoreElements()) {
 			serialPortId = (CommPortIdentifier) enumComm.nextElement();
 			if (serialPortId.getName().contentEquals(portName)) {
@@ -27,7 +27,7 @@ public final class RxtxUtils {
 		return serialPortId;
 	}
 
-	public static boolean isSerial(final CommPortIdentifier portIdentifier) {
+	public static boolean isSerial(CommPortIdentifier portIdentifier) {
 		if (portIdentifier.getPortType() == CommPortIdentifier.PORT_SERIAL) {
 			return true;
 		}
@@ -36,13 +36,13 @@ public final class RxtxUtils {
 	}
 
 	public static List<CommPortIdentifier> getCommPortIdentifier() {
-		final Enumeration<?> ports = CommPortIdentifier.getPortIdentifiers();
-		final List<?> actualObjectList = Collections.list(ports);
+		Enumeration<?> ports = CommPortIdentifier.getPortIdentifiers();
+		List<?> actualObjectList = Collections.list(ports);
 
-		final List<CommPortIdentifier> actualPortList = new ArrayList<>();
+		List<CommPortIdentifier> actualPortList = new ArrayList<>();
 
 		CommPortIdentifier portIdentifier = null;
-		for (final Object object : actualObjectList) {
+		for (Object object : actualObjectList) {
 			if (object instanceof CommPortIdentifier) {
 				portIdentifier = (CommPortIdentifier) object;
 				actualPortList.add(portIdentifier);

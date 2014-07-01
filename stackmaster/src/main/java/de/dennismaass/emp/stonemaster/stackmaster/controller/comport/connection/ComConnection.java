@@ -26,58 +26,58 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
 
 public class ComConnection implements SerialPortEventListener {
 
-	private static final Map<String, ComConnection> connectorMap = new HashMap<>();
+	private static Map<String, ComConnection> connectorMap = new HashMap<>();
 
 	private String comPortName;
 	private RXTXPort serialPort;
 
-	private final int baudrate = 9600;
-	private final int dataBits = SerialPort.DATABITS_8;
-	private final int stopBits = SerialPort.STOPBITS_1;
-	private final int parity = SerialPort.PARITY_NONE;
+	private int baudrate = 9600;
+	private int dataBits = SerialPort.DATABITS_8;
+	private int stopBits = SerialPort.STOPBITS_1;
+	private int parity = SerialPort.PARITY_NONE;
 
 	private boolean connected = false;
 
 	private OutputStream outputStream;
 	private InputStream inputStream;
 
-	// private final int readed = 0;
-	// private final byte[] readBuffer = new byte[9];
+	// private int readed = 0;
+	// private byte[] readBuffer = new byte[9];
 
-	private final List<ByteMessageListener> byteEventListener = new ArrayList<>();
+	private List<ByteMessageListener> byteEventListener = new ArrayList<>();
 
 	private boolean stopWhenChecksumError = true;
 
-	private ComConnection(final String comPortName) {
+	private ComConnection(String comPortName) {
 		super();
 
 		setComPortName(comPortName);
 	}
 
-	public static ComConnection getInstance(final String comPortName) {
+	public static ComConnection getInstance(String comPortName) {
 		if (!connectorMap.containsKey(comPortName)) {
-			final ComConnection connector = new ComConnection(comPortName);
+			ComConnection connector = new ComConnection(comPortName);
 			connectorMap.put(comPortName, connector);
 		}
 		return connectorMap.get(comPortName);
 	}
 
-	public void send(final byte[] byteArray) {
+	public void send(byte[] byteArray) {
 		if (byteArray != null && outputStream != null) {
 			try {
 				outputStream.write(byteArray);
-			} catch (final IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public void send(final int address, final int instruction, final int type, final int motor, final int value) {
+	public void send(int address, int instruction, int type, int motor, int value) {
 		send((byte) (address & 0xff), (byte) (instruction & 0xff), (byte) (type & 0xff), (byte) (motor & 0xff), value);
 	}
 
-	public void send(final byte address, final byte instruction, final byte type, final byte motor, final int value) {
-		final byte[] byteArray = new byte[9];
+	public void send(byte address, byte instruction, byte type, byte motor, int value) {
+		byte[] byteArray = new byte[9];
 		byteArray[0] = address;
 		byteArray[1] = instruction;
 		byteArray[2] = type;
@@ -90,8 +90,7 @@ public class ComConnection implements SerialPortEventListener {
 		send(byteArray);
 	}
 
-	protected byte computeCheckSum(final byte address, final byte instruction, final byte type, final byte motor,
-			final int value) {
+	protected byte computeCheckSum(byte address, byte instruction, byte type, byte motor, int value) {
 		return (byte) (address + instruction + type + motor + (byte) (value >> 24 & 0xff) + (byte) (value >> 16 & 0xff)
 				+ (byte) (value >> 8 & 0xff) + (byte) (value & 0xff));
 	}
@@ -100,11 +99,11 @@ public class ComConnection implements SerialPortEventListener {
 		if (!connected) {
 
 			try {
-				final CommPortIdentifier port = RxtxUtils.getCommPortIdentifier(getComPortName());
+				CommPortIdentifier port = RxtxUtils.getCommPortIdentifier(getComPortName());
 				if (port == null) {
 					return false;
 				}
-				final CommPort commPort = port.open(getClass().getName(), 2000);
+				CommPort commPort = port.open(getClass().getName(), 2000);
 
 				if (commPort instanceof RXTXPort) {
 					serialPort = (RXTXPort) commPort;
@@ -116,7 +115,7 @@ public class ComConnection implements SerialPortEventListener {
 
 					try {
 						serialPort.addEventListener(this);
-					} catch (final TooManyListenersException e) {
+					} catch (TooManyListenersException e) {
 						e.printStackTrace();
 					}
 
@@ -124,7 +123,7 @@ public class ComConnection implements SerialPortEventListener {
 					outputStream = serialPort.getOutputStream();
 				}
 				connected = true;
-			} catch (final UnsupportedCommOperationException e) {
+			} catch (UnsupportedCommOperationException e) {
 				connected = false;
 				e.printStackTrace();
 			}
@@ -134,18 +133,18 @@ public class ComConnection implements SerialPortEventListener {
 		return connected;
 	}
 
-	public void addByteEventListener(final ByteMessageListener listener) {
+	public void addByteEventListener(ByteMessageListener listener) {
 		byteEventListener.add(listener);
 	}
 
-	public void removeByteEventListener(final ByteMessageListener listener) {
+	public void removeByteEventListener(ByteMessageListener listener) {
 		byteEventListener.remove(listener);
 	}
 
 	public int getAvailableBytes() {
 		try {
 			return inputStream.available();
-		} catch (final IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return -1;
@@ -161,7 +160,7 @@ public class ComConnection implements SerialPortEventListener {
 				if (outputStream != null) {
 					outputStream.close();
 				}
-			} catch (final IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
@@ -178,14 +177,14 @@ public class ComConnection implements SerialPortEventListener {
 	}
 
 	public byte[] receive() throws ChecksumException {
-		final byte[] buffer = new byte[9];
-		final byte[] temp = new byte[9];
+		byte[] buffer = new byte[9];
+		byte[] temp = new byte[9];
 		int dataIndex = 0;
 		for (int i = 0; i < 20; i++) {
 			try {
 				if (inputStream != null && inputStream.available() > 0) {
 					// System.out.println("SR: available data " + inputStream.available());
-					final int readBytes = inputStream.read(temp);
+					int readBytes = inputStream.read(temp);
 					// System.out.println("readBytes: " + readBytes);
 					int j;
 					for (j = 0; j < readBytes; j++) {
@@ -221,9 +220,9 @@ public class ComConnection implements SerialPortEventListener {
 					// System.out.println("SR: waiting for data ");
 					Thread.sleep(10);
 				}
-			} catch (final IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
-			} catch (final InterruptedException e) {
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
@@ -231,13 +230,13 @@ public class ComConnection implements SerialPortEventListener {
 	}
 
 	@Override
-	public void serialEvent(final SerialPortEvent event) {
+	public void serialEvent(SerialPortEvent event) {
 		if (event.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			byte[] answer;
 			try {
 				answer = receive();
 				sendEvent(answer);
-			} catch (final ChecksumException e) {
+			} catch (ChecksumException e) {
 				e.printStackTrace();
 			}
 		} else {
@@ -246,9 +245,9 @@ public class ComConnection implements SerialPortEventListener {
 
 	}
 
-	protected void sendEvent(final byte[] byteArray) {
+	protected void sendEvent(byte[] byteArray) {
 		if (byteArray != null && byteArray.length > 0) {
-			for (final ByteMessageListener listener : byteEventListener) {
+			for (ByteMessageListener listener : byteEventListener) {
 				listener.handleByteMessageEvent(new ByteMessageEvent(this, byteArray));
 			}
 		}
@@ -259,7 +258,7 @@ public class ComConnection implements SerialPortEventListener {
 		return comPortName;
 	}
 
-	public void setComPortName(final String comPortName) {
+	public void setComPortName(String comPortName) {
 		this.comPortName = comPortName;
 	}
 
@@ -267,7 +266,7 @@ public class ComConnection implements SerialPortEventListener {
 		return stopWhenChecksumError;
 	}
 
-	public void setStopWhenChecksumError(final boolean stopWhenChecksumError) {
+	public void setStopWhenChecksumError(boolean stopWhenChecksumError) {
 		this.stopWhenChecksumError = stopWhenChecksumError;
 	}
 

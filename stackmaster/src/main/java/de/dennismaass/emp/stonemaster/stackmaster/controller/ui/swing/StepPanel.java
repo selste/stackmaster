@@ -17,25 +17,25 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.log4j.Logger;
 
-import de.dennismaass.emp.stonemaster.stackmaster.common.properties.ComConnectionProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
 
 public class StepPanel extends JPanel {
 
-	private static final long serialVersionUID = -2489089765486689116L;
+	private static long serialVersionUID = -2489089765486689116L;
 
-	private static final Logger LOGGER = Logger.getLogger(StepPanel.class);
+	private static Logger LOGGER = Logger.getLogger(StepPanel.class);
 
-	private static final double MIN_VALUE = -250.0, MAX_VALUE = 250.0;
-	private static final String DOT = ".";
+	private static double MIN_VALUE = -250.0, MAX_VALUE = 250.0;
+	private static String DOT = ".";
 
-	private static final String COMA = ",";
+	private static String COMA = ",";
 
-	private static final int ROUNDVALUE = 100000000;
+	private static int ROUNDVALUE = 100000000;
 
-	private static final String UNIT = "mm";
+	private static String UNIT = "mm";
 
-	private final ComConnectionProperties properties;
+	private ComConnectionProperties properties;
 	private double lastManStep = 0.001;
 
 	// TODO: einbauen
@@ -49,34 +49,34 @@ public class StepPanel extends JPanel {
 	private boolean pause;
 	private boolean stop = false;
 
-	private final JLabel autoStepsizeSumLb;
-	private final JLabel autoCountOfDoneRepeatsLb;
+	private JLabel autoStepsizeSumLb;
+	private JLabel autoCountOfDoneRepeatsLb;
 
 	private JLabel stateLine;
 
 	private ComCommunicator communicator;
 
-	private final JButton resetBT;
+	private JButton resetBT;
 
-	private final JButton executionBT;
+	private JButton executionBT;
 
-	private final JCheckBox mirrorCB;
-	private final JButton stopBT;
-	private final JButton btnPause;
-	private final JSpinner stepsizeTF;
-	private final JSpinner autoCountOfRepeatsTF;
-	private final JLabel geschaetzteDauerLb;
-	private final JLabel geschaetzteDauerValueLb;
-	private final JLabel lblErfolderlicherWeg;
-	private final JLabel lblMm;
-	private final JLabel label_6;
+	private JCheckBox mirrorCB;
+	private JButton stopBT;
+	private JButton btnPause;
+	private JSpinner stepsizeTF;
+	private JSpinner autoCountOfRepeatsTF;
+	private JLabel geschaetzteDauerLb;
+	private JLabel geschaetzteDauerValueLb;
+	private JLabel lblErfolderlicherWeg;
+	private JLabel lblMm;
+	private JLabel label_6;
 
 	/**
 	 * Create the panel.
 	 * 
 	 * @wbp.parser.constructor
 	 */
-	public StepPanel(final ComConnectionProperties properties, final JLabel stateLine) {
+	public StepPanel(ComConnectionProperties properties, final JLabel stateLine) {
 
 		this.properties = properties;
 		setVariablesFromProperties(properties);
@@ -85,33 +85,33 @@ public class StepPanel extends JPanel {
 
 		setVariablesFromProperties(properties);
 
-		final JLabel autoStepSizeTitle = new JLabel("Schrittgröße [mm]");
-		autoStepSizeTitle.setFont(SwingStarter.FONT);
+		JLabel autoStepSizeTitle = new JLabel("Schrittgröße [mm]");
+		autoStepSizeTitle.setFont(SwingStarter.actualFont);
 		add(autoStepSizeTitle, "cell 0 0,alignx trailing");
 
 		stepsizeTF = new JSpinner();
-		stepsizeTF.setFont(SwingStarter.FONT);
+		stepsizeTF.setFont(SwingStarter.actualFont);
 		stepsizeTF.setModel(new SpinnerNumberModel(properties.getStepSize(), 0.001, 250.0, 0.001));
 		add(stepsizeTF, "cell 2 0,growx");
 		stepsizeTF.addChangeListener(new ChangeListener() {
 
 			@Override
-			public void stateChanged(final ChangeEvent e) {
+			public void stateChanged(ChangeEvent e) {
 				refreshDistance();
 			}
 		});
 
-		final JLabel autoCountOfRepeatsTitle = new JLabel("Anzahl Bilder");
-		autoCountOfRepeatsTitle.setFont(SwingStarter.FONT);
+		JLabel autoCountOfRepeatsTitle = new JLabel("Anzahl Bilder");
+		autoCountOfRepeatsTitle.setFont(SwingStarter.actualFont);
 		add(autoCountOfRepeatsTitle, "cell 0 1,alignx trailing");
 
 		autoCountOfRepeatsTF = new JSpinner();
-		autoCountOfRepeatsTF.setFont(SwingStarter.FONT);
+		autoCountOfRepeatsTF.setFont(SwingStarter.actualFont);
 		autoCountOfRepeatsTF.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		autoCountOfRepeatsTF.addChangeListener(new ChangeListener() {
 
 			@Override
-			public void stateChanged(final ChangeEvent e) {
+			public void stateChanged(ChangeEvent e) {
 				refreshSleep();
 				refreshDistance();
 			}
@@ -120,11 +120,11 @@ public class StepPanel extends JPanel {
 		add(autoCountOfRepeatsTF, "cell 2 1,growx");
 
 		mirrorCB = new JCheckBox("Spiegel vorauslösung");
-		mirrorCB.setFont(SwingStarter.FONT);
+		mirrorCB.setFont(SwingStarter.actualFont);
 		mirrorCB.addChangeListener(new ChangeListener() {
 
 			@Override
-			public void stateChanged(final ChangeEvent e) {
+			public void stateChanged(ChangeEvent e) {
 				refreshDistance();
 				refreshSleep();
 			}
@@ -132,12 +132,12 @@ public class StepPanel extends JPanel {
 		add(mirrorCB, "cell 2 2,alignx center");
 
 		executionBT = new JButton("ausführen");
-		executionBT.setFont(SwingStarter.FONT);
+		executionBT.setFont(SwingStarter.actualFont);
 		add(executionBT, "flowx,cell 2 3,alignx center");
 		executionBT.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(final ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {
 				if (pause) {
 					pause = false;
 					executionBT.setText("ausführen");
@@ -149,7 +149,7 @@ public class StepPanel extends JPanel {
 
 					boolean correctValue = false;
 					try {
-						final double stepSize = (double) stepsizeTF.getValue();
+						double stepSize = (double) stepsizeTF.getValue();
 
 						LOGGER.info("click on execute step with size: " + stepSize);
 
@@ -159,11 +159,11 @@ public class StepPanel extends JPanel {
 
 							if (communicator != null) {
 								lastManStep = stepSize;
-								final int countOfSteps = (int) autoCountOfRepeatsTF.getValue();
+								int countOfSteps = (int) autoCountOfRepeatsTF.getValue();
 
 								if (countOfSteps > 0) {
 
-									final Thread job = createJob(stepSize, countOfSteps, sleepMovementMirror,
+									Thread job = createJob(stepSize, countOfSteps, sleepMovementMirror,
 											sleepMirrorPicture, sleepPictureMovement, sleepWhileMove, pulseDuration);
 									job.start();
 
@@ -181,7 +181,7 @@ public class StepPanel extends JPanel {
 						} else {
 							stepsizeTF.setBackground(Color.red);
 						}
-					} catch (final NumberFormatException ex) {
+					} catch (NumberFormatException ex) {
 						stepsizeTF.setBackground(Color.red);
 						stateLine.setText("Falsche Eingabe!");
 					}
@@ -191,12 +191,12 @@ public class StepPanel extends JPanel {
 		});
 
 		stopBT = new JButton("stop");
-		stopBT.setFont(SwingStarter.FONT);
+		stopBT.setFont(SwingStarter.actualFont);
 		stopBT.setEnabled(false);
 		stopBT.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(final ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				communicator.stop();
 				stop = true;
 				if (pause) {
@@ -210,11 +210,11 @@ public class StepPanel extends JPanel {
 		add(stopBT, "cell 2 3");
 
 		btnPause = new JButton("pause");
-		btnPause.setFont(SwingStarter.FONT);
+		btnPause.setFont(SwingStarter.actualFont);
 		btnPause.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(final ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				pause = true;
 
 			}
@@ -222,30 +222,30 @@ public class StepPanel extends JPanel {
 		btnPause.setEnabled(false);
 		add(btnPause, "cell 2 3");
 
-		final JLabel autoCountOfDoneRepeatsTitle = new JLabel("Anzahl getätigter Fahrten");
-		autoCountOfDoneRepeatsTitle.setFont(SwingStarter.FONT);
+		JLabel autoCountOfDoneRepeatsTitle = new JLabel("Anzahl getätigter Fahrten");
+		autoCountOfDoneRepeatsTitle.setFont(SwingStarter.actualFont);
 		add(autoCountOfDoneRepeatsTitle, "cell 0 5,alignx right");
 
 		autoCountOfDoneRepeatsLb = new JLabel("0");
-		autoCountOfDoneRepeatsLb.setFont(SwingStarter.FONT);
+		autoCountOfDoneRepeatsLb.setFont(SwingStarter.actualFont);
 		add(autoCountOfDoneRepeatsLb, "cell 2 5");
 
-		final JLabel autoStepsizeSumTitle = new JLabel("bisher zurückgelegter Weg[mm]");
-		autoStepsizeSumTitle.setFont(SwingStarter.FONT);
+		JLabel autoStepsizeSumTitle = new JLabel("bisher zurückgelegter Weg[mm]");
+		autoStepsizeSumTitle.setFont(SwingStarter.actualFont);
 		add(autoStepsizeSumTitle, "cell 0 6,alignx trailing");
 
 		autoStepsizeSumLb = new JLabel("0.0");
-		autoStepsizeSumLb.setFont(SwingStarter.FONT);
+		autoStepsizeSumLb.setFont(SwingStarter.actualFont);
 		add(autoStepsizeSumLb, "cell 2 6");
 
 		resetBT = new JButton("reset");
-		resetBT.setFont(SwingStarter.FONT);
+		resetBT.setFont(SwingStarter.actualFont);
 		add(resetBT, "cell 2 7");
 
 		resetBT.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(final ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {
 				resetAutoCountOfRepeats();
 				resetAutoSum();
 
@@ -256,25 +256,25 @@ public class StepPanel extends JPanel {
 		add(label_6, "cell 0 8");
 
 		geschaetzteDauerLb = new JLabel("geschätzte Dauer");
-		geschaetzteDauerLb.setFont(SwingStarter.FONT);
+		geschaetzteDauerLb.setFont(SwingStarter.actualFont);
 		add(geschaetzteDauerLb, "cell 0 9,alignx trailing");
 
 		geschaetzteDauerValueLb = new JLabel("0 ms");
-		geschaetzteDauerValueLb.setFont(SwingStarter.FONT);
+		geschaetzteDauerValueLb.setFont(SwingStarter.actualFont);
 		add(geschaetzteDauerValueLb, "cell 2 9");
 
 		lblErfolderlicherWeg = new JLabel("erfolderlicher Weg");
-		lblErfolderlicherWeg.setFont(SwingStarter.FONT);
+		lblErfolderlicherWeg.setFont(SwingStarter.actualFont);
 		add(lblErfolderlicherWeg, "cell 0 10,alignx trailing");
 
 		lblMm = new JLabel("0.0 mm");
-		lblMm.setFont(SwingStarter.FONT);
+		lblMm.setFont(SwingStarter.actualFont);
 		add(lblMm, "cell 2 10");
 	}
 
 	public void refreshDistance() {
-		final double distanceSum = (int) autoCountOfRepeatsTF.getValue() * (double) stepsizeTF.getValue();
-		final double roundedDistanceSum = Math.rint(distanceSum * 1000) / 1000;
+		double distanceSum = (int) autoCountOfRepeatsTF.getValue() * (double) stepsizeTF.getValue();
+		double roundedDistanceSum = Math.rint(distanceSum * 1000) / 1000;
 		lblMm.setText(Double.toString(roundedDistanceSum) + " mm");
 	}
 
@@ -285,9 +285,9 @@ public class StepPanel extends JPanel {
 		if (mirrorCB.isSelected()) {
 			sleepSum += properties.getSleepMirrorPicture() + properties.getPulseDuration();
 		}
-		final double sleepSumMs = sleepSum * (int) autoCountOfRepeatsTF.getValue();
-		final double sleepSumMin = sleepSumMs / 60000;
-		final double roundedSleepSumMin = Math.rint(sleepSumMin * 1000) / 1000;
+		double sleepSumMs = sleepSum * (int) autoCountOfRepeatsTF.getValue();
+		double sleepSumMin = sleepSumMs / 60000;
+		double roundedSleepSumMin = Math.rint(sleepSumMin * 1000) / 1000;
 		geschaetzteDauerValueLb.setText(Double.toString(roundedSleepSumMin) + " min");
 	}
 
@@ -304,7 +304,7 @@ public class StepPanel extends JPanel {
 			final long sleepMirrowPicture, final long sleepPictureMovement, final long sleepWhileMove,
 			final long pulseDuration) {
 
-		final Thread job = new Thread() {
+		Thread job = new Thread() {
 			@Override
 			public void run() {
 
@@ -312,7 +312,22 @@ public class StepPanel extends JPanel {
 				setStopEnable(true);
 
 				for (int i = 0; i < countOfSteps; i++) {
+					// Picture
+					if (stop) {
+						break;
+					}
+					auslösen(pulseDuration);
 
+					if (mirrorCB.isSelected()) {
+						pause(sleepMirrowPicture);
+						if (stop) {
+							break;
+						}
+						auslösen(pulseDuration);
+					}
+					checkSleepButton();
+
+					// Move
 					pause(sleepPictureMovement);
 					if (stop) {
 						break;
@@ -327,20 +342,6 @@ public class StepPanel extends JPanel {
 					refreshCountUi();
 
 					pause((int) (sleepWhileMove * moveStep) + sleepMovementMirrow);
-					checkSleepButton();
-
-					if (stop) {
-						break;
-					}
-					auslösen(pulseDuration);
-
-					if (mirrorCB.isSelected()) {
-						pause(sleepMirrowPicture);
-						if (stop) {
-							break;
-						}
-						auslösen(pulseDuration);
-					}
 
 				}
 				stop = false;
@@ -353,13 +354,13 @@ public class StepPanel extends JPanel {
 		return job;
 	}
 
-	private void setStopEnable(final boolean value) {
+	private void setStopEnable(boolean value) {
 		stopBT.setEnabled(value);
 		btnPause.setEnabled(value);
 
 	}
 
-	protected void move(final double stepSize) {
+	protected void move(double stepSize) {
 		communicator.move(stepSize);
 	}
 
@@ -368,19 +369,19 @@ public class StepPanel extends JPanel {
 		refreshAutoSumLabel();
 	}
 
-	protected void pause(final long autoSleep) {
+	protected void pause(long autoSleep) {
 		try {
 			Thread.sleep(autoSleep);
-		} catch (final InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
-	protected void auslösen(final long pulseDuration) {
+	protected void auslösen(long pulseDuration) {
 		communicator.setSIO(2, true);
 		try {
 			Thread.sleep(pulseDuration);
-		} catch (final InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		communicator.setSIO(2, false);
@@ -388,30 +389,30 @@ public class StepPanel extends JPanel {
 
 	// ---refreshAutoLabel
 	protected void refreshAutoCountOfStepsLabel() {
-		final int countOfRepeatsInt = Integer.parseInt(autoCountOfDoneRepeatsLb.getText());
-		final int value = countOfRepeatsInt + 1;
+		int countOfRepeatsInt = Integer.parseInt(autoCountOfDoneRepeatsLb.getText());
+		int value = countOfRepeatsInt + 1;
 		setAutoCountOfRepeatsLabel(value);
 	}
 
-	protected void setAutoCountOfRepeatsLabel(final int value) {
+	protected void setAutoCountOfRepeatsLabel(int value) {
 		autoCountOfDoneRepeatsLb.setText(Integer.toString(value));
 	}
 
 	protected void refreshAutoSumLabel() {
 
-		final double stepDouble = (double) stepsizeTF.getValue();
-		final double sumDouble = Double.parseDouble(autoStepsizeSumLb.getText());
+		double stepDouble = (double) stepsizeTF.getValue();
+		double sumDouble = Double.parseDouble(autoStepsizeSumLb.getText());
 
-		final double value = sumDouble + stepDouble;
-		final double multiplicateValue = value * ROUNDVALUE;
-		final double roundedValue = Math.round(multiplicateValue);
-		final double roundedDividedValue = roundedValue / ROUNDVALUE;
+		double value = sumDouble + stepDouble;
+		double multiplicateValue = value * ROUNDVALUE;
+		double roundedValue = Math.round(multiplicateValue);
+		double roundedDividedValue = roundedValue / ROUNDVALUE;
 
 		// TODO formatierung
 		setAutoSumLabel(roundedDividedValue);
 	}
 
-	protected void setAutoSumLabel(final double value) {
+	protected void setAutoSumLabel(double value) {
 		autoStepsizeSumLb.setText(Double.toString(value));
 	}
 
@@ -423,7 +424,7 @@ public class StepPanel extends JPanel {
 		autoCountOfDoneRepeatsLb.setText("0");
 	}
 
-	public void setVariablesFromProperties(final ComConnectionProperties properties) {
+	public void setVariablesFromProperties(ComConnectionProperties properties) {
 		lastManStep = properties.getStepSize();
 
 		reverseStep = properties.isReverseSteps();
@@ -435,11 +436,11 @@ public class StepPanel extends JPanel {
 
 	}
 
-	protected void setPropertiesFromVariables(final ComConnectionProperties properties) {
+	protected void setPropertiesFromVariables(ComConnectionProperties properties) {
 		properties.setStepSize(lastManStep);
 	}
 
-	public void setAllComponentsDisableState(final boolean disableState) {
+	public void setAllComponentsDisableState(boolean disableState) {
 		if (!disableState) {
 			LOGGER.info("set all components enable");
 		} else {
@@ -456,7 +457,7 @@ public class StepPanel extends JPanel {
 
 	}
 
-	protected boolean validate(final double stepSize) {
+	protected boolean validate(double stepSize) {
 		LOGGER.info("validation given step size : " + stepSize);
 		if (stepSize > MIN_VALUE && stepSize < MAX_VALUE) {
 			LOGGER.info("stepSize is between " + MIN_VALUE + " and " + MAX_VALUE + " and is valid");
@@ -469,7 +470,7 @@ public class StepPanel extends JPanel {
 		return communicator;
 	}
 
-	public void setCommunicator(final ComCommunicator communicator) {
+	public void setCommunicator(ComCommunicator communicator) {
 		this.communicator = communicator;
 	}
 
@@ -477,7 +478,7 @@ public class StepPanel extends JPanel {
 		return stateLine;
 	}
 
-	public void setStateLine(final JLabel stateLine) {
+	public void setStateLine(JLabel stateLine) {
 		this.stateLine = stateLine;
 	}
 
