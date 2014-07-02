@@ -145,15 +145,24 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 	@Setter
 	private boolean unsavedChanges;
 
+	private JMenuItem mntmExit;
+
+	private JMenuItem mntmLaden;
+
+	private JMenuItem mntmberCusa;
+
+	private JMenuItem mntmEinstellungen;
+
+	private JMenu mnEinstellungen;
+
+	private JMenu mnDatei;
+
 	/**
 	 * Create the frame.
 	 */
 	public SwingStarter() {
-
 		applicationProperties = applicationPropertiesFileHandler.read(applicationPropertyFile);
 
-		setFont(SwingStarter.actualFont);
-		changeFont(this, applicationProperties.getFontSize());
 		LOGGER.info("Start SwingStarter");
 
 		LOGGER.info("OS_ARCH " + OS_ARCH);
@@ -202,7 +211,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		initStatePanel();
 
 		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
-		tabbedPane.setFont(SwingStarter.actualFont);
+		// tabbedPane.setFont(SwingStarter.actualFont);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel welcome = new JPanel();
@@ -211,14 +220,14 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		welcome.setLayout(new MigLayout("", "[grow,center]", "[center][][]"));
 
 		welcomeLabel = new JLabel();
-		welcomeLabel.setFont(SwingStarter.actualFont);
+		// welcomeLabel.setFont(SwingStarter.actualFont);
 		welcome.add(welcomeLabel, "cell 0 0,alignx center");
 
 		JLabel platzhalter1 = new JLabel("");
 		welcome.add(platzhalter1, "cell 0 1");
 
 		secondLineLabel = new JLabel();
-		secondLineLabel.setFont(SwingStarter.actualFont);
+		// secondLineLabel.setFont(SwingStarter.actualFont);
 		welcome.add(secondLineLabel, "cell 0 2,alignx left");
 
 		relativPosPanel = new RelativPosPanel(defaultProfile.getProperties(), stateLine);
@@ -234,6 +243,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		setConnectionProperties(defaultProfile.getProperties());
 		LOGGER.info("user interface builded");
+
+		setNewFont(applicationProperties.getFontSize());
 	}
 
 	protected void initStatePanel() {
@@ -356,16 +367,16 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu mnDatei = new JMenu("Datei");
-		mnDatei.setFont(SwingStarter.actualFont);
+		mnDatei = new JMenu("Datei");
+		// mnDatei.setFont(SwingStarter.actualFont);
 		menuBar.add(mnDatei);
 
 		URL deleteURL = getClass().getResource(IMAGES + DELETE_ICON_NAME);
 		ImageIcon deleteIcon = new ImageIcon(deleteURL);
 		ImageIcon resizedDeleteIcon = ImageUtils.getResizedImage(deleteIcon, 15, 15);
 
-		JMenuItem mntmExit = new JMenuItem("Exit");
-		mntmExit.setFont(SwingStarter.actualFont);
+		mntmExit = new JMenuItem("Exit");
+		// mntmExit.setFont(SwingStarter.actualFont);
 		mntmExit.setIcon(resizedDeleteIcon);
 		mntmExit.addActionListener(new ActionListener() {
 
@@ -376,8 +387,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		});
 
-		JMenuItem mntmLaden = new JMenuItem("Profil laden");
-		mntmLaden.setFont(SwingStarter.actualFont);
+		mntmLaden = new JMenuItem("Profil laden");
+		// mntmLaden.setFont(SwingStarter.actualFont);
 		mntmLaden.addActionListener(new ActionListener() {
 
 			@Override
@@ -389,7 +400,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		mntmProfilSpeichern = new JMenuItem("Profil speichern");
 		mntmProfilSpeichern.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-		mntmProfilSpeichern.setFont(SwingStarter.actualFont);
+		// mntmProfilSpeichern.setFont(SwingStarter.actualFont);
 		mntmProfilSpeichern.setEnabled(false);
 		mntmProfilSpeichern.addActionListener(new ActionListener() {
 
@@ -402,7 +413,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		mnDatei.add(mntmProfilSpeichern);
 
 		mntmProfilSpeichernAls = new JMenuItem("Profil speichern unter...");
-		mntmProfilSpeichernAls.setFont(SwingStarter.actualFont);
+		// mntmProfilSpeichernAls.setFont(SwingStarter.actualFont);
 		mntmProfilSpeichernAls.addActionListener(new ActionListener() {
 
 			@Override
@@ -419,12 +430,12 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		ImageIcon resizedHelpIcon = ImageUtils.getResizedImage(helpIcon, 15, 15);
 
-		JMenu mnEinstellungen = new JMenu("Extras");
-		mnEinstellungen.setFont(SwingStarter.actualFont);
+		mnEinstellungen = new JMenu("Extras");
+		// mnEinstellungen.setFont(SwingStarter.actualFont);
 		menuBar.add(mnEinstellungen);
 
-		JMenuItem mntmEinstellungen = new JMenuItem("Einstellungen");
-		mntmEinstellungen.setFont(SwingStarter.actualFont);
+		mntmEinstellungen = new JMenuItem("Einstellungen");
+		// mntmEinstellungen.setFont(SwingStarter.actualFont);
 		mnEinstellungen.add(mntmEinstellungen);
 		mntmEinstellungen.addActionListener(new ActionListener() {
 
@@ -435,8 +446,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		});
 
-		JMenuItem mntmberCusa = new JMenuItem("\u00DCber");
-		mntmberCusa.setFont(SwingStarter.actualFont);
+		mntmberCusa = new JMenuItem("\u00DCber");
+		// mntmberCusa.setFont(SwingStarter.actualFont);
 		mnEinstellungen.add(mntmberCusa);
 		mntmberCusa.setIcon(resizedHelpIcon);
 		mntmberCusa.addActionListener(new ActionListener() {
@@ -698,13 +709,26 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 	}
 
 	public void changeFont(Component component, int fontSize) {
-		Font f = component.getFont();
+		Font f = actualFont;
 		component.setFont(new Font(f.getName(), f.getStyle(), fontSize));
 		if (component instanceof Container) {
 			for (Component child : ((Container) component).getComponents()) {
 				changeFont(child, fontSize);
 			}
 		}
+	}
+
+	private void setNewFont(int fontSize) {
+		changeFont(this, fontSize);
+		Font f = getFont();
+		mntmProfilSpeichern.setFont(new Font(f.getName(), f.getStyle(), fontSize));
+		mntmProfilSpeichernAls.setFont(new Font(f.getName(), f.getStyle(), fontSize));
+		mntmLaden.setFont(new Font(f.getName(), f.getStyle(), fontSize));
+		mntmExit.setFont(new Font(f.getName(), f.getStyle(), fontSize));
+		mnDatei.setFont(new Font(f.getName(), f.getStyle(), fontSize));
+		mntmberCusa.setFont(new Font(f.getName(), f.getStyle(), fontSize));
+		mntmEinstellungen.setFont(new Font(f.getName(), f.getStyle(), fontSize));
+		mnEinstellungen.setFont(new Font(f.getName(), f.getStyle(), fontSize));
 	}
 
 }

@@ -897,3 +897,245 @@ java.lang.NullPointerException
 2014-07-01 22:27:19 INFO  PropertiesFileHandler:51 - properties loaded
 2014-07-01 22:27:19 INFO  PropertiesFileHandler:39 - try loading properties
 2014-07-01 22:27:19 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:33:15 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:33:15 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:33:15 ERROR ApplicationPropertiesFileHandler:23 - error by parsing fontSize
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.ApplicationPropertiesFileHandler.read(ApplicationPropertiesFileHandler.java:20)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.<init>(SwingStarter.java:155)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter$4.run(SwingStarter.java:575)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-07-02 22:33:15 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:33:15 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:33:15 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:33:15 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:33:27 INFO  SwingStarter:546 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-02 22:33:27 INFO  SwingStarter:549 - try to save properties
+2014-07-02 22:33:27 INFO  SwingStarter:550 - properties are valid: true
+2014-07-02 22:33:27 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@5244c8cc in file default.stackmaster
+2014-07-02 22:33:27 INFO  ApplicationPropertiesFileHandler:51 - write applicationProperties to C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\application.profile
+2014-07-02 22:33:31 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:33:31 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:33:31 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:33:31 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:33:31 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:33:31 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:33:39 INFO  SwingStarter:546 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-02 22:33:39 INFO  SwingStarter:549 - try to save properties
+2014-07-02 22:33:39 INFO  SwingStarter:550 - properties are valid: true
+2014-07-02 22:33:39 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@6519ceb1 in file default.stackmaster
+2014-07-02 22:33:39 INFO  ApplicationPropertiesFileHandler:51 - write applicationProperties to C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\application.profile
+2014-07-02 22:36:52 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:36:52 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:36:52 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:36:52 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:36:52 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:36:52 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:36:55 INFO  SwingStarter:546 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-02 22:36:55 INFO  SwingStarter:549 - try to save properties
+2014-07-02 22:36:55 INFO  SwingStarter:550 - properties are valid: true
+2014-07-02 22:36:55 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@707d04ae in file default.stackmaster
+2014-07-02 22:36:55 INFO  ApplicationPropertiesFileHandler:51 - write applicationProperties to C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\application.profile
+2014-07-02 22:36:59 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:36:59 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:36:59 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:36:59 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:36:59 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:36:59 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:37:02 INFO  SwingStarter:546 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-02 22:37:02 INFO  SwingStarter:549 - try to save properties
+2014-07-02 22:37:02 INFO  SwingStarter:550 - properties are valid: true
+2014-07-02 22:37:02 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@2242806c in file default.stackmaster
+2014-07-02 22:37:02 INFO  ApplicationPropertiesFileHandler:51 - write applicationProperties to C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\application.profile
+2014-07-02 22:38:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:38:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:38:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:38:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:38:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:38:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:22 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:22 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:22 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:22 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:22 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:22 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:22 ERROR SwingStarter:580 - Error in main-methode by creating SwingStarter object
+java.lang.NullPointerException
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.changeFont(SwingStarter.java:462)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.cancel(SwingStarter.java:441)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.refresh(SwingStarter.java:544)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.setConnectionProperties(SwingStarter.java:427)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.<init>(SwingStarter.java:414)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter$4.run(SwingStarter.java:577)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-07-02 22:41:36 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:36 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:36 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:36 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:36 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:36 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:36 ERROR SwingStarter:580 - Error in main-methode by creating SwingStarter object
+java.lang.NullPointerException
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.changeFont(SwingStarter.java:462)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.cancel(SwingStarter.java:441)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.refresh(SwingStarter.java:544)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.setConnectionProperties(SwingStarter.java:427)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.<init>(SwingStarter.java:414)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter$4.run(SwingStarter.java:577)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-07-02 22:41:55 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:55 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:55 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:55 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:55 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:55 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:55 ERROR SwingStarter:580 - Error in main-methode by creating SwingStarter object
+java.lang.NullPointerException
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.changeFont(SwingStarter.java:462)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.cancel(SwingStarter.java:441)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.refresh(SwingStarter.java:544)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.setConnectionProperties(SwingStarter.java:427)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter.<init>(SwingStarter.java:414)
+	at de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter$4.run(SwingStarter.java:577)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-07-02 22:44:59 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:44:59 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:44:59 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:44:59 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:44:59 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:44:59 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:45:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:45:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:45:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:45:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:45:33 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:45:33 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:01 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:01 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:01 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:01 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:01 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:01 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:07 INFO  SwingStarter:549 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-02 22:46:07 INFO  SwingStarter:552 - try to save properties
+2014-07-02 22:46:07 INFO  SwingStarter:553 - properties are valid: true
+2014-07-02 22:46:07 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@2b65d7a2 in file default.stackmaster
+2014-07-02 22:46:07 INFO  ApplicationPropertiesFileHandler:51 - write applicationProperties to C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\application.profile
+2014-07-02 22:46:11 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:11 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:11 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:11 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:11 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:11 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:14 INFO  SwingStarter:419 - Exit StackMaster
+2014-07-02 22:46:20 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:20 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:20 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:20 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:20 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:20 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:23 INFO  SwingStarter:549 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-02 22:46:23 INFO  SwingStarter:552 - try to save properties
+2014-07-02 22:46:23 INFO  SwingStarter:553 - properties are valid: true
+2014-07-02 22:46:23 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@1dc330ce in file default.stackmaster
+2014-07-02 22:46:23 INFO  ApplicationPropertiesFileHandler:51 - write applicationProperties to C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\application.profile
+2014-07-02 22:48:11 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:11 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:11 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:11 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:11 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:11 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:14 INFO  SwingStarter:551 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-02 22:48:14 INFO  SwingStarter:554 - try to save properties
+2014-07-02 22:48:14 INFO  SwingStarter:555 - properties are valid: true
+2014-07-02 22:48:14 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@18fde079 in file default.stackmaster
+2014-07-02 22:48:14 INFO  ApplicationPropertiesFileHandler:51 - write applicationProperties to C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\application.profile
+2014-07-02 22:48:18 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:18 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:18 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:18 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:18 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:18 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:50:51 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:50:51 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:50:51 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:50:51 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:50:51 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:50:51 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:01 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:01 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:01 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:01 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:01 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:01 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:23 INFO  SwingStarter:551 - chosen file: C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\default.stackmaster
+2014-07-02 22:51:23 INFO  SwingStarter:554 - try to save properties
+2014-07-02 22:51:23 INFO  SwingStarter:555 - properties are valid: true
+2014-07-02 22:51:23 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@1e4d8726 in file default.stackmaster
+2014-07-02 22:51:23 INFO  ApplicationPropertiesFileHandler:51 - write applicationProperties to C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\application.profile
+2014-07-02 22:51:31 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:31 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:31 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:31 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:31 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:31 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:35 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:35 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:35 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:35 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:35 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:35 INFO  PropertiesFileHandler:51 - properties loaded

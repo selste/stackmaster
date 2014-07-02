@@ -5711,3 +5711,509 @@ java.lang.NullPointerException
 2014-07-01 22:27:08 INFO  SwingStarter:236 - user interface builded
 2014-07-01 22:27:11 INFO  SwingStarter:166 - window closed
 2014-07-01 22:27:11 INFO  SwingStarter:535 - Exit StackMaster
+2014-07-02 22:31:31 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:31:31 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:31:31 ERROR ApplicationPropertiesFileHandler:23 - error by parsing fontSize
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.ApplicationPropertiesFileHandler.read(ApplicationPropertiesFileHandler.java:20)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter.<init>(SwingStarter.java:164)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter$9.run(SwingStarter.java:598)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-07-02 22:31:31 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:31:31 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:31:31 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:31:31 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:31:31 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:31:31 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:31:31 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:31:31 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:31:31 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:31:31 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:31:31 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:31:31 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:31:31 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:31:31 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:31:31 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:31:31 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:31:31 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:31:31 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:31:31 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:31:31 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:31:31 ERROR SwingStarter:601 - Error in main-methode by creating SwingStarter object
+java.lang.NullPointerException
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter.changeFont(SwingStarter.java:713)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter.setNewFont(SwingStarter.java:722)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter.<init>(SwingStarter.java:247)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter$9.run(SwingStarter.java:598)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-07-02 22:32:50 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:32:50 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:32:50 ERROR ApplicationPropertiesFileHandler:23 - error by parsing fontSize
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.ApplicationPropertiesFileHandler.read(ApplicationPropertiesFileHandler.java:20)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter.<init>(SwingStarter.java:164)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter$9.run(SwingStarter.java:598)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-07-02 22:32:50 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:32:50 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:32:50 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:32:50 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:32:50 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:32:50 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:32:50 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:32:50 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:32:50 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:32:50 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:32:50 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:32:50 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:32:50 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:32:50 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:32:50 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:32:50 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:32:50 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:32:50 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:32:50 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:32:50 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:32:56 INFO  SwingStarter:175 - window closed
+2014-07-02 22:32:56 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:41:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:38 ERROR ApplicationPropertiesFileHandler:23 - error by parsing fontSize
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.ApplicationPropertiesFileHandler.read(ApplicationPropertiesFileHandler.java:20)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter.<init>(SwingStarter.java:164)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter$9.run(SwingStarter.java:598)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-07-02 22:41:38 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:41:38 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:41:38 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:41:38 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:41:38 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:41:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:39 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:41:39 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:41:39 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:41:39 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:41:39 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:41:39 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:41:39 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:41:39 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:41:39 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:41:39 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:41:39 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:41:45 INFO  SwingStarter:175 - window closed
+2014-07-02 22:41:45 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:41:51 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:51 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:51 ERROR ApplicationPropertiesFileHandler:23 - error by parsing fontSize
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.ApplicationPropertiesFileHandler.read(ApplicationPropertiesFileHandler.java:20)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter.<init>(SwingStarter.java:164)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter$9.run(SwingStarter.java:598)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-07-02 22:41:51 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:41:51 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:41:51 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:41:51 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:41:51 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:41:51 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:51 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:51 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:41:51 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:41:52 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:41:52 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:41:52 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:41:52 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:41:52 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:41:52 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:41:52 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:41:52 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:41:52 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:41:52 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:41:52 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:41:53 INFO  SwingStarter:175 - window closed
+2014-07-02 22:41:53 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:44:53 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:44:53 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:44:53 ERROR ApplicationPropertiesFileHandler:23 - error by parsing fontSize
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.ApplicationPropertiesFileHandler.read(ApplicationPropertiesFileHandler.java:20)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter.<init>(SwingStarter.java:164)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter$9.run(SwingStarter.java:598)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-07-02 22:44:53 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:44:53 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:44:53 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:44:53 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:44:53 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:44:53 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:44:53 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:44:53 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:44:53 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:44:54 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:44:54 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:44:54 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:44:54 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:44:54 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:44:54 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:44:54 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:44:54 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:44:54 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:44:54 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:44:54 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:44:55 INFO  SwingStarter:175 - window closed
+2014-07-02 22:44:55 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:44:56 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:44:56 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:44:56 ERROR ApplicationPropertiesFileHandler:23 - error by parsing fontSize
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:454)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.ApplicationPropertiesFileHandler.read(ApplicationPropertiesFileHandler.java:20)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter.<init>(SwingStarter.java:164)
+	at de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter$9.run(SwingStarter.java:598)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:312)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:733)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:703)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+2014-07-02 22:44:56 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:44:56 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:44:56 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:44:56 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:44:56 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:44:56 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:44:56 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:44:56 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:44:56 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:44:57 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:44:57 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:44:57 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:44:57 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:44:57 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:44:57 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:44:57 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:44:57 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:44:57 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:44:57 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:44:57 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:44:57 INFO  SwingStarter:175 - window closed
+2014-07-02 22:44:57 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:45:46 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:45:46 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:45:46 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:45:46 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:45:46 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:45:46 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:45:46 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:45:46 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:45:46 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:45:46 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:45:46 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:45:46 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:45:46 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:45:46 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:45:46 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:45:46 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:45:46 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:45:46 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:45:46 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:45:46 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:45:46 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:45:46 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:45:58 INFO  SwingStarter:175 - window closed
+2014-07-02 22:45:58 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:46:16 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:16 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:16 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:46:16 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:46:16 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:46:16 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:46:16 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:46:16 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:16 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:16 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:46:16 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:46:16 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:46:16 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:46:17 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:46:17 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:46:17 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:46:17 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:46:17 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:46:17 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:46:17 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:46:17 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:46:17 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:46:18 INFO  SwingStarter:175 - window closed
+2014-07-02 22:46:18 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:48:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:29 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:48:29 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:48:29 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:48:29 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:48:29 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:48:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:29 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:29 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:29 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:48:29 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:48:29 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:48:29 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:48:29 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:48:29 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:48:29 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:48:29 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:48:29 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:48:29 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:48:29 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:48:41 INFO  SwingStarter:175 - window closed
+2014-07-02 22:48:41 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:48:43 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:43 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:43 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:48:43 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:48:43 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:48:43 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:48:43 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:48:43 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:43 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:43 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:43 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:44 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:48:44 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:48:44 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:48:44 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:48:44 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:48:44 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:48:44 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:48:44 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:48:44 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:48:44 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:48:44 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:48:45 INFO  SwingStarter:175 - window closed
+2014-07-02 22:48:45 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:48:47 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:47 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:47 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:48:47 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:48:47 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:48:47 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:48:47 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:48:47 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:47 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:47 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:48:47 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:48:47 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:48:47 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:48:47 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:48:47 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:48:47 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:48:47 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:48:47 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:48:47 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:48:47 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:48:47 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:48:47 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:48:50 INFO  SwingStarter:175 - window closed
+2014-07-02 22:48:50 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:50:55 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:50:55 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:50:55 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:50:55 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:50:55 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:50:55 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:50:55 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:50:55 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:50:55 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:50:55 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:50:55 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:50:55 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:50:55 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:50:55 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:50:55 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:50:55 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:50:55 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:50:55 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:50:55 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:50:55 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:50:55 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:50:55 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:50:56 INFO  SwingStarter:175 - window closed
+2014-07-02 22:50:56 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:50:58 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:50:58 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:50:58 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:50:58 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:50:58 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:50:58 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:50:58 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:50:58 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:50:58 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:50:58 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:50:58 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:50:58 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:50:58 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:50:58 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:50:58 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:50:58 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:50:58 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:50:58 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:50:58 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:50:58 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:50:58 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:50:58 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:50:59 INFO  SwingStarter:175 - window closed
+2014-07-02 22:50:59 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:51:28 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:28 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:28 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:51:28 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:51:28 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:51:28 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:51:28 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:51:28 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:28 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:28 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:28 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:28 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:51:28 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:51:28 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:51:28 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:51:28 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:51:28 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:51:28 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:51:28 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:51:28 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:51:28 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:51:28 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:51:29 INFO  SwingStarter:175 - window closed
+2014-07-02 22:51:29 INFO  SwingStarter:546 - Exit StackMaster
+2014-07-02 22:51:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:38 INFO  SwingStarter:166 - Start SwingStarter
+2014-07-02 22:51:38 INFO  SwingStarter:168 - OS_ARCH amd64
+2014-07-02 22:51:38 INFO  SwingStarter:169 - OS_NAME windows 8.1
+2014-07-02 22:51:38 INFO  SwingStarter:170 - OS_VERSION 6.3
+2014-07-02 22:51:38 INFO  SwingStarter:180 - try building user interface
+2014-07-02 22:51:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:38 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-02 22:51:38 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-02 22:51:38 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:51:38 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:51:38 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:51:38 INFO  RelativPosPanel:343 - resize icon to 30x30
+2014-07-02 22:51:38 INFO  RelativPosPanel:343 - resize icon to 50x50
+2014-07-02 22:51:38 INFO  RelativPosPanel:343 - resize icon to 70x70
+2014-07-02 22:51:38 INFO  SwingStarter:482 - build connection thread
+2014-07-02 22:51:38 INFO  SwingStarter:357 - set all components disable
+2014-07-02 22:51:38 INFO  StepPanel:447 - set all components disable
+2014-07-02 22:51:38 INFO  RelativPosPanel:355 - set all components disable
+2014-07-02 22:51:38 INFO  SwingStarter:245 - user interface builded
+2014-07-02 22:52:00 INFO  PropertiesDialog:279 - try to save properties
+2014-07-02 22:52:00 INFO  PropertiesDialog:280 - properties are valid: true
+2014-07-02 22:52:00 INFO  SwingStarter:175 - window closed
+2014-07-02 22:52:00 INFO  SwingStarter:546 - Exit StackMaster

@@ -251,14 +251,15 @@ public class SwingStarter extends JFrame {
 		checkBoxFontSize.addItem(21);
 		checkBoxFontSize.addItem(22);
 		generalPanel.add(checkBoxFontSize, "cell 1 7,growx");
-		checkBoxFontSize.setSelectedItem(20);
 
 		checkBoxFontSize.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
-					setNewFont((int) e.getItem());
+					int fontSize = (int) e.getItem();
+					applicationProperties.setFontSize(fontSize);
+					setNewFont(fontSize);
 				}
 			}
 
@@ -438,6 +439,10 @@ public class SwingStarter extends JFrame {
 		lastNameTF.setText(applicationProperties.getLastName());
 		checkBoxFirstUse.setSelected(applicationProperties.isFirstUse());
 
+		int fontSize = applicationProperties.getFontSize();
+		checkBoxFontSize.setSelectedItem(fontSize);
+		setNewFont(fontSize);
+
 		comConnectionNameTF.setText(defaultConnectionProperties.getComConnectionName());
 		connectionModeCB.setSelectedItem(defaultConnectionProperties.getMicrostepResolutionMode());
 		countOfStepPerMmTF.setValue(defaultConnectionProperties.getStepsPerMm());
@@ -456,7 +461,7 @@ public class SwingStarter extends JFrame {
 	}
 
 	public void changeFont(Component component, int fontSize) {
-		Font f = component.getFont();
+		Font f = FONT;
 		component.setFont(new Font(f.getName(), f.getStyle(), fontSize));
 		if (component instanceof Container) {
 			for (Component child : ((Container) component).getComponents()) {
@@ -593,6 +598,9 @@ public class SwingStarter extends JFrame {
 
 		boolean firstUse = checkBoxFirstUse.isSelected();
 		comConnectionProperties.setFirstUse(firstUse);
+
+		int fontSize = (int) checkBoxFontSize.getSelectedItem();
+		comConnectionProperties.setFontSize(fontSize);
 
 		return comConnectionProperties;
 	}
