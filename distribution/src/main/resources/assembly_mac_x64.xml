@@ -25,16 +25,24 @@
 			<directory>../stackmasterconfigurator/target/</directory>
 			<outputDirectory>.</outputDirectory>
 			<includes>
-				<include>configurator.jar</include>
+				<include>configurator-${project.version}-shaded.jar</include>
 			</includes>
 		</fileSet>
 		<fileSet>
 			<directory>../stackmaster/target/</directory>
 			<outputDirectory>.</outputDirectory>
 			<includes>
-				<include>stackmaster.jar</include>
+				<include>stackmaster-${project.version}-shaded.jar</include>
 			</includes>
 		</fileSet>
+		<fileSet>
+			<directory>./src/main/resources/assemblyFiles/mac/x64/</directory>
+			<outputDirectory>.</outputDirectory>
+			<includes>
+				<include>librxtxSerial.jnilib</include>
+			</includes>
+		</fileSet>
+		
 		<fileSet>
 			<directory>./src/main/resources/assemblyFiles/mac/x64/</directory>
 			<outputDirectory>.</outputDirectory>
@@ -42,5 +50,9 @@
 				<include>rxtxSerial.dll</include>
 			</includes>
 		</fileSet>
+		
+		
+		
+		
 	</fileSets>
 </assembly>

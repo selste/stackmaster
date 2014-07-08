@@ -72,12 +72,10 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 //- Validierung aller Textfelder
 //- Kein Absturz mehr nach Trennen vom USB-Anschluss
 //- spinner problem
-//- nur property event wenn sich auch echt was geändert worden ist
 
 //Features:
-//- schriftgrößen einstellbar
-//- windows und mac profile in maven einbauen
 //- Start-Ende (Rückkanal)
+//- nur property event wenn sich auch echt was geändert worden ist
 //- Baukasten
 //- Mehrsprachigkeit
 public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,

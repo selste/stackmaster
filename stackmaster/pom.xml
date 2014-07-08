@@ -151,6 +151,7 @@
 							</execution>
 						</executions>
 						<configuration>
+						<finalName>stackmaster-${project.version}-shaded</finalName>
 							<shadedArtifactAttached>true</shadedArtifactAttached>
 							<shadedClassifierName>shaded</shadedClassifierName>
 							<transformers>
@@ -176,7 +177,7 @@
 									<headerType>gui</headerType>
 									<outfile>./target/stackmaster.exe</outfile>
 									<jar>
-										./target/controller-1.0.0-SNAPSHOT-shaded.jar</jar>
+										./target/stackmaster-${project.version}-shaded.jar</jar>
 									<errTitle>stackmaster error</errTitle>
 									<icon>${icon.path}</icon>
 									<jre>

@@ -117,15 +117,34 @@
 					<target>${maven.compiler.target}</target>
 				</configuration>
 			</plugin>
-			
-			
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<shadedArtifactAttached>true</shadedArtifactAttached>
+					<shadedClassifierName>shaded</shadedClassifierName>
+					<transformers>
+						<transformer
+							implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<mainClass>${mainClass.swing}</mainClass>
+						</transformer>
+					</transformers>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
-
+	
 	<profiles>
-
-
 		<profile>
 			<id>windows</id>
 			<activation>
@@ -136,29 +155,6 @@
 			</activation>
 			<build>
 				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-shade-plugin</artifactId>
-						<version>2.2</version>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>shade</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<shadedArtifactAttached>true</shadedArtifactAttached>
-							<shadedClassifierName>shaded</shadedClassifierName>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>${mainClass.swing}</mainClass>
-								</transformer>
-							</transformers>
-						</configuration>
-					</plugin>
 					<plugin>
 						<groupId>org.bluestemsoftware.open.maven.plugin</groupId>
 						<artifactId>launch4j-plugin</artifactId>
@@ -173,7 +169,7 @@
 								<configuration>
 									<headerType>gui</headerType>
 									<outfile>C:/Users/Dennis/git/stackmaster/stackmasterconfigurator/target/configurator.exe</outfile>
-									<jar>C:/Users/Dennis/git/stackmaster/stackmasterconfigurator/target/configurator-1.0.0-SNAPSHOT-shaded.jar</jar>
+									<jar>C:/Users/Dennis/git/stackmaster/stackmasterconfigurator/target/configurator-${project.version}-shaded.jar</jar>
 									<errTitle>configurator error</errTitle>
 									<icon>${icon.path}</icon>
 									<jre>
@@ -200,6 +196,7 @@
 				</plugins>
 			</build>
 		</profile>
+
 		<profile>
 			<id>mac</id>
 			<activation>
@@ -210,29 +207,6 @@
 			</activation>
 			<build>
 				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-shade-plugin</artifactId>
-						<version>2.2</version>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>shade</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<shadedArtifactAttached>true</shadedArtifactAttached>
-							<shadedClassifierName>shaded</shadedClassifierName>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>${mainClass.swing}</mainClass>
-								</transformer>
-							</transformers>
-						</configuration>
-					</plugin>
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>osxappbundle-maven-plugin</artifactId>

@@ -22,57 +22,50 @@
 	</dependencies>
 
 
-	<profiles>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>windowsx86</id>
+						<configuration>
+							<descriptor>src/main/resources/assembly_windows_x86.xml</descriptor>
+							<finalName>stackmaster_windows_x86</finalName>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>windowsx64</id>
+						<configuration>
+							<descriptor>src/main/resources/assembly_windows_x64.xml</descriptor>
+							<finalName>stackmaster_windows_x64</finalName>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+						<execution>
+						<id>macx64</id>
+						<configuration>
+							<descriptor>src/main/resources/assembly_mac_x64.xml</descriptor>
+							<finalName>stackmaster_mac_x64</finalName>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
-		<profile>
-			<id>windows</id>
-			<activation>
-				<os>
-					<family>windows</family>
-					<arch>amd64</arch>
-				</os>
-			</activation>
-			<build>
-				<plugins>
-
-
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-assembly-plugin</artifactId>
-
-						<executions>
-							<execution>
-								<id>windowsx86</id>
-								<configuration>
-									<descriptor>src/main/resources/assembly_windows_x86.xml</descriptor>
-									<finalName>stackmaster_windows_x86</finalName>
-								</configuration>
-								<phase>package</phase>
-								<goals>
-									<goal>single</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>windowsx64</id>
-								<configuration>
-									<descriptor>src/main/resources/assembly_windows_x64.xml</descriptor>
-									<finalName>stackmaster_windows_x64</finalName>
-								</configuration>
-								<phase>package</phase>
-								<goals>
-									<goal>single</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-
-
-
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 
 </project>
