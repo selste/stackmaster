@@ -11,7 +11,7 @@ public class ConnectionThread extends Thread {
 	private List<CommPortIdentifier> portList = new ArrayList<>();
 	private List<CommPortIdentifierNotificationListener> commPortIdentifierListenerList = new ArrayList<>();
 
-	private long delay = 1000;
+	private long delay = 500;
 	private boolean running = true;
 
 	public ConnectionThread(int delay) {
@@ -29,7 +29,7 @@ public class ConnectionThread extends Thread {
 			refreshConnections();
 
 			try {
-				Thread.sleep(getDelay());
+				Thread.sleep(delay);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

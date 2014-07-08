@@ -24,7 +24,6 @@ public class ComConnectionProperties {
 	private double stepSize = 0.01;
 	private int pictureCount = 0;
 	private boolean mirrorActivated = false;
-	private int actualPos;
 	private String comConnectionName;
 
 	public ComConnectionProperties() {

@@ -22,7 +22,12 @@
 		<module>
 			../common
 		</module>
+		<module>
+			../distribution
+		</module>
 	</modules>
+	
+	
 
 
 	<properties>
@@ -57,7 +62,6 @@
 			<url>https://launch4j-xml-plugin.googlecode.com/svn/repo</url>
 		</pluginRepository>
 	</pluginRepositories>
-
 
 	<dependencyManagement>
 		<dependencies>

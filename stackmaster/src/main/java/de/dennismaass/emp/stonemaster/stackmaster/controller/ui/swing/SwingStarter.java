@@ -110,7 +110,6 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 	/* Properties */
 	private Profile defaultProfile;
-	private Profile defaultBackupProfile;
 	private int microstepResolutionMode = 4;
 
 	private int stepsPerMm = 64025;
@@ -127,7 +126,6 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 	private PropertiesDialog propertiesDialog;
 
-	private File defaultFileBackup = new File("default.stackmaster.backup");
 	private File defaultFile = new File("default.stackmaster");
 	private File actualOpenedProfileFile = defaultFile;
 	private ProfileFileHandler propertiesHandler;
@@ -139,7 +137,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 	private JLabel secondLineLabel;
 
 	private static ApplicationProperties applicationProperties;
-	private File applicationPropertyFile = new File("application.profile");
+	private File applicationPropertyFile = new File("application.properties");
 	private ApplicationPropertiesFileHandler applicationPropertiesFileHandler = new ApplicationPropertiesFileHandler();
 	@Getter
 	@Setter
@@ -161,7 +159,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 	 * Create the frame.
 	 */
 	public SwingStarter() {
-		applicationProperties = applicationPropertiesFileHandler.read(applicationPropertyFile);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		LOGGER.info("Start SwingStarter");
 
@@ -194,9 +192,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		propertiesHandler = new ProfileFileHandler();
 		defaultProfile = propertiesHandler.readProfile(defaultFile);
-		defaultBackupProfile = propertiesHandler.readProfile(defaultFileBackup);
 
-		propertiesDialog = createPropertiesDialog(defaultProfile.getProperties(), defaultBackupProfile.getProperties());
+		propertiesDialog = createPropertiesDialog(defaultProfile.getProperties(), defaultProfile.getProperties());
 		setTitle(TITLE + " - defaults");
 
 		initMenu();
@@ -217,7 +214,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		JPanel welcome = new JPanel();
 
 		tabbedPane.addTab("Start", null, welcome, null);
-		welcome.setLayout(new MigLayout("", "[grow,center]", "[center][][]"));
+		welcome.setLayout(new MigLayout("", "[grow,center]", "[center][][][]"));
 
 		welcomeLabel = new JLabel();
 		// welcomeLabel.setFont(SwingStarter.actualFont);
@@ -236,7 +233,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		stepPanel = new StepPanel(defaultProfile.getProperties(), stateLine);
 		tabbedPane.addTab("Schritte", null, stepPanel, null);
 
-		connectThread = newConnectionThread();
+		connectThread = createConnectionThread();
 		connectThread.start();
 
 		setAllComponentsDisableState(true);
@@ -244,7 +241,13 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		setConnectionProperties(defaultProfile.getProperties());
 		LOGGER.info("user interface builded");
 
-		setNewFont(applicationProperties.getFontSize());
+		if (applicationPropertyFile.exists()) {
+			applicationProperties = applicationPropertiesFileHandler.read(applicationPropertyFile);
+			setNewFont(applicationProperties.getFontSize());
+		} else {
+			LOGGER.error("No application.properties available!");
+		}
+
 	}
 
 	protected void initStatePanel() {
@@ -274,6 +277,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		connectionComboBox.setRenderer(new CommPortIdentifierListRenderer());
 
+		setFavoriteConnectionIfAvailable();
+
 		connectButton = new JButton("Verbinden");
 		connectButton.setFont(SwingStarter.actualFont);
 		connectButton.setEnabled(false);
@@ -283,67 +288,89 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				LOGGER.info("click connect button");
-
-				if (communicator == null) {
-
-					Object selectedItem = connectionComboBox.getSelectedItem();
-					if (selectedItem instanceof CommPortIdentifier) {
-
-						CommPortIdentifier commPortIdentifier = (CommPortIdentifier) selectedItem;
-						boolean currentlyOwned = commPortIdentifier.isCurrentlyOwned();
-						if (currentlyOwned) {
-							stateLine.setText(commPortIdentifier.getName()
-									+ " wird von einem anderen Programm verwendet");
-						} else {
-							stateLine.setText("Verbindung wird hergstellt...");
-							ComCommunicator communicator = createCommunicator(commPortIdentifier.getName());
-
-							setCommunicator(communicator);
-
-							relativPosPanel.setCommunicator(communicator);
-							stepPanel.setCommunicator(communicator);
-						}
-					}
-				}
-				if (!communicator.isConnected()) {
-					LOGGER.info("no connection ready, try to build a connection");
-
-					boolean connect = false;
-					try {
-						connect = communicator.connect();
-					} catch (PortInUseException e) {
-						e.printStackTrace();
-						stateLine.setText(communicator.getComPort() + " wird von einem anderen Programm verwendet");
-					}
-					if (connect) {
-						connectButton.setText("Trennen");
-						stateLine.setText("Verbindung mit " + communicator.getComPort() + " hergestellt");
-						setAllComponentsDisableState(false);
-						connectionComboBox.setEnabled(false);
-
-						connectThread.setRunning(false);
-
-						communicator.setMicrostepResolution(microstepResolutionMode);
-					}
-				} else {
-					LOGGER.info("connection ready, try to disconnect");
-
-					communicator.stop();
-					communicator.disconnect();
-					connectButton.setText("Verbinden");
-					stateLine.setText("Verbindung mit " + communicator.getComPort() + " getrennt");
-					setAllComponentsDisableState(true);
-					connectionComboBox.setEnabled(true);
-
-					connectThread = newConnectionThread();
-					connectThread.start();
-				}
+				handleConnect();
 
 			}
 
 		});
 
+	}
+
+	protected void setFavoriteConnectionIfAvailable() {
+		String comConnectionName = defaultProfile.getProperties().getComConnectionName();
+		CommPortIdentifier commPortIdentifier = getComPortName(comConnectionName);
+		if (commPortIdentifier != null) {
+			connectionComboBox.setSelectedItem(commPortIdentifier);
+		}
+	}
+
+	private CommPortIdentifier getComPortName(String comConnectionName) {
+		int itemCount = connectionComboBox.getItemCount();
+		for (int i = 0; i < itemCount; i++) {
+			CommPortIdentifier commPortIdentifier = connectionComboBox.getItemAt(i);
+			if (commPortIdentifier.getName().equals(comConnectionName)) {
+				return commPortIdentifier;
+			}
+		}
+		return null;
+	}
+
+	protected void handleConnect() {
+		LOGGER.info("click connect button");
+
+		if (communicator == null) {
+
+			Object selectedItem = connectionComboBox.getSelectedItem();
+			if (selectedItem instanceof CommPortIdentifier) {
+
+				CommPortIdentifier commPortIdentifier = (CommPortIdentifier) selectedItem;
+				boolean currentlyOwned = commPortIdentifier.isCurrentlyOwned();
+				if (currentlyOwned) {
+					stateLine.setText(commPortIdentifier.getName() + " wird von einem anderen Programm verwendet");
+				} else {
+					stateLine.setText("Verbindung wird hergstellt...");
+					ComCommunicator communicator = createCommunicator(commPortIdentifier.getName());
+
+					setCommunicator(communicator);
+
+					relativPosPanel.setCommunicator(communicator);
+					stepPanel.setCommunicator(communicator);
+				}
+			}
+		}
+		if (!communicator.isConnected()) {
+			LOGGER.info("no connection ready, try to build a connection");
+
+			boolean connect = false;
+			try {
+				connect = communicator.connect();
+			} catch (PortInUseException e) {
+				e.printStackTrace();
+				stateLine.setText(communicator.getComPort() + " wird von einem anderen Programm verwendet");
+			}
+			if (connect) {
+				connectButton.setText("Trennen");
+				stateLine.setText("Verbindung mit " + communicator.getComPort() + " hergestellt");
+				setAllComponentsDisableState(false);
+				connectionComboBox.setEnabled(false);
+
+				connectThread.setRunning(false);
+
+				communicator.setMicrostepResolution(microstepResolutionMode);
+			}
+		} else {
+			LOGGER.info("connection ready, try to disconnect");
+
+			communicator.stop();
+			communicator.disconnect();
+			connectButton.setText("Verbinden");
+			stateLine.setText("Verbindung mit " + communicator.getComPort() + " getrennt");
+			setAllComponentsDisableState(true);
+			connectionComboBox.setEnabled(true);
+
+			connectThread = createConnectionThread();
+			connectThread.start();
+		}
 	}
 
 	public void setCommunicator(ComCommunicator communicator) {
@@ -478,7 +505,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		return communicator;
 	}
 
-	protected ConnectionThread newConnectionThread() {
+	protected ConnectionThread createConnectionThread() {
 		LOGGER.info("build connection thread");
 		ConnectionThread connectThread = new ConnectionThread();
 		connectThread.addCommPortIdentifierListener(this);
@@ -532,7 +559,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 	@Override
 	public void handleCommPortIdentifierNotificationEvent(CommPortIdentifierNotificationEvent event) {
 		refreshConnectionComboBox(event.getCommPortIdentifierList());
-
+		setFavoriteConnectionIfAvailable();
 	}
 
 	@Override
@@ -549,7 +576,10 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 			communicator.stop();
 			communicator.disconnect();
 		}
-		applicationProperties.setFirstUse(false);
+		if (applicationProperties != null && applicationProperties.isFirstUse()) {
+			applicationProperties.setFirstUse(false);
+			applicationPropertiesFileHandler.write(applicationPropertyFile, applicationProperties);
+		}
 
 		if (isUnsavedChanges()) {
 			JDialog.setDefaultLookAndFeelDecorated(true);
@@ -628,26 +658,30 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		defaultProfile.setProperties(connectionProperties);
 
-		String text = "Willkommen ";
-		String firstName = applicationProperties.getFirstName();
-		if (StringUtils.isNotEmpty(firstName)) {
-			text += " " + firstName;
+		if (applicationProperties != null) {
+			String text = "Willkommen";
+			String firstName = applicationProperties.getFirstName();
+			if (StringUtils.isNotEmpty(firstName)) {
+				text += " " + firstName;
 
-			String lastName = applicationProperties.getLastName();
-			if (StringUtils.isNotEmpty(lastName)) {
-				text += " " + lastName;
+				String lastName = applicationProperties.getLastName();
+				if (StringUtils.isNotEmpty(lastName)) {
+					text += " " + lastName;
+				}
 			}
-		}
-		welcomeLabel.setText(text);
+			welcomeLabel.setText(text);
 
-		String text2 = "";
-		if (!applicationProperties.isFirstUse()) {
-			text2 += "Ihre letzten Einstellungen waren: ";
-		} else {
-			text2 += "Wir wünschen Ihnen viel Spass mit dem Stackmaster!";
+			String text2 = "";
+			if (!applicationProperties.isFirstUse()) {
+				text2 += "<html>" + "<br>" + "<br>" + "Ihre letzten Verbindung war mit ComAnschluss \""
+						+ defaultProfile.getProperties().getComConnectionName() + "\"<br>" + "<br>" + "<br>"
+						+ "Bei Problemen mit der Software schreiben sie uns unter support@stonemaster.eu." + "<br>"
+						+ "<br>" + "Bei Ideen zur Weiterentwicklung unter ideen@stonemaster.eu." + "</html>";
+			} else {
+				text2 += "<html>Wir wünschen Ihnen viel Spass mit dem Stackmaster!</html>";
+			}
+			secondLineLabel.setText(text2);
 		}
-		secondLineLabel.setText(text2);
-
 	}
 
 	protected void handleSaveProperties() {
@@ -699,7 +733,6 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 					}
 					LOGGER.info("chosen file: " + absolutePath);
 					actualOpenedProfileFile = selectedFile;
-					applicationProperties.setFirstUse(false);
 					propertiesHandler.writeProfile(actualOpenedProfileFile, defaultProfile);
 					setTitle(TITLE + " - " + absolutePath);
 					mntmProfilSpeichern.setEnabled(true);
