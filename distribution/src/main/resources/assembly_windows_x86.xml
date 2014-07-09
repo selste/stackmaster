@@ -8,10 +8,6 @@
 
 	<includeBaseDirectory>false</includeBaseDirectory>
 
-	<!-- <dependencySets> <dependencySet> <includes> <include>groupId.example:artifactId.example</include> 
-		</includes> <unpack>false</unpack> <scope>runtime</scope> <outputDirectory>${plugin.name}</outputDirectory> 
-		</dependencySet> </dependencySets> -->
-
 	<fileSets>
 		<fileSet>
 			<directory>./src/main/resources/assemblyFiles/</directory>
@@ -23,13 +19,6 @@
 				<include>default.stackmaster</include>
 				<include>default.stackmaster.backup</include>
 				<include>stackmaster_installation_windows.pdf</include>
-			</includes>
-		</fileSet>
-		<fileSet>
-			<directory>../stackmasterconfigurator/target/</directory>
-			<outputDirectory>.</outputDirectory>
-			<includes>
-				<include>configurator.exe</include>
 			</includes>
 		</fileSet>
 		<fileSet>

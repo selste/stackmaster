@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -33,10 +34,6 @@ import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.C
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.PropertiesValidator;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
 
-//TODO: 
-// Als "new default" setzen
-// "reset default"
-//"to default"
 public class PropertiesDialog extends JDialog {
 	private static long serialVersionUID = 8974001888731772934L;
 	private static Logger LOGGER = Logger.getLogger(PropertiesDialog.class);
@@ -49,18 +46,16 @@ public class PropertiesDialog extends JDialog {
 
 	private List<ComConnectionPropertiesListener> listenerList = new ArrayList<>();
 
-	JSpinner fastUpSpeedTF, middleUpSpeedTF, slowUpSpeedTF;
-	JSpinner slowDownSpeedTF, middleDownSpeedTF, fastDownSpeedTF;
-	JSpinner sleepMovementMirrorTF, sleepMirrorPictureTF, sleepPictureMovementTF;
-	JSpinner pulseDurationTF;
+	private JSpinner fastUpSpeedTF, middleUpSpeedTF, slowUpSpeedTF;
+	private JSpinner slowDownSpeedTF, middleDownSpeedTF, fastDownSpeedTF;
+	private JSpinner sleepMovementMirrorTF, sleepMirrorPictureTF, sleepPictureMovementTF;
+	private JSpinner pulseDurationTF;
 
 	boolean cancel = false;
 
 	private PropertiesValidator validator = new PropertiesValidator();
+	public Font actualFont = new Font("Arial", Font.PLAIN, 20);
 
-	/**
-	 * Create the dialog.
-	 */
 	public PropertiesDialog(ComConnectionProperties actualConnectionProperties,
 			ComConnectionProperties defaultConnectionProperties) {
 		this.actualConnectionProperties = actualConnectionProperties;
@@ -94,7 +89,7 @@ public class PropertiesDialog extends JDialog {
 
 		});
 		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
-		tabbedPane.setFont(SwingStarter.actualFont);
+		tabbedPane.setFont(actualFont);
 		contentPanel.add(tabbedPane);
 
 		JPanel panel = new JPanel();
@@ -102,40 +97,40 @@ public class PropertiesDialog extends JDialog {
 		panel.setLayout(new MigLayout("", "[][]", "[][][][][][][][][]"));
 
 		JLabel lblNewLabel_6 = new JLabel("Hoch");
-		lblNewLabel_6.setFont(SwingStarter.actualFont);
+		lblNewLabel_6.setFont(actualFont);
 		panel.add(lblNewLabel_6, "cell 0 0,grow");
 
 		JLabel lblNewLabel_5 = new JLabel("");
 		panel.add(lblNewLabel_5, "cell 1 0,grow");
 
 		JLabel lblSchnelleGeschw = new JLabel("schnelle Geschw.");
-		lblSchnelleGeschw.setFont(SwingStarter.actualFont);
+		lblSchnelleGeschw.setFont(actualFont);
 		panel.add(lblSchnelleGeschw, "cell 0 1,grow");
 
 		fastUpSpeedTF = new JSpinner();
-		fastUpSpeedTF.setFont(SwingStarter.actualFont);
+		fastUpSpeedTF.setFont(actualFont);
 		fastUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(actualConnectionProperties.getFastUpSpeed()),
 				new Integer(1), new Integer(ComCommunicator.MAX_SPEED), new Integer(100)));
 		fastUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		panel.add(fastUpSpeedTF, "cell 1 1,growx");
 
 		JLabel lblNewLabel = new JLabel("mittlere Geschw.");
-		lblNewLabel.setFont(SwingStarter.actualFont);
+		lblNewLabel.setFont(actualFont);
 		panel.add(lblNewLabel, "cell 0 2,grow");
 
 		middleUpSpeedTF = new JSpinner();
-		middleUpSpeedTF.setFont(SwingStarter.actualFont);
+		middleUpSpeedTF.setFont(actualFont);
 		middleUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(actualConnectionProperties.getMiddleUpSpeed()),
 				new Integer(1), new Integer(ComCommunicator.MAX_SPEED), new Integer(100)));
 		middleUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		panel.add(middleUpSpeedTF, "cell 1 2,growx");
 
 		JLabel lblNewLabel_1 = new JLabel("langsame Geschw.");
-		lblNewLabel_1.setFont(SwingStarter.actualFont);
+		lblNewLabel_1.setFont(actualFont);
 		panel.add(lblNewLabel_1, "cell 0 3,grow");
 
 		slowUpSpeedTF = new JSpinner();
-		slowUpSpeedTF.setFont(SwingStarter.actualFont);
+		slowUpSpeedTF.setFont(actualFont);
 		slowUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(actualConnectionProperties.getSlowUpSpeed()),
 				new Integer(1), new Integer(ComCommunicator.MAX_SPEED), new Integer(100)));
 		panel.add(slowUpSpeedTF, "cell 1 3,growx");
@@ -144,37 +139,37 @@ public class PropertiesDialog extends JDialog {
 		panel.add(lblNewLabel_7, "cell 1 4,grow");
 
 		JLabel lblNewLabel_8 = new JLabel("Runter");
-		lblNewLabel_8.setFont(SwingStarter.actualFont);
+		lblNewLabel_8.setFont(actualFont);
 		panel.add(lblNewLabel_8, "cell 0 5,grow");
 
 		JLabel lblNewLabel_2 = new JLabel("schnelle Geschw.");
-		lblNewLabel_2.setFont(SwingStarter.actualFont);
+		lblNewLabel_2.setFont(actualFont);
 		panel.add(lblNewLabel_2, "cell 0 6,grow");
 
 		fastDownSpeedTF = new JSpinner();
-		fastDownSpeedTF.setFont(SwingStarter.actualFont);
+		fastDownSpeedTF.setFont(actualFont);
 		fastDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(actualConnectionProperties.getFastDownSpeed()),
 				new Integer(1), new Integer(ComCommunicator.MAX_SPEED), new Integer(100)));
 		fastDownSpeedTF.setMinimumSize(new Dimension(100, 22));
 		panel.add(fastDownSpeedTF, "cell 1 6,growx");
 
 		JLabel lblNewLabel_3 = new JLabel("mittlere Geschw.");
-		lblNewLabel_3.setFont(SwingStarter.actualFont);
+		lblNewLabel_3.setFont(actualFont);
 		panel.add(lblNewLabel_3, "cell 0 7,grow");
 
 		middleDownSpeedTF = new JSpinner();
-		middleDownSpeedTF.setFont(SwingStarter.actualFont);
+		middleDownSpeedTF.setFont(actualFont);
 		middleDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(actualConnectionProperties.getMiddleDownSpeed()),
 				new Integer(1), new Integer(ComCommunicator.MAX_SPEED), new Integer(100)));
 		middleDownSpeedTF.setMinimumSize(new Dimension(100, 22));
 		panel.add(middleDownSpeedTF, "cell 1 7,growx");
 
 		JLabel lblNewLabel_4 = new JLabel("langsame Geschw.");
-		lblNewLabel_4.setFont(SwingStarter.actualFont);
+		lblNewLabel_4.setFont(actualFont);
 		panel.add(lblNewLabel_4, "cell 0 8,grow");
 
 		slowDownSpeedTF = new JSpinner();
-		slowDownSpeedTF.setFont(SwingStarter.actualFont);
+		slowDownSpeedTF.setFont(actualFont);
 		slowDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(actualConnectionProperties.getSlowDownSpeed()),
 				new Integer(1), new Integer(ComCommunicator.MAX_SPEED), new Integer(100)));
 		slowDownSpeedTF.setMinimumSize(new Dimension(100, 22));
@@ -185,53 +180,53 @@ public class PropertiesDialog extends JDialog {
 		panel_1.setLayout(new MigLayout("", "[][grow]", "[][][][][][]"));
 
 		JLabel lblNewLabel_12 = new JLabel("Richtung umdrehen");
-		lblNewLabel_12.setFont(SwingStarter.actualFont);
+		lblNewLabel_12.setFont(actualFont);
 		panel_1.add(lblNewLabel_12, "cell 0 0,alignx left");
 
 		reverseCB = new JCheckBox();
-		reverseCB.setFont(SwingStarter.actualFont);
+		reverseCB.setFont(actualFont);
 		panel_1.add(reverseCB, "cell 1 0,grow");
 		reverseCB.setSelected(actualConnectionProperties.isReverseSteps());
 
 		JLabel lblNewLabel_9 = new JLabel("Pause (Bew. - Spiegel) [ms]");
-		lblNewLabel_9.setFont(SwingStarter.actualFont);
+		lblNewLabel_9.setFont(actualFont);
 		panel_1.add(lblNewLabel_9, "cell 0 1,alignx left");
 
 		sleepMovementMirrorTF = new JSpinner();
-		sleepMovementMirrorTF.setFont(SwingStarter.actualFont);
+		sleepMovementMirrorTF.setFont(actualFont);
 		sleepMovementMirrorTF.setModel(new SpinnerNumberModel(new Long(actualConnectionProperties
 				.getSleepMovementMirror()), new Long(1), null, new Long(500)));
 		sleepMovementMirrorTF.setMinimumSize(new Dimension(100, 22));
 		panel_1.add(sleepMovementMirrorTF, "cell 1 1,growx");
 
 		JLabel lblNewLabel_11 = new JLabel("Pause (Spiegel - Bild) [ms]");
-		lblNewLabel_11.setFont(SwingStarter.actualFont);
+		lblNewLabel_11.setFont(actualFont);
 		panel_1.add(lblNewLabel_11, "cell 0 2,alignx left");
 
 		sleepMirrorPictureTF = new JSpinner();
-		sleepMirrorPictureTF.setFont(SwingStarter.actualFont);
+		sleepMirrorPictureTF.setFont(actualFont);
 		sleepMirrorPictureTF.setModel(new SpinnerNumberModel(new Long(actualConnectionProperties
 				.getSleepMirrorPicture()), new Long(1), null, new Long(500)));
 		sleepMirrorPictureTF.setMinimumSize(new Dimension(100, 22));
 		panel_1.add(sleepMirrorPictureTF, "cell 1 2,growx");
 
 		JLabel lblNewLabel_10 = new JLabel("Pause (Bild - Bew.) [ms]");
-		lblNewLabel_10.setFont(SwingStarter.actualFont);
+		lblNewLabel_10.setFont(actualFont);
 		panel_1.add(lblNewLabel_10, "cell 0 3,alignx left");
 
 		sleepPictureMovementTF = new JSpinner();
-		sleepPictureMovementTF.setFont(SwingStarter.actualFont);
+		sleepPictureMovementTF.setFont(actualFont);
 		sleepPictureMovementTF.setModel(new SpinnerNumberModel(new Long(actualConnectionProperties
 				.getSleepPictureMovement()), new Long(1), null, new Long(500)));
 		sleepPictureMovementTF.setMinimumSize(new Dimension(100, 22));
 		panel_1.add(sleepPictureMovementTF, "cell 1 3,growx");
 
 		JLabel lblNewLabel_13 = new JLabel("Impulsdauer [ms]");
-		lblNewLabel_13.setFont(SwingStarter.actualFont);
+		lblNewLabel_13.setFont(actualFont);
 		panel_1.add(lblNewLabel_13, "cell 0 4,alignx left");
 
 		pulseDurationTF = new JSpinner();
-		pulseDurationTF.setFont(SwingStarter.actualFont);
+		pulseDurationTF.setFont(actualFont);
 		pulseDurationTF.setModel(new SpinnerNumberModel(new Long(actualConnectionProperties.getPulseDuration()),
 				new Long(1), null, new Long(500)));
 		pulseDurationTF.setMinimumSize(new Dimension(100, 22));
@@ -242,7 +237,7 @@ public class PropertiesDialog extends JDialog {
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
 		JButton okButton = new JButton("Okay");
-		okButton.setFont(SwingStarter.actualFont);
+		okButton.setFont(actualFont);
 		okButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -258,7 +253,7 @@ public class PropertiesDialog extends JDialog {
 		getRootPane().setDefaultButton(okButton);
 
 		JButton cancelButton = new JButton("Abbrechen");
-		cancelButton.setFont(SwingStarter.actualFont);
+		cancelButton.setFont(actualFont);
 		cancelButton.setActionCommand("Cancel");
 
 		buttonPane.add(cancelButton);

@@ -14,7 +14,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.util.Locale;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -44,56 +43,33 @@ import de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.ApplicationPropertiesFileHandler;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.PropertiesValidator;
+import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
+import de.dennismaass.emp.stonemaster.stackmaster.common.util.PathConstants;
+import de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.utils.UiConstants;
 
 public class SwingStarter extends JFrame {
 	private final static long serialVersionUID = -6032729218147398086L;
 
-	private static final int MAX_SPEED = 2047;
-
 	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
 
-	private static String OSVERSION_PROPERTY_NAME = "os.version";
-	private static String OSARCH_PROPERTY_NAME = "os.arch";
-	private static String OSNAME_PROPERTY_NAME = "os.name";
-
-	private static String TITLE = "StackMaster Configurator";
-
-	private static String FONT_NAME = "Arial";
-	public static Font FONT = new Font(FONT_NAME, Font.PLAIN, 20);
-
-	private static String DEFAULT_PROFILE_NAME = "default.stackmaster";
+	public Font font = new Font(Constants.FONT_NAME, Font.PLAIN, 20);
 
 	private Profile defaultProfile;
-	private File defaultFile = new File(DEFAULT_PROFILE_NAME);
+	private File defaultFile = new File(PathConstants.DEFAULT_PROFILE_NAME);
 
 	private ComConnectionProperties defaultConnectionProperties;
 
 	private ProfileFileHandler propertiesHandler;
 
-	private JTextField firstNameTF;
-	private JTextField lastNameTF;
+	private JTextField firstNameTF, lastNameTF, comConnectionNameTF;
 
-	private JMenuItem mntmSpeichern;
+	private JSpinner fastUpSpeedTF, middleUpSpeedTF, slowUpSpeedTF, fastDownSpeedTF, middleDownSpeedTF,
+			slowDownSpeedTF;
 
-	public static String OS_NAME = System.getProperty(OSNAME_PROPERTY_NAME).toLowerCase(Locale.US);
-	public static String OS_ARCH = System.getProperty(OSARCH_PROPERTY_NAME).toLowerCase(Locale.US);
-	public static String OS_VERSION = System.getProperty(OSVERSION_PROPERTY_NAME).toLowerCase(Locale.US);
-
-	private JTextField comConnectionNameTF;
-
-	private JSpinner fastUpSpeedTF;
-	private JSpinner middleUpSpeedTF;
-	private JSpinner slowUpSpeedTF;
-	private JSpinner fastDownSpeedTF;
-	private JSpinner middleDownSpeedTF;
-	private JSpinner slowDownSpeedTF;
 	private JSpinner countOfStepPerMmTF;
 	private JComboBox<Integer> connectionModeCB;
 	private JCheckBox reverseCB;
-	private JSpinner sleepMirrorPictureTF;
-	private JSpinner sleepMovementMirrorTF;
-	private JSpinner sleepPictureMovementTF;
-	private JSpinner pulseDurationTF;
+	private JSpinner sleepMirrorPictureTF, sleepMovementMirrorTF, sleepPictureMovementTF, pulseDurationTF;
 
 	private PropertiesValidator validator = new PropertiesValidator();
 
@@ -102,67 +78,28 @@ public class SwingStarter extends JFrame {
 	private ApplicationPropertiesFileHandler applicationPropertiesFileHandler = new ApplicationPropertiesFileHandler();;
 
 	private JCheckBox checkBoxFirstUse;
-
 	private JComboBox<Integer> checkBoxFontSize;
 
-	private JMenuItem mntmExit;
-
-	private JLabel lblModus;
-
-	private JLabel lblNewLabel_15;
-
-	private JLabel lblFirstUse;
-
-	private JLabel lblSchriftgre;
-
-	private JLabel lblNewLabel;
-
-	private JLabel lblNewLabel_1;
-
-	private JLabel lblNewLabel_2;
-
-	private JLabel lblNewLabel_3;
-
-	private JLabel lblNewLabel_4;
-
-	private JLabel lblNewLabel_6;
-
-	private JLabel lblNewLabel_7;
-
-	private JLabel lblNewLabel_8;
-
-	private JLabel lblNewLabel_9;
-
-	private JLabel lblNewLabel_10;
-
-	private JLabel lblNewLabel_11;
-
-	private JLabel lblNewLabel_12;
-
-	private JMenu menu;
-
-	private JLabel lblNewLabel_14;
-
-	private JLabel lblSchritteProMillimeter;
-
-	private JLabel lblNewLabel_13;
-
-	private JLabel lblNewLabel_5;
+	private JLabel lblModus, lblNewLabel_15, lblFirstUse, lblSchriftgre, lblNewLabel, lblNewLabel_1, lblNewLabel_2,
+			lblNewLabel_3, lblNewLabel_4, lblNewLabel_6, lblNewLabel_7, lblNewLabel_8, lblNewLabel_9, lblNewLabel_10,
+			lblNewLabel_11, lblNewLabel_12, lblNewLabel_14, lblSchritteProMillimeter, lblNewLabel_13, lblNewLabel_5,
+			label_2;
 
 	private JTabbedPane tabbedPane;
-	private JLabel label_2;
+
+	private JMenu menu;
+	private JMenuItem mntmExit, mntmSpeichern;
 
 	public SwingStarter() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		setTitle(TITLE);
+		setTitle(UiConstants.TITLE);
 		propertiesHandler = new ProfileFileHandler();
 
 		setSize(430, 694);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
 		tabbedPane = new JTabbedPane(SwingConstants.TOP);
-		tabbedPane.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		getContentPane().add(tabbedPane, BorderLayout.NORTH);
 
 		JPanel applicationPanel = new JPanel();
@@ -170,20 +107,16 @@ public class SwingStarter extends JFrame {
 		applicationPanel.setLayout(new MigLayout("", "[][grow]", "[][][][][][][][]"));
 
 		lblNewLabel_13 = new JLabel("Vorname");
-		lblNewLabel_13.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		applicationPanel.add(lblNewLabel_13, "cell 0 0,alignx left");
 
 		firstNameTF = new JTextField();
-		firstNameTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		applicationPanel.add(firstNameTF, "cell 1 0,growx");
 		firstNameTF.setColumns(10);
 
 		lblNewLabel_14 = new JLabel("Nachname");
-		lblNewLabel_14.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		applicationPanel.add(lblNewLabel_14, "cell 0 1,alignx left");
 
 		lastNameTF = new JTextField();
-		lastNameTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		applicationPanel.add(lastNameTF, "cell 1 1,growx");
 		lastNameTF.setColumns(10);
 
@@ -191,18 +124,16 @@ public class SwingStarter extends JFrame {
 		applicationPanel.add(label, "cell 0 2");
 
 		lblFirstUse = new JLabel("Erster Start");
-		lblFirstUse.setFont(new Font("Arial", Font.PLAIN, 20));
 		applicationPanel.add(lblFirstUse, "cell 0 6,alignx left");
 
 		checkBoxFirstUse = new JCheckBox("");
 		applicationPanel.add(checkBoxFirstUse, "cell 1 6");
 
 		lblSchriftgre = new JLabel("Schriftgröße");
-		lblSchriftgre.setFont(new Font("Arial", Font.PLAIN, 20));
 		applicationPanel.add(lblSchriftgre, "cell 0 7,alignx left");
 
 		checkBoxFontSize = new JComboBox<Integer>();
-		checkBoxFontSize.setFont(FONT);
+		checkBoxFontSize.setFont(font);
 		checkBoxFontSize.addItem(15);
 		checkBoxFontSize.addItem(16);
 		checkBoxFontSize.addItem(17);
@@ -233,39 +164,33 @@ public class SwingStarter extends JFrame {
 		defaultPanel.setLayout(new MigLayout("", "[][]", "[][][][][][][][][][][][][][][]"));
 
 		lblNewLabel = new JLabel("Hoch");
-		lblNewLabel.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel, "cell 0 0,alignx left");
 
 		lblNewLabel_1 = new JLabel("schnelle Geschw.");
-		lblNewLabel_1.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_1, "cell 0 1,alignx left");
 
 		fastUpSpeedTF = new JSpinner();
-		fastUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED),
+		fastUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(Constants.MAX_SPEED),
 				new Integer(100)));
-		fastUpSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		fastUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		defaultPanel.add(fastUpSpeedTF, "cell 1 1");
 
 		lblNewLabel_2 = new JLabel("mittlere Geschw.");
-		lblNewLabel_2.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
+		lblNewLabel_2.setFont(new Font(Constants.FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_2, "cell 0 2,alignx left");
 
 		middleUpSpeedTF = new JSpinner();
-		middleUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED),
-				new Integer(100)));
-		middleUpSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
+		middleUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1),
+				new Integer(Constants.MAX_SPEED), new Integer(100)));
 		middleUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		defaultPanel.add(middleUpSpeedTF, "cell 1 2");
 
 		lblNewLabel_3 = new JLabel("langsame Geschw.");
-		lblNewLabel_3.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_3, "cell 0 3,alignx left");
 
 		slowUpSpeedTF = new JSpinner();
-		slowUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED),
+		slowUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(Constants.MAX_SPEED),
 				new Integer(100)));
-		slowUpSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		slowUpSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(slowUpSpeedTF, "cell 1 3");
 
@@ -273,39 +198,32 @@ public class SwingStarter extends JFrame {
 		defaultPanel.add(label_1, "cell 0 4");
 
 		lblNewLabel_4 = new JLabel("Runter");
-		lblNewLabel_4.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_4, "cell 0 5,alignx left");
 
 		lblNewLabel_5 = new JLabel("schnelle Geschw.");
-		lblNewLabel_5.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_5, "cell 0 6,alignx left");
 
 		fastDownSpeedTF = new JSpinner();
-		fastDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED),
-				new Integer(100)));
-		fastDownSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
+		fastDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1),
+				new Integer(Constants.MAX_SPEED), new Integer(100)));
 		fastDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(fastDownSpeedTF, "cell 1 6");
 
 		lblNewLabel_6 = new JLabel("mittlere Geschw.");
-		lblNewLabel_6.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_6, "cell 0 7,alignx left");
 
 		middleDownSpeedTF = new JSpinner();
-		middleDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED),
-				new Integer(100)));
-		middleDownSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
+		middleDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(
+				Constants.MAX_SPEED), new Integer(100)));
 		middleDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(middleDownSpeedTF, "cell 1 7");
 
 		lblNewLabel_7 = new JLabel("langsame Geschw.");
-		lblNewLabel_7.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_7, "cell 0 8,alignx left");
 
 		slowDownSpeedTF = new JSpinner();
-		slowDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED),
-				new Integer(100)));
-		slowDownSpeedTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
+		slowDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1),
+				new Integer(Constants.MAX_SPEED), new Integer(100)));
 		slowDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(slowDownSpeedTF, "cell 1 8");
 
@@ -313,72 +231,58 @@ public class SwingStarter extends JFrame {
 		defaultPanel.add(label_2, "cell 0 9");
 
 		lblNewLabel_8 = new JLabel("Richtung umdrehen");
-		lblNewLabel_8.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_8, "cell 0 10,alignx left");
 
 		reverseCB = new JCheckBox("");
 		defaultPanel.add(reverseCB, "cell 1 10");
 
 		lblNewLabel_9 = new JLabel("Pause (Bew. - Spiegel) [ms]");
-		lblNewLabel_9.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_9, "cell 0 11,alignx left");
 
 		sleepMovementMirrorTF = new JSpinner();
 		sleepMovementMirrorTF.setModel(new SpinnerNumberModel(new Long(1), new Long(1), null, new Long(500)));
-		sleepMovementMirrorTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		sleepMovementMirrorTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(sleepMovementMirrorTF, "cell 1 11");
 
 		lblNewLabel_10 = new JLabel("Pause (Spiegel - Bild) [ms]");
-		lblNewLabel_10.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_10, "cell 0 12,alignx left");
 
 		sleepMirrorPictureTF = new JSpinner();
 		sleepMirrorPictureTF.setModel(new SpinnerNumberModel(new Long(1), new Long(1), null, new Long(500)));
-		sleepMirrorPictureTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		sleepMirrorPictureTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(sleepMirrorPictureTF, "cell 1 12");
 
 		lblNewLabel_11 = new JLabel("Pause (Bild - Bew.) [ms]");
-		lblNewLabel_11.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_11, "cell 0 13,alignx left");
 
 		sleepPictureMovementTF = new JSpinner();
 		sleepPictureMovementTF.setModel(new SpinnerNumberModel(new Long(1), new Long(1), null, new Long(500)));
-		sleepPictureMovementTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		sleepPictureMovementTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(sleepPictureMovementTF, "cell 1 13");
 
 		lblNewLabel_12 = new JLabel("Impulsdauer [ms]");
-		lblNewLabel_12.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_12, "cell 0 14,alignx left");
 
 		pulseDurationTF = new JSpinner();
 		pulseDurationTF.setModel(new SpinnerNumberModel(new Long(1), new Long(1), null, new Long(500)));
-		pulseDurationTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		pulseDurationTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(pulseDurationTF, "cell 1 14");
 
 		lblNewLabel_15 = new JLabel("COM-Anschluss");
-		lblNewLabel_15.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_15, "cell 0 15,alignx left");
 
 		comConnectionNameTF = new JTextField();
-		comConnectionNameTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(comConnectionNameTF, "cell 1 15,growx");
 		comConnectionNameTF.setColumns(10);
 
 		lblSchritteProMillimeter = new JLabel("Schritte pro Millimeter");
-		lblSchritteProMillimeter.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblSchritteProMillimeter, "cell 0 16,alignx left");
 
 		countOfStepPerMmTF = new JSpinner();
-		countOfStepPerMmTF.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		countOfStepPerMmTF.setMinimumSize(new Dimension(100, 22));
 		defaultPanel.add(countOfStepPerMmTF, "cell 1 16");
 
 		lblModus = new JLabel("Modus");
-		lblModus.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblModus, "cell 0 17,alignx left");
 
 		connectionModeCB = new JComboBox<Integer>();
@@ -390,19 +294,16 @@ public class SwingStarter extends JFrame {
 		connectionModeCB.addItem(6);
 		connectionModeCB.addItem(7);
 		connectionModeCB.addItem(8);
-		connectionModeCB.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(connectionModeCB, "cell 1 17,growx");
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
 		menu = new JMenu("Datei");
-		menu.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		menuBar.add(menu);
 
 		mntmSpeichern = new JMenuItem("Speichern");
 		mntmSpeichern.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-		mntmSpeichern.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		mntmSpeichern.addActionListener(new ActionListener() {
 
 			@Override
@@ -414,7 +315,6 @@ public class SwingStarter extends JFrame {
 		menu.add(mntmSpeichern);
 
 		mntmExit = new JMenuItem("Exit");
-		mntmExit.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		mntmExit.addActionListener(new ActionListener() {
 
 			@Override
@@ -478,7 +378,7 @@ public class SwingStarter extends JFrame {
 	}
 
 	public void changeFont(Component component, int fontSize) {
-		Font f = FONT;
+		Font f = font;
 		component.setFont(new Font(f.getName(), f.getStyle(), fontSize));
 		if (component instanceof Container) {
 			for (Component child : ((Container) component).getComponents()) {
@@ -489,75 +389,10 @@ public class SwingStarter extends JFrame {
 
 	private void setNewFont(int fontSize) {
 		changeFont(this, fontSize);
-		// firstNameTF.setFont(font);
-		// lastNameTF.setFont(font);
-		// checkBoxFirstUse.setFont(font);
-		//
-		// comConnectionNameTF.setFont(font);
-		// connectionModeCB.setFont(font);
-		//
-		// JSpinner.NumberEditor countOfStepPerMm = (JSpinner.NumberEditor) countOfStepPerMmTF.getEditor();
-		// countOfStepPerMm.getTextField().setFont(font);
-		//
-		// JSpinner.NumberEditor fastUpSpeed = (JSpinner.NumberEditor) fastUpSpeedTF.getEditor();
-		// fastUpSpeed.getTextField().setFont(font);
-		//
-		// JSpinner.NumberEditor middleUpSpeed = (JSpinner.NumberEditor) middleUpSpeedTF.getEditor();
-		// middleUpSpeed.getTextField().setFont(font);
-		//
-		// JSpinner.NumberEditor slowUpSpeed = (JSpinner.NumberEditor) slowUpSpeedTF.getEditor();
-		// slowUpSpeed.getTextField().setFont(font);
-		//
-		// JSpinner.NumberEditor fastDownSpeed = (JSpinner.NumberEditor) fastDownSpeedTF.getEditor();
-		// fastDownSpeed.getTextField().setFont(font);
-		//
-		// JSpinner.NumberEditor middleDownSpeed = (JSpinner.NumberEditor) middleDownSpeedTF.getEditor();
-		// middleDownSpeed.getTextField().setFont(font);
-		//
-		// JSpinner.NumberEditor slowDownSpeed = (JSpinner.NumberEditor) slowDownSpeedTF.getEditor();
-		// slowDownSpeed.getTextField().setFont(font);
-		//
-		// reverseCB.setFont(font);
-		//
-		// JSpinner.NumberEditor sleepMirrorPicture = (JSpinner.NumberEditor) sleepMirrorPictureTF.getEditor();
-		// sleepMirrorPicture.getTextField().setFont(font);
-		//
-		// JSpinner.NumberEditor sleepMovementMirror = (JSpinner.NumberEditor) sleepMovementMirrorTF.getEditor();
-		// sleepMovementMirror.getTextField().setFont(font);
-		//
-		// JSpinner.NumberEditor sleepPictureMovement = (JSpinner.NumberEditor) sleepPictureMovementTF.getEditor();
-		// sleepPictureMovement.getTextField().setFont(font);
-		//
-		// JSpinner.NumberEditor pulseDuration = (JSpinner.NumberEditor) pulseDurationTF.getEditor();
-		// pulseDuration.getTextField().setFont(font);
-		//
+
 		Font f = getFont();
 		mntmSpeichern.setFont(new Font(f.getName(), f.getStyle(), fontSize));
 		mntmExit.setFont(new Font(f.getName(), f.getStyle(), fontSize));
-		// checkBoxFontSize.setFont(font);
-		// menu.setFont(font);
-		// lblModus.setFont(font);
-		// lblNewLabel_15.setFont(font);
-		// lblFirstUse.setFont(font);
-		// lblSchriftgre.setFont(font);
-		// lblNewLabel.setFont(font);
-		// lblNewLabel_1.setFont(font);
-		// lblNewLabel_2.setFont(font);
-		// lblNewLabel_3.setFont(font);
-		// lblNewLabel_4.setFont(font);
-		// lblNewLabel_5.setFont(font);
-		// lblNewLabel_6.setFont(font);
-		// lblNewLabel_7.setFont(font);
-		// lblNewLabel_8.setFont(font);
-		// lblNewLabel_9.setFont(font);
-		// lblNewLabel_10.setFont(font);
-		// lblNewLabel_11.setFont(font);
-		// lblNewLabel_12.setFont(font);
-		// lblNewLabel_14.setFont(font);
-		// lblSchritteProMillimeter.setFont(font);
-		// lblNewLabel_13.setFont(font);
-		//
-		// tabbedPane.setFont(font);
 	}
 
 	public void refreshConnectionProperties() {
