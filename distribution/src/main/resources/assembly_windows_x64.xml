@@ -22,13 +22,6 @@
 			</includes>
 		</fileSet>
 		<fileSet>
-			<directory>../stackmasterconfigurator/target/</directory>
-			<outputDirectory>.</outputDirectory>
-			<includes>
-				<include>configurator.exe</include>
-			</includes>
-		</fileSet>
-		<fileSet>
 			<directory>../stackmaster/target/</directory>
 			<outputDirectory>.</outputDirectory>
 			<includes>

@@ -31,8 +31,8 @@
 
 
 	<properties>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.rxtx.version>2.2pre2</org.rxtx.version>
 		<org.projectlombok.lombok.version>1.14.2</org.projectlombok.lombok.version>

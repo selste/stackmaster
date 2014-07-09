@@ -58,9 +58,6 @@ public class RelativPosPanel extends JPanel {
 	private JLabel stateLine;
 	private JPanel panel;
 
-	/**
-	 * Create the panel.
-	 */
 	public RelativPosPanel(ComConnectionProperties properties, JLabel stateLine) {
 		this.properties = properties;
 		setVariablesFromProperties(properties);

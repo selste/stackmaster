@@ -1485,3 +1485,19 @@ java.lang.IllegalArgumentException: (minimum <= value <= maximum) is false
 2014-07-08 22:54:20 INFO  SwingStarter:601 - properties are valid: true
 2014-07-08 22:54:20 INFO  ProfileFileHandler:25 - write profile de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile@3d2b9b3 in file default.stackmaster
 2014-07-08 22:54:20 INFO  ApplicationPropertiesFileHandler:51 - write applicationProperties to C:\Users\Dennis\git\stackmaster\stackmasterconfigurator\application.properties
+2014-07-09 20:30:07 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-09 20:30:07 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-09 20:30:07 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-09 20:30:07 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-09 21:20:37 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-09 21:20:37 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-09 21:20:37 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-09 21:20:37 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-09 21:24:28 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-09 21:24:28 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-09 21:24:28 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-09 21:24:28 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-09 21:24:32 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-09 21:24:32 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-09 21:24:32 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-09 21:24:32 INFO  PropertiesFileHandler:51 - properties loaded

@@ -11,8 +11,6 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -21,7 +19,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -57,6 +54,8 @@ import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.C
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionPropertiesChangeEvent;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionPropertiesListener;
 import de.dennismaass.emp.stonemaster.stackmaster.common.ui.swing.PropertiesFileChooser;
+import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
+import de.dennismaass.emp.stonemaster.stackmaster.common.util.PathConstants;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.ComInstructionID;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer.ComAnswerEvent;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer.ComAnswerListener;
@@ -64,6 +63,7 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicato
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.CommPortIdentifierNotificationEvent;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.CommPortIdentifierNotificationListener;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.ConnectionThread;
+import de.dennismaass.emp.stonemaster.stackmaster.controller.ui.utils.UiConstants;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 
 //TODO:
@@ -80,90 +80,48 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 //- Mehrsprachigkeit
 public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
 		ComConnectionPropertiesListener {
+
 	private static final long serialVersionUID = 4155209335768313320L;
 
 	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
 
-	private static String DELETE_ICON_NAME = "delete-icon.png";
-
-	private static String FILE_ENDING = ".stackmaster";
-
-	/* Konstanten */
-
-	private static String TITLE = "StackMaster";
-
-	private static String IMAGES = "/images/";
-
-	/* Stepper */
 	private ComCommunicator communicator;
 
-	/* UI */
-	private JPanel contentPane;
-
-	private ConnectionThread connectThread;
-	private JButton connectButton;
-	private JComboBox<CommPortIdentifier> connectionComboBox;
-
-	private JLabel stateLine;
-
-	/* Properties */
 	private Profile defaultProfile;
-	private int microstepResolutionMode = 4;
+	private int microstepResolutionMode = 4, stepsPerMm = 64025;
 
-	private int stepsPerMm = 64025;
-
-	private RelativPosPanel relativPosPanel;
-	private StepPanel stepPanel;
-
-	public static String OS_NAME = System.getProperty("os.name").toLowerCase(Locale.US);
-	public static String OS_ARCH = System.getProperty("os.arch").toLowerCase(Locale.US);
-	public static String OS_VERSION = System.getProperty("os.version").toLowerCase(Locale.US);
-
-	private JMenuItem mntmProfilSpeichern;;
-	private JMenuItem mntmProfilSpeichernAls;
-
-	private PropertiesDialog propertiesDialog;
-
-	private File defaultFile = new File("default.stackmaster");
-	private File actualOpenedProfileFile = defaultFile;
 	private ProfileFileHandler propertiesHandler;
-
-	public static Font actualFont = new Font("Arial", Font.PLAIN, 20);
-
-	private JLabel welcomeLabel;
-
-	private JLabel secondLineLabel;
-
-	private static ApplicationProperties applicationProperties;
-	private File applicationPropertyFile = new File("application.properties");
+	private ApplicationProperties applicationProperties;
 	private ApplicationPropertiesFileHandler applicationPropertiesFileHandler = new ApplicationPropertiesFileHandler();
+
+	private File defaultFile = new File(PathConstants.PATH_DEFAULT_STACKMASTER);
+	private File applicationPropertyFile = new File(PathConstants.PATH_APPLICATION_PROPERTIES_FILENAME);
+	private File actualOpenedProfileFile = defaultFile;
+
 	@Getter
 	@Setter
 	private boolean unsavedChanges;
 
-	private JMenuItem mntmExit;
+	private JPanel contentPane;
+	private ConnectionThread connectThread;
+	private JButton connectButton;
+	private JComboBox<CommPortIdentifier> connectionComboBox;
+	private RelativPosPanel relativPosPanel;
+	private StepPanel stepPanel;
+	private JMenuItem mntmProfilSpeichern, mntmProfilSpeichernAls;
+	private PropertiesDialog propertiesDialog;
+	public Font actualFont = new Font("Arial", Font.PLAIN, 20);
+	private JLabel welcomeLabel, secondLineLabel, stateLine;
+	private JMenuItem mntmExit, mntmLaden, mntmberCusa, mntmEinstellungen, mnEinstellungen, mnDatei;
 
-	private JMenuItem mntmLaden;
-
-	private JMenuItem mntmberCusa;
-
-	private JMenuItem mntmEinstellungen;
-
-	private JMenu mnEinstellungen;
-
-	private JMenu mnDatei;
-
-	/**
-	 * Create the frame.
-	 */
 	public SwingStarter() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		LOGGER.info("Start SwingStarter");
 
-		LOGGER.info("OS_ARCH " + OS_ARCH);
-		LOGGER.info("OS_NAME " + OS_NAME);
-		LOGGER.info("OS_VERSION " + OS_VERSION);
+		LOGGER.info("OS_ARCH " + Constants.OS_ARCH);
+		LOGGER.info("OS_NAME " + Constants.OS_NAME);
+		LOGGER.info("OS_VERSION " + Constants.OS_VERSION);
 
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -175,15 +133,15 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		LOGGER.info("try building user interface");
 
-		URL logo32URL = getClass().getResource(IMAGES + "stackmaster_32x32.png");
-		URL logo64URL = getClass().getResource(IMAGES + "stackmaster_64x64.png");
+		URL logo32URL = getClass().getResource(PathConstants.PATH_IMAGE + PathConstants.PATH_STACKMASTER_32X32_PNG);
+		URL logo64URL = getClass().getResource(PathConstants.PATH_IMAGE + PathConstants.PATH_STACKMASTER_64X64_PNG);
 
 		List<Image> icons = new ArrayList<Image>();
 		icons.add(new ImageIcon(logo32URL).getImage());
 		icons.add(new ImageIcon(logo64URL).getImage());
 		setIconImages(icons);
 
-		setTitle(TITLE);
+		setTitle(UiConstants.TITLE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setBounds(100, 100, 650, 620);
@@ -192,7 +150,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		defaultProfile = propertiesHandler.readProfile(defaultFile);
 
 		propertiesDialog = createPropertiesDialog(defaultProfile.getProperties(), defaultProfile.getProperties());
-		setTitle(TITLE + " - defaults");
+		setTitle(UiConstants.TITLE + " - defaults");
 
 		initMenu();
 
@@ -206,7 +164,6 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		initStatePanel();
 
 		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
-		// tabbedPane.setFont(SwingStarter.actualFont);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel welcome = new JPanel();
@@ -215,14 +172,12 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		welcome.setLayout(new MigLayout("", "[grow,center]", "[center][][][]"));
 
 		welcomeLabel = new JLabel();
-		// welcomeLabel.setFont(SwingStarter.actualFont);
 		welcome.add(welcomeLabel, "cell 0 0,alignx center");
 
 		JLabel platzhalter1 = new JLabel("");
 		welcome.add(platzhalter1, "cell 0 1");
 
-		secondLineLabel = new JLabel();
-		// secondLineLabel.setFont(SwingStarter.actualFont);
+		secondLineLabel = new JLabel("sdf");
 		welcome.add(secondLineLabel, "cell 0 2,alignx left");
 
 		relativPosPanel = new RelativPosPanel(defaultProfile.getProperties(), stateLine);
@@ -236,7 +191,6 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		setAllComponentsDisableState(true);
 
-		setConnectionProperties(defaultProfile.getProperties());
 		LOGGER.info("user interface builded");
 
 		if (applicationPropertyFile.exists()) {
@@ -245,6 +199,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		} else {
 			LOGGER.error("No application.properties available!");
 		}
+		setConnectionProperties(defaultProfile.getProperties());
 
 	}
 
@@ -266,7 +221,6 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		connectionComboBox = new JComboBox<>();
-		connectionComboBox.setFont(SwingStarter.actualFont);
 		connectionComboBox.setPreferredSize(new Dimension(100, 22));
 		connectionComboBox.setMinimumSize(new Dimension(100, 22));
 		connectionComboBox.setMaximumSize(new Dimension(100, 32767));
@@ -278,19 +232,10 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		setFavoriteConnectionIfAvailable();
 
 		connectButton = new JButton("Verbinden");
-		connectButton.setFont(SwingStarter.actualFont);
 		connectButton.setEnabled(false);
 		connectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel.add(connectButton);
-		connectButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				handleConnect();
-
-			}
-
-		});
+		connectButton.addActionListener(actionEvent -> handleConnect());
 
 	}
 
@@ -393,96 +338,47 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		setJMenuBar(menuBar);
 
 		mnDatei = new JMenu("Datei");
-		// mnDatei.setFont(SwingStarter.actualFont);
 		menuBar.add(mnDatei);
 
-		URL deleteURL = getClass().getResource(IMAGES + DELETE_ICON_NAME);
+		URL deleteURL = getClass().getResource(PathConstants.PATH_IMAGE + PathConstants.PATH_DELETE_ICON_NAME);
 		ImageIcon deleteIcon = new ImageIcon(deleteURL);
 		ImageIcon resizedDeleteIcon = ImageUtils.getResizedImage(deleteIcon, 15, 15);
 
 		mntmExit = new JMenuItem("Exit");
-		// mntmExit.setFont(SwingStarter.actualFont);
 		mntmExit.setIcon(resizedDeleteIcon);
-		mntmExit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				handleExit();
-			}
-
-		});
+		mntmExit.addActionListener(e -> handleExit());
 
 		mntmLaden = new JMenuItem("Profil laden");
-		// mntmLaden.setFont(SwingStarter.actualFont);
-		mntmLaden.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				handleLoadProperties();
-			}
-		});
+		mntmLaden.addActionListener(e -> handleLoadProperties());
 		mnDatei.add(mntmLaden);
 
 		mntmProfilSpeichern = new JMenuItem("Profil speichern");
 		mntmProfilSpeichern.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-		// mntmProfilSpeichern.setFont(SwingStarter.actualFont);
 		mntmProfilSpeichern.setEnabled(false);
-		mntmProfilSpeichern.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				handleSaveProperties();
-			}
-
-		});
+		mntmProfilSpeichern.addActionListener(e -> handleSaveProperties());
 		mnDatei.add(mntmProfilSpeichern);
 
 		mntmProfilSpeichernAls = new JMenuItem("Profil speichern unter...");
-		// mntmProfilSpeichernAls.setFont(SwingStarter.actualFont);
-		mntmProfilSpeichernAls.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				handleSaveAsProperties();
-
-			}
-		});
+		mntmProfilSpeichernAls.addActionListener(e -> handleSaveAsProperties());
 		mnDatei.add(mntmProfilSpeichernAls);
 		mnDatei.add(mntmExit);
 
-		URL helpURL = getClass().getResource(IMAGES + "info-icon.png");
+		URL helpURL = getClass().getResource(PathConstants.PATH_IMAGE + PathConstants.PATH_INFO_ICON_PNG);
 		ImageIcon helpIcon = new ImageIcon(helpURL);
 
 		ImageIcon resizedHelpIcon = ImageUtils.getResizedImage(helpIcon, 15, 15);
 
 		mnEinstellungen = new JMenu("Extras");
-		// mnEinstellungen.setFont(SwingStarter.actualFont);
 		menuBar.add(mnEinstellungen);
 
 		mntmEinstellungen = new JMenuItem("Einstellungen");
-		// mntmEinstellungen.setFont(SwingStarter.actualFont);
 		mnEinstellungen.add(mntmEinstellungen);
-		mntmEinstellungen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				propertiesDialog.setVisible(true);
-			}
-
-		});
+		mntmEinstellungen.addActionListener(e -> propertiesDialog.setVisible(true));
 
 		mntmberCusa = new JMenuItem("\u00DCber");
-		// mntmberCusa.setFont(SwingStarter.actualFont);
 		mnEinstellungen.add(mntmberCusa);
 		mntmberCusa.setIcon(resizedHelpIcon);
-		mntmberCusa.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				handleOverUs();
-			}
-
-		});
+		mntmberCusa.addActionListener(e -> handleOverUs());
 		/** Menu Ende */
 	}
 
@@ -607,9 +503,6 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 						"Über", JOptionPane.PLAIN_MESSAGE);
 	}
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 
 		try {
@@ -700,7 +593,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 				actualOpenedProfileFile = selectedFile;
 				Profile loadedConnectionProperties = propertiesHandler.readProfile(actualOpenedProfileFile);
 				setConnectionProperties(loadedConnectionProperties.getProperties());
-				setTitle(TITLE + " - " + selectedFile.getAbsolutePath());
+				setTitle(UiConstants.TITLE + " - " + selectedFile.getAbsolutePath());
 				mntmProfilSpeichern.setEnabled(true);
 			}
 		}
@@ -725,14 +618,14 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 				if (acceptable) {
 					String absolutePath = selectedFile.getAbsolutePath();
 
-					if (!absolutePath.endsWith(FILE_ENDING)) {
-						absolutePath = absolutePath + FILE_ENDING;
+					if (!absolutePath.endsWith(PathConstants.FILE_ENDING_PROFILE)) {
+						absolutePath = absolutePath + PathConstants.FILE_ENDING_PROFILE;
 						selectedFile = new File(absolutePath);
 					}
 					LOGGER.info("chosen file: " + absolutePath);
 					actualOpenedProfileFile = selectedFile;
 					propertiesHandler.writeProfile(actualOpenedProfileFile, defaultProfile);
-					setTitle(TITLE + " - " + absolutePath);
+					setTitle(UiConstants.TITLE + " - " + absolutePath);
 					mntmProfilSpeichern.setEnabled(true);
 				}
 			}
