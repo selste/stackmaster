@@ -11,6 +11,8 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -205,8 +207,8 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 	protected void initStatePanel() {
 		JPanel statePanel = new JPanel();
-		statePanel.setPreferredSize(new Dimension(10, 20));
-		statePanel.setMinimumSize(new Dimension(10, 20));
+		statePanel.setPreferredSize(new Dimension(10, 50));
+		statePanel.setMinimumSize(new Dimension(10, 50));
 		contentPane.add(statePanel, BorderLayout.SOUTH);
 
 		stateLine = new JLabel("");
@@ -235,7 +237,13 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 		connectButton.setEnabled(false);
 		connectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel.add(connectButton);
-		connectButton.addActionListener(actionEvent -> handleConnect());
+		connectButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handleConnect();
+			}
+		});
 
 	}
 
@@ -346,20 +354,46 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		mntmExit = new JMenuItem("Exit");
 		mntmExit.setIcon(resizedDeleteIcon);
-		mntmExit.addActionListener(e -> handleExit());
+		mntmExit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handleExit();
+
+			}
+		});
 
 		mntmLaden = new JMenuItem("Profil laden");
-		mntmLaden.addActionListener(e -> handleLoadProperties());
+		mntmLaden.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handleLoadProperties();
+			}
+		});
 		mnDatei.add(mntmLaden);
 
 		mntmProfilSpeichern = new JMenuItem("Profil speichern");
 		mntmProfilSpeichern.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 		mntmProfilSpeichern.setEnabled(false);
-		mntmProfilSpeichern.addActionListener(e -> handleSaveProperties());
+		mntmProfilSpeichern.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handleSaveProperties();
+
+			}
+		});
 		mnDatei.add(mntmProfilSpeichern);
 
 		mntmProfilSpeichernAls = new JMenuItem("Profil speichern unter...");
-		mntmProfilSpeichernAls.addActionListener(e -> handleSaveAsProperties());
+		mntmProfilSpeichernAls.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handleSaveAsProperties();
+			}
+		});
 		mnDatei.add(mntmProfilSpeichernAls);
 		mnDatei.add(mntmExit);
 
@@ -373,12 +407,26 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 		mntmEinstellungen = new JMenuItem("Einstellungen");
 		mnEinstellungen.add(mntmEinstellungen);
-		mntmEinstellungen.addActionListener(e -> propertiesDialog.setVisible(true));
+		mntmEinstellungen.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				propertiesDialog.setVisible(true);
+
+			}
+		});
 
 		mntmberCusa = new JMenuItem("\u00DCber");
 		mnEinstellungen.add(mntmberCusa);
 		mntmberCusa.setIcon(resizedHelpIcon);
-		mntmberCusa.addActionListener(e -> handleOverUs());
+		mntmberCusa.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				handleOverUs();
+
+			}
+		});
 		/** Menu Ende */
 	}
 
@@ -607,12 +655,12 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 			File selectedFile = chooser.getSelectedFile();
 
 			if (selectedFile != null) {
-				boolean acceptable = false;
+				boolean acceptable = true;
 				if (selectedFile.exists()) {
 					int result = JOptionPane.showConfirmDialog(this, "The file exists, overwrite?", "Existing file",
 							JOptionPane.YES_NO_OPTION);
-					if (result == JOptionPane.YES_OPTION) {
-						acceptable = true;
+					if (result == JOptionPane.NO_OPTION) {
+						acceptable = false;
 					}
 				}
 				if (acceptable) {

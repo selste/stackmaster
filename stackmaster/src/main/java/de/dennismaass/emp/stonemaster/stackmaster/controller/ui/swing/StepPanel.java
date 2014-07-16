@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -19,7 +21,6 @@ import org.apache.log4j.Logger;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
-import de.dennismaass.emp.stonemaster.stackmaster.controller.ui.utils.UiConstants;
 
 public class StepPanel extends JPanel {
 
@@ -42,11 +43,11 @@ public class StepPanel extends JPanel {
 	private boolean pause, stop = false;
 
 	private JLabel autoStepsizeSumLb, autoCountOfDoneRepeatsLb, stateLine, geschaetzteDauerLb, geschaetzteDauerValueLb,
-			lblErfolderlicherWeg, lblMm, label_6;
+	lblErfolderlicherWeg, lblMm, label_6;
 
 	private JButton resetBT, executionBT, stopBT, btnPause;
 	private JCheckBox mirrorCB;
-	private JSpinner stepsizeTF, autoCountOfRepeatsTF;
+	private JSpinner stepsizeTF, autoCountOfPicturesTF;
 
 	public StepPanel(ComConnectionProperties properties, final JLabel stateLine) {
 
@@ -65,27 +66,44 @@ public class StepPanel extends JPanel {
 		stepsizeTF.setFont(actualFont);
 		stepsizeTF.setModel(new SpinnerNumberModel(properties.getStepSize(), 0.001, 250.0, 0.001));
 		add(stepsizeTF, "cell 2 0,growx");
-		stepsizeTF.addChangeListener(e -> refreshDistance());
+		stepsizeTF.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				refreshDistance();
+			}
+		});
 
 		JLabel autoCountOfRepeatsTitle = new JLabel("Anzahl Bilder");
 		autoCountOfRepeatsTitle.setFont(actualFont);
 		add(autoCountOfRepeatsTitle, "cell 0 1,alignx trailing");
 
-		autoCountOfRepeatsTF = new JSpinner();
-		autoCountOfRepeatsTF.setFont(actualFont);
-		autoCountOfRepeatsTF.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-		autoCountOfRepeatsTF.addChangeListener(e -> {
-			refreshSleep();
-			refreshDistance();
+		autoCountOfPicturesTF = new JSpinner();
+		autoCountOfPicturesTF.setFont(actualFont);
+		autoCountOfPicturesTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		autoCountOfPicturesTF.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				Integer value = (Integer) autoCountOfPicturesTF.getValue();
+
+				refreshComponents(value);
+			}
+
 		});
-		add(autoCountOfRepeatsTF, "cell 2 1,growx");
+		add(autoCountOfPicturesTF, "cell 2 1,growx");
 
 		mirrorCB = new JCheckBox("Spiegel vorauslösung");
 		mirrorCB.setFont(actualFont);
-		mirrorCB.addChangeListener(e -> {
-			refreshDistance();
-			refreshSleep();
+		mirrorCB.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				refreshDistance();
+				refreshSleep();
+			}
 		});
+
 		add(mirrorCB, "cell 2 2,alignx center");
 
 		executionBT = new JButton("ausführen");
@@ -116,23 +134,27 @@ public class StepPanel extends JPanel {
 
 							if (communicator != null) {
 								lastManStep = stepSize;
-								int countOfSteps = (int) autoCountOfRepeatsTF.getValue();
+								int countOfPictures = (int) autoCountOfPicturesTF.getValue();
 
-								if (countOfSteps > 0) {
+								if (countOfPictures > 1) {
 
-									Thread job = createJob(stepSize, countOfSteps, sleepMovementMirror,
+									Thread job = createJob(stepSize, countOfPictures, sleepMovementMirror,
 											sleepMirrorPicture, sleepPictureMovement, sleepWhileMove, pulseDuration);
 									job.start();
 
-								} else {
-									double moveStep = stepSize;
-									if (reverseStep) {
-										moveStep *= -1;
-									}
-									move(moveStep);
-
-									refreshCountUi();
 								}
+								if (countOfPictures == 1) {
+									auslösen(pulseDuration);
+								}
+								// else {
+								// double moveStep = stepSize;
+								// if (reverseStep) {
+								// moveStep *= -1;
+								// }
+								// move(moveStep);
+								//
+								// refreshCountUi();
+								// }
 
 							}
 						} else {
@@ -227,10 +249,27 @@ public class StepPanel extends JPanel {
 		lblMm = new JLabel("0.0 mm");
 		lblMm.setFont(actualFont);
 		add(lblMm, "cell 2 10");
+
+		refreshComponents((Integer) autoCountOfPicturesTF.getValue());
+	}
+
+	public void refreshComponents(Integer value) {
+		if (value != null) {
+			if (value == 1) {
+				mirrorCB.setEnabled(false);
+				stepsizeTF.setEnabled(false);
+			} else if (value > 1) {
+				mirrorCB.setEnabled(true);
+				stepsizeTF.setEnabled(true);
+			}
+
+			refreshSleep();
+			refreshDistance();
+		}
 	}
 
 	public void refreshDistance() {
-		double distanceSum = (int) autoCountOfRepeatsTF.getValue() * (double) stepsizeTF.getValue();
+		double distanceSum = (int) autoCountOfPicturesTF.getValue() * (double) stepsizeTF.getValue();
 		double roundedDistanceSum = Math.rint(distanceSum * 1000) / 1000;
 		lblMm.setText(Double.toString(roundedDistanceSum) + " mm");
 	}
@@ -242,7 +281,7 @@ public class StepPanel extends JPanel {
 		if (mirrorCB.isSelected()) {
 			sleepSum += properties.getSleepMirrorPicture() + properties.getPulseDuration();
 		}
-		double sleepSumMs = sleepSum * (int) autoCountOfRepeatsTF.getValue();
+		double sleepSumMs = sleepSum * (int) autoCountOfPicturesTF.getValue();
 		double sleepSumMin = sleepSumMs / 60000;
 		double roundedSleepSumMin = Math.rint(sleepSumMin * 1000) / 1000;
 		geschaetzteDauerValueLb.setText(Double.toString(roundedSleepSumMin) + " min");
@@ -257,7 +296,7 @@ public class StepPanel extends JPanel {
 		}
 	}
 
-	protected Thread createJob(final double stepSize, final int countOfSteps, final long sleepMovementMirrow,
+	protected Thread createJob(final double stepSize, final int countOfPictures, final long sleepMovementMirrow,
 			final long sleepMirrowPicture, final long sleepPictureMovement, final long sleepWhileMove,
 			final long pulseDuration) {
 
@@ -268,7 +307,7 @@ public class StepPanel extends JPanel {
 				setAllComponentsDisableState(true);
 				setStopEnable(true);
 
-				for (int i = 0; i < countOfSteps; i++) {
+				for (int i = 0; i < countOfPictures - 1; i++) {
 					// Picture
 					if (stop) {
 						break;
@@ -301,6 +340,11 @@ public class StepPanel extends JPanel {
 					pause((int) (sleepWhileMove * moveStep) + sleepMovementMirrow);
 
 				}
+				// Picture
+				if (!stop) {
+					auslösen(pulseDuration);
+				}
+
 				stop = false;
 				setStopEnable(false);
 				setAllComponentsDisableState(false);
@@ -407,7 +451,7 @@ public class StepPanel extends JPanel {
 		resetBT.setEnabled(!disableState);
 
 		stepsizeTF.setEnabled(!disableState);
-		autoCountOfRepeatsTF.setEnabled(!disableState);
+		autoCountOfPicturesTF.setEnabled(!disableState);
 
 		mirrorCB.setEnabled(!disableState);
 
