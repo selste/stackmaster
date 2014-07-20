@@ -7,6 +7,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>distribution</artifactId>
+	<packaging>pom</packaging>
 
 	<dependencies>
 		<dependency>
@@ -21,10 +22,60 @@
 		</dependency>
 	</dependencies>
 
-
-
+	<!--  FTP Properties in .m2/settings.xml-->
+	
 	<build>
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>ftp</id>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+								<ftp action="send" server="${ftp.host}" remotedir="${ftp.windowsremotedir}"
+									userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}"
+									verbose="${ftp.verbose}">
+									<fileset dir="${project.build.directory}">
+										<include name="*windows*.zip" />
+									</fileset>
+								</ftp>
+								<ftp action="send" server="${ftp.host}" remotedir="${ftp.macremotedir}"
+									userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}"
+									verbose="${ftp.verbose}">
+									<fileset dir="${project.build.directory}">
+										<include name="*mac*.zip" />
+									</fileset>
+								</ftp>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>commons-net</groupId>
+						<artifactId>commons-net</artifactId>
+						<version>1.4.1</version>
+					</dependency>
+					<dependency>
+						<groupId>ant</groupId>
+						<artifactId>ant-commons-net</artifactId>
+						<version>1.6.5</version>
+					</dependency>
+					<dependency>
+						<groupId>ant</groupId>
+						<artifactId>ant-nodeps</artifactId>
+						<version>1.6.5</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -51,7 +102,7 @@
 							<goal>single</goal>
 						</goals>
 					</execution>
-						<execution>
+					<execution>
 						<id>macx64</id>
 						<configuration>
 							<descriptor>src/main/resources/assembly_mac_x64.xml</descriptor>
@@ -66,6 +117,7 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 
 </project>

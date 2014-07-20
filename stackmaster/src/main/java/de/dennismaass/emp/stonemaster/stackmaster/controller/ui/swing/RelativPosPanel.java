@@ -2,7 +2,6 @@ package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
@@ -18,10 +17,11 @@ import org.apache.log4j.Logger;
 
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
+import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 
 public class RelativPosPanel extends JPanel {
 
-	private static long serialVersionUID = 287824350037456067L;
+	private static final long serialVersionUID = 287824350037456067L;
 
 	private static Logger LOGGER = Logger.getLogger(RelativPosPanel.class);
 
@@ -311,38 +311,28 @@ public class RelativPosPanel extends JPanel {
 		/** Icons */
 		URL doubleUpURL = getClass().getResource(IMAGES + "up_blue2.png");
 		doubleUpIcon = new ImageIcon(doubleUpURL);
-		doubleUpIcon = getResizedImage(doubleUpIcon, 70, 70);
+		doubleUpIcon = ImageUtils.getResizedImage(doubleUpIcon, 70, 70);
 
 		URL upBigURL = getClass().getResource(IMAGES + "up_blue2.png");
 		upBigIcon = new ImageIcon(upBigURL);
-		upBigIcon = getResizedImage(upBigIcon, 50, 50);
+		upBigIcon = ImageUtils.getResizedImage(upBigIcon, 50, 50);
 
 		URL upSmallURL = getClass().getResource(IMAGES + "up_blue2.png");
 		upSmallIcon = new ImageIcon(upSmallURL);
-		upSmallIcon = getResizedImage(upSmallIcon, 30, 30);
+		upSmallIcon = ImageUtils.getResizedImage(upSmallIcon, 30, 30);
 
 		URL downSmallURL = getClass().getResource(IMAGES + "down_blue2.png");
 		downSmallIcon = new ImageIcon(downSmallURL);
-		downSmallIcon = getResizedImage(downSmallIcon, 30, 30);
+		downSmallIcon = ImageUtils.getResizedImage(downSmallIcon, 30, 30);
 
 		URL downBigURL = getClass().getResource(IMAGES + "down_blue2.png");
 		downBigIcon = new ImageIcon(downBigURL);
-		downBigIcon = getResizedImage(downBigIcon, 50, 50);
+		downBigIcon = ImageUtils.getResizedImage(downBigIcon, 50, 50);
 
 		URL doubleDownURL = getClass().getResource(IMAGES + "down_blue2.png");
 		doubleDownIcon = new ImageIcon(doubleDownURL);
-		doubleDownIcon = getResizedImage(doubleDownIcon, 70, 70);
+		doubleDownIcon = ImageUtils.getResizedImage(doubleDownIcon, 70, 70);
 		/** Icons Ende */
-	}
-
-	// TODO: auslagern
-	protected ImageIcon getResizedImage(ImageIcon icon, int width, int height) {
-		LOGGER.info("resize icon to " + width + "x" + height);
-
-		Image img = icon.getImage();
-		Image newimg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
-		icon = new ImageIcon(newimg);
-		return icon;
 	}
 
 	public void setAllComponentsDisableState(boolean disableState) {

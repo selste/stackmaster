@@ -81,7 +81,7 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 //- Baukasten
 //- Mehrsprachigkeit
 public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
-		ComConnectionPropertiesListener {
+ComConnectionPropertiesListener {
 
 	private static final long serialVersionUID = 4155209335768313320L;
 
@@ -119,11 +119,12 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 	public SwingStarter() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		LOGGER.info("Start SwingStarter");
-
-		LOGGER.info("OS_ARCH " + Constants.OS_ARCH);
-		LOGGER.info("OS_NAME " + Constants.OS_NAME);
-		LOGGER.info("OS_VERSION " + Constants.OS_VERSION);
+		LOGGER.info("--------------------------------------------------------");
+		LOGGER.info("os: name=" + Constants.OS_NAME + ", architecture=" + Constants.OS_ARCH + ", version="
+				+ Constants.OS_VERSION);
+		LOGGER.info("java: version=" + Constants.JAVA_VERSION + ", home=" + Constants.JAVA_HOME + ", vendor="
+				+ Constants.JAVA_VENDOR);
+		LOGGER.info("--------------------------------------------------------");
 
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -133,7 +134,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 			}
 		});
 
-		LOGGER.info("try building user interface");
+		LOGGER.info("building user interface...");
 
 		URL logo32URL = getClass().getResource(PathConstants.PATH_IMAGE + PathConstants.PATH_STACKMASTER_32X32_PNG);
 		URL logo64URL = getClass().getResource(PathConstants.PATH_IMAGE + PathConstants.PATH_STACKMASTER_64X64_PNG);
@@ -512,7 +513,7 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 	}
 
 	protected void handleExit() {
-		LOGGER.info("Exit StackMaster");
+		LOGGER.info("Exit");
 
 		if (communicator != null) {
 			communicator.stop();
@@ -545,10 +546,10 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 	protected void handleOverUs() {
 		JOptionPane
-				.showMessageDialog(
-						getFrame(),
-						"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte",
-						"Über", JOptionPane.PLAIN_MESSAGE);
+		.showMessageDialog(
+				getFrame(),
+				"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte",
+				"Über", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public static void main(String[] args) {

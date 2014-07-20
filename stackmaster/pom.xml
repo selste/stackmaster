@@ -74,7 +74,7 @@
 				<version>2.2.1</version>
 				<executions>
 					<execution>
-						<id>ps1</id>
+						<id>stackmaster</id>
 						<goals>
 							<goal>jar</goal>
 						</goals>
@@ -94,18 +94,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>${mainClass.swing}</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
 			</plugin>
 
 			<plugin>
@@ -135,13 +123,10 @@
 			</activation>
 			<build>
 				<plugins>
-
-
-
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-shade-plugin</artifactId>
-						<version>2.2</version>
+						<version>2.3</version>
 						<executions>
 							<execution>
 								<phase>package</phase>
@@ -151,7 +136,6 @@
 							</execution>
 						</executions>
 						<configuration>
-						<finalName>stackmaster-${project.version}-shaded</finalName>
 							<shadedArtifactAttached>true</shadedArtifactAttached>
 							<shadedClassifierName>shaded</shadedClassifierName>
 							<transformers>
@@ -162,39 +146,44 @@
 							</transformers>
 						</configuration>
 					</plugin>
+
+
 					<plugin>
-						<groupId>org.bluestemsoftware.open.maven.plugin</groupId>
-						<artifactId>launch4j-plugin</artifactId>
-						<version>1.5.0.0</version>
+						<groupId>com.akathist.maven.plugins.launch4j</groupId>
+						<artifactId>launch4j-maven-plugin</artifactId>
+						<version>1.5.2</version>
 						<executions>
 							<execution>
-								<id>l4j-gui</id>
+								<id>l4j-clui</id>
 								<phase>package</phase>
 								<goals>
 									<goal>launch4j</goal>
 								</goals>
 								<configuration>
 									<headerType>gui</headerType>
-									<outfile>./target/stackmaster.exe</outfile>
-									<jar>
-										./target/stackmaster-${project.version}-shaded.jar</jar>
-									<errTitle>stackmaster error</errTitle>
+									<jar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</jar>
+									<outfile>${project.build.directory}/stackmaster.exe</outfile>
+									<downloadUrl>http://www.stonemaster.eu/#/products/microscopy/stackmaster/downloads</downloadUrl>
+									<classPath>
+										<mainClass>${mainClass.swing}</mainClass>
+										<preCp>anything</preCp>
+									</classPath>
 									<icon>${icon.path}</icon>
 									<jre>
-										<path>/jre</path>
+										<path>jre</path>
 										<minVersion>1.7.0</minVersion>
-										<initialHeapSize>128</initialHeapSize>
-										<maxHeapSize>256</maxHeapSize>
+										<jdkPreference>preferJre</jdkPreference>
 									</jre>
 									<versionInfo>
 										<fileVersion>1.0.0.0</fileVersion>
-										<txtFileVersion>1.0.0.0</txtFileVersion>
-										<fileDescription>Desc</fileDescription>
-										<copyright>C</copyright>
+										<txtFileVersion>${project.version}</txtFileVersion>
+										<fileDescription>${project.name}</fileDescription>
+										<copyright>2012 stonemaster.eu</copyright>
 										<productVersion>1.0.0.0</productVersion>
 										<txtProductVersion>1.0.0.0</txtProductVersion>
-										<productName>StackMaster</productName>
-										<internalName>StackMaster</internalName>
+										<productName>${project.name}</productName>
+										<companyName>stackmaster.eu</companyName>
+										<internalName>stackmaster</internalName>
 										<originalFilename>stackmaster.exe</originalFilename>
 									</versionInfo>
 								</configuration>
@@ -204,59 +193,6 @@
 				</plugins>
 			</build>
 		</profile>
-		<profile>
-			<id>mac</id>
-			<activation>
-				<os>
-					<family>mac</family>
-					<arch>x64</arch>
-				</os>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-shade-plugin</artifactId>
-						<version>2.2</version>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>shade</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<shadedArtifactAttached>true</shadedArtifactAttached>
-							<shadedClassifierName>shaded</shadedClassifierName>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>${mainClass.swing}</mainClass>
-								</transformer>
-							</transformers>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>osxappbundle-maven-plugin</artifactId>
-						<version>1.0-alpha-2</version>
-						<configuration>
-							<mainClass>${mainClass.swing}</mainClass>
-							<javaApplicationStub>D:/rainer/produkte/stackmaster/jre/x64/macosx/jre-7u51-macosx-x64.dmg</javaApplicationStub>
-							<iconFile>${icon.path}</iconFile>
-						</configuration>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>bundle</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
+
 	</profiles>
 </project>

@@ -1099,3 +1099,147 @@ java.lang.NumberFormatException: null
 2014-07-16 19:54:46 INFO  PropertiesFileHandler:51 - properties loaded
 2014-07-16 19:54:52 INFO  SwingStarter:131 - window closed
 2014-07-16 19:54:52 INFO  SwingStarter:515 - Exit StackMaster
+2014-07-17 22:52:00 INFO  SwingStarter:122 - Start SwingStarter
+2014-07-17 22:52:00 INFO  SwingStarter:124 - OS_ARCH amd64
+2014-07-17 22:52:00 INFO  SwingStarter:125 - OS_NAME windows 8.1
+2014-07-17 22:52:00 INFO  SwingStarter:126 - OS_VERSION 6.3
+2014-07-17 22:52:00 INFO  SwingStarter:136 - try building user interface
+2014-07-17 22:52:00 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-17 22:52:01 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-17 22:52:01 INFO  RelativPosPanel:340 - resize icon to 70x70
+2014-07-17 22:52:01 INFO  RelativPosPanel:340 - resize icon to 50x50
+2014-07-17 22:52:01 INFO  RelativPosPanel:340 - resize icon to 30x30
+2014-07-17 22:52:01 INFO  RelativPosPanel:340 - resize icon to 30x30
+2014-07-17 22:52:01 INFO  RelativPosPanel:340 - resize icon to 50x50
+2014-07-17 22:52:01 INFO  RelativPosPanel:340 - resize icon to 70x70
+2014-07-17 22:52:01 INFO  SwingStarter:451 - build connection thread
+2014-07-17 22:52:01 INFO  SwingStarter:335 - set all components disable
+2014-07-17 22:52:01 INFO  StepPanel:447 - set all components disable
+2014-07-17 22:52:01 INFO  RelativPosPanel:352 - set all components disable
+2014-07-17 22:52:01 INFO  SwingStarter:196 - user interface builded
+2014-07-17 22:52:01 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-17 22:52:01 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-17 22:52:06 INFO  SwingStarter:131 - window closed
+2014-07-17 22:52:06 INFO  SwingStarter:515 - Exit StackMaster
+2014-07-19 17:47:20 INFO  SwingStarter:122 - Start SwingStarter
+2014-07-19 17:47:20 INFO  SwingStarter:124 - OS_ARCH amd64
+2014-07-19 17:47:20 INFO  SwingStarter:125 - OS_NAME windows 8.1
+2014-07-19 17:47:20 INFO  SwingStarter:126 - OS_VERSION 6.3
+2014-07-19 17:47:20 INFO  SwingStarter:127 - JAVA_VERSION 1.8.0_05
+2014-07-19 17:47:20 INFO  SwingStarter:137 - try building user interface
+2014-07-19 17:47:20 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-19 17:47:21 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-19 17:47:21 INFO  RelativPosPanel:340 - resize icon to 70x70
+2014-07-19 17:47:21 INFO  RelativPosPanel:340 - resize icon to 50x50
+2014-07-19 17:47:21 INFO  RelativPosPanel:340 - resize icon to 30x30
+2014-07-19 17:47:21 INFO  RelativPosPanel:340 - resize icon to 30x30
+2014-07-19 17:47:21 INFO  RelativPosPanel:340 - resize icon to 50x50
+2014-07-19 17:47:21 INFO  RelativPosPanel:340 - resize icon to 70x70
+2014-07-19 17:47:21 INFO  SwingStarter:452 - build connection thread
+2014-07-19 17:47:21 INFO  SwingStarter:336 - set all components disable
+2014-07-19 17:47:21 INFO  StepPanel:447 - set all components disable
+2014-07-19 17:47:21 INFO  RelativPosPanel:352 - set all components disable
+2014-07-19 17:47:21 INFO  SwingStarter:197 - user interface builded
+2014-07-19 17:47:21 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-19 17:47:21 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-19 17:47:21 INFO  SwingStarter:471 - add Connection COM3
+2014-07-19 17:47:21 INFO  SwingStarter:495 - count of connections 1
+2014-07-19 17:47:32 INFO  SwingStarter:132 - window closed
+2014-07-19 17:47:32 INFO  SwingStarter:516 - Exit StackMaster
+2014-07-20 12:15:46 INFO  SwingStarter:122 - Start SwingStarter
+2014-07-20 12:15:46 INFO  SwingStarter:124 - OS_ARCH amd64
+2014-07-20 12:15:46 INFO  SwingStarter:125 - OS_NAME windows 8.1
+2014-07-20 12:15:46 INFO  SwingStarter:126 - OS_VERSION 6.3
+2014-07-20 12:15:46 INFO  SwingStarter:127 - JAVA_VERSION 1.8.0_05
+2014-07-20 12:15:46 INFO  SwingStarter:128 - JAVA_RUNTIME_VERSION 1.8.0_05-b13
+2014-07-20 12:15:46 INFO  SwingStarter:137 - try building user interface
+2014-07-20 12:15:46 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 12:15:46 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 12:15:47 INFO  SwingStarter:452 - build connection thread
+2014-07-20 12:15:47 INFO  SwingStarter:336 - set all components disable
+2014-07-20 12:15:47 INFO  StepPanel:447 - set all components disable
+2014-07-20 12:15:47 INFO  RelativPosPanel:342 - set all components disable
+2014-07-20 12:15:47 INFO  SwingStarter:197 - user interface builded
+2014-07-20 12:15:47 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 12:15:47 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 12:17:37 INFO  SwingStarter:132 - window closed
+2014-07-20 12:17:37 INFO  SwingStarter:516 - Exit StackMaster
+2014-07-20 13:17:36 INFO  SwingStarter:122 - ---- Start de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter -----
+2014-07-20 13:17:36 INFO  SwingStarter:124 - OS: ARCH amd64, NAME windows 8.1, VERSION 6.3
+2014-07-20 13:17:36 INFO  SwingStarter:126 - JAVA_VERSION 1.8.0_05
+2014-07-20 13:17:36 INFO  SwingStarter:135 - try building user interface
+2014-07-20 13:17:36 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 13:17:36 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 13:17:37 INFO  SwingStarter:450 - build connection thread
+2014-07-20 13:17:37 INFO  SwingStarter:334 - set all components disable
+2014-07-20 13:17:37 INFO  StepPanel:447 - set all components disable
+2014-07-20 13:17:37 INFO  RelativPosPanel:342 - set all components disable
+2014-07-20 13:17:37 INFO  SwingStarter:195 - user interface builded
+2014-07-20 13:17:37 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 13:17:37 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 13:17:38 INFO  SwingStarter:130 - window closed
+2014-07-20 13:17:38 INFO  SwingStarter:514 - Exit StackMaster
+2014-07-20 13:21:53 INFO  SwingStarter:122 - ---- start de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing.SwingStarter -----
+2014-07-20 13:21:53 INFO  SwingStarter:123 - os: name windows 8.1, architecture amd64, version 6.3
+2014-07-20 13:21:53 INFO  SwingStarter:125 - java: version 1.8.0_05
+2014-07-20 13:21:53 INFO  SwingStarter:126 - ---------------------
+2014-07-20 13:21:53 INFO  SwingStarter:136 - building user interface...
+2014-07-20 13:21:53 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 13:21:53 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 13:21:54 INFO  SwingStarter:451 - build connection thread
+2014-07-20 13:21:54 INFO  SwingStarter:335 - set all components disable
+2014-07-20 13:21:54 INFO  StepPanel:447 - set all components disable
+2014-07-20 13:21:54 INFO  RelativPosPanel:342 - set all components disable
+2014-07-20 13:21:54 INFO  SwingStarter:196 - user interface builded
+2014-07-20 13:21:54 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 13:21:54 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 13:21:55 INFO  SwingStarter:131 - window closed
+2014-07-20 13:21:55 INFO  SwingStarter:515 - Exit
+2014-07-20 13:22:55 INFO  SwingStarter:122 - ------------------------------------------------
+2014-07-20 13:22:55 INFO  SwingStarter:123 - os: name windows 8.1, architecture amd64, version 6.3
+2014-07-20 13:22:55 INFO  SwingStarter:125 - java: version 1.8.0_05
+2014-07-20 13:22:55 INFO  SwingStarter:126 - ------------------------------------------------
+2014-07-20 13:22:55 INFO  SwingStarter:136 - building user interface...
+2014-07-20 13:22:55 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 13:22:55 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 13:22:55 INFO  SwingStarter:451 - build connection thread
+2014-07-20 13:22:55 INFO  SwingStarter:335 - set all components disable
+2014-07-20 13:22:55 INFO  StepPanel:447 - set all components disable
+2014-07-20 13:22:55 INFO  RelativPosPanel:342 - set all components disable
+2014-07-20 13:22:55 INFO  SwingStarter:196 - user interface builded
+2014-07-20 13:22:55 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 13:22:55 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 13:22:57 INFO  SwingStarter:131 - window closed
+2014-07-20 13:22:57 INFO  SwingStarter:515 - Exit
+2014-07-20 13:25:11 INFO  SwingStarter:122 - --------------------------------------------------------
+2014-07-20 13:25:11 INFO  SwingStarter:123 - os: name=Windows 8.1, architecture=amd64, version=6.3
+2014-07-20 13:25:11 INFO  SwingStarter:125 - java: version=1.8.0_05, home=C:\Program Files\Java\jdk1.8.0_05\jre
+2014-07-20 13:25:11 INFO  SwingStarter:126 - --------------------------------------------------------
+2014-07-20 13:25:11 INFO  SwingStarter:136 - building user interface...
+2014-07-20 13:25:11 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 13:25:11 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 13:25:11 INFO  SwingStarter:451 - build connection thread
+2014-07-20 13:25:11 INFO  SwingStarter:335 - set all components disable
+2014-07-20 13:25:11 INFO  StepPanel:447 - set all components disable
+2014-07-20 13:25:11 INFO  RelativPosPanel:342 - set all components disable
+2014-07-20 13:25:11 INFO  SwingStarter:196 - user interface builded
+2014-07-20 13:25:11 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 13:25:11 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 13:25:13 INFO  SwingStarter:131 - window closed
+2014-07-20 13:25:13 INFO  SwingStarter:515 - Exit
+2014-07-20 13:26:43 INFO  SwingStarter:122 - --------------------------------------------------------
+2014-07-20 13:26:43 INFO  SwingStarter:123 - os: name=Windows 8.1, architecture=amd64, version=6.3
+2014-07-20 13:26:43 INFO  SwingStarter:125 - java: version=1.8.0_05, home=C:\Program Files\Java\jdk1.8.0_05\jre, vendor=Oracle Corporation
+2014-07-20 13:26:43 INFO  SwingStarter:127 - --------------------------------------------------------
+2014-07-20 13:26:43 INFO  SwingStarter:137 - building user interface...
+2014-07-20 13:26:43 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 13:26:44 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 13:26:44 INFO  SwingStarter:452 - build connection thread
+2014-07-20 13:26:44 INFO  SwingStarter:336 - set all components disable
+2014-07-20 13:26:44 INFO  StepPanel:447 - set all components disable
+2014-07-20 13:26:44 INFO  RelativPosPanel:342 - set all components disable
+2014-07-20 13:26:44 INFO  SwingStarter:197 - user interface builded
+2014-07-20 13:26:44 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-20 13:26:44 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-20 13:26:45 INFO  SwingStarter:132 - window closed
+2014-07-20 13:26:45 INFO  SwingStarter:516 - Exit

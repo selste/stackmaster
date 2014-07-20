@@ -24,7 +24,7 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicato
 
 public class StepPanel extends JPanel {
 
-	private static long serialVersionUID = -2489089765486689116L;
+	private static final long serialVersionUID = -2489089765486689116L;
 
 	private static Logger LOGGER = Logger.getLogger(StepPanel.class);
 
@@ -43,7 +43,7 @@ public class StepPanel extends JPanel {
 	private boolean pause, stop = false;
 
 	private JLabel autoStepsizeSumLb, autoCountOfDoneRepeatsLb, stateLine, geschaetzteDauerLb, geschaetzteDauerValueLb,
-	lblErfolderlicherWeg, lblMm, label_6;
+			lblErfolderlicherWeg, lblMm, label_6;
 
 	private JButton resetBT, executionBT, stopBT, btnPause;
 	private JCheckBox mirrorCB;
