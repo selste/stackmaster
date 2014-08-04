@@ -25,21 +25,31 @@
 		<module>
 			../distribution
 		</module>
+		<module>../web</module>
 	</modules>
-	
-	
+
+
 
 
 	<properties>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<icon.path>${basedir}/src/main/resources/images/stackmaster.ico</icon.path>
+		<com.miglayout.miglayout.version>3.7.4</com.miglayout.miglayout.version>
+
+		<org.codehaus.jackson.jackson-mapper-asl.version>1.9.13</org.codehaus.jackson.jackson-mapper-asl.version>
+
 		<org.rxtx.version>2.2pre2</org.rxtx.version>
 		<org.projectlombok.lombok.version>1.14.2</org.projectlombok.lombok.version>
 		<log4j.log4j.version>1.2.17</log4j.log4j.version>
-		<com.miglayout.miglayout.version>3.7.4</com.miglayout.miglayout.version>
 		<org.apache.commons.commons-lang3.version> 3.3.2</org.apache.commons.commons-lang3.version>
-		<icon.path>${basedir}/src/main/resources/images/stackmaster.ico</icon.path>
+		<com.google.guava.guava.version>17.0</com.google.guava.guava.version>
+		<com.sun.jersey.jersey-core.version> 1.18.1</com.sun.jersey.jersey-core.version>
+
+		<javax.servlet.javax.servlet-api.version>3.1.0</javax.servlet.javax.servlet-api.version>
+		<org.eclipse.jetty.jetty-maven-plugin.version>9.2.1.v20140609</org.eclipse.jetty.jetty-maven-plugin.version>
 	</properties>
 
 	<repositories>
@@ -66,15 +76,40 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${org.codehaus.jackson.jackson-mapper-asl.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-core</artifactId>
+				<version>${com.sun.jersey.jersey-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-client</artifactId>
+				<version>${com.sun.jersey.jersey-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-server</artifactId>
+				<version>${com.sun.jersey.jersey-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-json</artifactId>
+				<version>${com.sun.jersey.jersey-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-servlet</artifactId>
+				<version>${com.sun.jersey.jersey-core.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
 				<version>${org.projectlombok.lombok.version}</version>
 				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
-				<artifactId>common</artifactId>
-				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
@@ -90,6 +125,18 @@
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
 				<version>${log4j.log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${javax.servlet.javax.servlet-api.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
+				<artifactId>common</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.miglayout</groupId>

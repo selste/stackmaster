@@ -1243,3 +1243,207 @@ java.lang.NumberFormatException: null
 2014-07-20 13:26:44 INFO  PropertiesFileHandler:51 - properties loaded
 2014-07-20 13:26:45 INFO  SwingStarter:132 - window closed
 2014-07-20 13:26:45 INFO  SwingStarter:516 - Exit
+2014-07-21 20:20:58 INFO  SwingStarter:122 - --------------------------------------------------------
+2014-07-21 20:20:58 INFO  SwingStarter:123 - os: name=Windows 8.1, architecture=amd64, version=6.3
+2014-07-21 20:20:58 INFO  SwingStarter:125 - java: version=1.8.0_05, home=C:\Program Files\Java\jdk1.8.0_05\jre, vendor=Oracle Corporation
+2014-07-21 20:20:58 INFO  SwingStarter:127 - --------------------------------------------------------
+2014-07-21 20:20:58 INFO  SwingStarter:137 - building user interface...
+2014-07-21 20:20:58 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-21 20:20:58 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-21 20:20:58 INFO  SwingStarter:452 - build connection thread
+2014-07-21 20:20:58 INFO  SwingStarter:336 - set all components disable
+2014-07-21 20:20:58 INFO  StepPanel:447 - set all components disable
+2014-07-21 20:20:58 INFO  RelativPosPanel:342 - set all components disable
+2014-07-21 20:20:58 INFO  SwingStarter:197 - user interface builded
+2014-07-21 20:20:58 INFO  PropertiesFileHandler:39 - try loading properties
+2014-07-21 20:20:58 INFO  PropertiesFileHandler:51 - properties loaded
+2014-07-21 20:21:02 INFO  PropertiesDialog:274 - try to save properties
+2014-07-21 20:21:02 INFO  PropertiesDialog:275 - properties are valid: true
+2014-07-21 20:21:04 INFO  SwingStarter:132 - window closed
+2014-07-21 20:21:04 INFO  SwingStarter:516 - Exit
+2014-08-04 22:46:03 INFO  SwingStarter:124 - name: COM3
+2014-08-04 22:46:03 INFO  SwingStarter:129 - --------------------------------------------------------
+2014-08-04 22:46:03 INFO  SwingStarter:130 - os: name=Windows 8.1, architecture=amd64, version=6.3
+2014-08-04 22:46:03 INFO  SwingStarter:132 - java: version=1.8.0_05, home=C:\Program Files\Java\jdk1.8.0_05\jre, vendor=Oracle Corporation
+2014-08-04 22:46:03 INFO  SwingStarter:134 - --------------------------------------------------------
+2014-08-04 22:46:03 INFO  PropertiesFileHandler:39 - try loading properties
+2014-08-04 22:46:03 INFO  PropertiesFileHandler:51 - properties loaded
+2014-08-04 22:46:03 INFO  SwingStarter:459 - build connection thread
+2014-08-04 22:46:03 INFO  StepPanel:452 - set all components disable
+2014-08-04 22:46:03 INFO  RelativPosPanel:342 - set all components disable
+2014-08-04 22:46:03 INFO  SwingStarter:202 - user interface builded
+2014-08-04 22:46:03 ERROR ApplicationPropertiesFileHandler:15 - Loading application.properties: C:\Users\Dennis\git\stackmaster\stackmaster\application.properties
+2014-08-04 22:46:03 INFO  PropertiesFileHandler:39 - try loading properties
+2014-08-04 22:46:03 INFO  PropertiesFileHandler:51 - properties loaded
+2014-08-04 22:46:03 INFO  SwingStarter:478 - add new Connection COM3
+2014-08-04 22:46:03 ERROR ApplicationPropertiesFileHandler:48 - no error by parsing applicationProperties
+2014-08-04 22:46:03 INFO  SwingStarter:594 - set new connection properties: ConnectionProperties: fastUpSpeed=1000, middleUpSpeed=500, slowUpSpeed=100, fastDownSpeed=1000, slowDownSpeed=100, middleDownSpeed=500, stepsPerMm=64025, reverseSteps=false, microstepResolutionMode=4, sleepMovementMirror=1000, sleepMirrorPicture=1000, sleepWhileMove=1000, sleepPictureMovement=1000, pulseDuration=500, stepSize=0.01, pictureCount=0, mirrorActivated=false, comConnectionName=COM5
+2014-08-04 22:46:03 INFO  SwingStarter:502 - 1 connections available
+2014-08-04 22:46:05 INFO  SwingStarter:139 - closing window
+2014-08-04 22:46:05 INFO  SwingStarter:523 - Exit
+2014-08-04 22:56:43 INFO  SwingStarter:129 - --------------------------------------------------------
+2014-08-04 22:56:43 INFO  SwingStarter:130 - os: name=Windows 8.1, architecture=amd64, version=6.3
+2014-08-04 22:56:43 INFO  SwingStarter:132 - java: version=1.8.0_05, home=C:\Program Files\Java\jdk1.8.0_05\jre, vendor=Oracle Corporation
+2014-08-04 22:56:43 INFO  SwingStarter:134 - --------------------------------------------------------
+2014-08-04 22:56:43 INFO  PropertiesFileHandler:39 - try loading properties
+2014-08-04 22:56:43 INFO  PropertiesFileHandler:51 - properties loaded
+2014-08-04 22:56:43 INFO  SwingStarter:459 - build connection thread
+2014-08-04 22:56:43 INFO  StepPanel:452 - set all components disable
+2014-08-04 22:56:43 INFO  RelativPosPanel:342 - set all components disable
+2014-08-04 22:56:43 INFO  SwingStarter:202 - user interface builded
+2014-08-04 22:56:43 ERROR ApplicationPropertiesFileHandler:15 - Loading application.properties: C:\Users\Dennis\git\stackmaster\stackmaster\application.properties
+2014-08-04 22:56:43 INFO  PropertiesFileHandler:39 - try loading properties
+2014-08-04 22:56:43 INFO  PropertiesFileHandler:51 - properties loaded
+2014-08-04 22:56:43 ERROR ApplicationPropertiesFileHandler:48 - no error by parsing applicationProperties
+2014-08-04 22:56:43 INFO  SwingStarter:594 - set new connection properties: ConnectionProperties: fastUpSpeed=1000, middleUpSpeed=500, slowUpSpeed=100, fastDownSpeed=1000, slowDownSpeed=100, middleDownSpeed=500, stepsPerMm=64025, reverseSteps=false, microstepResolutionMode=4, sleepMovementMirror=1000, sleepMirrorPicture=1000, sleepWhileMove=1000, sleepPictureMovement=1000, pulseDuration=500, stepSize=0.01, pictureCount=0, mirrorActivated=false, comConnectionName=COM5
+2014-08-04 22:56:49 INFO  SwingStarter:478 - add new Connection COM3
+2014-08-04 22:56:49 INFO  SwingStarter:502 - 1 connections available
+2014-08-04 22:56:53 INFO  SwingStarter:277 - click connectbutton...
+2014-08-04 22:56:53 INFO  SwingStarter:280 - communicator==null
+2014-08-04 22:56:53 INFO  SwingStarter:290 - COM3not in use
+2014-08-04 22:56:53 INFO  SwingStarter:303 - no connection etablished, try to build a connection
+2014-08-04 22:56:53 INFO  SwingStarter:313 - connection etablished with COM3
+2014-08-04 22:56:53 INFO  StepPanel:450 - set all components enable
+2014-08-04 22:56:53 INFO  RelativPosPanel:340 - set all components enable
+2014-08-04 22:56:55 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:56 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:56 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:56 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:57 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:57 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:57 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:57 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:57 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:57 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:57 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:58 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:58 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:58 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:58 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:58 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:58 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:58 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:58 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:58 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:58 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:59 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:59 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:56:59 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:56:59 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:00 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:00 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:00 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:00 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:00 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:00 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:00 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:00 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:00 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:00 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:01 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:01 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:01 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:01 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:57:01 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:57:01 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:57:02 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:57:02 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:57:02 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:57:02 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:57:02 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:57:02 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:57:02 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:57:02 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:57:02 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:57:02 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:57:03 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:57:10 INFO  StepPanel:129 - click on execute step with size: 0.5
+2014-08-04 22:57:10 INFO  StepPanel:466 - validation given step size : 0.5
+2014-08-04 22:57:10 INFO  StepPanel:468 - stepSize is between -250.0 and 250.0 and is valid
+2014-08-04 22:57:10 INFO  StepPanel:452 - set all components disable
+2014-08-04 22:57:14 INFO  StepPanel:450 - set all components enable
+2014-08-04 22:57:19 INFO  RelativPosPanel:291 - stop motor
+2014-08-04 22:57:19 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:19 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:19 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:19 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:20 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:20 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:20 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:20 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:25 INFO  PropertiesDialog:274 - try to save properties
+2014-08-04 22:57:25 INFO  PropertiesDialog:275 - properties are valid: true
+2014-08-04 22:57:25 INFO  SwingStarter:594 - set new connection properties: ConnectionProperties: fastUpSpeed=1000, middleUpSpeed=500, slowUpSpeed=100, fastDownSpeed=1000, slowDownSpeed=100, middleDownSpeed=500, stepsPerMm=64025, reverseSteps=true, microstepResolutionMode=4, sleepMovementMirror=1000, sleepMirrorPicture=1000, sleepWhileMove=1000, sleepPictureMovement=1000, pulseDuration=500, stepSize=0.01, pictureCount=0, mirrorActivated=false, comConnectionName=COM5
+2014-08-04 22:57:26 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:26 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:26 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:26 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:26 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:27 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:28 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:28 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:28 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:28 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:28 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:28 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:28 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:28 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:28 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:57:29 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:57:30 INFO  StepPanel:129 - click on execute step with size: 0.5
+2014-08-04 22:57:30 INFO  StepPanel:466 - validation given step size : 0.5
+2014-08-04 22:57:30 INFO  StepPanel:468 - stepSize is between -250.0 and 250.0 and is valid
+2014-08-04 22:57:30 INFO  StepPanel:452 - set all components disable
+2014-08-04 22:57:33 INFO  StepPanel:450 - set all components enable
+2014-08-04 22:57:44 INFO  StepPanel:129 - click on execute step with size: 0.5
+2014-08-04 22:57:44 INFO  StepPanel:466 - validation given step size : 0.5
+2014-08-04 22:57:44 INFO  StepPanel:468 - stepSize is between -250.0 and 250.0 and is valid
+2014-08-04 22:57:44 INFO  StepPanel:452 - set all components disable
+2014-08-04 22:57:46 INFO  StepPanel:450 - set all components enable
+2014-08-04 22:58:44 INFO  StepPanel:129 - click on execute step with size: 0.5
+2014-08-04 22:58:44 INFO  StepPanel:466 - validation given step size : 0.5
+2014-08-04 22:58:44 INFO  StepPanel:468 - stepSize is between -250.0 and 250.0 and is valid
+2014-08-04 22:58:44 INFO  StepPanel:452 - set all components disable
+2014-08-04 22:58:46 INFO  StepPanel:450 - set all components enable
+2014-08-04 22:58:47 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:58:48 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:58:51 INFO  PropertiesDialog:274 - try to save properties
+2014-08-04 22:58:51 INFO  PropertiesDialog:275 - properties are valid: true
+2014-08-04 22:58:51 INFO  SwingStarter:594 - set new connection properties: ConnectionProperties: fastUpSpeed=1000, middleUpSpeed=500, slowUpSpeed=100, fastDownSpeed=1000, slowDownSpeed=100, middleDownSpeed=500, stepsPerMm=64025, reverseSteps=false, microstepResolutionMode=4, sleepMovementMirror=1000, sleepMirrorPicture=1000, sleepWhileMove=1000, sleepPictureMovement=1000, pulseDuration=500, stepSize=0.01, pictureCount=0, mirrorActivated=false, comConnectionName=COM5
+2014-08-04 22:58:52 INFO  StepPanel:129 - click on execute step with size: 0.5
+2014-08-04 22:58:52 INFO  StepPanel:466 - validation given step size : 0.5
+2014-08-04 22:58:52 INFO  StepPanel:468 - stepSize is between -250.0 and 250.0 and is valid
+2014-08-04 22:58:52 INFO  StepPanel:452 - set all components disable
+2014-08-04 22:58:55 INFO  StepPanel:450 - set all components enable
+2014-08-04 22:58:56 INFO  RelativPosPanel:274 - send rotate right command with speed: 1000
+2014-08-04 22:58:56 INFO  RelativPosPanel:282 - stop motor
+2014-08-04 22:58:56 INFO  RelativPosPanel:133 - send rotate left command with speed: 1000
+2014-08-04 22:58:57 INFO  RelativPosPanel:141 - stop motor
+2014-08-04 22:58:57 INFO  SwingStarter:277 - click connectbutton...
+2014-08-04 22:58:57 INFO  SwingStarter:327 - connection always etablished, try to disconnect...
+2014-08-04 22:58:57 INFO  StepPanel:452 - set all components disable
+2014-08-04 22:58:57 INFO  RelativPosPanel:342 - set all components disable
+2014-08-04 22:58:57 INFO  SwingStarter:459 - build connection thread
+2014-08-04 22:58:57 INFO  SwingStarter:502 - 1 connections available
+2014-08-04 22:58:58 INFO  SwingStarter:139 - closing window
+2014-08-04 22:58:58 INFO  SwingStarter:523 - Exit
+2014-08-04 22:59:12 INFO  SwingStarter:124 - name: COM3
+2014-08-04 22:59:12 INFO  SwingStarter:129 - --------------------------------------------------------
+2014-08-04 22:59:12 INFO  SwingStarter:130 - os: name=Windows 8.1, architecture=amd64, version=6.3
+2014-08-04 22:59:12 INFO  SwingStarter:132 - java: version=1.8.0_05, home=C:\Program Files\Java\jdk1.8.0_05\jre, vendor=Oracle Corporation
+2014-08-04 22:59:12 INFO  SwingStarter:134 - --------------------------------------------------------
+2014-08-04 22:59:12 INFO  PropertiesFileHandler:39 - try loading properties
+2014-08-04 22:59:12 INFO  PropertiesFileHandler:51 - properties loaded
+2014-08-04 22:59:12 INFO  SwingStarter:459 - build connection thread
+2014-08-04 22:59:12 INFO  StepPanel:452 - set all components disable
+2014-08-04 22:59:12 INFO  RelativPosPanel:342 - set all components disable
+2014-08-04 22:59:12 INFO  SwingStarter:202 - user interface builded
+2014-08-04 22:59:12 ERROR ApplicationPropertiesFileHandler:15 - Loading application.properties: C:\Users\Dennis\git\stackmaster\stackmaster\application.properties
+2014-08-04 22:59:12 INFO  PropertiesFileHandler:39 - try loading properties
+2014-08-04 22:59:12 INFO  PropertiesFileHandler:51 - properties loaded
+2014-08-04 22:59:12 ERROR ApplicationPropertiesFileHandler:48 - no error by parsing applicationProperties
+2014-08-04 22:59:12 INFO  SwingStarter:594 - set new connection properties: ConnectionProperties: fastUpSpeed=1000, middleUpSpeed=500, slowUpSpeed=100, fastDownSpeed=1000, slowDownSpeed=100, middleDownSpeed=500, stepsPerMm=64025, reverseSteps=false, microstepResolutionMode=4, sleepMovementMirror=1000, sleepMirrorPicture=1000, sleepWhileMove=1000, sleepPictureMovement=1000, pulseDuration=500, stepSize=0.01, pictureCount=0, mirrorActivated=false, comConnectionName=COM5
+2014-08-04 22:59:12 INFO  SwingStarter:478 - add new Connection COM3
+2014-08-04 22:59:12 INFO  SwingStarter:502 - 1 connections available
+2014-08-04 22:59:17 INFO  SwingStarter:139 - closing window
+2014-08-04 22:59:17 INFO  SwingStarter:523 - Exit

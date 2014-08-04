@@ -37,8 +37,6 @@ public class ComCommunicator implements ByteMessageListener {
 	private boolean activMotor;
 	private List<ComAnswerListener> answerListener = new ArrayList<>();
 
-	private boolean reverse = false;
-
 	private ComCommunicator(String comPort, double stepsPerMm) {
 		super();
 		connector = ComConnection.getInstance(comPort);
@@ -101,19 +99,11 @@ public class ComCommunicator implements ByteMessageListener {
 	}
 
 	public void rotateRight(int speed) {
-		if (!isReverse()) {
-			rotate(ComInstructionID.ROTATE_LEFT, speed);
-		} else {
-			rotate(ComInstructionID.ROTATE_RIGHT, speed);
-		}
+		rotate(ComInstructionID.ROTATE_LEFT, speed);
 	}
 
 	public void rotateLeft(int speed) {
-		if (!isReverse()) {
-			rotate(ComInstructionID.ROTATE_RIGHT, speed);
-		} else {
-			rotate(ComInstructionID.ROTATE_LEFT, speed);
-		}
+		rotate(ComInstructionID.ROTATE_RIGHT, speed);
 	}
 
 	public void stop() {
@@ -235,14 +225,6 @@ public class ComCommunicator implements ByteMessageListener {
 
 	public void setComPort(String comPort) {
 		connector.setComPortName(comPort);
-	}
-
-	public boolean isReverse() {
-		return reverse;
-	}
-
-	public void setReverse(boolean reverse) {
-		this.reverse = reverse;
 	}
 
 	public double getStepsPerMm() {

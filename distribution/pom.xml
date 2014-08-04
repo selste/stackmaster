@@ -22,12 +22,12 @@
 		</dependency>
 	</dependencies>
 
-	<!--  FTP Properties in .m2/settings.xml-->
 	
 	<build>
 		<plugins>
 
-			<plugin>
+	<!--  FTP Properties in .m2/settings.xml-->
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
@@ -74,7 +74,7 @@
 						<version>1.6.5</version>
 					</dependency>
 				</dependencies>
-			</plugin>
+			</plugin> -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -84,7 +84,7 @@
 						<id>windowsx86</id>
 						<configuration>
 							<descriptor>src/main/resources/assembly_windows_x86.xml</descriptor>
-							<finalName>stackmaster_windows_x86</finalName>
+							<finalName>stackmaster_windows_x86_${project.version}</finalName>
 						</configuration>
 						<phase>package</phase>
 						<goals>
@@ -95,7 +95,7 @@
 						<id>windowsx64</id>
 						<configuration>
 							<descriptor>src/main/resources/assembly_windows_x64.xml</descriptor>
-							<finalName>stackmaster_windows_x64</finalName>
+							<finalName>stackmaster_windows_x64_${project.version}</finalName>
 						</configuration>
 						<phase>package</phase>
 						<goals>
@@ -106,7 +106,7 @@
 						<id>macx64</id>
 						<configuration>
 							<descriptor>src/main/resources/assembly_mac_x64.xml</descriptor>
-							<finalName>stackmaster_mac_x64</finalName>
+							<finalName>stackmaster_mac_x64_${project.version}</finalName>
 						</configuration>
 						<phase>package</phase>
 						<goals>

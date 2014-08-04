@@ -50,4 +50,34 @@ public class ComConnectionProperties {
 
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("ConnectionProperties: ");
+		stringBuilder.append("fastUpSpeed=" + fastUpSpeed);
+		stringBuilder.append(", middleUpSpeed=" + middleUpSpeed);
+		stringBuilder.append(", slowUpSpeed=" + slowUpSpeed);
+
+		stringBuilder.append(", fastDownSpeed=" + fastDownSpeed);
+		stringBuilder.append(", slowDownSpeed=" + slowDownSpeed);
+		stringBuilder.append(", middleDownSpeed=" + middleDownSpeed);
+
+		stringBuilder.append(", stepsPerMm=" + stepsPerMm);
+		stringBuilder.append(", reverseSteps=" + reverseSteps);
+		stringBuilder.append(", microstepResolutionMode=" + microstepResolutionMode);
+
+		stringBuilder.append(", sleepMovementMirror=" + sleepMovementMirror);
+		stringBuilder.append(", sleepMirrorPicture=" + sleepMirrorPicture);
+		stringBuilder.append(", sleepWhileMove=" + sleepWhileMove);
+		stringBuilder.append(", sleepPictureMovement=" + sleepPictureMovement);
+		stringBuilder.append(", pulseDuration=" + pulseDuration);
+
+		stringBuilder.append(", stepSize=" + stepSize);
+		stringBuilder.append(", pictureCount=" + pictureCount);
+		stringBuilder.append(", mirrorActivated=" + mirrorActivated);
+		stringBuilder.append(", comConnectionName=" + comConnectionName);
+
+		return stringBuilder.toString();
+	}
+
 }

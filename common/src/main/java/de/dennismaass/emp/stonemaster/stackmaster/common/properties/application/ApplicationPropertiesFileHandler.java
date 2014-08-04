@@ -12,6 +12,8 @@ public class ApplicationPropertiesFileHandler extends PropertiesFileHandler {
 	private static Logger LOGGER = Logger.getLogger(ApplicationPropertiesFileHandler.class);
 
 	public ApplicationProperties read(File file) {
+		LOGGER.error("Loading application.properties: " + file.getAbsolutePath());
+
 		Properties properties = readProperties(file);
 
 		ApplicationProperties applicationProperties = new ApplicationProperties();
@@ -43,6 +45,7 @@ public class ApplicationPropertiesFileHandler extends PropertiesFileHandler {
 			LOGGER.error("error by parsing lastName", e);
 		}
 
+		LOGGER.error("no error by parsing applicationProperties");
 		return applicationProperties;
 
 	}

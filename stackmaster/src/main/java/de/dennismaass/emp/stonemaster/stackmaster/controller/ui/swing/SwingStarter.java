@@ -67,6 +67,7 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.ConnectionThread;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.ui.utils.UiConstants;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
+import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
 
 //TODO:
 
@@ -81,7 +82,7 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 //- Baukasten
 //- Mehrsprachigkeit
 public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
-ComConnectionPropertiesListener {
+		ComConnectionPropertiesListener {
 
 	private static final long serialVersionUID = 4155209335768313320L;
 
@@ -117,6 +118,12 @@ ComConnectionPropertiesListener {
 	private JMenuItem mntmExit, mntmLaden, mntmberCusa, mntmEinstellungen, mnEinstellungen, mnDatei;
 
 	public SwingStarter() {
+
+		List<CommPortIdentifier> actualPortList = RxtxUtils.getCommPortIdentifier();
+		for (CommPortIdentifier commPortIdentifier : actualPortList) {
+			LOGGER.info("name: " + commPortIdentifier.getName());
+		}
+
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		LOGGER.info("--------------------------------------------------------");
@@ -129,12 +136,10 @@ ComConnectionPropertiesListener {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				LOGGER.info("window closed");
+				LOGGER.info("closing window");
 				handleExit();
 			}
 		});
-
-		LOGGER.info("building user interface...");
 
 		URL logo32URL = getClass().getResource(PathConstants.PATH_IMAGE + PathConstants.PATH_STACKMASTER_32X32_PNG);
 		URL logo64URL = getClass().getResource(PathConstants.PATH_IMAGE + PathConstants.PATH_STACKMASTER_64X64_PNG);
@@ -197,6 +202,7 @@ ComConnectionPropertiesListener {
 		LOGGER.info("user interface builded");
 
 		if (applicationPropertyFile.exists()) {
+
 			applicationProperties = applicationPropertiesFileHandler.read(applicationPropertyFile);
 			setNewFont(applicationProperties.getFontSize());
 		} else {
@@ -268,21 +274,23 @@ ComConnectionPropertiesListener {
 	}
 
 	protected void handleConnect() {
-		LOGGER.info("click connect button");
+		LOGGER.info("click connectbutton...");
 
 		if (communicator == null) {
+			LOGGER.info("communicator==null");
 
 			Object selectedItem = connectionComboBox.getSelectedItem();
 			if (selectedItem instanceof CommPortIdentifier) {
-
 				CommPortIdentifier commPortIdentifier = (CommPortIdentifier) selectedItem;
-				boolean currentlyOwned = commPortIdentifier.isCurrentlyOwned();
-				if (currentlyOwned) {
+
+				if (commPortIdentifier.isCurrentlyOwned()) {
+					LOGGER.info(commPortIdentifier.getName() + " in use");
 					stateLine.setText(commPortIdentifier.getName() + " wird von einem anderen Programm verwendet");
 				} else {
-					stateLine.setText("Verbindung wird hergstellt...");
-					ComCommunicator communicator = createCommunicator(commPortIdentifier.getName());
+					LOGGER.info(commPortIdentifier.getName() + "not in use");
 
+					stateLine.setText("Verbindung wird hergestellt...");
+					ComCommunicator communicator = createCommunicator(commPortIdentifier.getName());
 					setCommunicator(communicator);
 
 					relativPosPanel.setCommunicator(communicator);
@@ -290,8 +298,9 @@ ComConnectionPropertiesListener {
 				}
 			}
 		}
+
 		if (!communicator.isConnected()) {
-			LOGGER.info("no connection ready, try to build a connection");
+			LOGGER.info("no connection etablished, try to build a connection");
 
 			boolean connect = false;
 			try {
@@ -301,6 +310,8 @@ ComConnectionPropertiesListener {
 				stateLine.setText(communicator.getComPort() + " wird von einem anderen Programm verwendet");
 			}
 			if (connect) {
+				LOGGER.info("connection etablished with " + communicator.getComPort());
+
 				connectButton.setText("Trennen");
 				stateLine.setText("Verbindung mit " + communicator.getComPort() + " hergestellt");
 				setAllComponentsDisableState(false);
@@ -309,9 +320,11 @@ ComConnectionPropertiesListener {
 				connectThread.setRunning(false);
 
 				communicator.setMicrostepResolution(microstepResolutionMode);
+			} else {
+				LOGGER.info("connection not etablished with " + communicator.getComPort());
 			}
 		} else {
-			LOGGER.info("connection ready, try to disconnect");
+			LOGGER.info("connection always etablished, try to disconnect...");
 
 			communicator.stop();
 			communicator.disconnect();
@@ -322,6 +335,7 @@ ComConnectionPropertiesListener {
 
 			connectThread = createConnectionThread();
 			connectThread.start();
+			communicator = null;
 		}
 	}
 
@@ -330,19 +344,12 @@ ComConnectionPropertiesListener {
 	}
 
 	private void setAllComponentsDisableState(boolean disableState) {
-		if (!disableState) {
-			LOGGER.info("set all components enable");
-		} else {
-			LOGGER.info("set all components disable");
-		}
 		stepPanel.setAllComponentsDisableState(disableState);
 		relativPosPanel.setAllComponentsDisableState(disableState);
 	}
 
 	protected void initMenu() {
-
 		/** Menu */
-
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -468,7 +475,7 @@ ComConnectionPropertiesListener {
 
 		for (CommPortIdentifier commPortIdentifier : commPortIdentifierList) {
 			if (!items.contains(commPortIdentifier)) {
-				LOGGER.info("add Connection " + commPortIdentifier.getName());
+				LOGGER.info("add new Connection " + commPortIdentifier.getName());
 				connectionComboBox.addItem(commPortIdentifier);
 			}
 		}
@@ -492,7 +499,7 @@ ComConnectionPropertiesListener {
 
 		}
 
-		LOGGER.info("count of connections " + connectionComboBox.getItemCount());
+		LOGGER.info(connectionComboBox.getItemCount() + " connections available");
 		if (connectionComboBox.getItemCount() > 0) {
 			connectionComboBox.setSelectedIndex(0);
 			connectButton.setEnabled(true);
@@ -546,10 +553,10 @@ ComConnectionPropertiesListener {
 
 	protected void handleOverUs() {
 		JOptionPane
-		.showMessageDialog(
-				getFrame(),
-				"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte",
-				"Über", JOptionPane.PLAIN_MESSAGE);
+				.showMessageDialog(
+						getFrame(),
+						"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte",
+						"Über", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public static void main(String[] args) {
@@ -584,6 +591,8 @@ ComConnectionPropertiesListener {
 	}
 
 	public void setConnectionProperties(ComConnectionProperties connectionProperties) {
+		LOGGER.info("set new connection properties: " + connectionProperties);
+
 		stepPanel.setVariablesFromProperties(connectionProperties);
 		stepPanel.refreshDistance();
 		stepPanel.refreshSleep();
@@ -592,7 +601,6 @@ ComConnectionPropertiesListener {
 
 		if (communicator != null) {
 			communicator.setStepsPerMm(connectionProperties.getStepsPerMm());
-			communicator.setReverse(connectionProperties.isReverseSteps());
 			communicator.setMicrostepResolution(connectionProperties.getMicrostepResolutionMode());
 		}
 

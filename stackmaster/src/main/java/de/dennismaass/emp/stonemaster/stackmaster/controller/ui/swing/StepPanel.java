@@ -34,7 +34,6 @@ public class StepPanel extends JPanel {
 	public Font actualFont = new Font("Arial", Font.PLAIN, 20);
 	private double lastManStep = 0.001;
 
-	// TODO: einbauen
 	private boolean reverseStep = false;
 
 	private long sleepMovementMirror = 1000, sleepMirrorPicture = 1000, sleepWhileMove = 1000,
@@ -43,7 +42,7 @@ public class StepPanel extends JPanel {
 	private boolean pause, stop = false;
 
 	private JLabel autoStepsizeSumLb, autoCountOfDoneRepeatsLb, stateLine, geschaetzteDauerLb, geschaetzteDauerValueLb,
-			lblErfolderlicherWeg, lblMm, label_6;
+	lblErfolderlicherWeg, lblMm, label_6;
 
 	private JButton resetBT, executionBT, stopBT, btnPause;
 	private JCheckBox mirrorCB;
@@ -343,6 +342,11 @@ public class StepPanel extends JPanel {
 				// Picture
 				if (!stop) {
 					auslösen(pulseDuration);
+
+					if (mirrorCB.isSelected()) {
+						pause(sleepMirrowPicture);
+						auslösen(pulseDuration);
+					}
 				}
 
 				stop = false;
