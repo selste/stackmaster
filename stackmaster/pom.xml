@@ -24,7 +24,11 @@
 		<icon.path>${basedir}/src/main/resources/images/stackmaster.ico</icon.path>
 	</properties>
 
-
+	<scm>
+		<connection>scm:git:https://dennis.maass.privat@code.google.com/p/stackmaster/</connection>
+  		<developerConnection>scm:git:https://dennis.maass.privat@code.google.com/p/stackmaster/</developerConnection>
+  		<url>scm:git:https://dennis.maass.privat@code.google.com/p/stackmaster/</url>
+	</scm>
 
 	<dependencies>
 		<dependency>

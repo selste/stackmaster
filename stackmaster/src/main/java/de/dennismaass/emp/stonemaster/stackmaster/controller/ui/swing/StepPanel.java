@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -48,6 +49,8 @@ public class StepPanel extends JPanel {
 	private JCheckBox mirrorCB;
 	private JSpinner stepsizeTF, autoCountOfPicturesTF;
 
+	private DecimalFormat df = new DecimalFormat("0.0000");
+
 	public StepPanel(ComConnectionProperties properties, final JLabel stateLine) {
 
 		this.properties = properties;
@@ -63,7 +66,8 @@ public class StepPanel extends JPanel {
 
 		stepsizeTF = new JSpinner();
 		stepsizeTF.setFont(actualFont);
-		stepsizeTF.setModel(new SpinnerNumberModel(properties.getStepSize(), 0.001, 250.0, 0.001));
+		stepsizeTF.setModel(new SpinnerNumberModel(properties.getStepSize(), 0.0001, 250.0, 0.0001));
+		((JSpinner.NumberEditor) stepsizeTF.getEditor()).getFormat().setMaximumFractionDigits(4);
 		add(stepsizeTF, "cell 2 0,growx");
 		stepsizeTF.addChangeListener(new ChangeListener() {
 
@@ -144,6 +148,7 @@ public class StepPanel extends JPanel {
 								}
 								if (countOfPictures == 1) {
 									auslösen(pulseDuration);
+									refreshAutoCountOfStepsLabel();
 								}
 								// else {
 								// double moveStep = stepSize;
@@ -200,7 +205,7 @@ public class StepPanel extends JPanel {
 		btnPause.setEnabled(false);
 		add(btnPause, "cell 2 3");
 
-		JLabel autoCountOfDoneRepeatsTitle = new JLabel("Anzahl getätigter Fahrten");
+		JLabel autoCountOfDoneRepeatsTitle = new JLabel("Anzahl getätigter Bilder");
 		autoCountOfDoneRepeatsTitle.setFont(actualFont);
 		add(autoCountOfDoneRepeatsTitle, "cell 0 5,alignx right");
 
@@ -241,7 +246,7 @@ public class StepPanel extends JPanel {
 		geschaetzteDauerValueLb.setFont(actualFont);
 		add(geschaetzteDauerValueLb, "cell 2 9");
 
-		lblErfolderlicherWeg = new JLabel("erfolderlicher Weg");
+		lblErfolderlicherWeg = new JLabel("erforderlicher Weg");
 		lblErfolderlicherWeg.setFont(actualFont);
 		add(lblErfolderlicherWeg, "cell 0 10,alignx trailing");
 
@@ -268,9 +273,10 @@ public class StepPanel extends JPanel {
 	}
 
 	public void refreshDistance() {
-		double distanceSum = (int) autoCountOfPicturesTF.getValue() * (double) stepsizeTF.getValue();
-		double roundedDistanceSum = Math.rint(distanceSum * 1000) / 1000;
-		lblMm.setText(Double.toString(roundedDistanceSum) + " mm");
+		double distanceSum = ((int) autoCountOfPicturesTF.getValue() - 1) * (double) stepsizeTF.getValue();
+		// double roundedDistanceSum = Math.rint(distanceSum * 10000) / 10000;
+		lblMm.setText(df.format(distanceSum) + " mm");
+		// lblMm.setText(Double.toString(roundedDistanceSum) + " mm");
 	}
 
 	public void refreshSleep() {
@@ -280,10 +286,19 @@ public class StepPanel extends JPanel {
 		if (mirrorCB.isSelected()) {
 			sleepSum += properties.getSleepMirrorPicture() + properties.getPulseDuration();
 		}
-		double sleepSumMs = sleepSum * (int) autoCountOfPicturesTF.getValue();
-		double sleepSumMin = sleepSumMs / 60000;
-		double roundedSleepSumMin = Math.rint(sleepSumMin * 1000) / 1000;
-		geschaetzteDauerValueLb.setText(Double.toString(roundedSleepSumMin) + " min");
+		long sleepSumMs = sleepSum * (int) autoCountOfPicturesTF.getValue();
+		long sleepSumSec = sleepSumMs / 1000;
+		long sleepSumMin = sleepSumSec / 60;
+		long restsecs = sleepSumSec % 60;
+		long sleepSumHours = sleepSumMin / 60;
+
+		String text = "";
+		if (sleepSumHours <= 0) {
+			text = sleepSumMin % 60 + ":" + restsecs + "." + sleepSumMs % 1000;
+		} else {
+			text = sleepSumHours + ":" + sleepSumMin % 60 + ":" + restsecs + "." + sleepSumMs % 1000;
+		}
+		geschaetzteDauerValueLb.setText(text);
 	}
 
 	protected void checkSleepButton() {
@@ -312,6 +327,7 @@ public class StepPanel extends JPanel {
 						break;
 					}
 					auslösen(pulseDuration);
+					refreshAutoCountOfStepsLabel();
 
 					if (mirrorCB.isSelected()) {
 						pause(sleepMirrowPicture);
@@ -334,14 +350,15 @@ public class StepPanel extends JPanel {
 					}
 					move(moveStep);
 
-					refreshCountUi();
+					refreshAutoSumLabel();
 
-					pause((int) (sleepWhileMove * moveStep) + sleepMovementMirrow);
+					pause((int) (sleepWhileMove * Math.abs(moveStep)) + sleepMovementMirrow);
 
 				}
 				// Picture
 				if (!stop) {
 					auslösen(pulseDuration);
+					refreshAutoCountOfStepsLabel();
 
 					if (mirrorCB.isSelected()) {
 						pause(sleepMirrowPicture);
@@ -367,11 +384,6 @@ public class StepPanel extends JPanel {
 
 	protected void move(double stepSize) {
 		communicator.move(stepSize);
-	}
-
-	protected void refreshCountUi() {
-		refreshAutoCountOfStepsLabel();
-		refreshAutoSumLabel();
 	}
 
 	protected void pause(long autoSleep) {

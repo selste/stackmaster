@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import de.dennismaass.emp.stonemaster.stackmaster.controller.calculator.Calculator;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.ComInstructionID;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer.ComAnswer;
@@ -19,6 +21,8 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.bytemessage.ByteMessageListener;
 
 public class ComCommunicator implements ByteMessageListener {
+
+	private static Logger LOGGER = Logger.getLogger(ComCommunicator.class);
 
 	private static Map<String, ComCommunicator> communicatorMap = new HashMap<>();
 
@@ -145,6 +149,8 @@ public class ComCommunicator implements ByteMessageListener {
 
 	public void send(int address, int instruction, int type, int motor, int value) {
 		connector.send(address, instruction, type, motor, value);
+		LOGGER.info("send address:" + address + ",instruction:" + instruction + ",type:" + type + ",motor:" + motor
+				+ ",value:" + value);
 	}
 
 	public void send(ComInstruction command) {
@@ -189,6 +195,8 @@ public class ComCommunicator implements ByteMessageListener {
 		byte[] byteArray = event.getByteArray();
 		if (byteArray != null && byteArray.length > 0) {
 			ComAnswer answer = ComAnswer.build(byteArray);
+			LOGGER.info("answer address:" + answer.getAddress() + ",instruction:" + answer.getInstruction() + ",value:"
+					+ answer.getValue() + ",host:" + answer.getHost() + ",checksum" + answer.getChecksum());
 			sendEvent(answer);
 		}
 
