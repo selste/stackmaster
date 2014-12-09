@@ -14,8 +14,7 @@
 	<scm>
 		<connection>scm:git:https://code.google.com/p/stackmaster/</connection>
 		<developerConnection>scm:git:https://code.google.com/p/stackmaster/</developerConnection>
-		<url>https://code.google.com/p/stackmaster/</url>
-		<tag>HEAD</tag>
+		<url>https://code.google.com/p/stackmaster/source/browse</url>
 	</scm>
 
 	<modules>
