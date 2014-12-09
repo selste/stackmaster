@@ -12,10 +12,11 @@
 		<url>www.stonemaster.eu</url>
 	</organization>
 
-	<scm>  
+	<scm>
 		<connection>scm:git:https://dennis.maass.privat@code.google.com/p/stackmaster/</connection>
 		<developerConnection>scm:git:https://dennis.maass.privat@code.google.com/p/stackmaster/</developerConnection>
 		<url>https://dennis.maass.privat@code.google.com/p/stackmaster/</url>
+		<tag>HEAD</tag>
 	</scm>
 
 	<modules>
@@ -151,4 +152,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+
+	
 </project>
