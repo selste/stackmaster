@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
 	<artifactId>parent</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>StackMaster parent project</name>
 	<description>This is the StackMaster parent project which contains shared things</description>
 	<packaging>pom</packaging>
