@@ -17,7 +17,7 @@
 		<developerConnection>scm:git:https://code.google.com/p/stackmaster/</developerConnection>
 		<url>https://code.google.com/p/stackmaster/source/browse/</url>
 	</scm>
-
+ 
 	<modules>
 		<module>
 			../stackmasterconfigurator
