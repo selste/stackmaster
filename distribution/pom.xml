@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 		<relativePath>../parent</relativePath>
 	</parent>
 	<artifactId>distribution</artifactId>
@@ -36,14 +36,12 @@
 						<phase>install</phase>
 						<configuration>
 							<tasks>
-								<ftp action="send" server="${ftp.host}" remotedir="${ftp.windowsremotedir}" userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}"
-									verbose="${ftp.verbose}">
+								<ftp action="send" server="${ftp.host}" remotedir="${ftp.windowsremotedir}" userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}" verbose="${ftp.verbose}">
 									<fileset dir="${project.build.directory}">
 										<include name="*windows*.zip" />
 									</fileset>
 								</ftp>
-								<ftp action="send" server="${ftp.host}" remotedir="${ftp.macremotedir}" userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}"
-									verbose="${ftp.verbose}">
+								<ftp action="send" server="${ftp.host}" remotedir="${ftp.macremotedir}" userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}" verbose="${ftp.verbose}">
 									<fileset dir="${project.build.directory}">
 										<include name="*mac*.zip" />
 									</fileset>
