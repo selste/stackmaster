@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
 	<artifactId>parent</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>StackMaster parent project</name>
 	<description>This is the StackMaster parent project which contains shared things</description>
 	<packaging>pom</packaging>
@@ -16,7 +15,8 @@
 		<connection>scm:git:https://code.google.com/p/stackmaster/</connection>
 		<developerConnection>scm:git:https://code.google.com/p/stackmaster/</developerConnection>
 		<url>https://code.google.com/p/stackmaster/source/browse/</url>
-	</scm>
+	  <tag>1.0.0</tag>
+  </scm>
 
 	<modules>
 		<module>
@@ -149,7 +149,7 @@
 					de.dennismaass.emp.stonemaster.stackmaster
 				</groupId>
 				<artifactId>common</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>1.0.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

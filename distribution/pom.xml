@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0</version>
 		<relativePath>../parent</relativePath>
 	</parent>
 	<artifactId>distribution</artifactId>
@@ -37,15 +36,13 @@
 						<phase>install</phase>
 						<configuration>
 							<tasks>
-								<ftp action="send" server="${ftp.host}" remotedir="${ftp.windowsremotedir}"
-									userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}"
+								<ftp action="send" server="${ftp.host}" remotedir="${ftp.windowsremotedir}" userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}"
 									verbose="${ftp.verbose}">
 									<fileset dir="${project.build.directory}">
 										<include name="*windows*.zip" />
 									</fileset>
 								</ftp>
-								<ftp action="send" server="${ftp.host}" remotedir="${ftp.macremotedir}"
-									userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}"
+								<ftp action="send" server="${ftp.host}" remotedir="${ftp.macremotedir}" userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}"
 									verbose="${ftp.verbose}">
 									<fileset dir="${project.build.directory}">
 										<include name="*mac*.zip" />
