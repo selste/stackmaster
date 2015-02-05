@@ -2,6 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>configurator</artifactId>
 	<name>StackMaster Configurator</name>
+	
 	<organization>
 		<name>stonemaster</name>
 		<url>www.stonemaster.eu</url>
@@ -14,7 +15,6 @@
 		<relativePath>../parent</relativePath>
 	</parent>
 
-
 	<properties>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
@@ -22,12 +22,6 @@
 		<mainClass.swing>de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.swing.SwingStarter</mainClass.swing>
 		<icon.path>${basedir}/src/main/resources/images/setting_icon_win.ico</icon.path>
 	</properties>
-
-
-
-
-
-
 
 	<dependencies>
 		<dependency>

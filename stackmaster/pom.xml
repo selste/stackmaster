@@ -191,4 +191,5 @@
 		</profile>
 
 	</profiles>
+	<description>This project represents the core of the  stackmaster software and contains a matching swing ui</description>
 </project>

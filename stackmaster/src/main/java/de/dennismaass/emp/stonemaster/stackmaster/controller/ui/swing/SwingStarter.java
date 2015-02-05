@@ -82,7 +82,7 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
 //- Baukasten
 //- Mehrsprachigkeit
 public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
-		ComConnectionPropertiesListener {
+ComConnectionPropertiesListener {
 
 	private static final long serialVersionUID = 4155209335768313320L;
 
@@ -553,10 +553,10 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 
 	protected void handleOverUs() {
 		JOptionPane
-				.showMessageDialog(
-						getFrame(),
-						"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte",
-						"Über", JOptionPane.PLAIN_MESSAGE);
+		.showMessageDialog(
+				getFrame(),
+				"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte",
+				"Über", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public static void main(String[] args) {
@@ -565,7 +565,6 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 			LOGGER.error("SystemLookAndFeel not available", e);
-			e.printStackTrace();
 		}
 
 		EventQueue.invokeLater(new Runnable() {
@@ -576,7 +575,6 @@ public class SwingStarter extends JFrame implements ComAnswerListener, CommPortI
 					frame.setVisible(true);
 				} catch (Exception e) {
 					LOGGER.error("Error in main-methode by creating SwingStarter object", e);
-					e.printStackTrace();
 				}
 			}
 		});

@@ -23,4 +23,5 @@
 		</dependency>
 	</dependencies>
 
+	<description>This is the StackMaster common project which contains shared things.</description>
 </project>

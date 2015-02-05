@@ -64,7 +64,7 @@ public class SwingStarter extends JFrame {
 	private JTextField firstNameTF, lastNameTF, comConnectionNameTF;
 
 	private JSpinner fastUpSpeedTF, middleUpSpeedTF, slowUpSpeedTF, fastDownSpeedTF, middleDownSpeedTF,
-			slowDownSpeedTF;
+	slowDownSpeedTF;
 
 	private JSpinner countOfStepPerMmTF;
 	private JComboBox<Integer> connectionModeCB;
@@ -81,9 +81,9 @@ public class SwingStarter extends JFrame {
 	private JComboBox<Integer> checkBoxFontSize;
 
 	private JLabel lblModus, lblNewLabel_15, lblFirstUse, lblSchriftgre, lblNewLabel, lblNewLabel_1, lblNewLabel_2,
-			lblNewLabel_3, lblNewLabel_4, lblNewLabel_6, lblNewLabel_7, lblNewLabel_8, lblNewLabel_9, lblNewLabel_10,
-			lblNewLabel_11, lblNewLabel_12, lblNewLabel_14, lblSchritteProMillimeter, lblNewLabel_13, lblNewLabel_5,
-			label_2;
+	lblNewLabel_3, lblNewLabel_4, lblNewLabel_6, lblNewLabel_7, lblNewLabel_8, lblNewLabel_9, lblNewLabel_10,
+	lblNewLabel_11, lblNewLabel_12, lblNewLabel_14, lblSchritteProMillimeter, lblNewLabel_13, lblNewLabel_5,
+	label_2;
 
 	private JTabbedPane tabbedPane;
 
@@ -457,7 +457,6 @@ public class SwingStarter extends JFrame {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 			LOGGER.error("SystemLookAndFeel not available", e);
-			e.printStackTrace();
 		}
 
 		EventQueue.invokeLater(new Runnable() {
@@ -468,7 +467,6 @@ public class SwingStarter extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					LOGGER.error("Error in main-methode by creating SwingStarter object", e);
-					e.printStackTrace();
 				}
 			}
 		});

@@ -3,7 +3,6 @@
 	<artifactId>web</artifactId>
 	<packaging>war</packaging>
 	<name>StackMaster web</name>
-	<url>http://www.stonemaster.eu</url>
 
 	<parent>
 		<groupId>de.dennismaass.emp.stonemaster.stackmaster</groupId>
@@ -76,4 +75,9 @@
 	</build>
 
 
+	<organization>
+		<name>StoneMaster</name>
+		<url>http://www.stonemaster.eu</url>
+	</organization>
+	<description>This project provides a rest api to control the StackMaster</description>
 </project>

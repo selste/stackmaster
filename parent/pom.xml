@@ -4,7 +4,6 @@
 	<artifactId>parent</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
 	<name>StackMaster parent project</name>
-	<description>This is the StackMaster parent project which contains shared things</description>
 	<packaging>pom</packaging>
 	<organization>
 		<name>stonemaster</name>
@@ -169,4 +168,5 @@
 		</plugins>
 	</build>
 
+	<description>This project , binds everything together and contains the dependency management</description>
 </project>

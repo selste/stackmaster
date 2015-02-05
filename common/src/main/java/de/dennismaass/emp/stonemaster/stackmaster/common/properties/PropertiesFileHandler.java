@@ -51,7 +51,6 @@ public class PropertiesFileHandler {
 			LOGGER.info("properties loaded");
 		} catch (IOException e) {
 			LOGGER.error("Error before or while reading properties file", e);
-			e.printStackTrace();
 		}
 
 		return properties;
