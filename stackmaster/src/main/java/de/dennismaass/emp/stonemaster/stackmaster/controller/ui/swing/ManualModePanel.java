@@ -1,6 +1,8 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 import java.text.DecimalFormat;
 
@@ -171,6 +173,24 @@ public class ManualModePanel extends JPanel {
 			public void stateChanged(ChangeEvent e) {
 				Integer value = (Integer) picSpinner.getValue();
 				refreshComponents(value);
+			}
+		});
+		
+		checkMirror.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				refreshDistance();
+				refreshSleep();
+			}
+		});
+		
+		executeButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 		
