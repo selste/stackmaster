@@ -2,6 +2,7 @@ package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
 import java.awt.LayoutManager;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -12,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -19,6 +22,7 @@ import org.apache.log4j.Logger;
 
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
+import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 
 public class ManualModePanel extends JPanel {
 
@@ -54,6 +58,8 @@ public class ManualModePanel extends JPanel {
 				pathDistanceLabel, timeNumberLabel, pathLengthLabel;
 
 	private JSpinner stepSpinner, picSpinner;
+	
+	private DecimalFormat df = new DecimalFormat("0.0000");
 	
 
 	public ManualModePanel(ComConnectionProperties properties, JLabel stateLine) {
@@ -130,7 +136,9 @@ public class ManualModePanel extends JPanel {
 		URL downURL = getClass().getResource(IMAGES + "down_blue2.png");
 		
 		upIcon = new ImageIcon(upURL);
+		upIcon = ImageUtils.getResizedImage(upIcon, 30, 30);
 		downIcon = new ImageIcon(downURL);
+		downIcon = ImageUtils.getResizedImage(downIcon, 30, 30);
 	}
 
 	private void declareButtons() {
@@ -148,7 +156,65 @@ public class ManualModePanel extends JPanel {
 	private void assignListeners() {
 		LOGGER.debug("assigning Listeners");
 		
+		stepSpinner.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				refreshDistance();
+			}
+
+		});
 		
+		picSpinner.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				Integer value = (Integer) picSpinner.getValue();
+				refreshComponents(value);
+			}
+		});
+		
+	}
+	
+	public void refreshComponents(Integer value) {
+		if (value != null) {
+			if (value == 1) {
+				checkMirror.setEnabled(false);
+				stepSpinner.setEnabled(false);
+			} else if(value > 1) {
+				checkMirror.setEnabled(true);
+				stepSpinner.setEnabled(true);
+			}
+			refreshSleep();
+			refreshDistance();
+		}
+	}
+	
+	public void refreshSleep() {
+		long sleepSum = properties.getSleepPictureMovement() + properties.getSleepMovementMirror()
+				+ (long) (properties.getSleepWhileMove() * (double) stepSpinner.getValue())
+				+ properties.getPulseDuration();
+		if (checkMirror.isSelected()) {
+			sleepSum += properties.getSleepMirrorPicture() + properties.getPulseDuration();
+		}
+		long sleepSumMs = sleepSum * (int) picSpinner.getValue();
+		long sleepSumSec = sleepSumMs / 1000;
+		long sleepSumMin = sleepSumSec / 60;
+		long restSecs = sleepSumSec % 60;
+		long sleepSumHours = sleepSumMin / 60;
+		
+		String text;
+		if (sleepSumHours <= 0) {
+			text = sleepSumMin % 60 + ":" + restSecs + "." + sleepSumMs % 1000;
+		} else {
+			text = sleepSumHours + ":" + sleepSumMin % 60 + ":" + restSecs + "." + sleepSumMs % 1000;
+		}
+		timeNumberLabel.setText(text);
+	}
+
+	public void refreshDistance() {
+		double distanceSum = ((int) picSpinner.getValue() - 1) * (double) stepSpinner.getValue();
+		pathLengthLabel.setText(df.format(distanceSum) + " mm");
 	}
 
 	private void groupRadioButtons() {
