@@ -117,6 +117,10 @@ ComConnectionPropertiesListener {
 	private JLabel welcomeLabel, secondLineLabel, stateLine;
 	private JMenuItem mntmExit, mntmLaden, mntmberCusa, mntmEinstellungen, mnEinstellungen, mnDatei;
 
+	private AutoModePanel autoModePanel;
+
+	private ManualModePanel manualModePanel;
+
 	public SwingStarter() {
 
 		List<CommPortIdentifier> actualPortList = RxtxUtils.getCommPortIdentifier();
@@ -193,6 +197,12 @@ ComConnectionPropertiesListener {
 
 		stepPanel = new StepPanel(defaultProfile.getProperties(), stateLine);
 		tabbedPane.addTab("Schritte", null, stepPanel, null);
+		
+		autoModePanel = new AutoModePanel(defaultProfile.getProperties(), stateLine);
+		tabbedPane.addTab("Automatisch", null, autoModePanel, null);
+		
+		manualModePanel = new ManualModePanel(defaultProfile.getProperties(), stateLine);
+		tabbedPane.addTab("Manuell", null, manualModePanel, null);
 
 		connectThread = createConnectionThread();
 		connectThread.start();
