@@ -1,5 +1,6 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
+import java.awt.Color;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ import net.miginfocom.swing.MigLayout;
 import org.apache.log4j.Logger;
 
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 
@@ -62,6 +64,15 @@ public class ManualModePanel extends JPanel {
 	private JSpinner stepSpinner, picSpinner;
 	
 	private DecimalFormat df = new DecimalFormat("0.0000");
+
+	protected boolean pause, stop, reverseStep = false;
+	
+	protected double lastManStep;
+	
+	private long sleepMovementMirror = 1000, sleepMirrorPicture = 1000, sleepWhileMove = 1000,
+			sleepPictureMovement = 1000, pulseDuration = 1000;
+
+	
 	
 
 	public ManualModePanel(ComConnectionProperties properties, JLabel stateLine) {
@@ -189,13 +200,173 @@ public class ManualModePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				if (pause) {
+					pause = false;
+					executeButton.setText("ausführen");
+					executeButton.setEnabled(false);
+					pauseButton.setEnabled(true);
+				} else {
+					
+					boolean correctValue = false;
+					try {
+						double stepSize = (double) stepSpinner.getValue();
+						
+						LOGGER.info("click on execute step with size: " + stepSize);
+						
+						correctValue = validate(stepSize);
+						if (correctValue) {
+							stepSpinner.setBackground(Color.white);
+							
+							if (communicator != null) {
+								lastManStep = stepSize;
+								int countOfPictures = (int) picSpinner.getValue();
+								
+								if (countOfPictures > 1) {
+									
+									Thread job = createJob(stepSize, countOfPictures, sleepMovementMirror, 
+											sleepMirrorPicture, sleepPictureMovement, sleepWhileMove, pulseDuration);
+									job.start();
+								}
+								
+								if (countOfPictures == 1) {
+									auslösen(pulseDuration);
+									refreshAutoCountOfStepsLabel();
+								}
+							}
+						} else {
+							stepSpinner.setBackground(Color.red);
+						}
+					} catch (NumberFormatException numEx) {
+						stepSpinner.setBackground(Color.red);
+						stateLine.setText("Falsche Eingabe");
+					}
+				}
 			}
-		});
-		
+		});		
 	}
 	
+	protected Thread createJob(final double stepSize, final int countOfPictures, final long sleepMovementMirror,
+			final long sleepMirrorPicture, final long sleepPictureMovement, final long sleepWhileMove,
+			final long pulseDuration) {
+		Thread job = new Thread() {
+			@Override
+			public void run() {
+				
+				setAllComponentsDisableState(true);
+				setStopEnable(true);
+				
+				for (int i = 0; i < countOfPictures - 1; i++) {
+					//Picture
+					if (stop) {
+						break;
+					}
+					auslösen(pulseDuration);
+					refreshAutoCountOfStepsLabel();
+					
+					if (checkMirror.isSelected()) {
+						pause(sleepMirrorPicture);
+						if (stop) {
+							break;
+						}
+						auslösen(pulseDuration);
+					}
+					checkSleepButton();
+					
+					//movement
+					pause(sleepPictureMovement);
+					if (stop) {
+						break;
+					}
+					
+					double moveStep = stepSize;
+					if(reverseStep) {
+						moveStep *= -1;
+					}
+					move(moveStep);
+					
+					refreshAutoSumLabel();
+					
+					pause((int) (sleepWhileMove * Math.abs(moveStep)) + sleepMovementMirror);
+				}
+				//picture
+				if (!stop) {
+					auslösen(pulseDuration);
+					refreshAutoCountOfStepsLabel();
+					
+					if (checkMirror.isSelected()) {
+						pause(sleepMirrorPicture);
+						auslösen(pulseDuration);
+					}
+				}
+				
+				stop = false;
+				setStopEnable(false);
+				setAllComponentsDisableState(false);
+			}
+		};
+		return job;
+	}
+
+	protected void refreshAutoSumLabel() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void move(double moveStep) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void checkSleepButton() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void pause(long sleepMirrorPicture) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void setStopEnable(boolean state) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void setAllComponentsDisableState(boolean state) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void auslösen(long pulseDuration) {
+		communicator.setSIO(2, true);
+		try {
+			Thread.sleep(pulseDuration);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		communicator.setSIO(2, false);
+	}
+
+	protected void refreshAutoCountOfStepsLabel() {
+		int happenedRepeats = Integer.parseInt(picsNumberLabel.getText());
+		int value = happenedRepeats++;
+		setPicCountLabel(value);
+	}
+
+	protected void setPicCountLabel(int value) {
+		picsNumberLabel.setText(Integer.toString(value));
+	}
+
+	protected boolean validate(double stepSize) {
+		LOGGER.info("validation given step size: " + stepSize);
+		if (stepSize > Constants.MIN_STEP && stepSize < Constants.MAX_STEP) {
+			LOGGER.info("stepSize is between " + Constants.MIN_STEP + "and " + Constants.MAX_STEP + "and is valid");
+			return true;
+		}
+		LOGGER.debug("stepSize is not in the valid range");
+		return false;
+	}
+
 	public void refreshComponents(Integer value) {
 		if (value != null) {
 			if (value == 1) {
