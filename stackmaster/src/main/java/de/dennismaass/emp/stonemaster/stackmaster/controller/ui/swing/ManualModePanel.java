@@ -80,7 +80,7 @@ public class ManualModePanel extends JPanel {
 		//setVariablesFromProperties(properties);
 		setStateLine(stateLine);
 		
-		this.setLayout(new MigLayout("debug", "[] []30[] [] []", "[]20[] [] [] []20[] [] []20[] []"));
+		this.setLayout(new MigLayout("debug", "[] []30[] [] []", "[]20[] [] [] [] [] [] []20[] []"));
 		
 		checkMirror = new JCheckBox("Spiegelvorauslösung");
 		stepSpinner = new JSpinner();
@@ -106,14 +106,24 @@ public class ManualModePanel extends JPanel {
 		this.add(picCountLabel, "right, cell 2 2");
 		this.add(picSpinner, "span 2, pushx, growx, wrap");
 		
+		this.add(speedLabel);
+		
 		this.add(checkMirror, "cell 3 3, wrap");
+		
+		this.add(fast);
+		this.add(upButton);
 		
 		this.add(executeButton, "cell 3 4, split 3");
 		this.add(stopButton);
 		this.add(pauseButton, "wrap");
 		
+		this.add(normal);
+		
 		this.add(picsTakenLabel, "cell 2 5, right");
 		this.add(picsNumberLabel, "left, wrap");
+		
+		this.add(slow);
+		this.add(downButton);
 		
 		this.add(pathTraveledLabel, "cell 2 6, right");
 		this.add(pathDistanceLabel, "left, wrap");
@@ -137,7 +147,7 @@ public class ManualModePanel extends JPanel {
 		picsTakenLabel = new JLabel("Anzahl getätigter Bilder: ");
 		picsNumberLabel = new JLabel("0");
 		pathTraveledLabel = new JLabel("Bisher zurückgelegter Weg [mm]: ");
-		pathDistanceLabel = new JLabel("0");
+		pathDistanceLabel = new JLabel("0.0");
 		assumedTimeLabel = new JLabel("Geschätze Dauer: ");
 		timeNumberLabel = new JLabel("0");
 		nessecaryPathLengthLabel = new JLabel("erforderlicher Weg: ");
@@ -279,13 +289,11 @@ public class ManualModePanel extends JPanel {
 	}
 	
 	protected void resetAutoSum() {
-		// TODO Auto-generated method stub
-		
+		pathDistanceLabel.setText("0.0");
 	}
 
 	protected void resetAutoCountOfRepeats() {
-		// TODO Auto-generated method stub
-		
+		picsNumberLabel.setText("0");
 	}
 
 	protected Thread createJob(final double stepSize, final int countOfPictures, final long sleepMovementMirror,
