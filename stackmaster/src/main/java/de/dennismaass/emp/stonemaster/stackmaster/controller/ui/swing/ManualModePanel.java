@@ -242,9 +242,52 @@ public class ManualModePanel extends JPanel {
 					}
 				}
 			}
-		});		
+		});
+		
+		stopButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				communicator.stop();
+				stop = true;
+				if (pause) {
+					pause = false;
+					executeButton.setText("ausführen");
+					executeButton.setEnabled(false);
+					pauseButton.setEnabled(true);
+				}
+			}
+		});
+		
+		pauseButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pause = true;
+			}
+		});
+		
+		resetButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				resetAutoCountOfRepeats();
+				resetAutoSum();
+			}
+		});
+		
 	}
 	
+	protected void resetAutoSum() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void resetAutoCountOfRepeats() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	protected Thread createJob(final double stepSize, final int countOfPictures, final long sleepMovementMirror,
 			final long sleepMirrorPicture, final long sleepPictureMovement, final long sleepWhileMove,
 			final long pulseDuration) {
@@ -308,33 +351,68 @@ public class ManualModePanel extends JPanel {
 	}
 
 	protected void refreshAutoSumLabel() {
-		// TODO Auto-generated method stub
+		double stepDouble = (double) stepSpinner.getValue();
+		double sumDouble = Double.parseDouble(pathDistanceLabel.getText());
 		
+		double value = sumDouble + stepDouble;
+		double multiplicateValue = value * Constants.ROUNDER;
+		double roundedValue = Math.round(multiplicateValue);
+		double roundedDividedValue = roundedValue / Constants.ROUNDER;
+		
+		setAutoSumLabel(roundedDividedValue);
+	}
+
+	protected void setAutoSumLabel(double value) {
+		pathDistanceLabel.setText(Double.toString(value));
 	}
 
 	protected void move(double moveStep) {
-		// TODO Auto-generated method stub
-		
+		communicator.move(moveStep);
 	}
 
 	protected void checkSleepButton() {
-		// TODO Auto-generated method stub
-		
+		while (pause) {
+			executeButton.setText("weiter");
+			executeButton.setEnabled(true);
+			pauseButton.setEnabled(false);
+			pause(100);
+		}
 	}
 
-	protected void pause(long sleepMirrorPicture) {
-		// TODO Auto-generated method stub
-		
+	protected void pause(long pauseTime) {
+		try {
+			Thread.sleep(pauseTime);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
-	protected void setStopEnable(boolean state) {
-		// TODO Auto-generated method stub
-		
+	private void setStopEnable(boolean state) {
+		stopButton.setEnabled(state);
+		pauseButton.setEnabled(state);
 	}
 
-	protected void setAllComponentsDisableState(boolean state) {
-		// TODO Auto-generated method stub
+	public void setAllComponentsDisableState(boolean disableState) {
+		if (!disableState) {
+			LOGGER.info("set all Components enable");
+		} else {
+			LOGGER.info("set all Components disable");
+		}
 		
+		upButton.setEnabled(!disableState);
+		downButton.setEnabled(!disableState);
+		
+		fast.setEnabled(!disableState);
+		normal.setEnabled(!disableState);
+		slow.setEnabled(!disableState);
+		
+		executeButton.setEnabled(!disableState);
+		resetButton.setEnabled(!disableState);
+		
+		stepSpinner.setEnabled(!disableState);
+		picSpinner.setEnabled(!disableState);
+		
+		checkMirror.setEnabled(!disableState);
 	}
 
 	protected void auslösen(long pulseDuration) {
