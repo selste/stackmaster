@@ -1,12 +1,13 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
 import java.awt.Color;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 import java.net.URL;
+
 import java.text.DecimalFormat;
 
 import javax.swing.ButtonGroup;
@@ -16,7 +17,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -81,6 +81,9 @@ public class ManualModePanel extends JPanel {
 		this.properties = properties;
 		//setVariablesFromProperties(properties);
 		setStateLine(stateLine);
+		
+		upSpeed = properties.getMiddleUpSpeed();
+		downSpeed = properties.getMiddleDownSpeed();
 		
 		this.setLayout(new MigLayout("debug", "[] []30[] [] []", "[]20[] [] [] [] [] [] []20[] []"));
 		
@@ -321,39 +324,63 @@ public class ManualModePanel extends JPanel {
 			}
 		});
 		
-		upButton.addMouseListener(new MouseListener() {
+		upButton.addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				if (communicator != null) {
+					LOGGER.info("stopping motor");
+					communicator.stop();
+				}
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				if (communicator != null) {
+					LOGGER.info("rotate left command with speed: " + upSpeed);
+					communicator.rotateLeft(upSpeed);
+				}
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				if (communicator != null) {
+					if (communicator.isActiv()) {
+						LOGGER.info("stopping Motor");
+						communicator.stop();
+					}
+				}
 			}
 		});
 		
+		downButton.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (communicator != null) {
+					if (communicator.isActiv()) {
+						LOGGER.info("stopping motor");
+						communicator.stop();
+					}
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("rotating motor right with speed: " + downSpeed);
+					communicator.rotateRight(downSpeed);
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("stopping motor");
+					communicator.stop();
+				}
+			}
+		});
 	}
 	
 	protected void resetAutoSum() {
