@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 import java.text.DecimalFormat;
 
@@ -72,7 +74,7 @@ public class ManualModePanel extends JPanel {
 	private long sleepMovementMirror = 1000, sleepMirrorPicture = 1000, sleepWhileMove = 1000,
 			sleepPictureMovement = 1000, pulseDuration = 1000;
 
-	
+	private int upSpeed, downSpeed;
 	
 
 	public ManualModePanel(ComConnectionProperties properties, JLabel stateLine) {
@@ -277,12 +279,78 @@ public class ManualModePanel extends JPanel {
 			}
 		});
 		
+		fast.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				if (fast.isSelected()) {
+					upSpeed = properties.getFastUpSpeed();
+					downSpeed = properties.getFastDownSpeed();
+				}
+			}
+		});
+		
+		normal.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				if (normal.isSelected()) {
+					upSpeed = properties.getMiddleUpSpeed();
+					downSpeed = properties.getMiddleDownSpeed();
+				}
+			}
+		});
+		
+		slow.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				if (slow.isSelected()) {
+					upSpeed = properties.getSlowUpSpeed();
+					downSpeed = properties.getSlowDownSpeed();
+				}
+			}
+		});
+		
 		resetButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				resetAutoCountOfRepeats();
 				resetAutoSum();
+			}
+		});
+		
+		upButton.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 		
