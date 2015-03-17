@@ -2,6 +2,8 @@ package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
 import java.awt.Component;
 import java.awt.LayoutManager;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 
 import javax.swing.ButtonGroup;
@@ -12,14 +14,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import org.apache.log4j.Logger;
 
 import net.miginfocom.swing.MigLayout;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 
 public class AutoModePanel extends JPanel {
 
 	private static final long serialVersionUID = 1042974763111948238L;
+	
+	private static final Logger LOGGER = Logger.getLogger(AutoModePanel.class);
 	
 	private static final String IMAGES = "/images/";
 	private static final String SLOW = "Langsam";
@@ -50,8 +59,12 @@ public class AutoModePanel extends JPanel {
 
 	private JLabel calculatedPicsLabel;
 
+	private long sleepMovementMirror = 1000l, sleepMirrorPicture = 1000l, sleepWhileMove = 1000l,
+			sleepPictureMovement = 1000l, pulseDuration = 1000l;
 	
+	private int upSpeed, downSpeed;
 
+	protected ComCommunicator communicator;
 
 
 	public AutoModePanel(ComConnectionProperties properties, final JLabel stateLine) {
@@ -59,6 +72,15 @@ public class AutoModePanel extends JPanel {
 		setStateLine(stateLine);
 		
 		this.setLayout(new MigLayout("debug", "[] []30[] [] []", "[]20[][][][][][]"));
+		
+		upSpeed = properties.getMiddleUpSpeed();
+		downSpeed = properties.getMiddleDownSpeed();
+		
+		sleepMovementMirror = properties.getSleepMovementMirror();
+		sleepMirrorPicture = properties.getSleepMirrorPicture();
+		sleepWhileMove = properties.getSleepWhileMove();
+		sleepPictureMovement = properties.getSleepPictureMovement();
+		pulseDuration = properties.getPulseDuration();
 		
 		mirrorCheckBox = new JCheckBox("Spiegelvorauslösung");
 		stepSizeSpinner = new JSpinner();
@@ -126,7 +148,98 @@ public class AutoModePanel extends JPanel {
 	}
 
 	private void assignListeners() {
-		// TODO Auto-generated method stub
+		
+		slowRadioButton.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				if (slowRadioButton.isSelected()) {
+					upSpeed = properties.getSlowUpSpeed();
+					downSpeed = properties.getSlowDownSpeed();
+				}
+			}
+		});
+		
+		normalRadioButton.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				if (normalRadioButton.isSelected()) {
+					upSpeed = properties.getMiddleUpSpeed();
+					downSpeed = properties.getMiddleDownSpeed();
+				}
+			}
+		});
+		
+		fastRadioButton.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				if (fastRadioButton.isSelected()) {
+					upSpeed = properties.getFastUpSpeed();
+					downSpeed = properties.getFastDownSpeed();
+				}
+			}
+		});
+		
+		upButton.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (communicator != null) {
+					if (communicator.isActiv()) {
+						LOGGER.info("stopping motor");
+						communicator.stop();
+					}
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("rotate left with speed: " + upSpeed);
+					communicator.rotateLeft(upSpeed);
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("stopping motor");
+					communicator.stop();
+				}
+			}
+		});
+		
+		downButton.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (communicator != null) {
+					if (communicator.isActiv()) {
+						LOGGER.info("stopping motor");
+						communicator.stop();
+					}
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("rotating right with speed: " + downSpeed);
+					communicator.rotateRight(downSpeed);
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (communicator != null) {
+					LOGGER.info("stopping Motor");
+					communicator.stop();
+				}
+			}	
+		});
+		
 		
 	}
 

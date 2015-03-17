@@ -71,8 +71,8 @@ public class ManualModePanel extends JPanel {
 	
 	protected double lastManStep;
 	
-	private long sleepMovementMirror = 1000, sleepMirrorPicture = 1000, sleepWhileMove = 1000,
-			sleepPictureMovement = 1000, pulseDuration = 1000;
+	private long sleepMovementMirror = 1000l, sleepMirrorPicture = 1000l, sleepWhileMove = 1000l,
+			sleepPictureMovement = 1000l, pulseDuration = 1000l;
 
 	private int upSpeed, downSpeed;
 	
@@ -84,6 +84,12 @@ public class ManualModePanel extends JPanel {
 		
 		upSpeed = properties.getMiddleUpSpeed();
 		downSpeed = properties.getMiddleDownSpeed();
+		
+		sleepMovementMirror = properties.getSleepMovementMirror();
+		sleepMirrorPicture = properties.getSleepMirrorPicture();
+		sleepWhileMove = properties.getSleepWhileMove();
+		sleepPictureMovement = properties.getSleepPictureMovement();
+		pulseDuration = properties.getPulseDuration();
 		
 		this.setLayout(new MigLayout("debug", "[] []30[] [] []", "[]20[] [] [] [] [] [] []20[] []"));
 		
