@@ -22,6 +22,7 @@ public class ComConnectionProperties {
 	private long pulseDuration = 1000;
 
 	private double stepSize = 0.01;
+	private double translation = 0.05;
 	private int pictureCount = 0;
 	private boolean mirrorActivated = false;
 	private String comConnectionName;
@@ -47,6 +48,7 @@ public class ComConnectionProperties {
 		setSlowUpSpeed(connectionProperties.getSlowUpSpeed());
 		setStepSize(connectionProperties.getStepSize());
 		setStepsPerMm(connectionProperties.getStepsPerMm());
+		setTranslation(connectionProperties.getTranslation());
 
 	}
 
@@ -76,6 +78,7 @@ public class ComConnectionProperties {
 		stringBuilder.append(", pictureCount=" + pictureCount);
 		stringBuilder.append(", mirrorActivated=" + mirrorActivated);
 		stringBuilder.append(", comConnectionName=" + comConnectionName);
+		stringBuilder.append(", translation=" + translation);
 
 		return stringBuilder.toString();
 	}
