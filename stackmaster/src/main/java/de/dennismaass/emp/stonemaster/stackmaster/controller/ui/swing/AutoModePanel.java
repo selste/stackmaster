@@ -86,10 +86,10 @@ public class AutoModePanel extends JPanel {
 		stepSizeSpinner = new JSpinner();
 		
 		initIcons();
-		defineButtons();
-		assignListeners();
 		defineLabels();
+		defineButtons();
 		createRadioGroup();
+		assignListeners();
 		
 		buildLayout();
 	}
@@ -268,7 +268,13 @@ public class AutoModePanel extends JPanel {
 		this.stateLine = stateLine;
 	}
 
-	
+	public ComCommunicator getCommunicator() {
+		return communicator;
+	}
+
+	public void setCommunicator(ComCommunicator communicator) {
+		this.communicator = communicator;
+	}
 
 }
 
