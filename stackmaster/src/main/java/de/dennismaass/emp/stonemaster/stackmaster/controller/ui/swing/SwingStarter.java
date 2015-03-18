@@ -156,7 +156,7 @@ ComConnectionPropertiesListener {
 		setTitle(UiConstants.TITLE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(100, 100, 650, 620);
+		setBounds(100, 100, 1050, 620);
 
 		propertiesHandler = new ProfileFileHandler();
 		defaultProfile = propertiesHandler.readProfile(defaultFile);
@@ -305,6 +305,8 @@ ComConnectionPropertiesListener {
 
 					relativPosPanel.setCommunicator(communicator);
 					stepPanel.setCommunicator(communicator);
+					manualModePanel.setCommunicator(communicator);
+					autoModePanel.setCommunicator(communicator);
 				}
 			}
 		}
