@@ -2,6 +2,8 @@ package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
 import java.awt.Component;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
@@ -19,6 +21,8 @@ import javax.swing.event.ChangeListener;
 
 import org.apache.log4j.Logger;
 
+import com.google.common.base.Optional;
+
 import net.miginfocom.swing.MigLayout;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
@@ -34,6 +38,8 @@ public class AutoModePanel extends JPanel {
 	private static final String SLOW = "Langsam";
 	private static final String NORMAL = "Normal";
 	private static final String FAST = "Schnell";
+	
+	private final SwingStarter starter;
 
 	private ComConnectionProperties properties;
 	
@@ -65,11 +71,13 @@ public class AutoModePanel extends JPanel {
 	private int upSpeed, downSpeed;
 
 	protected ComCommunicator communicator;
+	
+	protected Double startPos, endPos;
 
-
-	public AutoModePanel(ComConnectionProperties properties, final JLabel stateLine) {
+	public AutoModePanel(ComConnectionProperties properties, final JLabel stateLine, SwingStarter starter) {
 		this.properties = properties;
 		setStateLine(stateLine);
+		this.starter = starter;
 		
 		this.setLayout(new MigLayout("debug", "[] []30[] [] []", "[]20[][][][][][]"));
 		
@@ -84,6 +92,8 @@ public class AutoModePanel extends JPanel {
 		
 		mirrorCheckBox = new JCheckBox("Spiegelvorauslösung");
 		stepSizeSpinner = new JSpinner();
+		startPos = new Double(0.0);
+		endPos = new Double(0.0);
 		
 		initIcons();
 		defineLabels();
@@ -240,7 +250,69 @@ public class AutoModePanel extends JPanel {
 			}	
 		});
 		
+		saveStartButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				startPos = Double.parseDouble("" + starter.position);
+			}
+		});
 		
+		saveEndButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				endPos = Double.parseDouble("" + starter.position);
+			}
+		});
+		
+		startButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//1. Zu startposition bewegen
+				//2. in Schritten zu endposition bewegen
+				//3. nach jedem Schritt Foto machen
+				// nach letztem Foto beenden
+			}
+		});
+		
+		stopButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//bewegung und Fotosession beenden
+			}
+		});
+		
+		pauseButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Aktuelle Aktion pausieren
+			}
+		});
+		
+		resetButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				startPos = Double.parseDouble("0.0");
+				endPos = Double.parseDouble("0.0");
+				if (!normalRadioButton.isSelected()) {
+					normalRadioButton.setSelected(true);
+				}
+			}
+		});
+		
+		stepSizeSpinner.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				//TODO
+				
+			}
+		});
 	}
 
 	private void initIcons() {
@@ -254,7 +326,7 @@ public class AutoModePanel extends JPanel {
 	}
 
 	private void defineButtons() {
-		saveStartButton = new JButton("Anfangspunkt Speichern");
+		saveStartButton = new JButton("Startpunkt Speichern");
 		saveEndButton = new JButton("Endpunkt Speichern");
 		startButton = new JButton("Start");
 		stopButton = new JButton("Stop");

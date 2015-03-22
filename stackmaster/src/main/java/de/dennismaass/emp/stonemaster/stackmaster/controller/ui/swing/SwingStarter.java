@@ -120,6 +120,8 @@ ComConnectionPropertiesListener {
 	private AutoModePanel autoModePanel;
 
 	private ManualModePanel manualModePanel;
+	
+	public double position;
 
 	public SwingStarter() {
 
@@ -198,7 +200,7 @@ ComConnectionPropertiesListener {
 		stepPanel = new StepPanel(defaultProfile.getProperties(), stateLine);
 		tabbedPane.addTab("Schritte", null, stepPanel, null);
 		
-		autoModePanel = new AutoModePanel(defaultProfile.getProperties(), stateLine);
+		autoModePanel = new AutoModePanel(defaultProfile.getProperties(), stateLine, this);
 		tabbedPane.addTab("Automatisch", null, autoModePanel, null);
 		
 		manualModePanel = new ManualModePanel(defaultProfile.getProperties(), stateLine);
@@ -527,7 +529,7 @@ ComConnectionPropertiesListener {
 	@Override
 	public void handleAnswer(ComAnswerEvent e) {
 		if (e.getInstruction() == ComInstructionID.MOVE_POSITION) {
-			System.out.println(e.getValueInMillimeter());
+			position = e.getValueInMillimeter();
 		}
 	}
 
