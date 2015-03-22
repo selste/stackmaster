@@ -128,6 +128,13 @@ public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
 			LOGGER.error("error by parsing pulseDuration", e);
 		}
 
+		try {
+			Double translation = Double.parseDouble(properties.getProperty("translation"));
+			comConnectionProperties.setTranslation(translation);
+		} catch (NumberFormatException e) {
+			LOGGER.error("error by parsing pulseDuration", e);
+		}
+		
 		return comConnectionProperties;
 
 	}
@@ -174,6 +181,9 @@ public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
 
 		double lastStep = comConnectionProperties.getStepSize();
 		properties.setProperty("lastStep", Double.toString(lastStep));
+		
+		double translation = comConnectionProperties.getTranslation();
+		properties.setProperty("translation", Double.toString(translation));
 
 		writeProperties(file, properties);
 
