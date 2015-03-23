@@ -271,6 +271,18 @@ public class AutoModePanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//1. Zu startposition bewegen
+				if (startPos.doubleValue() > endPos.doubleValue()) {
+					LOGGER.info("Startposition über Endposition, bewege zu start");
+					communicator.moveTo(startPos.doubleValue() + 0.05);
+					communicator.moveTo(startPos.doubleValue());
+				} else if (startPos.doubleValue() < endPos.doubleValue()) {
+					LOGGER.info("Startposition unter Endposition, bewege zu start");
+					communicator.moveTo(startPos.doubleValue() - 0.05);
+					communicator.moveTo(startPos.doubleValue());
+				} else {
+					LOGGER.info("Startposition gleich Endposition, bewege zu start");
+					communicator.moveTo(startPos.doubleValue());
+				}
 				//2. in Schritten zu endposition bewegen
 				//3. nach jedem Schritt Foto machen
 				// nach letztem Foto beenden
