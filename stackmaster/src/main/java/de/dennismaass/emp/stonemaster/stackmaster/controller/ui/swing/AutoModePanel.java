@@ -275,16 +275,20 @@ public class AutoModePanel extends JPanel {
 					LOGGER.info("Startposition über Endposition, bewege zu start");
 					communicator.moveTo(startPos.doubleValue() + 0.05);
 					communicator.moveTo(startPos.doubleValue());
+					//2. in Schritten zu endposition bewegen und Fotos machen
+					moveDown();
 				} else if (startPos.doubleValue() < endPos.doubleValue()) {
 					LOGGER.info("Startposition unter Endposition, bewege zu start");
 					communicator.moveTo(startPos.doubleValue() - 0.05);
 					communicator.moveTo(startPos.doubleValue());
+					//2. in Schritten zu endposition bewegen und Fotos machen
+					moveUp();
 				} else {
 					LOGGER.info("Startposition gleich Endposition, bewege zu start");
 					communicator.moveTo(startPos.doubleValue());
+					
 				}
-				//2. in Schritten zu endposition bewegen
-				//3. nach jedem Schritt Foto machen
+				
 				// nach letztem Foto beenden
 			}
 		});
@@ -325,6 +329,26 @@ public class AutoModePanel extends JPanel {
 				
 			}
 		});
+	}
+
+	protected void moveUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void moveDown() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	protected void auslösen(long pulseDuration) {
+		communicator.setSIO(2, true);
+		try {
+			Thread.sleep(pulseDuration);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		communicator.setSIO(2, false);
 	}
 
 	private void initIcons() {
