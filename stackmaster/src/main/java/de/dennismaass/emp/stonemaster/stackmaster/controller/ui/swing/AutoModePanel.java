@@ -25,6 +25,7 @@ import com.google.common.base.Optional;
 
 import net.miginfocom.swing.MigLayout;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
+import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 
@@ -273,29 +274,33 @@ public class AutoModePanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				double stepSize = (double) stepSizeSpinner.getValue();
-				startButton.setEnabled(false);
-				stopButton.setEnabled(true);
-				pauseButton.setEnabled(true);
-				//1. Zu startposition bewegen
-				if (startPos.doubleValue() > endPos.doubleValue()) {
-					LOGGER.info("Startposition über Endposition, bewege zu start");
-					communicator.moveTo(startPos.doubleValue() + 0.05);
-					communicator.moveTo(startPos.doubleValue());
-					//2. in Schritten zu endposition bewegen und Fotos machen
-					moveDown(stepSize);
-				} else if (startPos.doubleValue() < endPos.doubleValue()) {
-					LOGGER.info("Startposition unter Endposition, bewege zu start");
-					communicator.moveTo(startPos.doubleValue() - 0.05);
-					communicator.moveTo(startPos.doubleValue());
-					//2. in Schritten zu endposition bewegen und Fotos machen
-					moveUp(stepSize);
-				} else {
-					LOGGER.info("Startposition gleich Endposition, bewege zu start");
-					communicator.moveTo(startPos.doubleValue());
+				boolean correctValue = validate(stepSize);
+				if (correctValue) {
+					startButton.setEnabled(false);
+					stopButton.setEnabled(true);
+					pauseButton.setEnabled(true);
 					
+					//1. Zu startposition bewegen
+					if (startPos.doubleValue() > endPos.doubleValue()) {
+						LOGGER.info("Startposition über Endposition, bewege zu start");
+						communicator.moveTo(startPos.doubleValue() + 0.05);
+						communicator.moveTo(startPos.doubleValue());
+						//2. in Schritten zu endposition bewegen und Fotos machen
+						moveDown(stepSize);
+					} else if (startPos.doubleValue() < endPos.doubleValue()) {
+						LOGGER.info("Startposition unter Endposition, bewege zu start");
+						communicator.moveTo(startPos.doubleValue() - 0.05);
+						communicator.moveTo(startPos.doubleValue());
+						//2. in Schritten zu endposition bewegen und Fotos machen
+						moveUp(stepSize);
+					} else {
+						LOGGER.info("Startposition gleich Endposition, bewege zu start");
+						communicator.moveTo(startPos.doubleValue());
+						
+					}
+					
+					// nach letztem Foto beenden
 				}
-				
-				// nach letztem Foto beenden
 			}
 		});
 		
@@ -338,6 +343,16 @@ public class AutoModePanel extends JPanel {
 		});
 	}
 
+	protected boolean validate(double stepSize) {
+		LOGGER.info("Validating size of steps: " + stepSize);
+		if (stepSize > Constants.MIN_STEP && stepSize < Constants.MAX_STEP) {
+			LOGGER.info("stepSize validated. Range is correct");
+			return true;
+		}
+		LOGGER.info("stepSize validated. Range is incorrect");
+		return false;
+	}
+	
 	protected void moveUp(double stepSize) {
 		Thread upMover = createThread(stepSize);
 		upMover.start();
