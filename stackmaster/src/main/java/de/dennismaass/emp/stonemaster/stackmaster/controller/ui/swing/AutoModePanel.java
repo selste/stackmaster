@@ -139,7 +139,9 @@ public class AutoModePanel extends JPanel {
 		this.add(downButton);
 		this.add(startButton, "split 3");
 		this.add(stopButton);
+		stopButton.setEnabled(false);
 		this.add(pauseButton, "center, wrap");
+		pauseButton.setEnabled(false);
 		
 		this.add(picsMadeLabel, "cell 2 6, center");
 		this.add(calculatedPicsLabel, "left");
@@ -270,19 +272,23 @@ public class AutoModePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				double stepSize = (double) stepSizeSpinner.getValue();
+				startButton.setEnabled(false);
+				stopButton.setEnabled(true);
+				pauseButton.setEnabled(true);
 				//1. Zu startposition bewegen
 				if (startPos.doubleValue() > endPos.doubleValue()) {
 					LOGGER.info("Startposition über Endposition, bewege zu start");
 					communicator.moveTo(startPos.doubleValue() + 0.05);
 					communicator.moveTo(startPos.doubleValue());
 					//2. in Schritten zu endposition bewegen und Fotos machen
-					moveDown();
+					moveDown(stepSize);
 				} else if (startPos.doubleValue() < endPos.doubleValue()) {
 					LOGGER.info("Startposition unter Endposition, bewege zu start");
 					communicator.moveTo(startPos.doubleValue() - 0.05);
 					communicator.moveTo(startPos.doubleValue());
 					//2. in Schritten zu endposition bewegen und Fotos machen
-					moveUp();
+					moveUp(stepSize);
 				} else {
 					LOGGER.info("Startposition gleich Endposition, bewege zu start");
 					communicator.moveTo(startPos.doubleValue());
@@ -297,7 +303,8 @@ public class AutoModePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//bewegung und Fotosession beenden
+				stopButton.setEnabled(false);
+				
 			}
 		});
 		
@@ -305,7 +312,7 @@ public class AutoModePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Aktuelle Aktion pausieren
+				pauseButton.setEnabled(false);
 			}
 		});
 		
@@ -331,14 +338,18 @@ public class AutoModePanel extends JPanel {
 		});
 	}
 
-	protected void moveUp() {
-		// TODO Auto-generated method stub
-		
+	protected void moveUp(double stepSize) {
+		Thread upMover = createThread(stepSize);
+		upMover.start();
 	}
 
-	protected void moveDown() {
-		// TODO Auto-generated method stub
-		
+	protected void moveDown(double stepSize) {
+		Thread downMover = createThread(stepSize);
+		downMover.start();
+	}
+	
+	protected Thread createThread(double stepSize) {
+		return new Thread();
 	}
 	
 	protected void auslösen(long pulseDuration) {
