@@ -127,6 +127,7 @@ public class ManualModePanel extends JPanel {
 		this.add(executeButton, "cell 3 4, split 3");
 		this.add(stopButton);
 		this.add(pauseButton, "wrap");
+		pauseButton.setEnabled(false);
 		
 		this.add(normal);
 		
