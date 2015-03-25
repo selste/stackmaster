@@ -75,6 +75,8 @@ public class AutoModePanel extends JPanel {
 	
 	protected Double startPos, endPos;
 
+	protected boolean stop = false;
+
 	public AutoModePanel(ComConnectionProperties properties, final JLabel stateLine, SwingStarter starter) {
 		this.properties = properties;
 		setStateLine(stateLine);
@@ -286,20 +288,21 @@ public class AutoModePanel extends JPanel {
 						communicator.moveTo(startPos.doubleValue() + 0.05);
 						communicator.moveTo(startPos.doubleValue());
 						//2. in Schritten zu endposition bewegen und Fotos machen
-						moveDown(stepSize);
+						Thread job = createThread(stepSize);
+						job.start();
 					} else if (startPos.doubleValue() < endPos.doubleValue()) {
 						LOGGER.info("Startposition unter Endposition, bewege zu start");
 						communicator.moveTo(startPos.doubleValue() - 0.05);
 						communicator.moveTo(startPos.doubleValue());
 						//2. in Schritten zu endposition bewegen und Fotos machen
-						moveUp(stepSize);
+						Thread job = createThread(stepSize);
+						job.start();
 					} else {
 						LOGGER.info("Startposition gleich Endposition, bewege zu start");
 						communicator.moveTo(startPos.doubleValue());
-						
+						Thread job = createThread(stepSize);
+						job.start();
 					}
-					
-					// nach letztem Foto beenden
 				}
 			}
 		});
@@ -308,6 +311,8 @@ public class AutoModePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				communicator.stop();
+				stop = true;
 				stopButton.setEnabled(false);
 				
 			}
@@ -318,6 +323,7 @@ public class AutoModePanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				pauseButton.setEnabled(false);
+				
 			}
 		});
 		
@@ -353,27 +359,66 @@ public class AutoModePanel extends JPanel {
 		return false;
 	}
 	
-	protected void moveUp(double stepSize) {
-		Thread upMover = createThread(stepSize);
-		upMover.start();
-	}
-
-	protected void moveDown(double stepSize) {
-		Thread downMover = createThread(stepSize);
-		downMover.start();
-	}
-	
-	protected Thread createThread(double stepSize) {
+	protected Thread createThread(final double stepSize) {
 		Thread job = new Thread() {
 
 			@Override
 			public void run() {
 				disableAllComponents(true);
 				setEnableStopAndPause(false);
-			}
-			
+				
+				while (startPos.doubleValue() != endPos.doubleValue()) {
+					if (stop) {
+						break;
+					}
+					if (startPos.doubleValue() > endPos.doubleValue()) {
+						auslösen(pulseDuration);
+						if (mirrorCheckBox.isSelected()) {
+							pause(sleepMirrorPicture);
+							if (stop) {
+								break;
+							}
+							auslösen(pulseDuration);
+						}
+						
+						//bewegung
+						pause(sleepPictureMovement);
+						if (stop) {
+							break;
+						}
+						if ((starter.position - endPos.doubleValue()) > stepSize) {
+							communicator.move(stepSize);
+						} else {
+							communicator.moveTo(endPos.doubleValue());
+						}
+					} else {
+						
+					}
+				}
+				//letzes Bild
+				if (!stop) {
+					auslösen(pulseDuration);
+					
+					if (mirrorCheckBox.isSelected()) {
+						pause(sleepMirrorPicture);
+						auslösen(pulseDuration);
+					}
+				}
+				
+				stop = false;
+				setEnableStopAndPause(false);
+				disableAllComponents(false);
+			}	
 		};
 		return job;
+	}
+	
+	protected void pause(long pauseTime) {
+		try {
+			Thread.sleep(pauseTime);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	protected void disableAllComponents(boolean disableState) {
