@@ -371,28 +371,32 @@ public class AutoModePanel extends JPanel {
 					if (stop) {
 						break;
 					}
-					if (startPos.doubleValue() > endPos.doubleValue()) {
-						auslösen(pulseDuration);
-						if (mirrorCheckBox.isSelected()) {
-							pause(sleepMirrorPicture);
-							if (stop) {
-								break;
-							}
-							auslösen(pulseDuration);
-						}
-						
-						//bewegung
-						pause(sleepPictureMovement);
+					auslösen(pulseDuration);
+					if (mirrorCheckBox.isSelected()) {
+						pause(sleepMirrorPicture);
 						if (stop) {
 							break;
 						}
+						auslösen(pulseDuration);
+					}
+					
+					//bewegung
+					pause(sleepPictureMovement);
+					if (stop) {
+						break;
+					}
+					if (startPos.doubleValue() > endPos.doubleValue()) {					
 						if ((starter.position - endPos.doubleValue()) > stepSize) {
 							communicator.move(stepSize);
 						} else {
 							communicator.moveTo(endPos.doubleValue());
 						}
 					} else {
-						
+						if ((endPos.doubleValue() - starter.position) > stepSize) {
+							communicator.move((stepSize)*-1); 
+						} else {
+							communicator.moveTo(endPos.doubleValue());
+						}
 					}
 				}
 				//letzes Bild
