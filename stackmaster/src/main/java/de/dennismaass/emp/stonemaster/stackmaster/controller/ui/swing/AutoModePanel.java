@@ -364,7 +364,43 @@ public class AutoModePanel extends JPanel {
 	}
 	
 	protected Thread createThread(double stepSize) {
-		return new Thread();
+		Thread job = new Thread() {
+
+			@Override
+			public void run() {
+				disableAllComponents(true);
+				setEnableStopAndPause(false);
+			}
+			
+		};
+		return job;
+	}
+	
+	protected void disableAllComponents(boolean disableState) {
+		if (!disableState) {
+			LOGGER.info("enable all components");
+		} else {
+			LOGGER.info("disable all components");
+		}
+		
+		upButton.setEnabled(!disableState);
+		downButton.setEnabled(!disableState);
+		
+		slowRadioButton.setEnabled(!disableState);
+		normalRadioButton.setEnabled(!disableState);
+		fastRadioButton.setEnabled(!disableState);
+		
+		startButton.setEnabled(!disableState);
+		resetButton.setEnabled(!disableState);
+		
+		mirrorCheckBox.setEnabled(!disableState);
+		
+		stepSizeSpinner.setEnabled(!disableState);
+	}
+	
+	protected void setEnableStopAndPause(boolean state) {
+		stopButton.setEnabled(state);
+		pauseButton.setEnabled(state);
 	}
 	
 	protected void auslösen(long pulseDuration) {
