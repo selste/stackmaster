@@ -77,12 +77,14 @@ public class AutoModePanel extends JPanel {
 
 	protected boolean stop = false;
 
+	protected boolean pause = false;
+
 	public AutoModePanel(ComConnectionProperties properties, final JLabel stateLine, SwingStarter starter) {
 		this.properties = properties;
 		setStateLine(stateLine);
 		this.starter = starter;
 		
-		this.setLayout(new MigLayout("debug", "[] []30[] [] []", "[]20[][][][][][]"));
+		this.setLayout(new MigLayout("", "[] []30[] [] []", "[]20[][][][][][]"));
 		
 		upSpeed = properties.getMiddleUpSpeed();
 		downSpeed = properties.getMiddleDownSpeed();
@@ -314,7 +316,8 @@ public class AutoModePanel extends JPanel {
 				communicator.stop();
 				stop = true;
 				stopButton.setEnabled(false);
-				
+				pause = false;
+				pauseButton.setEnabled(false);
 			}
 		});
 		
@@ -322,8 +325,13 @@ public class AutoModePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pauseButton.setEnabled(false);
-				
+				if (pause) {
+					pause = false;
+					pauseButton.setText("Pause");
+				} else {
+					pause = true;
+					pauseButton.setText("Fortsetzen");
+				}
 			}
 		});
 		
@@ -385,6 +393,9 @@ public class AutoModePanel extends JPanel {
 					if (stop) {
 						break;
 					}
+					if (pause) {
+						performPause();
+					}
 					if (startPos.doubleValue() > endPos.doubleValue()) {					
 						if ((starter.position - endPos.doubleValue()) > stepSize) {
 							communicator.move(stepSize);
@@ -398,6 +409,10 @@ public class AutoModePanel extends JPanel {
 							communicator.moveTo(endPos.doubleValue());
 						}
 					}
+					if(pause){
+						performPause();
+					}
+					//pause();
 				}
 				//letzes Bild
 				if (!stop) {
@@ -415,6 +430,16 @@ public class AutoModePanel extends JPanel {
 			}	
 		};
 		return job;
+	}
+	
+	protected void performPause() {
+		while(pause) {
+			try {
+				Thread.sleep(500L);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	protected void pause(long pauseTime) {

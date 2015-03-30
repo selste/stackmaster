@@ -91,7 +91,7 @@ public class ManualModePanel extends JPanel {
 		sleepPictureMovement = properties.getSleepPictureMovement();
 		pulseDuration = properties.getPulseDuration();
 		
-		this.setLayout(new MigLayout("debug", "[] []30[] [] []", "[]20[] [] [] [] [] [] []20[] []"));
+		this.setLayout(new MigLayout("", "[] []30[] [] []", "[]20[] [] [] [] [] [] []20[] []"));
 		
 		checkMirror = new JCheckBox("Spiegelvorauslösung");
 		stepSpinner = new JSpinner();
