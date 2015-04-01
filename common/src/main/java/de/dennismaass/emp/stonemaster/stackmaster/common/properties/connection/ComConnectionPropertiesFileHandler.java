@@ -128,12 +128,12 @@ public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
 			LOGGER.error("error by parsing pulseDuration", e);
 		}
 
-		try {
+		/*try {
 			Double translation = Double.parseDouble(properties.getProperty("translation"));
 			comConnectionProperties.setTranslation(translation);
 		} catch (NumberFormatException e) {
 			LOGGER.error("error by parsing pulseDuration", e);
-		}
+		}*/
 		
 		return comConnectionProperties;
 

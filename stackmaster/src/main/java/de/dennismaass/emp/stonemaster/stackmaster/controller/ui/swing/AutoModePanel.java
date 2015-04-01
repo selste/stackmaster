@@ -351,8 +351,11 @@ public class AutoModePanel extends JPanel {
 			
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				//TODO
-				
+				if ((double) stepSizeSpinner.getValue() > Constants.MAX_STEP) {
+					stepSizeSpinner.setValue(Constants.MAX_STEP);
+				} else if((double) stepSizeSpinner.getValue() < Constants.MIN_STEP) {
+					stepSizeSpinner.setValue(Constants.MIN_STEP);
+				}
 			}
 		});
 	}
@@ -409,10 +412,12 @@ public class AutoModePanel extends JPanel {
 							communicator.moveTo(endPos.doubleValue());
 						}
 					}
+					pause((int) (sleepWhileMove * Math.abs(stepSize)) + sleepMovementMirror);
+					
 					if(pause){
 						performPause();
 					}
-					//pause();
+					
 				}
 				//letzes Bild
 				if (!stop) {
@@ -425,6 +430,7 @@ public class AutoModePanel extends JPanel {
 				}
 				
 				stop = false;
+				pause = false;
 				setEnableStopAndPause(false);
 				disableAllComponents(false);
 			}	
