@@ -90,6 +90,10 @@ public class SwingStarter extends JFrame {
 	private JMenu menu;
 	private JMenuItem mntmExit, mntmSpeichern;
 
+	private JLabel lblTranslate;
+
+	private JSpinner translationTF;
+
 	public SwingStarter() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -161,7 +165,7 @@ public class SwingStarter extends JFrame {
 
 		JPanel defaultPanel = new JPanel();
 		tabbedPane.addTab("default.stackmaster", null, defaultPanel, null);
-		defaultPanel.setLayout(new MigLayout("", "[][]", "[][][][][][][][][][][][][][][]"));
+		defaultPanel.setLayout(new MigLayout("", "[][]", "[][][][][][][][][][][][][][][][]"));
 
 		lblNewLabel = new JLabel("Hoch");
 		defaultPanel.add(lblNewLabel, "cell 0 0,alignx left");
@@ -284,7 +288,7 @@ public class SwingStarter extends JFrame {
 
 		lblModus = new JLabel("Modus");
 		defaultPanel.add(lblModus, "cell 0 17,alignx left");
-
+		
 		connectionModeCB = new JComboBox<Integer>();
 		connectionModeCB.addItem(1);
 		connectionModeCB.addItem(2);
@@ -295,6 +299,13 @@ public class SwingStarter extends JFrame {
 		connectionModeCB.addItem(7);
 		connectionModeCB.addItem(8);
 		defaultPanel.add(connectionModeCB, "cell 1 17,growx");
+		
+		lblTranslate = new JLabel("Motor-Übersetzung");
+		defaultPanel.add(lblTranslate, "cell 0 18, alignx left");
+		
+		translationTF = new JSpinner();
+		translationTF.setMinimumSize(new Dimension(100, 22));
+		defaultPanel.add(translationTF, "cell 1 18");
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -412,6 +423,7 @@ public class SwingStarter extends JFrame {
 			sleepMovementMirrorTF.setValue(defaultConnectionProperties.getSleepMovementMirror());
 			sleepPictureMovementTF.setValue(defaultConnectionProperties.getSleepPictureMovement());
 			pulseDurationTF.setValue(defaultConnectionProperties.getPulseDuration());
+			translationTF.setValue(defaultConnectionProperties.getTranslation());
 		}
 	}
 
@@ -503,6 +515,9 @@ public class SwingStarter extends JFrame {
 
 		int countOfStepsPerMm = (int) countOfStepPerMmTF.getValue();
 		comConnectionProperties.setStepsPerMm(countOfStepsPerMm);
+		
+		double translation = (double) translationTF.getValue();
+		comConnectionProperties.setTranslation(translation);
 
 		int fastUpSpeed = (int) fastUpSpeedTF.getValue();
 		comConnectionProperties.setFastUpSpeed(fastUpSpeed);
@@ -549,6 +564,9 @@ public class SwingStarter extends JFrame {
 
 		int countOfStepPerMm = (int) countOfStepPerMmTF.getValue();
 		allValid = validateStepCount(countOfStepPerMm, countOfStepPerMmTF);
+		
+		double translation = (double) translationTF.getValue();
+		//allValid = validateTranslation(translation, tanslationTF);
 
 		int fastUpSpeed = (int) fastUpSpeedTF.getValue();
 		allValid = validateSpeed(fastUpSpeed, fastUpSpeedTF);
