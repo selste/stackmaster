@@ -654,4 +654,16 @@ public class SwingStarter extends JFrame {
 		return allValid;
 	}
 
+	protected boolean validateTranslation(double translation, JComponent component) {
+		boolean allValid = false;
+		//if() {
+		//component.setBackground(Color.red);
+		//LOGGER.error("error by parsing " + component.getName());
+		//} else {
+		//allValid = true;
+		//component.setBackground(Color.white);
+		//}
+		return allValid;
+	}
+	
 }
