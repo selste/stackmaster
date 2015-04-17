@@ -1,13 +1,12 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import java.net.URL;
-
 import java.text.DecimalFormat;
 
 import javax.swing.ButtonGroup;
@@ -18,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -47,6 +47,8 @@ public class ManualModePanel extends JPanel {
 	
 	private JButton upButton, downButton, pauseButton,
 				stopButton, resetButton, executeButton;
+	
+	public Font actualFont = new Font("Arial", Font.PLAIN, 20);
 	
 	private ImageIcon upIcon, downIcon;
 	
@@ -94,8 +96,14 @@ public class ManualModePanel extends JPanel {
 		this.setLayout(new MigLayout("", "[] []30[] [] []", "[]20[] [] [] [] [] [] []20[] []"));
 		
 		checkMirror = new JCheckBox("Spiegelvorauslösung");
+		checkMirror.setFont(actualFont);
 		stepSpinner = new JSpinner();
+		stepSpinner.setModel(new SpinnerNumberModel(properties.getStepSize(), 0.0001, 250.1, 0.0001));
+		((JSpinner.NumberEditor) stepSpinner.getEditor()).getFormat().setMaximumFractionDigits(4);
+		stepSpinner.setFont(actualFont);
 		picSpinner = new JSpinner();
+		picSpinner.setFont(actualFont);
+		picSpinner.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		
 		createLabels();
 		declareRadioButtons();
@@ -105,6 +113,7 @@ public class ManualModePanel extends JPanel {
 		assignListeners();
 		
 		buildLayout();
+		setAllComponentsDisableState(true);
 	}
 	
 	private void buildLayout() {
@@ -121,7 +130,7 @@ public class ManualModePanel extends JPanel {
 		
 		this.add(checkMirror, "cell 3 3, wrap");
 		
-		this.add(fast);
+		this.add(slow);
 		this.add(upButton);
 		
 		this.add(executeButton, "cell 3 4, split 3");
@@ -135,7 +144,7 @@ public class ManualModePanel extends JPanel {
 		this.add(picsTakenLabel, "cell 2 5, right");
 		this.add(picsNumberLabel, "left, wrap");
 		
-		this.add(slow);
+		this.add(fast);
 		this.add(downButton);
 		
 		this.add(pathTraveledLabel, "cell 2 6, right");
@@ -153,18 +162,31 @@ public class ManualModePanel extends JPanel {
 
 	private void createLabels() {
 		relativeLabel = new JLabel("Relative Bewegung");
+		relativeLabel.setFont(actualFont);
 		stepLabel = new JLabel("Steuerung durch Schritte");
+		stepLabel.setFont(actualFont);
 		speedLabel = new JLabel("Geschwindigkeit:");
+		speedLabel.setFont(actualFont);
 		picCountLabel = new JLabel("Anzahl Bilder:");
+		picCountLabel.setFont(actualFont);
 		stepSizeLabel = new JLabel("Schrittgröße [mm]:");
+		stepSizeLabel.setFont(actualFont);
 		picsTakenLabel = new JLabel("Anzahl getätigter Bilder: ");
+		picsTakenLabel.setFont(actualFont);
 		picsNumberLabel = new JLabel("0");
+		picsNumberLabel.setFont(actualFont);
 		pathTraveledLabel = new JLabel("Bisher zurückgelegter Weg [mm]: ");
+		pathTraveledLabel.setFont(actualFont);
 		pathDistanceLabel = new JLabel("0.0");
+		pathDistanceLabel.setFont(actualFont);
 		assumedTimeLabel = new JLabel("Geschätze Dauer: ");
+		assumedTimeLabel.setFont(actualFont);
 		timeNumberLabel = new JLabel("0");
+		timeNumberLabel.setFont(actualFont);
 		nessecaryPathLengthLabel = new JLabel("erforderlicher Weg: ");
+		nessecaryPathLengthLabel.setFont(actualFont);
 		pathLengthLabel = new JLabel("0 mm");
+		pathLengthLabel.setFont(actualFont);
 	}
 	
 	private void initIcons(){
@@ -183,10 +205,13 @@ public class ManualModePanel extends JPanel {
 		upButton = new JButton(upIcon);
 		downButton = new JButton(downIcon);
 		pauseButton = new JButton("pause");
+		pauseButton.setFont(actualFont);
 		stopButton = new JButton("stop");
+		stopButton.setFont(actualFont);
 		resetButton = new JButton("reset");
+		resetButton.setFont(actualFont);
 		executeButton = new JButton("ausführen");
-		
+		executeButton.setFont(actualFont);
 	}
 	
 	private void assignListeners() {
@@ -346,7 +371,7 @@ public class ManualModePanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("rotate left command with speed: " + upSpeed);
-					communicator.rotateLeft(upSpeed);
+					communicator.rotateRight(upSpeed);
 				}
 			}
 			
@@ -377,7 +402,7 @@ public class ManualModePanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				if (communicator != null) {
 					LOGGER.info("rotating motor right with speed: " + downSpeed);
-					communicator.rotateRight(downSpeed);
+					communicator.rotateLeft(downSpeed);
 				}
 			}
 
@@ -610,12 +635,12 @@ public class ManualModePanel extends JPanel {
 		LOGGER.debug("creating Radio Buttons.");
 		
 		fast = new JRadioButton(FAST);
-		fast.setActionCommand(FAST);
+		fast.setFont(actualFont);
 		normal = new JRadioButton(NORMAL);
-		normal.setActionCommand(NORMAL);
+		normal.setFont(actualFont);
 		normal.setSelected(true);
 		slow = new JRadioButton(SLOW);
-		slow.setActionCommand(SLOW);
+		slow.setFont(actualFont);
 	}
 	
 	public ComCommunicator getCommunicator() {

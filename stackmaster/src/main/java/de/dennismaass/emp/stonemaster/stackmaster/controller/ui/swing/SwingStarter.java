@@ -360,6 +360,8 @@ ComConnectionPropertiesListener {
 	private void setAllComponentsDisableState(boolean disableState) {
 		stepPanel.setAllComponentsDisableState(disableState);
 		relativPosPanel.setAllComponentsDisableState(disableState);
+		manualModePanel.setAllComponentsDisableState(disableState);
+		autoModePanel.disableAllComponents(disableState);
 	}
 
 	protected void initMenu() {
@@ -528,7 +530,8 @@ ComConnectionPropertiesListener {
 
 	@Override
 	public void handleAnswer(ComAnswerEvent e) {
-		if (e.getInstruction() == ComInstructionID.MOVE_POSITION) {
+		if (e.getInstruction() == 6) {
+			LOGGER.info("Value in mm: " + e.getValueInMillimeter());
 			position = e.getValueInMillimeter();
 		}
 	}
