@@ -109,8 +109,8 @@ ComConnectionPropertiesListener {
 	private ConnectionThread connectThread;
 	private JButton connectButton;
 	private JComboBox<CommPortIdentifier> connectionComboBox;
-	private RelativPosPanel relativPosPanel;
-	private StepPanel stepPanel;
+//	private RelativPosPanel relativPosPanel;
+//	private StepPanel stepPanel;
 	private JMenuItem mntmProfilSpeichern, mntmProfilSpeichernAls;
 	private PropertiesDialog propertiesDialog;
 	public Font actualFont = new Font("Arial", Font.PLAIN, 20);
@@ -158,7 +158,7 @@ ComConnectionPropertiesListener {
 		setTitle(UiConstants.TITLE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(100, 100, 1050, 620);
+		setBounds(100, 100, 855, 620);
 
 		propertiesHandler = new ProfileFileHandler();
 		defaultProfile = propertiesHandler.readProfile(defaultFile);
@@ -194,18 +194,18 @@ ComConnectionPropertiesListener {
 		secondLineLabel = new JLabel("sdf");
 		welcome.add(secondLineLabel, "cell 0 2,alignx left");
 
-		relativPosPanel = new RelativPosPanel(defaultProfile.getProperties(), stateLine);
-		tabbedPane.addTab("relativ", null, relativPosPanel, null);
-
-		stepPanel = new StepPanel(defaultProfile.getProperties(), stateLine);
-		tabbedPane.addTab("Schritte", null, stepPanel, null);
+//		relativPosPanel = new RelativPosPanel(defaultProfile.getProperties(), stateLine);
+//		tabbedPane.addTab("relativ", null, relativPosPanel, null);
+//
+//		stepPanel = new StepPanel(defaultProfile.getProperties(), stateLine);
+//		tabbedPane.addTab("Schritte", null, stepPanel, null);
+		
+		manualModePanel = new ManualModePanel(defaultProfile.getProperties(), stateLine);
+		tabbedPane.addTab("Manuell", null, manualModePanel, null);
 		
 		autoModePanel = new AutoModePanel(defaultProfile.getProperties(), stateLine, this);
 		tabbedPane.addTab("Automatisch", null, autoModePanel, null);
 		
-		manualModePanel = new ManualModePanel(defaultProfile.getProperties(), stateLine);
-		tabbedPane.addTab("Manuell", null, manualModePanel, null);
-
 		connectThread = createConnectionThread();
 		connectThread.start();
 
@@ -305,8 +305,8 @@ ComConnectionPropertiesListener {
 					ComCommunicator communicator = createCommunicator(commPortIdentifier.getName());
 					setCommunicator(communicator);
 
-					relativPosPanel.setCommunicator(communicator);
-					stepPanel.setCommunicator(communicator);
+//					relativPosPanel.setCommunicator(communicator);
+//					stepPanel.setCommunicator(communicator);
 					manualModePanel.setCommunicator(communicator);
 					autoModePanel.setCommunicator(communicator);
 				}
@@ -358,8 +358,8 @@ ComConnectionPropertiesListener {
 	}
 
 	private void setAllComponentsDisableState(boolean disableState) {
-		stepPanel.setAllComponentsDisableState(disableState);
-		relativPosPanel.setAllComponentsDisableState(disableState);
+//		stepPanel.setAllComponentsDisableState(disableState);
+//		relativPosPanel.setAllComponentsDisableState(disableState);
 		manualModePanel.setAllComponentsDisableState(disableState);
 		autoModePanel.disableAllComponents(disableState);
 	}
@@ -608,10 +608,12 @@ ComConnectionPropertiesListener {
 	public void setConnectionProperties(ComConnectionProperties connectionProperties) {
 		LOGGER.info("set new connection properties: " + connectionProperties);
 
-		stepPanel.setVariablesFromProperties(connectionProperties);
-		stepPanel.refreshDistance();
-		stepPanel.refreshSleep();
-		relativPosPanel.setVariablesFromProperties(connectionProperties);
+//		stepPanel.setVariablesFromProperties(connectionProperties);
+//		stepPanel.refreshDistance();
+//		stepPanel.refreshSleep();
+//		relativPosPanel.setVariablesFromProperties(connectionProperties);
+		autoModePanel.setProperties(connectionProperties);
+		manualModePanel.setProperties(connectionProperties);
 		propertiesDialog.setConnectionProperties(connectionProperties);
 
 		if (communicator != null) {
