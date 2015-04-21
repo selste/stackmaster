@@ -50,6 +50,7 @@ public class PropertiesDialog extends JDialog {
 	private JSpinner slowDownSpeedTF, middleDownSpeedTF, fastDownSpeedTF;
 	private JSpinner sleepMovementMirrorTF, sleepMirrorPictureTF, sleepPictureMovementTF;
 	private JSpinner pulseDurationTF;
+	private JSpinner translateTF;
 
 	boolean cancel = false;
 
@@ -93,7 +94,7 @@ public class PropertiesDialog extends JDialog {
 		contentPanel.add(tabbedPane);
 
 		JPanel panel = new JPanel();
-		tabbedPane.addTab("Relativ-Panel", null, panel, null);
+		tabbedPane.addTab("Relative Bewegung", null, panel, null);
 		panel.setLayout(new MigLayout("", "[][]", "[][][][][][][][][]"));
 
 		JLabel lblNewLabel_6 = new JLabel("Hoch");
@@ -176,8 +177,8 @@ public class PropertiesDialog extends JDialog {
 		panel.add(slowDownSpeedTF, "cell 1 8,growx");
 
 		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Step-Panel", null, panel_1, null);
-		panel_1.setLayout(new MigLayout("", "[][grow]", "[][][][][][]"));
+		tabbedPane.addTab("Schrittgesteuerte Bewegung", null, panel_1, null);
+		panel_1.setLayout(new MigLayout("", "[][grow]", "[][][][][][][]"));
 
 		JLabel lblNewLabel_12 = new JLabel("Richtung umdrehen");
 		lblNewLabel_12.setFont(actualFont);
@@ -231,6 +232,16 @@ public class PropertiesDialog extends JDialog {
 				new Long(1), null, new Long(500)));
 		pulseDurationTF.setMinimumSize(new Dimension(100, 22));
 		panel_1.add(pulseDurationTF, "cell 1 4,growx");
+		
+		JLabel translationLbl = new JLabel("Motorübersetzung");
+		translationLbl.setFont(actualFont);
+		panel_1.add(translationLbl, "cell 0 5, alignx left");
+		
+		translateTF = new JSpinner();
+		translateTF.setFont(actualFont);
+		translateTF.setModel(new SpinnerNumberModel(0.5, 0.1, 1, 0.1));
+		translateTF.setMinimumSize(new Dimension(100, 22));
+		panel_1.add(translateTF, "cell 1 5, growx");
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
