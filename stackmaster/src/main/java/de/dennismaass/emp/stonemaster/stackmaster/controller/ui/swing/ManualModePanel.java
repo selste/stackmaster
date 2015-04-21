@@ -79,9 +79,9 @@ public class ManualModePanel extends JPanel {
 	private int upSpeed, downSpeed;
 	
 
-	public ManualModePanel(ComConnectionProperties properties, JLabel stateLine) {
+	public ManualModePanel(ComConnectionProperties properties, final JLabel stateLine) {
 		this.properties = properties;
-		//setVariablesFromProperties(properties);
+		setVariablesFromProperties(properties);
 		setStateLine(stateLine);
 		
 		upSpeed = properties.getMiddleUpSpeed();
@@ -171,11 +171,11 @@ public class ManualModePanel extends JPanel {
 		picCountLabel.setFont(actualFont);
 		stepSizeLabel = new JLabel("Schrittgröße [mm]:");
 		stepSizeLabel.setFont(actualFont);
-		picsTakenLabel = new JLabel("Anzahl getätigter Bilder: ");
+		picsTakenLabel = new JLabel("Getätigte Bilder: ");
 		picsTakenLabel.setFont(actualFont);
 		picsNumberLabel = new JLabel("0");
 		picsNumberLabel.setFont(actualFont);
-		pathTraveledLabel = new JLabel("Bisher zurückgelegter Weg [mm]: ");
+		pathTraveledLabel = new JLabel("Zurückgelegter Weg [mm]: ");
 		pathTraveledLabel.setFont(actualFont);
 		pathDistanceLabel = new JLabel("0.0");
 		pathDistanceLabel.setFont(actualFont);
@@ -657,6 +657,22 @@ public class ManualModePanel extends JPanel {
 
 	public void setStateLine(JLabel stateLine) {
 		this.stateLine = stateLine;
+	}
+	
+	public void setVariablesFromProperties(ComConnectionProperties properties) {
+		sleepMovementMirror = properties.getSleepMovementMirror();
+		sleepMirrorPicture = properties.getSleepMirrorPicture();
+		sleepWhileMove = properties.getSleepWhileMove();
+		sleepPictureMovement = properties.getSleepPictureMovement();
+		pulseDuration = properties.getPulseDuration();
+		
+		upSpeed = properties.getMiddleUpSpeed();
+		downSpeed = properties.getMiddleDownSpeed();
+	}
+	
+	public void setProperties(ComConnectionProperties properties) {
+		this.properties = properties;
+		setVariablesFromProperties(properties);
 	}
 
 }
