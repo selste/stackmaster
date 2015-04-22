@@ -4,6 +4,7 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -83,6 +84,10 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
 //- Mehrsprachigkeit
 public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
 ComConnectionPropertiesListener {
+
+	private static final Color CONTENTCOLOR = new Color(0, 141, 212);
+
+	private static final Color PANELCOLOR = new Color(221, 236, 250);
 
 	private static final long serialVersionUID = 4155209335768313320L;
 
@@ -170,6 +175,7 @@ ComConnectionPropertiesListener {
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(CONTENTCOLOR);
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(10, 10));
 
@@ -178,12 +184,14 @@ ComConnectionPropertiesListener {
 		initStatePanel();
 
 		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
+		tabbedPane.setBackground(PANELCOLOR);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel welcome = new JPanel();
 
 		tabbedPane.addTab("Start", null, welcome, null);
 		welcome.setLayout(new MigLayout("", "[grow,center]", "[center][][][]"));
+		welcome.setBackground(PANELCOLOR);
 
 		welcomeLabel = new JLabel();
 		welcome.add(welcomeLabel, "cell 0 0,alignx center");
@@ -201,9 +209,11 @@ ComConnectionPropertiesListener {
 //		tabbedPane.addTab("Schritte", null, stepPanel, null);
 		
 		manualModePanel = new ManualModePanel(defaultProfile.getProperties(), stateLine);
+		manualModePanel.setBackground(PANELCOLOR);
 		tabbedPane.addTab("Manuell", null, manualModePanel, null);
 		
 		autoModePanel = new AutoModePanel(defaultProfile.getProperties(), stateLine, this);
+		autoModePanel.setBackground(PANELCOLOR);
 		tabbedPane.addTab("Automatisch", null, autoModePanel, null);
 		
 		connectThread = createConnectionThread();
@@ -226,6 +236,7 @@ ComConnectionPropertiesListener {
 
 	protected void initStatePanel() {
 		JPanel statePanel = new JPanel();
+		statePanel.setBackground(PANELCOLOR);
 		statePanel.setPreferredSize(new Dimension(10, 50));
 		statePanel.setMinimumSize(new Dimension(10, 50));
 		contentPane.add(statePanel, BorderLayout.SOUTH);
@@ -236,6 +247,7 @@ ComConnectionPropertiesListener {
 
 	protected void initConnectionPanel() {
 		JPanel panel = new JPanel();
+		panel.setBackground(PANELCOLOR);
 		contentPane.add(panel, BorderLayout.NORTH);
 
 		Box.createHorizontalBox();

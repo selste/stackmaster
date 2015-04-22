@@ -1,5 +1,6 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +36,8 @@ public class AutoModePanel extends JPanel {
 	private static final String START_LBL_TXT = "Startposition: ";
 
 	private static final long serialVersionUID = 1042974763111948238L;
+	
+	private static final Color PANELCOLOR = new Color(221, 236, 250);
 	
 	private static final Logger LOGGER = Logger.getLogger(AutoModePanel.class);
 	
@@ -104,6 +107,7 @@ public class AutoModePanel extends JPanel {
 		
 		mirrorCheckBox = new JCheckBox("Spiegelvorauslösung");
 		mirrorCheckBox.setFont(actualFont);
+		mirrorCheckBox.setBackground(PANELCOLOR);
 		stepSizeSpinner = new JSpinner();
 		stepSizeSpinner.setFont(actualFont);
 		stepSizeSpinner.setModel(new SpinnerNumberModel(properties.getStepSize(), 0.0001, 250.0, 0.0001));
@@ -122,11 +126,14 @@ public class AutoModePanel extends JPanel {
 	private void createRadioGroup() {
 		slowRadioButton = new JRadioButton(SLOW);
 		slowRadioButton.setFont(actualFont);
+		slowRadioButton.setBackground(PANELCOLOR);
 		normalRadioButton = new JRadioButton(NORMAL);
 		normalRadioButton.setFont(actualFont);
 		normalRadioButton.setSelected(true);
+		normalRadioButton.setBackground(PANELCOLOR);
 		fastRadioButton = new JRadioButton(FAST);
 		fastRadioButton.setFont(actualFont);
+		fastRadioButton.setBackground(PANELCOLOR);
 		
 		speed = new ButtonGroup();
 		speed.add(slowRadioButton);

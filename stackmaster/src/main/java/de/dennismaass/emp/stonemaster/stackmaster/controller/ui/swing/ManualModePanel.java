@@ -39,6 +39,8 @@ public class ManualModePanel extends JPanel {
 	private static final String NORMAL = "Normal";
 	private static final String FAST = "Schnell";
 	
+	private static final Color PANELCOLOR = new Color(221, 236, 250);
+	
 	private static Logger LOGGER = Logger.getLogger(ManualModePanel.class);
 	
 	private ButtonGroup speed;
@@ -96,6 +98,7 @@ public class ManualModePanel extends JPanel {
 		this.setLayout(new MigLayout("", "[] []30[] [] []", "[]20[] [] [] [] [] [] []20[] []"));
 		
 		checkMirror = new JCheckBox("Spiegelvorauslösung");
+		checkMirror.setBackground(PANELCOLOR);
 		checkMirror.setFont(actualFont);
 		stepSpinner = new JSpinner();
 		stepSpinner.setModel(new SpinnerNumberModel(properties.getStepSize(), 0.0001, 250.1, 0.0001));
@@ -354,6 +357,7 @@ public class ManualModePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				resetAutoCountOfRepeats();
 				resetAutoSum();
+				normal.setSelected(true);
 			}
 		});
 		
@@ -636,11 +640,14 @@ public class ManualModePanel extends JPanel {
 		
 		fast = new JRadioButton(FAST);
 		fast.setFont(actualFont);
+		fast.setBackground(PANELCOLOR);
 		normal = new JRadioButton(NORMAL);
 		normal.setFont(actualFont);
+		normal.setBackground(PANELCOLOR);
 		normal.setSelected(true);
 		slow = new JRadioButton(SLOW);
 		slow.setFont(actualFont);
+		slow.setBackground(PANELCOLOR);
 	}
 	
 	public ComCommunicator getCommunicator() {
