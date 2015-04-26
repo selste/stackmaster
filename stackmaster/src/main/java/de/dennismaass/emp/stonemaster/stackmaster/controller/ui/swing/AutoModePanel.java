@@ -178,7 +178,7 @@ public class AutoModePanel extends JPanel {
 	}
 
 	private void defineLabels() {
-		relMoveLabel = new JLabel("relative Bewegung");
+		relMoveLabel = new JLabel("Relative Bewegung");
 		relMoveLabel.setFont(actualFont);
 		autoPathLabel = new JLabel("Steuerung Automatik, Streckenbasiert");
 		autoPathLabel.setFont(actualFont);
@@ -395,6 +395,7 @@ public class AutoModePanel extends JPanel {
 					normalRadioButton.setSelected(true);
 				}
 				stepSizeSpinner.setValue(properties.getStepSize());
+				initializePictureCountLabel();
 			}
 		});
 		
