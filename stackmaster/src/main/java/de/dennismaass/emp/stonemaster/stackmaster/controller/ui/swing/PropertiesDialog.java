@@ -50,7 +50,7 @@ public class PropertiesDialog extends JDialog {
 	private JSpinner slowDownSpeedTF, middleDownSpeedTF, fastDownSpeedTF;
 	private JSpinner sleepMovementMirrorTF, sleepMirrorPictureTF, sleepPictureMovementTF;
 	private JSpinner pulseDurationTF;
-	private JSpinner translateTF;
+	//private JSpinner translateTF;
 
 	boolean cancel = false;
 
@@ -233,15 +233,15 @@ public class PropertiesDialog extends JDialog {
 		pulseDurationTF.setMinimumSize(new Dimension(100, 22));
 		panel_1.add(pulseDurationTF, "cell 1 4,growx");
 		
-		JLabel translationLbl = new JLabel("Motorübersetzung");
-		translationLbl.setFont(actualFont);
-		panel_1.add(translationLbl, "cell 0 5, alignx left");
-		
-		translateTF = new JSpinner();
-		translateTF.setFont(actualFont);
-		translateTF.setModel(new SpinnerNumberModel(0.5, 0.1, 1, 0.1));
-		translateTF.setMinimumSize(new Dimension(100, 22));
-		panel_1.add(translateTF, "cell 1 5, growx");
+//		JLabel translationLbl = new JLabel("Motorübersetzung");
+//		translationLbl.setFont(actualFont);
+//		panel_1.add(translationLbl, "cell 0 5, alignx left");
+//		
+//		translateTF = new JSpinner();
+//		translateTF.setFont(actualFont);
+//		translateTF.setModel(new SpinnerNumberModel(0.5, 0.1, 1, 0.1));
+//		translateTF.setMinimumSize(new Dimension(100, 22));
+//		panel_1.add(translateTF, "cell 1 5, growx");
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

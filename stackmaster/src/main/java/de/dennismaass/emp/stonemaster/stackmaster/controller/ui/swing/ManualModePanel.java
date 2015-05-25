@@ -95,7 +95,7 @@ public class ManualModePanel extends JPanel {
 		sleepPictureMovement = properties.getSleepPictureMovement();
 		pulseDuration = properties.getPulseDuration();
 		
-		this.setLayout(new MigLayout("", "[] []30[] [] []", "[]20[] [] [] [] [] [] []20[] []"));
+		this.setLayout(new MigLayout("", "[] []30[] [] []", "[]20[] [] [] [] [] [] []10[] []"));
 		
 		checkMirror = new JCheckBox("Spiegelvorauslösung");
 		checkMirror.setBackground(PANELCOLOR);
@@ -672,6 +672,7 @@ public class ManualModePanel extends JPanel {
 		sleepWhileMove = properties.getSleepWhileMove();
 		sleepPictureMovement = properties.getSleepPictureMovement();
 		pulseDuration = properties.getPulseDuration();
+		reverseStep = properties.isReverseSteps();
 		
 		upSpeed = properties.getMiddleUpSpeed();
 		downSpeed = properties.getMiddleDownSpeed();

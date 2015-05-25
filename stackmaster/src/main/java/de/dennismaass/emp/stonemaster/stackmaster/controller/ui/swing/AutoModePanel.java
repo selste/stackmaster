@@ -80,7 +80,9 @@ public class AutoModePanel extends JPanel {
 
 	protected ComCommunicator communicator;
 	
-	protected double startPos, endPos;
+	protected double startPos;
+	protected double endPos;
+	
 
 	protected boolean stop = false;
 
@@ -239,13 +241,11 @@ public class AutoModePanel extends JPanel {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (communicator != null) {
-					if (communicator.isActiv()) {
-						LOGGER.info("stopping motor");
-						communicator.getPosition();
-						communicator.stop();
-					}
+				if (communicator != null && communicator.isActiv()) {
+					LOGGER.info("Stopping motor");
+					communicator.stop();
 				}
+				communicator.getPosition();
 			}
 
 			@Override
@@ -258,11 +258,11 @@ public class AutoModePanel extends JPanel {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (communicator != null) {
-					LOGGER.info("stopping motor");
-					communicator.getPosition();
+				if (communicator != null && communicator.isActiv()) {
+					LOGGER.info("Stopping motor");
 					communicator.stop();
 				}
+				communicator.getPosition();
 			}
 		});
 		
@@ -270,13 +270,11 @@ public class AutoModePanel extends JPanel {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (communicator != null) {
-					if (communicator.isActiv()) {
-						LOGGER.info("stopping motor");
-						communicator.getPosition();
-						communicator.stop();
-					}
+				if (communicator != null && communicator.isActiv()) {
+					LOGGER.info("Stopping motor");
+					communicator.stop();
 				}
+				communicator.getPosition();
 			}
 
 			@Override
@@ -289,11 +287,11 @@ public class AutoModePanel extends JPanel {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (communicator != null) {
-					LOGGER.info("stopping Motor");
-					communicator.getPosition();
+				if (communicator != null && communicator.isActiv()) {
+					LOGGER.info("Stopping motor");
 					communicator.stop();
 				}
+				communicator.getPosition();
 			}	
 		});
 		
@@ -323,6 +321,7 @@ public class AutoModePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				communicator.moveTo(startPos);
 				double stepSize = (double) stepSizeSpinner.getValue();
 				boolean correctValue = validate(stepSize);
 				if (correctValue) {
@@ -340,17 +339,16 @@ public class AutoModePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				communicator.getPosition();
+				initializePictureCountLabel();
 				double pos;
 				if (endPos > startPos && startPos != starter.position) {
 					pos = startPos - 2.0;
 					communicator.moveTo(pos);
-					communicator.moveTo(startPos);
 				} else if (endPos < startPos && starter.position != startPos){
 					pos = startPos + 2.0;
 					communicator.moveTo(pos);
-					communicator.moveTo(startPos);
 				}
+				communicator.getPosition();
 			}
 		});
 		
@@ -405,10 +403,8 @@ public class AutoModePanel extends JPanel {
 			public void stateChanged(ChangeEvent e) {
 				if ((double) stepSizeSpinner.getValue() > Constants.MAX_STEP) {
 					stepSizeSpinner.setValue(Constants.MAX_STEP);
-					initializePictureCountLabel();
 				} else if((double) stepSizeSpinner.getValue() < Constants.MIN_STEP) {
 					stepSizeSpinner.setValue(Constants.MIN_STEP);
-					initializePictureCountLabel();
 				}
 			}
 		});
@@ -440,9 +436,22 @@ public class AutoModePanel extends JPanel {
 				disableAllComponents(true);
 				setEnableStopAndPause(true);
 				
-				communicator.getPosition();
+				boolean needMove = (starter.position != endPos);
 				
-				while (starter.position != endPos) {
+				double step;
+				double path;
+				if (startPos > endPos) {
+					step = stepSize * -1;
+					path = starter.position - endPos;
+				} else {
+					step = stepSize;
+					path = endPos - starter.position;
+				}
+				if (path < 0) {
+					path *= -1;
+				}
+				
+				while (needMove) {					
 					if (stop) {
 						break;
 					}
@@ -464,29 +473,18 @@ public class AutoModePanel extends JPanel {
 					if (pause) {
 						performPause();
 					}
-					if (startPos > endPos) {
-						if ((starter.position - endPos) > stepSize) {
-							communicator.move((stepSize)*-1);
-							communicator.getPosition();
-						} else {
-							communicator.move((stepSize)*-1);
-							break;
-						}
+					if (path > stepSize) {
+						communicator.move(step);
+						path -= stepSize;
 					} else {
-						if ((endPos - starter.position) > stepSize) {
-							communicator.move((stepSize));
-							communicator.getPosition();
-						} else {
-							communicator.move(stepSize);
-							break;
-						}
+						communicator.move(step);
+						needMove = false;
 					}
 					pause((int) (sleepWhileMove * Math.abs(stepSize)) + sleepMovementMirror);
 					
 					if(pause){
 						performPause();
 					}
-					
 				}
 				//letzes Bild
 				if (!stop) {
@@ -571,24 +569,17 @@ public class AutoModePanel extends JPanel {
 		picsMax = 0;
 		if (startPos > endPos) {
 			double maximum = (startPos - endPos) / (double) stepSizeSpinner.getValue();
-			picsMax = (int) maximum;
+			picsMax = (int) maximum+2;
 			picsMax += 1;
 			if((maximum - picsMax) > 0)
 				picsMax += 1;
-//			picsMax = (int) ((startPos - endPos) / (double) stepSizeSpinner.getValue());
-//			if (((startPos - endPos) % (double) stepSizeSpinner.getValue()) > 0) {
-//				picsMax += 1;
-//			}
+			
 		} else if(endPos > startPos) {
 			double maximum = (endPos - startPos) / (double) stepSizeSpinner.getValue();
-			picsMax = (int) maximum;
+			picsMax = (int) maximum+2;
 			picsMax += 1;
 			if ((maximum - picsMax) > 0)
 				picsMax += 1;		
-//			picsMax = (int) ((endPos - startPos) / (double) stepSizeSpinner.getValue());
-//			if (((endPos - startPos) % (double) stepSizeSpinner.getValue() ) > 0) {
-//				picsMax += 1;
-//			}
 		}
 		picsCurrent = 0;
 		calculatedPicsLabel.setText(picsCurrent + "/" + picsMax);

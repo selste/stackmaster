@@ -166,7 +166,7 @@ ComConnectionPropertiesListener {
 		setTitle(UiConstants.TITLE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(100, 100, 855, 620);
+		setBounds(100, 100, 855, 640);
 
 		propertiesHandler = new ProfileFileHandler();
 		defaultProfile = propertiesHandler.readProfile(defaultFile);
@@ -240,12 +240,28 @@ ComConnectionPropertiesListener {
 	protected void initStatePanel() {
 		JPanel statePanel = new JPanel();
 		statePanel.setBackground(PANELCOLOR);
-		statePanel.setPreferredSize(new Dimension(10, 50));
-		statePanel.setMinimumSize(new Dimension(10, 50));
+		statePanel.setPreferredSize(new Dimension(10, 75));
+		statePanel.setMinimumSize(new Dimension(10, 75));
 		contentPane.add(statePanel, BorderLayout.SOUTH);
 
-		stateLine = new JLabel("");
-		statePanel.add(stateLine);
+		JLabel logo1 = new JLabel();
+		URL url1 = getClass().getResource("/images/Logo-kontur-transparent.png");
+		ImageIcon icon1 = new ImageIcon(url1);
+		icon1 = ImageUtils.getResizedImage(icon1, 270, 52);
+		logo1.setIcon(icon1);
+		logo1.setAlignmentX(Component.CENTER_ALIGNMENT);
+		statePanel.add(logo1);
+		
+		JLabel spacer1 = new JLabel("           ");
+		spacer1.setAlignmentX(Component.CENTER_ALIGNMENT);
+		statePanel.add(spacer1);
+		
+		JLabel logo = new JLabel();
+		URL url = getClass().getResource("/images/stackmaster_64x64.png");
+		ImageIcon icon = new ImageIcon(url);
+		logo.setIcon(icon);
+		logo.setAlignmentX(Component.CENTER_ALIGNMENT);
+		statePanel.add(logo);
 	}
 
 	protected void initConnectionPanel() {
@@ -255,18 +271,6 @@ ComConnectionPropertiesListener {
 
 		Box.createHorizontalBox();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JLabel logo1 = new JLabel();
-		URL url1 = getClass().getResource("/images/Logo-kontur-transparent.png");
-		ImageIcon icon1 = new ImageIcon(url1);
-		icon1 = ImageUtils.getResizedImage(icon1, 270, 52);
-		logo1.setIcon(icon1);
-		logo1.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel.add(logo1);
-		
-		JLabel spacer2 = new JLabel("        ");
-		spacer2.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel.add(spacer2);
 		
 		connectionComboBox = new JComboBox<>();
 		connectionComboBox.setPreferredSize(new Dimension(100, 22));
@@ -291,17 +295,9 @@ ComConnectionPropertiesListener {
 			}
 		});
 		
-		JLabel spacer1 = new JLabel("           ");
-		spacer1.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel.add(spacer1);
+		stateLine = new JLabel("");
+		panel.add(stateLine);
 		
-		JLabel logo = new JLabel();
-		URL url = getClass().getResource("/images/stackmaster_64x64.png");
-		ImageIcon icon = new ImageIcon(url);
-		logo.setIcon(icon);
-		logo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel.add(logo);
-
 	}
 
 	protected void setFavoriteConnectionIfAvailable() {
