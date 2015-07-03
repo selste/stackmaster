@@ -1,6 +1,7 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,10 +31,6 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicato
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 
 public class AutoModePanel extends JPanel {
-
-	private static final String END_LBL_TXT = "Endposition: ";
-
-	private static final String START_LBL_TXT = "Startposition: ";
 
 	private static final long serialVersionUID = 1042974763111948238L;
 	
@@ -67,9 +64,8 @@ public class AutoModePanel extends JPanel {
 				downButton, moveStartButton;
 	
 	private JLabel stateLine, relMoveLabel, autoPathLabel, 
-				startPosLabel, endPosLabel, speedLabel,
-				stepSizeLabel, distanceLabel, picsMadeLabel,
-				calculatedPicsLabel, calculatedPathLabel;
+				speedLabel,	stepSizeLabel, distanceLabel,
+				picsMadeLabel, calculatedPicsLabel, calculatedPathLabel;
 
 	private JSpinner stepSizeSpinner;
 
@@ -92,8 +88,7 @@ public class AutoModePanel extends JPanel {
 
 	public AutoModePanel(ComConnectionProperties properties, final JLabel stateLine, SwingStarter starter) {
 		this.properties = properties;
-		setVariablesFromProperties(properties);
-		setStateLine(stateLine);
+		
 		this.starter = starter;
 		
 		this.setLayout(new MigLayout("", "[] []30[]10[] []", "[]20[][][][][][][]"));
@@ -121,6 +116,9 @@ public class AutoModePanel extends JPanel {
 		createRadioGroup();
 		assignListeners();
 		
+		setVariablesFromProperties(properties);
+		setStateLine(stateLine);
+		
 		buildLayout();
 		disableAllComponents(true);
 	}
@@ -147,12 +145,10 @@ public class AutoModePanel extends JPanel {
 		this.add(relMoveLabel, "center, span 2");
 		this.add(autoPathLabel, "center, span 3, wrap");
 		
-		this.add(startPosLabel, "cell 2 1, right");
-		this.add(saveStartButton, "wrap");
+		this.add(saveStartButton, "cell 3 1, wrap");
 		
 		this.add(speedLabel, "left");
-		this.add(endPosLabel, "cell 2 2, right");
-		this.add(saveEndButton, "wrap");
+		this.add(saveEndButton, "cell 3 2, wrap");
 		
 		this.add(slowRadioButton, "left");
 		this.add(upButton);
@@ -184,10 +180,6 @@ public class AutoModePanel extends JPanel {
 		relMoveLabel.setFont(actualFont);
 		autoPathLabel = new JLabel("Steuerung Automatik, Streckenbasiert");
 		autoPathLabel.setFont(actualFont);
-		startPosLabel = new JLabel(START_LBL_TXT + "leer");
-		startPosLabel.setFont(actualFont);
-		endPosLabel = new JLabel(END_LBL_TXT + "leer");
-		endPosLabel.setFont(actualFont);
 		speedLabel = new JLabel("Geschwindigkeit:");
 		speedLabel.setFont(actualFont);
 		stepSizeLabel = new JLabel("Schrittgröße [mm]: ");
@@ -198,7 +190,7 @@ public class AutoModePanel extends JPanel {
 		calculatedPicsLabel.setFont(actualFont);
 		distanceLabel = new JLabel("Zurückgelegter Weg:");
 		distanceLabel.setFont(actualFont);
-		calculatedPathLabel = new JLabel("x");
+		calculatedPathLabel = new JLabel("0 mm");
 		calculatedPathLabel.setFont(actualFont);
 	}
 
@@ -245,7 +237,6 @@ public class AutoModePanel extends JPanel {
 					LOGGER.info("Stopping motor");
 					communicator.stop();
 				}
-				communicator.getPosition();
 			}
 
 			@Override
@@ -262,7 +253,6 @@ public class AutoModePanel extends JPanel {
 					LOGGER.info("Stopping motor");
 					communicator.stop();
 				}
-				communicator.getPosition();
 			}
 		});
 		
@@ -273,8 +263,7 @@ public class AutoModePanel extends JPanel {
 				if (communicator != null && communicator.isActiv()) {
 					LOGGER.info("Stopping motor");
 					communicator.stop();
-				}
-				communicator.getPosition();
+				}				
 			}
 
 			@Override
@@ -289,9 +278,8 @@ public class AutoModePanel extends JPanel {
 			public void mouseReleased(MouseEvent e) {
 				if (communicator != null && communicator.isActiv()) {
 					LOGGER.info("Stopping motor");
-					communicator.stop();
-				}
-				communicator.getPosition();
+					communicator.stop();					
+				}				
 			}	
 		});
 		
@@ -299,8 +287,14 @@ public class AutoModePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				communicator.getPosition();
+				try {
+					Thread.sleep(300l);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				startPos = starter.position;
-				startPosLabel.setText(START_LBL_TXT + df.format(startPos));
 				actualizePathLabel();
 				initializePictureCountLabel();
 			}
@@ -310,8 +304,14 @@ public class AutoModePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				communicator.getPosition();
+				try {
+					Thread.sleep(300l);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				endPos = starter.position;
-				endPosLabel.setText(END_LBL_TXT + df.format(endPos));
 				actualizePathLabel();
 				initializePictureCountLabel();
 			}
@@ -321,7 +321,6 @@ public class AutoModePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				communicator.moveTo(startPos);
 				double stepSize = (double) stepSizeSpinner.getValue();
 				boolean correctValue = validate(stepSize);
 				if (correctValue) {
@@ -329,6 +328,7 @@ public class AutoModePanel extends JPanel {
 					stopButton.setEnabled(true);
 					pauseButton.setEnabled(true);
 					
+					communicator.moveTo(startPos);
 					Thread job = createThread(stepSize);
 					job.start();	
 				}
@@ -342,10 +342,10 @@ public class AutoModePanel extends JPanel {
 				initializePictureCountLabel();
 				double pos;
 				if (endPos > startPos && startPos != starter.position) {
-					pos = startPos - 2.0;
+					pos = startPos - 1.0;
 					communicator.moveTo(pos);
 				} else if (endPos < startPos && starter.position != startPos){
-					pos = startPos + 2.0;
+					pos = startPos + 1.0;
 					communicator.moveTo(pos);
 				}
 				communicator.getPosition();
@@ -384,8 +384,6 @@ public class AutoModePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				startPos = 0;
 				endPos = 0;
-				startPosLabel.setText(START_LBL_TXT + "leer");
-				endPosLabel.setText(END_LBL_TXT + "leer");
 				if (mirrorCheckBox.isSelected()) {
 					mirrorCheckBox.setSelected(false);
 				}
@@ -393,6 +391,7 @@ public class AutoModePanel extends JPanel {
 					normalRadioButton.setSelected(true);
 				}
 				stepSizeSpinner.setValue(properties.getStepSize());
+				calculatedPathLabel.setText("0 mm");
 				initializePictureCountLabel();
 			}
 		});
@@ -412,9 +411,9 @@ public class AutoModePanel extends JPanel {
 
 	protected void actualizePathLabel() {
 		if (startPos > endPos) {
-			calculatedPathLabel.setText(df.format((startPos - endPos)) + "mm");
+			calculatedPathLabel.setText(df.format((startPos - endPos)) + " mm");
 		} else {
-			calculatedPathLabel.setText(df.format((endPos - startPos)) + "mm");
+			calculatedPathLabel.setText(df.format((endPos - startPos)) + " mm");
 		}
 	}
 	
@@ -436,19 +435,30 @@ public class AutoModePanel extends JPanel {
 				disableAllComponents(true);
 				setEnableStopAndPause(true);
 				
-				boolean needMove = (starter.position != endPos);
+				boolean needMove = false;
+				
+				if (startPos != endPos) {
+					needMove = true;
+				}
 				
 				double step;
 				double path;
 				if (startPos > endPos) {
 					step = stepSize * -1;
-					path = starter.position - endPos;
+					path = startPos - endPos;
 				} else {
 					step = stepSize;
-					path = endPos - starter.position;
+					path = endPos - startPos;
 				}
 				if (path < 0) {
 					path *= -1;
+				}
+				
+				try {
+					Thread.sleep(2500l);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				
 				while (needMove) {					
@@ -475,7 +485,7 @@ public class AutoModePanel extends JPanel {
 					}
 					if (path > stepSize) {
 						communicator.move(step);
-						path -= stepSize;
+						path = path - stepSize;
 					} else {
 						communicator.move(step);
 						needMove = false;
@@ -566,21 +576,16 @@ public class AutoModePanel extends JPanel {
 	}
 
 	protected void initializePictureCountLabel() {
-		picsMax = 0;
-		if (startPos > endPos) {
-			double maximum = (startPos - endPos) / (double) stepSizeSpinner.getValue();
-			picsMax = (int) maximum+2;
-			picsMax += 1;
-			if((maximum - picsMax) > 0)
-				picsMax += 1;
-			
-		} else if(endPos > startPos) {
-			double maximum = (endPos - startPos) / (double) stepSizeSpinner.getValue();
-			picsMax = (int) maximum+2;
-			picsMax += 1;
-			if ((maximum - picsMax) > 0)
-				picsMax += 1;		
-		}
+		picsMax = 1;
+		double path;
+		double divisor = (double) stepSizeSpinner.getValue();
+		if (startPos > endPos)
+			path = startPos - endPos;
+		else 
+			path = endPos - startPos;
+		double max = path / divisor;
+		if (max != 0)
+			picsMax = (int) max + picsMax + 1;
 		picsCurrent = 0;
 		calculatedPicsLabel.setText(picsCurrent + "/" + picsMax);
 	}
@@ -640,6 +645,7 @@ public class AutoModePanel extends JPanel {
 		
 		upSpeed = properties.getMiddleUpSpeed();
 		downSpeed = properties.getMiddleDownSpeed();
+		normalRadioButton.setSelected(true);;
 	}
 	
 	public void setProperties(ComConnectionProperties properties) {

@@ -83,8 +83,6 @@ public class ManualModePanel extends JPanel {
 
 	public ManualModePanel(ComConnectionProperties properties, final JLabel stateLine) {
 		this.properties = properties;
-		setVariablesFromProperties(properties);
-		setStateLine(stateLine);
 		
 		upSpeed = properties.getMiddleUpSpeed();
 		downSpeed = properties.getMiddleDownSpeed();
@@ -114,6 +112,9 @@ public class ManualModePanel extends JPanel {
 		initIcons();
 		declareButtons();
 		assignListeners();
+		
+		setVariablesFromProperties(properties);
+		setStateLine(stateLine);
 		
 		buildLayout();
 		setAllComponentsDisableState(true);
@@ -178,9 +179,9 @@ public class ManualModePanel extends JPanel {
 		picsTakenLabel.setFont(actualFont);
 		picsNumberLabel = new JLabel("0");
 		picsNumberLabel.setFont(actualFont);
-		pathTraveledLabel = new JLabel("Zurückgelegter Weg [mm]: ");
+		pathTraveledLabel = new JLabel("Zurückgelegter Weg: ");
 		pathTraveledLabel.setFont(actualFont);
-		pathDistanceLabel = new JLabel("0.0");
+		pathDistanceLabel = new JLabel("0.0 mm");
 		pathDistanceLabel.setFont(actualFont);
 		assumedTimeLabel = new JLabel("Geschätze Dauer: ");
 		assumedTimeLabel.setFont(actualFont);
@@ -421,7 +422,7 @@ public class ManualModePanel extends JPanel {
 	}
 	
 	protected void resetAutoSum() {
-		pathDistanceLabel.setText("0.0");
+		pathDistanceLabel.setText("0.0 mm");
 	}
 
 	protected void resetAutoCountOfRepeats() {
@@ -492,7 +493,8 @@ public class ManualModePanel extends JPanel {
 
 	protected void refreshAutoSumLabel() {
 		double stepDouble = (double) stepSpinner.getValue();
-		double sumDouble = Double.parseDouble(pathDistanceLabel.getText());
+		String[] val = pathDistanceLabel.getText().split(" ", 2);
+		double sumDouble = Double.parseDouble(val[0]);
 		
 		double value = sumDouble + stepDouble;
 		double multiplicateValue = value * Constants.ROUNDER;
@@ -503,7 +505,7 @@ public class ManualModePanel extends JPanel {
 	}
 
 	protected void setAutoSumLabel(double value) {
-		pathDistanceLabel.setText(Double.toString(value));
+		pathDistanceLabel.setText(Double.toString(value) + " mm");
 	}
 
 	protected void move(double moveStep) {
@@ -567,7 +569,7 @@ public class ManualModePanel extends JPanel {
 
 	protected void refreshAutoCountOfStepsLabel() {
 		int happenedRepeats = Integer.parseInt(picsNumberLabel.getText());
-		int value = happenedRepeats++;
+		int value = happenedRepeats+1;
 		setPicCountLabel(value);
 	}
 
@@ -676,6 +678,7 @@ public class ManualModePanel extends JPanel {
 		
 		upSpeed = properties.getMiddleUpSpeed();
 		downSpeed = properties.getMiddleDownSpeed();
+		normal.setSelected(true);
 	}
 	
 	public void setProperties(ComConnectionProperties properties) {
