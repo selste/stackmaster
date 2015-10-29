@@ -11,7 +11,7 @@ public class ComConnectionProperties {
 	private int slowDownSpeed = 10, middleDownSpeed = 500, fastDownSpeed = 1500;
 	private boolean reverseRelativ = false;
 
-	private int stepsPerMm = 66000;
+	private int stepsPerMm = 64025;
 	private boolean reverseSteps = false;
 	private int microstepResolutionMode = 4;
 

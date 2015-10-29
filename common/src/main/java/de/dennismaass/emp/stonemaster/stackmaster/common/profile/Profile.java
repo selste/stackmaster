@@ -9,5 +9,5 @@ import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.C
 public class Profile {
 
 	private ComConnectionProperties properties;
-
+ 
 }

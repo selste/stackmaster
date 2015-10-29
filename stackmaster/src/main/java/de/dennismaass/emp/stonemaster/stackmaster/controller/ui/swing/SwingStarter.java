@@ -18,14 +18,11 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -62,7 +59,6 @@ import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.C
 import de.dennismaass.emp.stonemaster.stackmaster.common.ui.swing.PropertiesFileChooser;
 import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
 import de.dennismaass.emp.stonemaster.stackmaster.common.util.PathConstants;
-import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.ComInstructionID;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer.ComAnswerEvent;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer.ComAnswerListener;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
@@ -72,8 +68,8 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.
 import de.dennismaass.emp.stonemaster.stackmaster.controller.ui.utils.UiConstants;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
-
-//TODO:
+ 
+//TODO: 
 
 //Bugs:
 //- Validierung aller Textfelder
@@ -91,7 +87,7 @@ ComConnectionPropertiesListener {
 	private static final Color CONTENTCOLOR = new Color(0, 141, 212);
 
 	private static final Color PANELCOLOR = new Color(221, 236, 250);
-
+ 
 	private static final long serialVersionUID = 4155209335768313320L;
 
 	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
