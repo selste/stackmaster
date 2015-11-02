@@ -80,7 +80,7 @@
 						<id>windowsx86</id>
 						<configuration>
 							<descriptor>src/main/resources/assembly_windows_x86.xml</descriptor>
-							<finalName>stackmaster_windows_x86_${project.version}</finalName>
+							<finalName>stackmaster_novoflex_windows_x86_${project.version}</finalName>
 						</configuration>
 						<phase>package</phase>
 						<goals>
@@ -91,7 +91,7 @@
 						<id>windowsx64</id>
 						<configuration>
 							<descriptor>src/main/resources/assembly_windows_x64.xml</descriptor>
-							<finalName>stackmaster_windows_x64_${project.version}</finalName>
+							<finalName>stackmaster_novoflex_windows_x64_${project.version}</finalName>
 						</configuration>
 						<phase>package</phase>
 						<goals>
@@ -102,7 +102,7 @@
 						<id>macx64</id>
 						<configuration>
 							<descriptor>src/main/resources/assembly_mac_x64.xml</descriptor>
-							<finalName>stackmaster_mac_x64_${project.version}</finalName>
+							<finalName>stackmaster_novoflex_mac_x64_${project.version}</finalName>
 						</configuration>
 						<phase>package</phase>
 						<goals>
