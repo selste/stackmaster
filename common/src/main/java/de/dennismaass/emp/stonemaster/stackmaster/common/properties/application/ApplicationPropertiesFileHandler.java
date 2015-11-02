@@ -8,13 +8,14 @@ import org.apache.log4j.Logger;
 
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.PropertiesFileHandler;
 
-public class ApplicationPropertiesFileHandler extends PropertiesFileHandler {
+public class ApplicationPropertiesFileHandler {
 	private static Logger LOGGER = Logger.getLogger(ApplicationPropertiesFileHandler.class);
+	private PropertiesFileHandler propertiesFileHandler = new PropertiesFileHandler();
 
 	public ApplicationProperties read(File file) {
 		LOGGER.info("Loading application.properties: " + file.getAbsolutePath());
 
-		Properties properties = readProperties(file);
+		Properties properties = propertiesFileHandler.read(file);
 
 		ApplicationProperties applicationProperties = new ApplicationProperties();
 
@@ -49,9 +50,9 @@ public class ApplicationPropertiesFileHandler extends PropertiesFileHandler {
 		return applicationProperties;
 
 	}
-
-	public void write(File file, ApplicationProperties applicationProperties) {
-		LOGGER.info("write applicationProperties to " + file.getAbsolutePath());
+	
+	
+	public Properties toProperties(ApplicationProperties applicationProperties){
 		Properties properties = new Properties();
 
 		boolean firstUse = applicationProperties.isFirstUse();
@@ -65,9 +66,13 @@ public class ApplicationPropertiesFileHandler extends PropertiesFileHandler {
 		}
 		int fontSize = applicationProperties.getFontSize();
 		properties.setProperty("fontSize", Integer.toString(fontSize));
+		
+		return properties;
+	}
 
-		writeProperties(file, properties);
-
+	public void write(File file, ApplicationProperties applicationProperties) {
+		LOGGER.info("write applicationProperties to " + file.getAbsolutePath());
+		propertiesFileHandler.write(file, toProperties(applicationProperties));
 	}
 
 }

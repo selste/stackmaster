@@ -8,11 +8,12 @@ import org.apache.log4j.Logger;
 
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.PropertiesFileHandler;
 
-public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
+public class ComConnectionPropertiesFileHandler {
 	private static Logger LOGGER = Logger.getLogger(ComConnectionPropertiesFileHandler.class);
-
+	private PropertiesFileHandler propertiesFileHandler = new PropertiesFileHandler();
+	
 	public ComConnectionProperties read(File file) {
-		Properties properties = readProperties(file);
+		Properties properties = propertiesFileHandler.read(file);
 
 		ComConnectionProperties comConnectionProperties = new ComConnectionProperties();
 
@@ -139,7 +140,8 @@ public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
 
 	}
 
-	public void write(File file, ComConnectionProperties comConnectionProperties) {
+	
+	public Properties toProperties(ComConnectionProperties comConnectionProperties){
 		Properties properties = new Properties();
 
 		String comConnectionName = comConnectionProperties.getComConnectionName();
@@ -184,9 +186,13 @@ public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
 		
 		double translation = comConnectionProperties.getTranslation();
 		properties.setProperty("translation", Double.toString(translation));
-
-		writeProperties(file, properties);
-
+		
+		return properties;
+	}
+	
+	public void write(File file, ComConnectionProperties comConnectionProperties) {
+		Properties properties = toProperties(comConnectionProperties);
+		propertiesFileHandler.write(file, properties);
 	}
 
 }

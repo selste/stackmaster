@@ -11,10 +11,6 @@ public class PropertiesValidator {
 	public static int MIN_SPEED = 1;
 	public static int MAX_SPEED = 2047;
 
-	public PropertiesValidator() {
-
-	}
-
 	public boolean validate(ComConnectionProperties comConnectionProperties) {
 		if (!isValidSpeed(comConnectionProperties.getFastUpSpeed())) {
 			return false;

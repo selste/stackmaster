@@ -1,8 +1,5 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
-import gnu.io.CommPortIdentifier;
-import gnu.io.PortInUseException;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -18,14 +15,11 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,10 +39,6 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import lombok.Getter;
-import lombok.Setter;
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -60,9 +50,7 @@ import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.C
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionPropertiesChangeEvent;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionPropertiesListener;
 import de.dennismaass.emp.stonemaster.stackmaster.common.ui.swing.PropertiesFileChooser;
-import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
 import de.dennismaass.emp.stonemaster.stackmaster.common.util.PathConstants;
-import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.ComInstructionID;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer.ComAnswerEvent;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.answer.ComAnswerListener;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
@@ -72,6 +60,11 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.
 import de.dennismaass.emp.stonemaster.stackmaster.controller.ui.utils.UiConstants;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
+import gnu.io.CommPortIdentifier;
+import gnu.io.PortInUseException;
+import lombok.Getter;
+import lombok.Setter;
+import net.miginfocom.swing.MigLayout;
 
 //TODO:
 
@@ -85,14 +78,27 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
 //- nur property event wenn sich auch echt was geändert worden ist
 //- Baukasten
 //- Mehrsprachigkeit
-public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
-ComConnectionPropertiesListener {
-
-	private static final Color CONTENTCOLOR = new Color(0, 141, 212);
-
-	private static final Color PANELCOLOR = new Color(221, 236, 250);
+public class SwingStarter extends JFrame
+		implements ComAnswerListener, CommPortIdentifierNotificationListener, ComConnectionPropertiesListener {
 
 	private static final long serialVersionUID = 4155209335768313320L;
+
+	private static final Color CONTENTCOLOR = new Color(0, 141, 212);
+	private static final Color PANELCOLOR = new Color(221, 236, 250);
+	public static final String FONT_NAME = "Arial";
+
+	public static final String OS_NAME = System.getProperty("os.name");
+	public static final String OS_ARCH = System.getProperty("os.arch");
+	public static final String OS_VERSION = System.getProperty("os.version");
+	public static final String JAVA_VERSION = System.getProperty("java.version");
+	public static final String JAVA_HOME = System.getProperty("java.home");
+	public static final String JAVA_VENDOR = System.getProperty("java.vendor");
+
+	public static final int ROUNDER = 100000000;
+	public static final String UNIT = "mm";
+
+	public static final double MIN_STEP = -250.0, MAX_STEP = 250.0;
+	public static final int MAX_SPEED = 2047;
 
 	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
 
@@ -117,8 +123,8 @@ ComConnectionPropertiesListener {
 	private ConnectionThread connectThread;
 	private JButton connectButton;
 	private JComboBox<CommPortIdentifier> connectionComboBox;
-//	private RelativPosPanel relativPosPanel;
-//	private StepPanel stepPanel;
+	// private RelativPosPanel relativPosPanel;
+	// private StepPanel stepPanel;
 	private JMenuItem mntmProfilSpeichern, mntmProfilSpeichernAls;
 	private PropertiesDialog propertiesDialog;
 	public Font actualFont = new Font("Arial", Font.PLAIN, 20);
@@ -128,7 +134,7 @@ ComConnectionPropertiesListener {
 	private AutoModePanel autoModePanel;
 
 	private ManualModePanel manualModePanel;
-	
+
 	public double position;
 
 	public SwingStarter() {
@@ -141,10 +147,8 @@ ComConnectionPropertiesListener {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		LOGGER.info("--------------------------------------------------------");
-		LOGGER.info("os: name=" + Constants.OS_NAME + ", architecture=" + Constants.OS_ARCH + ", version="
-				+ Constants.OS_VERSION);
-		LOGGER.info("java: version=" + Constants.JAVA_VERSION + ", home=" + Constants.JAVA_HOME + ", vendor="
-				+ Constants.JAVA_VENDOR);
+		LOGGER.info("os: name=" + OS_NAME + ", architecture=" + OS_ARCH + ", version=" + OS_VERSION);
+		LOGGER.info("java: version=" + JAVA_VERSION + ", home=" + JAVA_HOME + ", vendor=" + JAVA_VENDOR);
 		LOGGER.info("--------------------------------------------------------");
 
 		addWindowListener(new WindowAdapter() {
@@ -169,7 +173,7 @@ ComConnectionPropertiesListener {
 		setBounds(100, 100, 855, 640);
 
 		propertiesHandler = new ProfileFileHandler();
-		defaultProfile = propertiesHandler.readProfile(defaultFile);
+		defaultProfile = propertiesHandler.read(defaultFile);
 
 		propertiesDialog = createPropertiesDialog(defaultProfile.getProperties(), defaultProfile.getProperties());
 		setTitle(UiConstants.TITLE + " - defaults");
@@ -205,20 +209,21 @@ ComConnectionPropertiesListener {
 		secondLineLabel = new JLabel("sdf");
 		welcome.add(secondLineLabel, "cell 0 2,alignx left");
 
-//		relativPosPanel = new RelativPosPanel(defaultProfile.getProperties(), stateLine);
-//		tabbedPane.addTab("relativ", null, relativPosPanel, null);
-//
-//		stepPanel = new StepPanel(defaultProfile.getProperties(), stateLine);
-//		tabbedPane.addTab("Schritte", null, stepPanel, null);
-		
+		// relativPosPanel = new RelativPosPanel(defaultProfile.getProperties(),
+		// stateLine);
+		// tabbedPane.addTab("relativ", null, relativPosPanel, null);
+		//
+		// stepPanel = new StepPanel(defaultProfile.getProperties(), stateLine);
+		// tabbedPane.addTab("Schritte", null, stepPanel, null);
+
 		manualModePanel = new ManualModePanel(defaultProfile.getProperties(), stateLine);
 		manualModePanel.setBackground(PANELCOLOR);
 		tabbedPane.addTab("Manuell", null, manualModePanel, null);
-		
+
 		autoModePanel = new AutoModePanel(defaultProfile.getProperties(), stateLine, this);
 		autoModePanel.setBackground(PANELCOLOR);
 		tabbedPane.addTab("Automatisch", null, autoModePanel, null);
-		
+
 		connectThread = createConnectionThread();
 		connectThread.start();
 
@@ -251,11 +256,11 @@ ComConnectionPropertiesListener {
 		logo1.setIcon(icon1);
 		logo1.setAlignmentX(Component.CENTER_ALIGNMENT);
 		statePanel.add(logo1);
-		
+
 		JLabel spacer1 = new JLabel("           ");
 		spacer1.setAlignmentX(Component.CENTER_ALIGNMENT);
 		statePanel.add(spacer1);
-		
+
 		JLabel logo = new JLabel();
 		URL url = getClass().getResource("/images/stackmaster_64x64.png");
 		ImageIcon icon = new ImageIcon(url);
@@ -271,7 +276,7 @@ ComConnectionPropertiesListener {
 
 		Box.createHorizontalBox();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		connectionComboBox = new JComboBox<>();
 		connectionComboBox.setPreferredSize(new Dimension(100, 22));
 		connectionComboBox.setMinimumSize(new Dimension(100, 22));
@@ -294,10 +299,10 @@ ComConnectionPropertiesListener {
 				handleConnect();
 			}
 		});
-		
+
 		stateLine = new JLabel("");
 		panel.add(stateLine);
-		
+
 	}
 
 	protected void setFavoriteConnectionIfAvailable() {
@@ -339,8 +344,8 @@ ComConnectionPropertiesListener {
 					ComCommunicator communicator = createCommunicator(commPortIdentifier.getName());
 					setCommunicator(communicator);
 
-//					relativPosPanel.setCommunicator(communicator);
-//					stepPanel.setCommunicator(communicator);
+					// relativPosPanel.setCommunicator(communicator);
+					// stepPanel.setCommunicator(communicator);
 					manualModePanel.setCommunicator(communicator);
 					autoModePanel.setCommunicator(communicator);
 				}
@@ -392,8 +397,8 @@ ComConnectionPropertiesListener {
 	}
 
 	private void setAllComponentsDisableState(boolean disableState) {
-//		stepPanel.setAllComponentsDisableState(disableState);
-//		relativPosPanel.setAllComponentsDisableState(disableState);
+		// stepPanel.setAllComponentsDisableState(disableState);
+		// relativPosPanel.setAllComponentsDisableState(disableState);
 		manualModePanel.setAllComponentsDisableState(disableState);
 		autoModePanel.disableAllComponents(disableState);
 	}
@@ -603,11 +608,9 @@ ComConnectionPropertiesListener {
 	}
 
 	protected void handleOverUs() {
-		JOptionPane
-		.showMessageDialog(
-				getFrame(),
+		JOptionPane.showMessageDialog(getFrame(),
 				"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte.\n\n"
-				+ "Das Programm zur Steuerung des Stackmasters wurde in Zusammenarbeit\nvon Dennis Maaß, Karlsruhe und Johannes Müller, Saarwellingen entwickelt.",
+						+ "Das Programm zur Steuerung des Stackmasters wurde in Zusammenarbeit\nvon Dennis Maaß, Karlsruhe und Johannes Müller, Saarwellingen entwickelt.",
 				"Über", JOptionPane.PLAIN_MESSAGE);
 	}
 
@@ -643,10 +646,10 @@ ComConnectionPropertiesListener {
 	public void setConnectionProperties(ComConnectionProperties connectionProperties) {
 		LOGGER.info("set new connection properties: " + connectionProperties);
 
-//		stepPanel.setVariablesFromProperties(connectionProperties);
-//		stepPanel.refreshDistance();
-//		stepPanel.refreshSleep();
-//		relativPosPanel.setVariablesFromProperties(connectionProperties);
+		// stepPanel.setVariablesFromProperties(connectionProperties);
+		// stepPanel.refreshDistance();
+		// stepPanel.refreshSleep();
+		// relativPosPanel.setVariablesFromProperties(connectionProperties);
 		autoModePanel.setProperties(connectionProperties);
 		manualModePanel.setProperties(connectionProperties);
 		propertiesDialog.setConnectionProperties(connectionProperties);
@@ -687,7 +690,7 @@ ComConnectionPropertiesListener {
 	protected void handleSaveProperties() {
 		LOGGER.info("chosen file: " + actualOpenedProfileFile.getAbsolutePath());
 		applicationProperties.setFirstUse(false);
-		propertiesHandler.writeProfile(actualOpenedProfileFile, defaultProfile);
+		propertiesHandler.write(actualOpenedProfileFile, defaultProfile);
 		setUnsavedChanges(false);
 	}
 
@@ -700,7 +703,7 @@ ComConnectionPropertiesListener {
 			if (selectedFile != null) {
 				LOGGER.info("chosen file: " + selectedFile);
 				actualOpenedProfileFile = selectedFile;
-				Profile loadedConnectionProperties = propertiesHandler.readProfile(actualOpenedProfileFile);
+				Profile loadedConnectionProperties = propertiesHandler.read(actualOpenedProfileFile);
 				setConnectionProperties(loadedConnectionProperties.getProperties());
 				setTitle(UiConstants.TITLE + " - " + selectedFile.getAbsolutePath());
 				mntmProfilSpeichern.setEnabled(true);
@@ -733,7 +736,7 @@ ComConnectionPropertiesListener {
 					}
 					LOGGER.info("chosen file: " + absolutePath);
 					actualOpenedProfileFile = selectedFile;
-					propertiesHandler.writeProfile(actualOpenedProfileFile, defaultProfile);
+					propertiesHandler.write(actualOpenedProfileFile, defaultProfile);
 					setTitle(UiConstants.TITLE + " - " + absolutePath);
 					mntmProfilSpeichern.setEnabled(true);
 				}

@@ -12,7 +12,7 @@ public class ProfileFileHandler {
 
 	private ComConnectionPropertiesFileHandler propertiesFileHandler = new ComConnectionPropertiesFileHandler();
 
-	public Profile readProfile(File file) {
+	public Profile read(File file) {
 		ComConnectionProperties connectionProperties = propertiesFileHandler.read(file);
 
 		Profile profile = new Profile();
@@ -21,7 +21,7 @@ public class ProfileFileHandler {
 		return profile;
 	}
 
-	public void writeProfile(File file, Profile profile) {
+	public void write(File file, Profile profile) {
 		LOGGER.info("write profile " + profile + " in file " + file);
 		propertiesFileHandler.write(file, profile.getProperties());
 	}

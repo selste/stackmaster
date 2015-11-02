@@ -33,8 +33,6 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.log4j.Logger;
 
 import de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile;
@@ -43,16 +41,19 @@ import de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.application.ApplicationPropertiesFileHandler;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.PropertiesValidator;
-import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
 import de.dennismaass.emp.stonemaster.stackmaster.common.util.PathConstants;
-import de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.utils.UiConstants;
+import net.miginfocom.swing.MigLayout;
 
 public class SwingStarter extends JFrame {
 	private final static long serialVersionUID = -6032729218147398086L;
 
+	public static final String FONT_NAME = "Arial";
+	public static final int MAX_SPEED = 2047;
+	public static final String TITLE = "StackMaster Configurator";
+
 	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
 
-	public Font font = new Font(Constants.FONT_NAME, Font.PLAIN, 20);
+	public Font font = new Font(FONT_NAME, Font.PLAIN, 20);
 
 	private Profile defaultProfile;
 	private File defaultFile = new File(PathConstants.DEFAULT_PROFILE_NAME);
@@ -63,8 +64,7 @@ public class SwingStarter extends JFrame {
 
 	private JTextField firstNameTF, lastNameTF, comConnectionNameTF;
 
-	private JSpinner fastUpSpeedTF, middleUpSpeedTF, slowUpSpeedTF, fastDownSpeedTF, middleDownSpeedTF,
-	slowDownSpeedTF;
+	private JSpinner fastUpSpeedTF, middleUpSpeedTF, slowUpSpeedTF, fastDownSpeedTF, middleDownSpeedTF, slowDownSpeedTF;
 
 	private JSpinner countOfStepPerMmTF;
 	private JComboBox<Integer> connectionModeCB;
@@ -81,9 +81,9 @@ public class SwingStarter extends JFrame {
 	private JComboBox<Integer> checkBoxFontSize;
 
 	private JLabel lblModus, lblNewLabel_15, lblFirstUse, lblSchriftgre, lblNewLabel, lblNewLabel_1, lblNewLabel_2,
-	lblNewLabel_3, lblNewLabel_4, lblNewLabel_6, lblNewLabel_7, lblNewLabel_8, lblNewLabel_9, lblNewLabel_10,
-	lblNewLabel_11, lblNewLabel_12, lblNewLabel_14, lblSchritteProMillimeter, lblNewLabel_13, lblNewLabel_5,
-	label_2;
+			lblNewLabel_3, lblNewLabel_4, lblNewLabel_6, lblNewLabel_7, lblNewLabel_8, lblNewLabel_9, lblNewLabel_10,
+			lblNewLabel_11, lblNewLabel_12, lblNewLabel_14, lblSchritteProMillimeter, lblNewLabel_13, lblNewLabel_5,
+			label_2;
 
 	private JTabbedPane tabbedPane;
 
@@ -97,7 +97,7 @@ public class SwingStarter extends JFrame {
 	public SwingStarter() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		setTitle(UiConstants.TITLE);
+		setTitle(TITLE);
 		propertiesHandler = new ProfileFileHandler();
 
 		setSize(430, 694);
@@ -174,18 +174,18 @@ public class SwingStarter extends JFrame {
 		defaultPanel.add(lblNewLabel_1, "cell 0 1,alignx left");
 
 		fastUpSpeedTF = new JSpinner();
-		fastUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(Constants.MAX_SPEED),
-				new Integer(100)));
+		fastUpSpeedTF.setModel(
+				new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED), new Integer(100)));
 		fastUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		defaultPanel.add(fastUpSpeedTF, "cell 1 1");
 
 		lblNewLabel_2 = new JLabel("mittlere Geschw.");
-		lblNewLabel_2.setFont(new Font(Constants.FONT_NAME, Font.PLAIN, 20));
+		lblNewLabel_2.setFont(new Font(FONT_NAME, Font.PLAIN, 20));
 		defaultPanel.add(lblNewLabel_2, "cell 0 2,alignx left");
 
 		middleUpSpeedTF = new JSpinner();
-		middleUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1),
-				new Integer(Constants.MAX_SPEED), new Integer(100)));
+		middleUpSpeedTF.setModel(
+				new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED), new Integer(100)));
 		middleUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		defaultPanel.add(middleUpSpeedTF, "cell 1 2");
 
@@ -193,8 +193,8 @@ public class SwingStarter extends JFrame {
 		defaultPanel.add(lblNewLabel_3, "cell 0 3,alignx left");
 
 		slowUpSpeedTF = new JSpinner();
-		slowUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(Constants.MAX_SPEED),
-				new Integer(100)));
+		slowUpSpeedTF.setModel(
+				new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED), new Integer(100)));
 		slowUpSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(slowUpSpeedTF, "cell 1 3");
 
@@ -208,8 +208,8 @@ public class SwingStarter extends JFrame {
 		defaultPanel.add(lblNewLabel_5, "cell 0 6,alignx left");
 
 		fastDownSpeedTF = new JSpinner();
-		fastDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1),
-				new Integer(Constants.MAX_SPEED), new Integer(100)));
+		fastDownSpeedTF.setModel(
+				new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED), new Integer(100)));
 		fastDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(fastDownSpeedTF, "cell 1 6");
 
@@ -217,8 +217,8 @@ public class SwingStarter extends JFrame {
 		defaultPanel.add(lblNewLabel_6, "cell 0 7,alignx left");
 
 		middleDownSpeedTF = new JSpinner();
-		middleDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(
-				Constants.MAX_SPEED), new Integer(100)));
+		middleDownSpeedTF.setModel(
+				new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED), new Integer(100)));
 		middleDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(middleDownSpeedTF, "cell 1 7");
 
@@ -226,8 +226,8 @@ public class SwingStarter extends JFrame {
 		defaultPanel.add(lblNewLabel_7, "cell 0 8,alignx left");
 
 		slowDownSpeedTF = new JSpinner();
-		slowDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1),
-				new Integer(Constants.MAX_SPEED), new Integer(100)));
+		slowDownSpeedTF.setModel(
+				new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_SPEED), new Integer(100)));
 		slowDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(slowDownSpeedTF, "cell 1 8");
 
@@ -288,7 +288,7 @@ public class SwingStarter extends JFrame {
 
 		lblModus = new JLabel("Modus");
 		defaultPanel.add(lblModus, "cell 0 17,alignx left");
-		
+
 		connectionModeCB = new JComboBox<Integer>();
 		connectionModeCB.addItem(1);
 		connectionModeCB.addItem(2);
@@ -299,10 +299,10 @@ public class SwingStarter extends JFrame {
 		connectionModeCB.addItem(7);
 		connectionModeCB.addItem(8);
 		defaultPanel.add(connectionModeCB, "cell 1 17,growx");
-		
+
 		lblTranslate = new JLabel("Motor-Übersetzung");
 		defaultPanel.add(lblTranslate, "cell 0 18, alignx left");
-		
+
 		translationTF = new JSpinner();
 		translationTF.setMinimumSize(new Dimension(100, 22));
 		defaultPanel.add(translationTF, "cell 1 18");
@@ -353,7 +353,7 @@ public class SwingStarter extends JFrame {
 			}
 
 			if (defaultFile.exists()) {
-				defaultProfile = propertiesHandler.readProfile(defaultFile);
+				defaultProfile = propertiesHandler.read(defaultFile);
 				if (defaultProfile != null) {
 					defaultConnectionProperties = defaultProfile.getProperties();
 				}
@@ -451,7 +451,7 @@ public class SwingStarter extends JFrame {
 			if (defaultProfile != null) {
 				ComConnectionProperties newConnectionProperties = getNewConnectionProperties();
 				setConnectionProperties(newConnectionProperties);
-				propertiesHandler.writeProfile(defaultFile, defaultProfile);
+				propertiesHandler.write(defaultFile, defaultProfile);
 			}
 
 			if (applicationProperties != null) {
@@ -515,7 +515,7 @@ public class SwingStarter extends JFrame {
 
 		int countOfStepsPerMm = (int) countOfStepPerMmTF.getValue();
 		comConnectionProperties.setStepsPerMm(countOfStepsPerMm);
-		
+
 		double translation = (double) translationTF.getValue();
 		comConnectionProperties.setTranslation(translation);
 
@@ -564,9 +564,9 @@ public class SwingStarter extends JFrame {
 
 		int countOfStepPerMm = (int) countOfStepPerMmTF.getValue();
 		allValid = validateStepCount(countOfStepPerMm, countOfStepPerMmTF);
-		
+
 		double translation = (double) translationTF.getValue();
-		//allValid = validateTranslation(translation, tanslationTF);
+		// allValid = validateTranslation(translation, tanslationTF);
 
 		int fastUpSpeed = (int) fastUpSpeedTF.getValue();
 		allValid = validateSpeed(fastUpSpeed, fastUpSpeedTF);
@@ -656,14 +656,14 @@ public class SwingStarter extends JFrame {
 
 	protected boolean validateTranslation(double translation, JComponent component) {
 		boolean allValid = false;
-		//if() {
-		//component.setBackground(Color.red);
-		//LOGGER.error("error by parsing " + component.getName());
-		//} else {
-		//allValid = true;
-		//component.setBackground(Color.white);
-		//}
+		// if() {
+		// component.setBackground(Color.red);
+		// LOGGER.error("error by parsing " + component.getName());
+		// } else {
+		// allValid = true;
+		// component.setBackground(Color.white);
+		// }
 		return allValid;
 	}
-	
+
 }

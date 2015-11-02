@@ -6,8 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ApplicationProperties {
-	private String firstName;
-	private String lastName;
+	private String firstName="";
+	private String lastName="";
 	private boolean firstUse = true;
 	private int fontSize = 20;
 

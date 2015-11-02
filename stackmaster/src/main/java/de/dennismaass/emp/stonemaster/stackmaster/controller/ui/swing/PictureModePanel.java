@@ -1,10 +1,6 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.net.URL;
 
 import javax.swing.ButtonGroup;
@@ -16,21 +12,18 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import org.apache.log4j.Logger;
 
-import net.miginfocom.swing.MigLayout;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
-import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
-import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
-
+import net.miginfocom.swing.MigLayout;
 
 /**
- * Klasse für ein Panel, welche die Automatische Steuerung eines Kameraschlittens mit Hilfe von zwei Positionen
- * und einer vorgegebenen Bilderzahl übernimmt.
+ * Klasse für ein Panel, welche die Automatische Steuerung eines
+ * Kameraschlittens mit Hilfe von zwei Positionen und einer vorgegebenen
+ * Bilderzahl übernimmt.
+ * 
  * @author Johannes
  *
  */
@@ -39,64 +32,61 @@ public class PictureModePanel extends JPanel {
 	private static final long serialVersionUID = -2137933567033802574L;
 
 	private static final Logger LOGGER = Logger.getLogger(PictureModePanel.class);
-	
+
 	private static final String IMAGES = "/images/";
 	private static final String START_LBL_TXT = "Startposition: ";
 	private static final String END_LBL_TXT = "Endposition: ";
-	
+
 	private SwingStarter starter;
-	
+
 	private double startPos, endPos;
-	
+
 	private JSpinner picSpinner;
-	
-	private JButton upButton, downButton, saveStartButton,
-		saveEndButton, moveStartButton, startButton,
-		stopButton, pauseButton, resetButton;
-	
+
+	private JButton upButton, downButton, saveStartButton, saveEndButton, moveStartButton, startButton, stopButton,
+			pauseButton, resetButton;
+
 	private JRadioButton fast, normal, slow;
 	private ButtonGroup speeds;
-	
-	private JLabel stateLine, relativLabel, autoLabel,
-		startPosLabel, endPosLabel, picCountLabel,
-		picsLabel, stepSizeDescLabel, stepSizeLabel,
-		maxPicsLabel, speedLabel;
-	
+
+	private JLabel stateLine, relativLabel, autoLabel, startPosLabel, endPosLabel, picCountLabel, picsLabel,
+			stepSizeDescLabel, stepSizeLabel, maxPicsLabel, speedLabel;
+
 	private ComConnectionProperties properties;
-	
+
 	public Font actualFont = new Font("Arial", Font.PLAIN, 20);
 
 	private ImageIcon upIcon, downIcon;
-	
+
 	private JCheckBox mirrorCheck;
-	
+
 	public PictureModePanel(ComConnectionProperties properties, final JLabel stateLine, SwingStarter starter) {
 		this.properties = properties;
 		setStateLine(stateLine);
 		this.starter = starter;
-		
+
 		this.setLayout(new MigLayout("", "[] []30[] [] []", "[]20[][][][][][]"));
-		
+
 		picSpinner = new JSpinner();
 		picSpinner.setFont(actualFont);
 		picSpinner.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		
+
 		mirrorCheck = new JCheckBox("Spiegelvorauslösung");
 		mirrorCheck.setFont(actualFont);
-		
+
 		createLabels();
 		initIcons();
 		defineButtons();
 		defineRadio();
 		assignListeners();
-		
+
 		buildLayout();
 	}
 
 	private void initIcons() {
 		URL upURL = getClass().getResource(IMAGES + "upBlue_2.png");
-		URL downURL = getClass().getResource(IMAGES+ "downBlue_2.png");
-		
+		URL downURL = getClass().getResource(IMAGES + "downBlue_2.png");
+
 		upIcon = new ImageIcon(upURL);
 		upIcon = ImageUtils.getResizedImage(upIcon, 30, 30);
 		downIcon = new ImageIcon(downURL);
@@ -105,12 +95,12 @@ public class PictureModePanel extends JPanel {
 
 	private void buildLayout() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void assignListeners() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void defineRadio() {
@@ -118,7 +108,7 @@ public class PictureModePanel extends JPanel {
 		normal = new JRadioButton("normal");
 		normal.setSelected(true);
 		slow = new JRadioButton("langsam");
-		
+
 		speeds = new ButtonGroup();
 		speeds.add(fast);
 		speeds.add(normal);
@@ -166,16 +156,16 @@ public class PictureModePanel extends JPanel {
 		upButton = new JButton(upIcon);
 		downButton = new JButton(downIcon);
 	}
-	
+
 	private void setStateLine(JLabel stateLine) {
 		this.stateLine = stateLine;
 	}
-	
-	private void initializePictureCountLabel(){
-		
+
+	private void initializePictureCountLabel() {
+
 	}
-	
-	private void actualizePictureCountLabel(){
-		
+
+	private void actualizePictureCountLabel() {
+
 	}
 }

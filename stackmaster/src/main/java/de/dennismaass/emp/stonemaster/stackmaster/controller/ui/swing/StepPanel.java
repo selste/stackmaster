@@ -15,13 +15,11 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.log4j.Logger;
 
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
-import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
+import net.miginfocom.swing.MigLayout;
 
 public class StepPanel extends JPanel {
 
@@ -43,7 +41,7 @@ public class StepPanel extends JPanel {
 	private boolean pause, stop = false;
 
 	private JLabel autoStepsizeSumLb, autoCountOfDoneRepeatsLb, stateLine, geschaetzteDauerLb, geschaetzteDauerValueLb,
-	lblErfolderlicherWeg, lblMm, label_6;
+			lblErfolderlicherWeg, lblMm, label_6;
 
 	private JButton resetBT, executionBT, stopBT, btnPause;
 	private JCheckBox mirrorCB;
@@ -421,9 +419,9 @@ public class StepPanel extends JPanel {
 		double sumDouble = Double.parseDouble(autoStepsizeSumLb.getText());
 
 		double value = sumDouble + stepDouble;
-		double multiplicateValue = value * Constants.ROUNDER;
+		double multiplicateValue = value * SwingStarter.ROUNDER;
 		double roundedValue = Math.round(multiplicateValue);
-		double roundedDividedValue = roundedValue / Constants.ROUNDER;
+		double roundedDividedValue = roundedValue / SwingStarter.ROUNDER;
 
 		setAutoSumLabel(roundedDividedValue);
 	}
@@ -475,8 +473,8 @@ public class StepPanel extends JPanel {
 
 	protected boolean validate(double stepSize) {
 		LOGGER.info("validation given step size : " + stepSize);
-		if (stepSize > Constants.MIN_STEP && stepSize < Constants.MAX_STEP) {
-			LOGGER.info("stepSize is between " + Constants.MIN_STEP + " and " + Constants.MAX_STEP + " and is valid");
+		if (stepSize > SwingStarter.MIN_STEP && stepSize < SwingStarter.MAX_STEP) {
+			LOGGER.info("stepSize is between " + SwingStarter.MIN_STEP + " and " + SwingStarter.MAX_STEP + " and is valid");
 			return true;
 		}
 		return false;

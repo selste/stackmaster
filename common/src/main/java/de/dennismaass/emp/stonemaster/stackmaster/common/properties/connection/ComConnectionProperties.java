@@ -1,5 +1,7 @@
 package de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection;
 
+import org.apache.commons.lang3.StringUtils;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,12 +9,16 @@ import lombok.Setter;
 @Setter
 public class ComConnectionProperties {
 
-	private int fastUpSpeed = 1500, middleUpSpeed = 500, slowUpSpeed = 10;
-	private int slowDownSpeed = 10, middleDownSpeed = 500, fastDownSpeed = 1500;
-	private boolean reverseRelativ = false;
+	private int fastUpSpeed = 1500;
+	private int middleUpSpeed = 500;
+	private int slowUpSpeed = 10;
+	private int slowDownSpeed = 10;
+	private int middleDownSpeed = 500;
+	private int fastDownSpeed = 1500;
+	private boolean reverseRelativ;
 
 	private int stepsPerMm = 66000;
-	private boolean reverseSteps = false;
+	private boolean reverseSteps;
 	private int microstepResolutionMode = 4;
 
 	private long sleepMovementMirror = 1000;
@@ -23,9 +29,9 @@ public class ComConnectionProperties {
 
 	private double stepSize = 0.01;
 	private double translation = 0.05;
-	private int pictureCount = 0;
-	private boolean mirrorActivated = false;
-	private String comConnectionName;
+	private int pictureCount;
+	private boolean mirrorActivated;
+	private String comConnectionName="";
 
 	public ComConnectionProperties() {
 	}

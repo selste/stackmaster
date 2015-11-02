@@ -6,8 +6,9 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PropertiesFileChooser extends JFileChooser {
+	private static final long serialVersionUID = 3124624998436602958L;
+	
 	private static String STACK_MASTER_FILE_DESCRIPTION = "StackMaster Dateien";
-	private static long serialVersionUID = -4209490203324629746L;
 	private static String FILE_ENDING = "stackmaster";
 
 	public PropertiesFileChooser() {
