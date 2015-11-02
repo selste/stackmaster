@@ -84,18 +84,17 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
 public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
 ComConnectionPropertiesListener {
 
-	private static final Color CONTENTCOLOR = new Color(0, 141, 212);
-
-	private static final Color PANELCOLOR = new Color(221, 236, 250);
- 
 	private static final long serialVersionUID = 4155209335768313320L;
 
+	private static final Color CONTENTCOLOR = new Color(0, 141, 212);
+	private static final Color PANELCOLOR = new Color(221, 236, 250);
+ 
 	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
 
 	private ComCommunicator communicator;
 
 	private Profile defaultProfile;
-	private int microstepResolutionMode = 4, stepsPerMm = 64025;
+	private int microstepResolutionMode = 4, stepsPerMm = 6403;
 
 	private ProfileFileHandler propertiesHandler;
 	private ApplicationProperties applicationProperties;
@@ -136,11 +135,10 @@ ComConnectionPropertiesListener {
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+		
 		LOGGER.info("--------------------------------------------------------");
-		LOGGER.info("os: name=" + Constants.OS_NAME + ", architecture=" + Constants.OS_ARCH + ", version="
-				+ Constants.OS_VERSION);
-		LOGGER.info("java: version=" + Constants.JAVA_VERSION + ", home=" + Constants.JAVA_HOME + ", vendor="
-				+ Constants.JAVA_VENDOR);
+		LOGGER.info("os: name=" + Constants.OS_NAME + ", architecture=" + Constants.OS_ARCH + ", version="+ Constants.OS_VERSION);
+		LOGGER.info("java: version=" + Constants.JAVA_VERSION + ", home=" + Constants.JAVA_HOME + ", vendor="+ Constants.JAVA_VENDOR);
 		LOGGER.info("--------------------------------------------------------");
 
 		addWindowListener(new WindowAdapter() {
@@ -329,7 +327,7 @@ ComConnectionPropertiesListener {
 					LOGGER.info(commPortIdentifier.getName() + " in use");
 					stateLine.setText(commPortIdentifier.getName() + " wird von einem anderen Programm verwendet");
 				} else {
-					LOGGER.info(commPortIdentifier.getName() + "not in use");
+					LOGGER.info(commPortIdentifier.getName() + " not in use");
 
 					stateLine.setText("Verbindung wird hergestellt...");
 					ComCommunicator communicator = createCommunicator(commPortIdentifier.getName());
@@ -496,8 +494,17 @@ ComConnectionPropertiesListener {
 	}
 
 	protected ComCommunicator createCommunicator(String comPortName) {
+		ComConnectionProperties defaultProperties = defaultProfile.getProperties();
+		if(defaultProperties!=null){
+			LOGGER.info("set connection properties in communicator");
+			stepsPerMm=defaultProperties.getStepsPerMm();
+		}
+		
 		ComCommunicator communicator = ComCommunicator.getInstance(comPortName, stepsPerMm);
 		communicator.addAnswerListener(this);
+		if(defaultProperties!=null){
+			communicator.setMicrostepResolution(defaultProperties.getMicrostepResolutionMode());
+		}
 		return communicator;
 	}
 
@@ -648,6 +655,7 @@ ComConnectionPropertiesListener {
 		propertiesDialog.setConnectionProperties(connectionProperties);
 
 		if (communicator != null) {
+			LOGGER.info("set connection properties in communicator");
 			communicator.setStepsPerMm(connectionProperties.getStepsPerMm());
 			communicator.setMicrostepResolution(connectionProperties.getMicrostepResolutionMode());
 		}
