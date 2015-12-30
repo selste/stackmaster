@@ -9,7 +9,7 @@ public class PropertiesValidator {
 	public static long MAX_SLEEP = Long.MAX_VALUE;
 
 	public static int MIN_SPEED = 1;
-	public static int MAX_SPEED = 2047;
+	public static int MAX_SPEED = 800;
 
 	public PropertiesValidator() {
 

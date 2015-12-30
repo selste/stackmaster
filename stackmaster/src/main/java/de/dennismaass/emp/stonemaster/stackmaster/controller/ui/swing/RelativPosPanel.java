@@ -11,13 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.log4j.Logger;
 
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
+import net.miginfocom.swing.MigLayout;
 
 public class RelativPosPanel extends JPanel {
 
@@ -48,8 +47,8 @@ public class RelativPosPanel extends JPanel {
 	private ComCommunicator communicator;
 
 	private ComConnectionProperties properties;
-	private int fastUpSpeed = 1000, middleUpSpeed = 500, slowUpSpeed = 100;
-	private int slowDownSpeed = 100, middleDownSpeed = 500, fastDownSpeed = 1000;
+	private int fastUpSpeed = 600, middleUpSpeed = 300, slowUpSpeed = 100;
+	private int slowDownSpeed = 100, middleDownSpeed = 300, fastDownSpeed = 600;
 
 	private boolean reverseRelativ = false;
 

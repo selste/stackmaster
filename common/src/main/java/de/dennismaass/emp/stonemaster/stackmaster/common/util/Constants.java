@@ -15,7 +15,7 @@ public final class Constants {
 	public static final String UNIT = "mm";
 
 	public static final double MIN_STEP = -250.0, MAX_STEP = 250.0;
-	public static final int MAX_SPEED = 2047;
+	public static final int MAX_SPEED = 800;
 
 	private Constants() {
 	}

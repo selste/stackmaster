@@ -7,11 +7,11 @@ import lombok.Setter;
 @Setter
 public class ComConnectionProperties {
 
-	private int fastUpSpeed = 1500, middleUpSpeed = 500, slowUpSpeed = 10;
-	private int slowDownSpeed = 10, middleDownSpeed = 500, fastDownSpeed = 1500;
+	private int fastUpSpeed = 600, middleUpSpeed = 300, slowUpSpeed = 10;
+	private int slowDownSpeed = 10, middleDownSpeed = 300, fastDownSpeed = 600;
 	private boolean reverseRelativ = false;
 
-	private int stepsPerMm = 64025;
+	private int stepsPerMm = 6403;
 	private boolean reverseSteps = false;
 	private int microstepResolutionMode = 4;
 

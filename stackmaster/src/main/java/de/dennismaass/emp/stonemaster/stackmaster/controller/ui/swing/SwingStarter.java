@@ -1,8 +1,5 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
-import gnu.io.CommPortIdentifier;
-import gnu.io.PortInUseException;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -42,10 +39,6 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import lombok.Getter;
-import lombok.Setter;
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -68,8 +61,13 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.
 import de.dennismaass.emp.stonemaster.stackmaster.controller.ui.utils.UiConstants;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
- 
-//TODO: 
+import gnu.io.CommPortIdentifier;
+import gnu.io.PortInUseException;
+import lombok.Getter;
+import lombok.Setter;
+import net.miginfocom.swing.MigLayout;
+
+//TODO:
 
 //Bugs:
 //- Validierung aller Textfelder
@@ -88,7 +86,7 @@ ComConnectionPropertiesListener {
 
 	private static final Color CONTENTCOLOR = new Color(0, 141, 212);
 	private static final Color PANELCOLOR = new Color(221, 236, 250);
- 
+
 	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
 
 	private ComCommunicator communicator;
@@ -112,8 +110,8 @@ ComConnectionPropertiesListener {
 	private ConnectionThread connectThread;
 	private JButton connectButton;
 	private JComboBox<CommPortIdentifier> connectionComboBox;
-//	private RelativPosPanel relativPosPanel;
-//	private StepPanel stepPanel;
+	//	private RelativPosPanel relativPosPanel;
+	//	private StepPanel stepPanel;
 	private JMenuItem mntmProfilSpeichern, mntmProfilSpeichernAls;
 	private PropertiesDialog propertiesDialog;
 	public Font actualFont = new Font("Arial", Font.PLAIN, 20);
@@ -123,7 +121,7 @@ ComConnectionPropertiesListener {
 	private AutoModePanel autoModePanel;
 
 	private ManualModePanel manualModePanel;
-	
+
 	public double position;
 
 	public SwingStarter() {
@@ -135,7 +133,7 @@ ComConnectionPropertiesListener {
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		
+
 		LOGGER.info("--------------------------------------------------------");
 		LOGGER.info("os: name=" + Constants.OS_NAME + ", architecture=" + Constants.OS_ARCH + ", version="+ Constants.OS_VERSION);
 		LOGGER.info("java: version=" + Constants.JAVA_VERSION + ", home=" + Constants.JAVA_HOME + ", vendor="+ Constants.JAVA_VENDOR);
@@ -199,20 +197,20 @@ ComConnectionPropertiesListener {
 		secondLineLabel = new JLabel("sdf");
 		welcome.add(secondLineLabel, "cell 0 2,alignx left");
 
-//		relativPosPanel = new RelativPosPanel(defaultProfile.getProperties(), stateLine);
-//		tabbedPane.addTab("relativ", null, relativPosPanel, null);
-//
-//		stepPanel = new StepPanel(defaultProfile.getProperties(), stateLine);
-//		tabbedPane.addTab("Schritte", null, stepPanel, null);
-		
+		//		relativPosPanel = new RelativPosPanel(defaultProfile.getProperties(), stateLine);
+		//		tabbedPane.addTab("relativ", null, relativPosPanel, null);
+		//
+		//		stepPanel = new StepPanel(defaultProfile.getProperties(), stateLine);
+		//		tabbedPane.addTab("Schritte", null, stepPanel, null);
+
 		manualModePanel = new ManualModePanel(defaultProfile.getProperties(), stateLine);
 		manualModePanel.setBackground(PANELCOLOR);
 		tabbedPane.addTab("Manuell", null, manualModePanel, null);
-		
+
 		autoModePanel = new AutoModePanel(defaultProfile.getProperties(), stateLine, this);
 		autoModePanel.setBackground(PANELCOLOR);
 		tabbedPane.addTab("Automatisch", null, autoModePanel, null);
-		
+
 		connectThread = createConnectionThread();
 		connectThread.start();
 
@@ -245,11 +243,11 @@ ComConnectionPropertiesListener {
 		logo1.setIcon(icon1);
 		logo1.setAlignmentX(Component.CENTER_ALIGNMENT);
 		statePanel.add(logo1);
-		
+
 		JLabel spacer1 = new JLabel("           ");
 		spacer1.setAlignmentX(Component.CENTER_ALIGNMENT);
 		statePanel.add(spacer1);
-		
+
 		JLabel logo = new JLabel();
 		URL url = getClass().getResource("/images/stackmaster_64x64.png");
 		ImageIcon icon = new ImageIcon(url);
@@ -265,7 +263,7 @@ ComConnectionPropertiesListener {
 
 		Box.createHorizontalBox();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		connectionComboBox = new JComboBox<>();
 		connectionComboBox.setPreferredSize(new Dimension(100, 22));
 		connectionComboBox.setMinimumSize(new Dimension(100, 22));
@@ -288,10 +286,10 @@ ComConnectionPropertiesListener {
 				handleConnect();
 			}
 		});
-		
+
 		stateLine = new JLabel("");
 		panel.add(stateLine);
-		
+
 	}
 
 	protected void setFavoriteConnectionIfAvailable() {
@@ -331,10 +329,12 @@ ComConnectionPropertiesListener {
 
 					stateLine.setText("Verbindung wird hergestellt...");
 					ComCommunicator communicator = createCommunicator(commPortIdentifier.getName());
+					//TODO: add own property
+					communicator.setMaxSpeed(defaultProfile.getProperties().getFastUpSpeed());
 					setCommunicator(communicator);
 
-//					relativPosPanel.setCommunicator(communicator);
-//					stepPanel.setCommunicator(communicator);
+					//					relativPosPanel.setCommunicator(communicator);
+					//					stepPanel.setCommunicator(communicator);
 					manualModePanel.setCommunicator(communicator);
 					autoModePanel.setCommunicator(communicator);
 				}
@@ -386,8 +386,8 @@ ComConnectionPropertiesListener {
 	}
 
 	private void setAllComponentsDisableState(boolean disableState) {
-//		stepPanel.setAllComponentsDisableState(disableState);
-//		relativPosPanel.setAllComponentsDisableState(disableState);
+		//		stepPanel.setAllComponentsDisableState(disableState);
+		//		relativPosPanel.setAllComponentsDisableState(disableState);
 		manualModePanel.setAllComponentsDisableState(disableState);
 		autoModePanel.disableAllComponents(disableState);
 	}
@@ -499,7 +499,7 @@ ComConnectionPropertiesListener {
 			LOGGER.info("set connection properties in communicator");
 			stepsPerMm=defaultProperties.getStepsPerMm();
 		}
-		
+
 		ComCommunicator communicator = ComCommunicator.getInstance(comPortName, stepsPerMm);
 		communicator.addAnswerListener(this);
 		if(defaultProperties!=null){
@@ -610,8 +610,8 @@ ComConnectionPropertiesListener {
 		.showMessageDialog(
 				getFrame(),
 				"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte.\n\n"
-				+ "Das Programm zur Steuerung des Stackmasters wurde in Zusammenarbeit\nvon Dennis Maaß, Karlsruhe und Johannes Müller, Saarwellingen entwickelt.",
-				"Über", JOptionPane.PLAIN_MESSAGE);
+						+ "Das Programm zur Steuerung des Stackmasters wurde in Zusammenarbeit\nvon Dennis Maaß, Karlsruhe und Johannes Müller, Saarwellingen entwickelt.",
+						"Über", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public static void main(String[] args) {
@@ -646,10 +646,10 @@ ComConnectionPropertiesListener {
 	public void setConnectionProperties(ComConnectionProperties connectionProperties) {
 		LOGGER.info("set new connection properties: " + connectionProperties);
 
-//		stepPanel.setVariablesFromProperties(connectionProperties);
-//		stepPanel.refreshDistance();
-//		stepPanel.refreshSleep();
-//		relativPosPanel.setVariablesFromProperties(connectionProperties);
+		//		stepPanel.setVariablesFromProperties(connectionProperties);
+		//		stepPanel.refreshDistance();
+		//		stepPanel.refreshSleep();
+		//		relativPosPanel.setVariablesFromProperties(connectionProperties);
 		autoModePanel.setProperties(connectionProperties);
 		manualModePanel.setProperties(connectionProperties);
 		propertiesDialog.setConnectionProperties(connectionProperties);

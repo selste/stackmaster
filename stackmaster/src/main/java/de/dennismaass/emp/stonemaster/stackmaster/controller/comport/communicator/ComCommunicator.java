@@ -1,7 +1,5 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator;
 
-import gnu.io.PortInUseException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +17,7 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.command.ins
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.ComConnection;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.bytemessage.ByteMessageEvent;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.bytemessage.ByteMessageListener;
+import gnu.io.PortInUseException;
 
 public class ComCommunicator implements ByteMessageListener {
 
@@ -33,7 +32,7 @@ public class ComCommunicator implements ByteMessageListener {
 	public static long MAX_SLEEP = Long.MAX_VALUE;
 
 	public static int MIN_SPEED = 1;
-	public static int MAX_SPEED = 2047;
+	public static int MAX_SPEED = 800;
 
 	private ComConnection connector;
 
@@ -45,7 +44,6 @@ public class ComCommunicator implements ByteMessageListener {
 		super();
 		connector = ComConnection.getInstance(comPort);
 		calculator = new Calculator(stepsPerMm, 1.0);
-		doInit();
 	}
 
 	public static ComCommunicator getInstance(String comPortName, double stepsPerMm) {
@@ -54,10 +52,6 @@ public class ComCommunicator implements ByteMessageListener {
 			communicatorMap.put(comPortName, communicator);
 		}
 		return communicatorMap.get(comPortName);
-	}
-
-	protected void doInit() {
-
 	}
 
 	public void setPositionReached(int positionInSteps) {
