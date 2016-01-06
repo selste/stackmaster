@@ -67,32 +67,19 @@ import lombok.Getter;
 import lombok.Setter;
 import net.miginfocom.swing.MigLayout;
 
-//TODO:
-
-//Bugs:
-//- Validierung aller Textfelder
-//- Kein Absturz mehr nach Trennen vom USB-Anschluss
-//- spinner problem
-
-//Features:
-//- Start-Ende (Rückkanal)
-//- nur property event wenn sich auch echt was geändert worden ist
-//- Baukasten
-//- Mehrsprachigkeit
 public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
 ComConnectionPropertiesListener {
 
 	private static final long serialVersionUID = 4155209335768313320L;
 
 	private static final Color CONTENTCOLOR = new Color(0, 141, 212);
-	private static final Color PANELCOLOR = new Color(221, 236, 250);
+	//	private static final Color PANELCOLOR = new Color(221, 236, 250);
 
 	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
 
 	private ComCommunicator communicator;
 
 	private Profile defaultProfile;
-	private int microstepResolutionMode = 4, stepsPerMm = 6403;
 
 	private ProfileFileHandler propertiesHandler;
 	private ApplicationProperties applicationProperties;
@@ -110,19 +97,25 @@ ComConnectionPropertiesListener {
 	private ConnectionThread connectThread;
 	private JButton connectButton;
 	private JComboBox<CommPortIdentifier> connectionComboBox;
-	//	private RelativPosPanel relativPosPanel;
-	//	private StepPanel stepPanel;
 	private JMenuItem mntmProfilSpeichern, mntmProfilSpeichernAls;
 	private PropertiesDialog propertiesDialog;
 	public Font actualFont = new Font("Arial", Font.PLAIN, 20);
-	private JLabel welcomeLabel, secondLineLabel, stateLine;
-	private JMenuItem mntmExit, mntmLaden, mntmberCusa, mntmEinstellungen, mnEinstellungen, mnDatei;
+	private JLabel stateLine;
+	private JMenuItem mntmExit, mntmLaden, mntmberStackmaster, mntmEinstellungen, mnEinstellungen, mnDatei;
 
 	private AutoModePanel autoModePanel;
 
 	private ManualModePanel manualModePanel;
 
 	public double position;
+
+	private RelativPosPanel2 relativPosPanel2;
+
+
+
+
+
+
 
 	public SwingStarter() {
 
@@ -158,7 +151,7 @@ ComConnectionPropertiesListener {
 		setTitle(UiConstants.TITLE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(100, 100, 855, 640);
+		setBounds(100, 100, 955, 640);
 
 		propertiesHandler = new ProfileFileHandler();
 		defaultProfile = propertiesHandler.readProfile(defaultFile);
@@ -178,38 +171,28 @@ ComConnectionPropertiesListener {
 
 		initStatePanel();
 
+
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new MigLayout());
+
+
+
 		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
-		tabbedPane.setBackground(PANELCOLOR);
-		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		centerPanel.add(tabbedPane);
+		contentPane.add(centerPanel, BorderLayout.CENTER);
 
-		JPanel welcome = new JPanel();
+		relativPosPanel2 = new RelativPosPanel2(defaultProfile.getProperties(), stateLine);
+		relativPosPanel2.setPreferredSize(new Dimension(300, 200));
+		relativPosPanel2.setSize(new Dimension(300, 200));
+		relativPosPanel2.setMaximumSize(new Dimension(300, 200));
+		centerPanel.add(relativPosPanel2);
 
-		tabbedPane.addTab("Start", null, welcome, null);
-		welcome.setLayout(new MigLayout("", "[grow,center]", "[center][][][]"));
-		welcome.setBackground(PANELCOLOR);
-
-		welcomeLabel = new JLabel();
-		welcome.add(welcomeLabel, "cell 0 0,alignx center");
-
-		JLabel platzhalter1 = new JLabel("");
-		welcome.add(platzhalter1, "cell 0 1");
-
-		secondLineLabel = new JLabel("sdf");
-		welcome.add(secondLineLabel, "cell 0 2,alignx left");
-
-		//		relativPosPanel = new RelativPosPanel(defaultProfile.getProperties(), stateLine);
-		//		tabbedPane.addTab("relativ", null, relativPosPanel, null);
-		//
-		//		stepPanel = new StepPanel(defaultProfile.getProperties(), stateLine);
-		//		tabbedPane.addTab("Schritte", null, stepPanel, null);
 
 		manualModePanel = new ManualModePanel(defaultProfile.getProperties(), stateLine);
-		manualModePanel.setBackground(PANELCOLOR);
-		tabbedPane.addTab("Manuell", null, manualModePanel, null);
+		tabbedPane.addTab("Anzahl Bilder Schritte", null, manualModePanel, null);
 
 		autoModePanel = new AutoModePanel(defaultProfile.getProperties(), stateLine, this);
-		autoModePanel.setBackground(PANELCOLOR);
-		tabbedPane.addTab("Automatisch", null, autoModePanel, null);
+		tabbedPane.addTab("Start- und Endpunkt", null, autoModePanel, null);
 
 		connectThread = createConnectionThread();
 		connectThread.start();
@@ -218,20 +201,19 @@ ComConnectionPropertiesListener {
 
 		LOGGER.info("user interface builded");
 
-		if (applicationPropertyFile.exists()) {
-
-			applicationProperties = applicationPropertiesFileHandler.read(applicationPropertyFile);
-			setNewFont(applicationProperties.getFontSize());
-		} else {
+		if (!applicationPropertyFile.exists()) {
 			LOGGER.error("No application.properties available!");
 		}
+
+		applicationProperties = applicationPropertiesFileHandler.read(applicationPropertyFile);
+		setNewFont(applicationProperties.getFontSize());
+
 		setConnectionProperties(defaultProfile.getProperties());
 
 	}
 
 	protected void initStatePanel() {
 		JPanel statePanel = new JPanel();
-		statePanel.setBackground(PANELCOLOR);
 		statePanel.setPreferredSize(new Dimension(10, 75));
 		statePanel.setMinimumSize(new Dimension(10, 75));
 		contentPane.add(statePanel, BorderLayout.SOUTH);
@@ -258,7 +240,6 @@ ComConnectionPropertiesListener {
 
 	protected void initConnectionPanel() {
 		JPanel panel = new JPanel();
-		panel.setBackground(PANELCOLOR);
 		contentPane.add(panel, BorderLayout.NORTH);
 
 		Box.createHorizontalBox();
@@ -287,7 +268,7 @@ ComConnectionPropertiesListener {
 			}
 		});
 
-		stateLine = new JLabel("");
+		stateLine = new JLabel(StringUtils.EMPTY);
 		panel.add(stateLine);
 
 	}
@@ -329,12 +310,8 @@ ComConnectionPropertiesListener {
 
 					stateLine.setText("Verbindung wird hergestellt...");
 					ComCommunicator communicator = createCommunicator(commPortIdentifier.getName());
-					//TODO: add own property
-					communicator.setMaxSpeed(defaultProfile.getProperties().getFastUpSpeed());
 					setCommunicator(communicator);
 
-					//					relativPosPanel.setCommunicator(communicator);
-					//					stepPanel.setCommunicator(communicator);
 					manualModePanel.setCommunicator(communicator);
 					autoModePanel.setCommunicator(communicator);
 				}
@@ -353,6 +330,8 @@ ComConnectionPropertiesListener {
 			}
 			if (connect) {
 				LOGGER.info("connection etablished with " + communicator.getComPort());
+				ComConnectionProperties defaultProperties = defaultProfile.getProperties();
+
 
 				connectButton.setText("Trennen");
 				stateLine.setText("Verbindung mit " + communicator.getComPort() + " hergestellt");
@@ -361,7 +340,7 @@ ComConnectionPropertiesListener {
 
 				connectThread.setRunning(false);
 
-				communicator.setMicrostepResolution(microstepResolutionMode);
+				sendInitCommandsAfterConnection(defaultProperties);
 			} else {
 				LOGGER.info("connection not etablished with " + communicator.getComPort());
 			}
@@ -381,31 +360,40 @@ ComConnectionPropertiesListener {
 		}
 	}
 
+	private void sendInitCommandsAfterConnection(ComConnectionProperties defaultProperties) {
+		communicator.setMicrostepResolution(defaultProperties.getMicrostepResolutionMode());
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		communicator.setMaxSpeed(defaultProperties.getMaxSpeed());
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		communicator.setMaxAcceleration(defaultProperties.getMaxAcceleration());
+	}
+
 	public void setCommunicator(ComCommunicator communicator) {
 		this.communicator = communicator;
 	}
 
 	private void setAllComponentsDisableState(boolean disableState) {
-		//		stepPanel.setAllComponentsDisableState(disableState);
-		//		relativPosPanel.setAllComponentsDisableState(disableState);
 		manualModePanel.setAllComponentsDisableState(disableState);
 		autoModePanel.disableAllComponents(disableState);
+		relativPosPanel2.disableAllComponents(disableState);
 	}
 
 	protected void initMenu() {
-		/** Menu */
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
 		mnDatei = new JMenu("Datei");
 		menuBar.add(mnDatei);
 
-		URL deleteURL = getClass().getResource(PathConstants.PATH_IMAGE + PathConstants.PATH_DELETE_ICON_NAME);
-		ImageIcon deleteIcon = new ImageIcon(deleteURL);
-		ImageIcon resizedDeleteIcon = ImageUtils.getResizedImage(deleteIcon, 15, 15);
-
 		mntmExit = new JMenuItem("Exit");
-		mntmExit.setIcon(resizedDeleteIcon);
 		mntmExit.addActionListener(new ActionListener() {
 
 			@Override
@@ -449,10 +437,6 @@ ComConnectionPropertiesListener {
 		mnDatei.add(mntmProfilSpeichernAls);
 		mnDatei.add(mntmExit);
 
-		URL helpURL = getClass().getResource(PathConstants.PATH_IMAGE + PathConstants.PATH_INFO_ICON_PNG);
-		ImageIcon helpIcon = new ImageIcon(helpURL);
-
-		ImageIcon resizedHelpIcon = ImageUtils.getResizedImage(helpIcon, 15, 15);
 
 		mnEinstellungen = new JMenu("Extras");
 		menuBar.add(mnEinstellungen);
@@ -468,10 +452,9 @@ ComConnectionPropertiesListener {
 			}
 		});
 
-		mntmberCusa = new JMenuItem("\u00DCber");
-		mnEinstellungen.add(mntmberCusa);
-		mntmberCusa.setIcon(resizedHelpIcon);
-		mntmberCusa.addActionListener(new ActionListener() {
+		mntmberStackmaster = new JMenuItem("\u00DCber");
+		mnEinstellungen.add(mntmberStackmaster);
+		mntmberStackmaster.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -495,16 +478,10 @@ ComConnectionPropertiesListener {
 
 	protected ComCommunicator createCommunicator(String comPortName) {
 		ComConnectionProperties defaultProperties = defaultProfile.getProperties();
-		if(defaultProperties!=null){
-			LOGGER.info("set connection properties in communicator");
-			stepsPerMm=defaultProperties.getStepsPerMm();
-		}
+		LOGGER.info("set connection properties in communicator");
 
-		ComCommunicator communicator = ComCommunicator.getInstance(comPortName, stepsPerMm);
+		ComCommunicator communicator = ComCommunicator.getInstance(comPortName, defaultProperties.getStepsPerMm());
 		communicator.addAnswerListener(this);
-		if(defaultProperties!=null){
-			communicator.setMicrostepResolution(defaultProperties.getMicrostepResolutionMode());
-		}
 		return communicator;
 	}
 
@@ -646,47 +623,29 @@ ComConnectionPropertiesListener {
 	public void setConnectionProperties(ComConnectionProperties connectionProperties) {
 		LOGGER.info("set new connection properties: " + connectionProperties);
 
-		//		stepPanel.setVariablesFromProperties(connectionProperties);
-		//		stepPanel.refreshDistance();
-		//		stepPanel.refreshSleep();
-		//		relativPosPanel.setVariablesFromProperties(connectionProperties);
 		autoModePanel.setProperties(connectionProperties);
 		manualModePanel.setProperties(connectionProperties);
+		relativPosPanel2.setProperties(connectionProperties);
 		propertiesDialog.setConnectionProperties(connectionProperties);
 
 		if (communicator != null) {
 			LOGGER.info("set connection properties in communicator");
+
+
+			//			calculateStepsPerMm(connectionProperties.getStepsPerMm(), connectionProperties.getTranslation());
+
 			communicator.setStepsPerMm(connectionProperties.getStepsPerMm());
 			communicator.setMicrostepResolution(connectionProperties.getMicrostepResolutionMode());
+			communicator.setMaxAcceleration(connectionProperties.getMaxAcceleration());
+			communicator.setMaxSpeed(connectionProperties.getMaxSpeed());
 		}
 
 		defaultProfile.setProperties(connectionProperties);
-
-		if (applicationProperties != null) {
-			String text = "Willkommen";
-			String firstName = applicationProperties.getFirstName();
-			if (StringUtils.isNotEmpty(firstName)) {
-				text += " " + firstName;
-
-				String lastName = applicationProperties.getLastName();
-				if (StringUtils.isNotEmpty(lastName)) {
-					text += " " + lastName;
-				}
-			}
-			welcomeLabel.setText(text);
-
-			String text2 = "";
-			if (!applicationProperties.isFirstUse()) {
-				text2 += "<html>" + "<br>" + "<br>" + "Ihre letzten Verbindung war mit ComAnschluss \""
-						+ defaultProfile.getProperties().getComConnectionName() + "\"<br>" + "<br>" + "<br>"
-						+ "Bei Problemen mit der Software schreiben sie uns unter support@stonemaster.eu." + "<br>"
-						+ "<br>" + "Bei Ideen zur Weiterentwicklung unter ideen@stonemaster.eu." + "</html>";
-			} else {
-				text2 += "<html>Wir wünschen Ihnen viel Spass mit dem Stackmaster!</html>";
-			}
-			secondLineLabel.setText(text2);
-		}
 	}
+
+	//	private double calculateStepsPerMm(int stepsPerMm, double translation) {
+	//		return translation/0.5*64024;
+	//	}
 
 	protected void handleSaveProperties() {
 		LOGGER.info("chosen file: " + actualOpenedProfileFile.getAbsolutePath());
@@ -763,7 +722,7 @@ ComConnectionPropertiesListener {
 		mntmLaden.setFont(new Font(f.getName(), f.getStyle(), fontSize));
 		mntmExit.setFont(new Font(f.getName(), f.getStyle(), fontSize));
 		mnDatei.setFont(new Font(f.getName(), f.getStyle(), fontSize));
-		mntmberCusa.setFont(new Font(f.getName(), f.getStyle(), fontSize));
+		mntmberStackmaster.setFont(new Font(f.getName(), f.getStyle(), fontSize));
 		mntmEinstellungen.setFont(new Font(f.getName(), f.getStyle(), fontSize));
 		mnEinstellungen.setFont(new Font(f.getName(), f.getStyle(), fontSize));
 	}

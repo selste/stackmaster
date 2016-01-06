@@ -33,8 +33,6 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.log4j.Logger;
 
 import de.dennismaass.emp.stonemaster.stackmaster.common.profile.Profile;
@@ -46,11 +44,23 @@ import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.P
 import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
 import de.dennismaass.emp.stonemaster.stackmaster.common.util.PathConstants;
 import de.dennismaass.emp.stonemaster.stackmaster.configurator.ui.utils.UiConstants;
+import net.miginfocom.swing.MigLayout;
 
 public class SwingStarter extends JFrame {
 	private final static long serialVersionUID = -6032729218147398086L;
 
 	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
+
+	public static final int MIN_HARDWARE_MODE = 1;
+	public static final int MAX_HARDWARE_MODE = 8;
+	public static final int MIN_HARDWARE_SPEED = 1;
+	public static final int MAX_HARDWARE_SPEED = 800;
+
+	public static double MIN_STEP = -250.0, MAX_STEP = 250.0;
+	public static long MIN_SLEEP = 1;
+	public static long MAX_SLEEP = Long.MAX_VALUE;
+
+
 
 	public Font font = new Font(Constants.FONT_NAME, Font.PLAIN, 20);
 
@@ -64,7 +74,7 @@ public class SwingStarter extends JFrame {
 	private JTextField firstNameTF, lastNameTF, comConnectionNameTF;
 
 	private JSpinner fastUpSpeedTF, middleUpSpeedTF, slowUpSpeedTF, fastDownSpeedTF, middleDownSpeedTF,
-	slowDownSpeedTF;
+	slowDownSpeedTF,maxSpeedTF;
 
 	private JSpinner countOfStepPerMmTF;
 	private JComboBox<Integer> connectionModeCB;
@@ -90,9 +100,9 @@ public class SwingStarter extends JFrame {
 	private JMenu menu;
 	private JMenuItem mntmExit, mntmSpeichern;
 
-	private JLabel lblTranslate;
+	private JLabel lblTranslate,lblMaxSpeed,lblMaxAcceleration;
 
-	private JSpinner translationTF;
+	private JSpinner translationTF,maxAccelerationTF;
 
 	public SwingStarter() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -100,7 +110,7 @@ public class SwingStarter extends JFrame {
 		setTitle(UiConstants.TITLE);
 		propertiesHandler = new ProfileFileHandler();
 
-		setSize(430, 694);
+		setSize(430, 770);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
 		tabbedPane = new JTabbedPane(SwingConstants.TOP);
@@ -174,7 +184,7 @@ public class SwingStarter extends JFrame {
 		defaultPanel.add(lblNewLabel_1, "cell 0 1,alignx left");
 
 		fastUpSpeedTF = new JSpinner();
-		fastUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(Constants.MAX_SPEED),
+		fastUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_HARDWARE_SPEED),
 				new Integer(100)));
 		fastUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		defaultPanel.add(fastUpSpeedTF, "cell 1 1");
@@ -185,7 +195,7 @@ public class SwingStarter extends JFrame {
 
 		middleUpSpeedTF = new JSpinner();
 		middleUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1),
-				new Integer(Constants.MAX_SPEED), new Integer(100)));
+				new Integer(MAX_HARDWARE_SPEED), new Integer(100)));
 		middleUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		defaultPanel.add(middleUpSpeedTF, "cell 1 2");
 
@@ -193,7 +203,7 @@ public class SwingStarter extends JFrame {
 		defaultPanel.add(lblNewLabel_3, "cell 0 3,alignx left");
 
 		slowUpSpeedTF = new JSpinner();
-		slowUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(Constants.MAX_SPEED),
+		slowUpSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(MAX_HARDWARE_SPEED),
 				new Integer(100)));
 		slowUpSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(slowUpSpeedTF, "cell 1 3");
@@ -209,7 +219,7 @@ public class SwingStarter extends JFrame {
 
 		fastDownSpeedTF = new JSpinner();
 		fastDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1),
-				new Integer(Constants.MAX_SPEED), new Integer(100)));
+				new Integer(MAX_HARDWARE_SPEED), new Integer(100)));
 		fastDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(fastDownSpeedTF, "cell 1 6");
 
@@ -218,7 +228,7 @@ public class SwingStarter extends JFrame {
 
 		middleDownSpeedTF = new JSpinner();
 		middleDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(
-				Constants.MAX_SPEED), new Integer(100)));
+				MAX_HARDWARE_SPEED), new Integer(100)));
 		middleDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(middleDownSpeedTF, "cell 1 7");
 
@@ -227,7 +237,7 @@ public class SwingStarter extends JFrame {
 
 		slowDownSpeedTF = new JSpinner();
 		slowDownSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1),
-				new Integer(Constants.MAX_SPEED), new Integer(100)));
+				new Integer(MAX_HARDWARE_SPEED), new Integer(100)));
 		slowDownSpeedTF.setPreferredSize(new Dimension(100, 22));
 		defaultPanel.add(slowDownSpeedTF, "cell 1 8");
 
@@ -288,7 +298,7 @@ public class SwingStarter extends JFrame {
 
 		lblModus = new JLabel("Modus");
 		defaultPanel.add(lblModus, "cell 0 17,alignx left");
-		
+
 		connectionModeCB = new JComboBox<Integer>();
 		connectionModeCB.addItem(1);
 		connectionModeCB.addItem(2);
@@ -299,13 +309,31 @@ public class SwingStarter extends JFrame {
 		connectionModeCB.addItem(7);
 		connectionModeCB.addItem(8);
 		defaultPanel.add(connectionModeCB, "cell 1 17,growx");
-		
+
 		lblTranslate = new JLabel("Motor-Übersetzung");
 		defaultPanel.add(lblTranslate, "cell 0 18, alignx left");
-		
+
 		translationTF = new JSpinner();
 		translationTF.setMinimumSize(new Dimension(100, 22));
 		defaultPanel.add(translationTF, "cell 1 18");
+
+		lblMaxSpeed = new JLabel("Maximale Geschwindigkeit");
+		defaultPanel.add(lblMaxSpeed, "cell 0 19, alignx left");
+
+		maxSpeedTF = new JSpinner();
+		maxSpeedTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1),
+				new Integer(MAX_HARDWARE_SPEED), new Integer(100)));
+		maxSpeedTF.setPreferredSize(new Dimension(100, 22));
+		defaultPanel.add(maxSpeedTF, "cell 1 19");
+
+		lblMaxAcceleration = new JLabel("Maximale Beschleunigung");
+		defaultPanel.add(lblMaxAcceleration, "cell 0 20, alignx left");
+
+		maxAccelerationTF = new JSpinner();
+		maxAccelerationTF.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1),
+				new Integer(MAX_HARDWARE_SPEED), new Integer(100)));
+		maxAccelerationTF.setPreferredSize(new Dimension(100, 22));
+		defaultPanel.add(maxAccelerationTF, "cell 1 20");
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -354,9 +382,7 @@ public class SwingStarter extends JFrame {
 
 			if (defaultFile.exists()) {
 				defaultProfile = propertiesHandler.readProfile(defaultFile);
-				if (defaultProfile != null) {
-					defaultConnectionProperties = defaultProfile.getProperties();
-				}
+				defaultConnectionProperties = defaultProfile.getProperties();
 			} else {
 				tabbedPane.setEnabledAt(1, false);
 				tabbedPane.setSelectedIndex(0);
@@ -407,37 +433,33 @@ public class SwingStarter extends JFrame {
 	}
 
 	public void refreshConnectionProperties() {
-		if (defaultConnectionProperties != null) {
-			comConnectionNameTF.setText(defaultConnectionProperties.getComConnectionName());
-			connectionModeCB.setSelectedItem(defaultConnectionProperties.getMicrostepResolutionMode());
-			countOfStepPerMmTF.setValue(defaultConnectionProperties.getStepsPerMm());
+		comConnectionNameTF.setText(defaultConnectionProperties.getComConnectionName());
+		connectionModeCB.setSelectedItem(defaultConnectionProperties.getMicrostepResolutionMode());
+		countOfStepPerMmTF.setValue(defaultConnectionProperties.getStepsPerMm());
 
-			fastUpSpeedTF.setValue(defaultConnectionProperties.getFastUpSpeed());
-			middleUpSpeedTF.setValue(defaultConnectionProperties.getMiddleUpSpeed());
-			slowUpSpeedTF.setValue(defaultConnectionProperties.getSlowUpSpeed());
-			fastDownSpeedTF.setValue(defaultConnectionProperties.getFastDownSpeed());
-			middleDownSpeedTF.setValue(defaultConnectionProperties.getMiddleDownSpeed());
-			slowDownSpeedTF.setValue(defaultConnectionProperties.getSlowDownSpeed());
-			reverseCB.setSelected(defaultConnectionProperties.isReverseSteps());
-			sleepMirrorPictureTF.setValue(defaultConnectionProperties.getSleepMirrorPicture());
-			sleepMovementMirrorTF.setValue(defaultConnectionProperties.getSleepMovementMirror());
-			sleepPictureMovementTF.setValue(defaultConnectionProperties.getSleepPictureMovement());
-			pulseDurationTF.setValue(defaultConnectionProperties.getPulseDuration());
-			translationTF.setValue(defaultConnectionProperties.getTranslation());
-		}
+		fastUpSpeedTF.setValue(defaultConnectionProperties.getFastUpSpeed());
+		middleUpSpeedTF.setValue(defaultConnectionProperties.getMiddleUpSpeed());
+		slowUpSpeedTF.setValue(defaultConnectionProperties.getSlowUpSpeed());
+		fastDownSpeedTF.setValue(defaultConnectionProperties.getFastDownSpeed());
+		middleDownSpeedTF.setValue(defaultConnectionProperties.getMiddleDownSpeed());
+		slowDownSpeedTF.setValue(defaultConnectionProperties.getSlowDownSpeed());
+		reverseCB.setSelected(defaultConnectionProperties.isReverseSteps());
+		sleepMirrorPictureTF.setValue(defaultConnectionProperties.getSleepMirrorPicture());
+		sleepMovementMirrorTF.setValue(defaultConnectionProperties.getSleepMovementMirror());
+		sleepPictureMovementTF.setValue(defaultConnectionProperties.getSleepPictureMovement());
+		pulseDurationTF.setValue(defaultConnectionProperties.getPulseDuration());
+		translationTF.setValue(defaultConnectionProperties.getTranslation());
+		maxSpeedTF.setValue(defaultConnectionProperties.getMaxSpeed());
 	}
 
 	public void refreshApplicationProperties() {
+		firstNameTF.setText(applicationProperties.getFirstName());
+		lastNameTF.setText(applicationProperties.getLastName());
+		checkBoxFirstUse.setSelected(applicationProperties.isFirstUse());
 
-		if (applicationProperties != null) {
-			firstNameTF.setText(applicationProperties.getFirstName());
-			lastNameTF.setText(applicationProperties.getLastName());
-			checkBoxFirstUse.setSelected(applicationProperties.isFirstUse());
-
-			int fontSize = applicationProperties.getFontSize();
-			checkBoxFontSize.setSelectedItem(fontSize);
-			setNewFont(fontSize);
-		}
+		int fontSize = applicationProperties.getFontSize();
+		checkBoxFontSize.setSelectedItem(fontSize);
+		setNewFont(fontSize);
 	}
 
 	protected void handleSaveProperties() {
@@ -447,19 +469,13 @@ public class SwingStarter extends JFrame {
 		LOGGER.info("try to save properties");
 		LOGGER.info("properties are valid: " + allValid);
 		if (allValid) {
+			ComConnectionProperties newConnectionProperties = getNewConnectionProperties();
+			setConnectionProperties(newConnectionProperties);
+			propertiesHandler.writeProfile(defaultFile, defaultProfile);
 
-			if (defaultProfile != null) {
-				ComConnectionProperties newConnectionProperties = getNewConnectionProperties();
-				setConnectionProperties(newConnectionProperties);
-				propertiesHandler.writeProfile(defaultFile, defaultProfile);
-			}
-
-			if (applicationProperties != null) {
-				ApplicationProperties newApplicationProperties = getNewApplicationProperties();
-				setApplicationProperties(newApplicationProperties);
-				applicationPropertiesFileHandler.write(applicationPropertyFile, applicationProperties);
-			}
-
+			ApplicationProperties newApplicationProperties = getNewApplicationProperties();
+			setApplicationProperties(newApplicationProperties);
+			applicationPropertiesFileHandler.write(applicationPropertyFile, applicationProperties);
 		}
 	}
 
@@ -490,8 +506,6 @@ public class SwingStarter extends JFrame {
 		String firstName = firstNameTF.getText();
 		comConnectionProperties.setFirstName(firstName);
 
-		System.out.println(firstName);
-
 		String lastName = lastNameTF.getText();
 		comConnectionProperties.setLastName(lastName);
 
@@ -515,7 +529,7 @@ public class SwingStarter extends JFrame {
 
 		int countOfStepsPerMm = (int) countOfStepPerMmTF.getValue();
 		comConnectionProperties.setStepsPerMm(countOfStepsPerMm);
-		
+
 		double translation = (double) translationTF.getValue();
 		comConnectionProperties.setTranslation(translation);
 
@@ -552,6 +566,12 @@ public class SwingStarter extends JFrame {
 		boolean reverseSteps = reverseCB.isSelected();
 		comConnectionProperties.setReverseSteps(reverseSteps);
 
+		int maxSpeed = (int) maxSpeedTF.getValue();
+		comConnectionProperties.setMaxSpeed(maxSpeed);
+
+		int maxAcceleration = (int) maxAccelerationTF.getValue();
+		comConnectionProperties.setMaxAcceleration(maxAcceleration);
+
 		return comConnectionProperties;
 
 	}
@@ -564,9 +584,9 @@ public class SwingStarter extends JFrame {
 
 		int countOfStepPerMm = (int) countOfStepPerMmTF.getValue();
 		allValid = validateStepCount(countOfStepPerMm, countOfStepPerMmTF);
-		
-		double translation = (double) translationTF.getValue();
-		//allValid = validateTranslation(translation, tanslationTF);
+
+		//		double translation = (double) translationTF.getValue();
+		//		allValid = validateTranslation(translation, tanslationTF);
 
 		int fastUpSpeed = (int) fastUpSpeedTF.getValue();
 		allValid = validateSpeed(fastUpSpeed, fastUpSpeedTF);
@@ -665,5 +685,5 @@ public class SwingStarter extends JFrame {
 		//}
 		return allValid;
 	}
-	
+
 }

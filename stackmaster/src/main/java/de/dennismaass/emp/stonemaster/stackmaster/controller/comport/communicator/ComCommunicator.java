@@ -21,18 +21,21 @@ import gnu.io.PortInUseException;
 
 public class ComCommunicator implements ByteMessageListener {
 
+	public static final int MIN_HARDWARE_MODE = 1;
+	public static final int MAX_HARDWARE_MODE = 8;
+	public static final int MIN_HARDWARE_SPEED = 1;
+	public static final int MAX_HARDWARE_SPEED = 800;
+
+	public static double MIN_STEP = -250.0, MAX_STEP = 250.0;
+	public static long MIN_SLEEP = MIN_HARDWARE_SPEED;
+	public static long MAX_SLEEP = Long.MAX_VALUE;
+	public static int MAX_SPEED = MAX_HARDWARE_SPEED;
+
+
 	private static Logger LOGGER = Logger.getLogger(ComCommunicator.class);
 
 	private static Map<String, ComCommunicator> communicatorMap = new HashMap<>();
 
-	public static int MIN_MODE = 1;
-	public static int MAX_MODE = 8;
-
-	public static long MIN_SLEEP = 1;
-	public static long MAX_SLEEP = Long.MAX_VALUE;
-
-	public static int MIN_SPEED = 1;
-	public static int MAX_SPEED = 800;
 
 	private ComConnection connector;
 
@@ -45,6 +48,7 @@ public class ComCommunicator implements ByteMessageListener {
 		connector = ComConnection.getInstance(comPort);
 		calculator = new Calculator(stepsPerMm, 1.0);
 	}
+
 
 	public static ComCommunicator getInstance(String comPortName, double stepsPerMm) {
 		if (!communicatorMap.containsKey(comPortName)) {
@@ -65,6 +69,9 @@ public class ComCommunicator implements ByteMessageListener {
 
 	public void setMaxSpeed(int speed) {
 		send(1, ComInstructionID.SET_AXIS_PARAMETER, ComInstructionID.SET_AXIS_PARAMETER_MAX_SPEED, 0, speed);
+	}
+	public void setMaxAcceleration (int acceleration) {
+		send(1, ComInstructionID.SET_AXIS_PARAMETER, ComInstructionID.SET_AXIS_PARAMETER_MAX_ACCELERATION, 0, acceleration);
 	}
 
 	protected void pause(long delayInMillis) {

@@ -1,0 +1,8 @@
+Version 2.02:
+- add changelog.txt
+- change gui color
+- remove start tab
+- remove duplicated manual control panel
+- add max speed property
+- add max acceleration property
+- change x64 to 64bit and x86 to 32bit

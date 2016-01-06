@@ -14,6 +14,7 @@ public class ProfileFileHandler {
 
 	public Profile readProfile(File file) {
 		ComConnectionProperties connectionProperties = propertiesFileHandler.read(file);
+		LOGGER.info("read connectionProperties: " + connectionProperties);
 
 		Profile profile = new Profile();
 		profile.setProperties(connectionProperties);

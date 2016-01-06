@@ -1,14 +1,5 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection;
 
-import gnu.io.CommPort;
-import gnu.io.CommPortIdentifier;
-import gnu.io.PortInUseException;
-import gnu.io.RXTXPort;
-import gnu.io.SerialPort;
-import gnu.io.SerialPortEvent;
-import gnu.io.SerialPortEventListener;
-import gnu.io.UnsupportedCommOperationException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -23,6 +14,14 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.bytemessage.ByteMessageListener;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.exception.ChecksumException;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
+import gnu.io.CommPort;
+import gnu.io.CommPortIdentifier;
+import gnu.io.PortInUseException;
+import gnu.io.RXTXPort;
+import gnu.io.SerialPort;
+import gnu.io.SerialPortEvent;
+import gnu.io.SerialPortEventListener;
+import gnu.io.UnsupportedCommOperationException;
 
 public class ComConnection implements SerialPortEventListener {
 
@@ -40,9 +39,6 @@ public class ComConnection implements SerialPortEventListener {
 
 	private OutputStream outputStream;
 	private InputStream inputStream;
-
-	// private int readed = 0;
-	// private byte[] readBuffer = new byte[9];
 
 	private List<ByteMessageListener> byteEventListener = new ArrayList<>();
 
@@ -183,9 +179,7 @@ public class ComConnection implements SerialPortEventListener {
 		for (int i = 0; i < 20; i++) {
 			try {
 				if (inputStream != null && inputStream.available() > 0) {
-					// System.out.println("SR: available data " + inputStream.available());
 					int readBytes = inputStream.read(temp);
-					// System.out.println("readBytes: " + readBytes);
 					int j;
 					for (j = 0; j < readBytes; j++) {
 						if (dataIndex + j < 9) {
@@ -209,15 +203,9 @@ public class ComConnection implements SerialPortEventListener {
 								send(1, ComInstructionID.MOTOR_STOP, 0, 0, 0);
 							}
 							throw new ChecksumException("Checksum-Error in " + buffer);
-							// String buff = "";
-							// for (int k = 0; k < 8; k++) {
-							// buff += buffer[k] + ", ";
-							// }
-							// buff += buffer[8];
 						}
 					}
 				} else {
-					// System.out.println("SR: waiting for data ");
 					Thread.sleep(10);
 				}
 			} catch (IOException e) {

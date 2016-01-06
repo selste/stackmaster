@@ -2,14 +2,13 @@ package de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection;
 
 public class PropertiesValidator {
 
-	public static int MIN_MODE = 1;
-	public static int MAX_MODE = 8;
-
 	public static long MIN_SLEEP = 1;
 	public static long MAX_SLEEP = Long.MAX_VALUE;
 
-	public static int MIN_SPEED = 1;
-	public static int MAX_SPEED = 800;
+	public static final int MIN_HARDWARE_MODE = 1;
+	public static final int MAX_HARDWARE_MODE = 8;
+	public static final int MIN_HARDWARE_SPEED = 1;
+	public static final int MAX_HARDWARE_SPEED = 800;
 
 	public PropertiesValidator() {
 
@@ -46,7 +45,7 @@ public class PropertiesValidator {
 	}
 
 	public boolean isValidSpeed(int value) {
-		if (value >= PropertiesValidator.MIN_SPEED && value <= PropertiesValidator.MAX_SPEED) {
+		if (value >= PropertiesValidator.MIN_HARDWARE_SPEED && value <= PropertiesValidator.MAX_HARDWARE_SPEED) {
 			return true;
 		}
 		return false;
@@ -64,7 +63,7 @@ public class PropertiesValidator {
 	}
 
 	public boolean isValidMicrostepResolutionMode(int value) {
-		if (value >= PropertiesValidator.MIN_MODE && value <= PropertiesValidator.MAX_MODE) {
+		if (value >= PropertiesValidator.MIN_HARDWARE_MODE && value <= PropertiesValidator.MAX_HARDWARE_MODE) {
 			return true;
 		}
 		return false;

@@ -33,6 +33,7 @@ public class ComInstructionID {
 	// Options for SAP commandds
 	public static int SET_AXIS_PARAMETER = 5;
 	public static int SET_AXIS_PARAMETER_MAX_SPEED = 4;
+	public static int SET_AXIS_PARAMETER_MAX_ACCELERATION = 5;
 	public static int SET_AXIS_PARAMETER_POSITION_REACHED = 8;
 	public static int SET_AXIS_PARAMETER_MICROSTEP_RESOLUTION = 140;
 

@@ -7,8 +7,8 @@ import lombok.Setter;
 @Setter
 public class ComConnectionProperties {
 
-	private int fastUpSpeed = 600, middleUpSpeed = 300, slowUpSpeed = 10;
-	private int slowDownSpeed = 10, middleDownSpeed = 300, fastDownSpeed = 600;
+	private int fastUpSpeed = 600, middleUpSpeed = 300, slowUpSpeed = 100;
+	private int slowDownSpeed = 100, middleDownSpeed = 300, fastDownSpeed = 600;
 	private boolean reverseRelativ = false;
 
 	private int stepsPerMm = 6403;
@@ -23,9 +23,13 @@ public class ComConnectionProperties {
 
 	private double stepSize = 0.01;
 	private double translation = 0.05;
+
 	private int pictureCount = 0;
 	private boolean mirrorActivated = false;
 	private String comConnectionName;
+
+	private int maxSpeed = 800;
+	private int maxAcceleration=200;
 
 	public ComConnectionProperties() {
 	}
@@ -49,7 +53,8 @@ public class ComConnectionProperties {
 		setStepSize(connectionProperties.getStepSize());
 		setStepsPerMm(connectionProperties.getStepsPerMm());
 		setTranslation(connectionProperties.getTranslation());
-
+		setMaxSpeed(connectionProperties.getMaxSpeed());
+		setMaxAcceleration(connectionProperties.getMaxAcceleration());
 	}
 
 	@Override
@@ -79,6 +84,8 @@ public class ComConnectionProperties {
 		stringBuilder.append(", mirrorActivated=" + mirrorActivated);
 		stringBuilder.append(", comConnectionName=" + comConnectionName);
 		stringBuilder.append(", translation=" + translation);
+		stringBuilder.append(", maxSpeed=" + maxSpeed);
+		stringBuilder.append(", maxAcceleration=" + maxAcceleration);
 
 		return stringBuilder.toString();
 	}

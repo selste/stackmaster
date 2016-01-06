@@ -26,52 +26,6 @@
 	<build>
 		<plugins>
 
-	<!--  FTP Properties in .m2/settings.xml-->
-			<!-- <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>ftp</id>
-						<phase>install</phase>
-						<configuration>
-							<tasks>
-								<ftp action="send" server="${ftp.host}" remotedir="${ftp.windowsremotedir}" userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}" verbose="${ftp.verbose}">
-									<fileset dir="${project.build.directory}">
-										<include name="*windows*.zip" />
-									</fileset>
-								</ftp>
-								<ftp action="send" server="${ftp.host}" remotedir="${ftp.macremotedir}" userid="${ftp.userid}" password="${ftp.password}" depends="${ftp.depends}" verbose="${ftp.verbose}">
-									<fileset dir="${project.build.directory}">
-										<include name="*mac*.zip" />
-									</fileset>
-								</ftp>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>commons-net</groupId>
-						<artifactId>commons-net</artifactId>
-						<version>1.4.1</version>
-					</dependency>
-					<dependency>
-						<groupId>ant</groupId>
-						<artifactId>ant-commons-net</artifactId>
-						<version>1.6.5</version>
-					</dependency>
-					<dependency>
-						<groupId>ant</groupId>
-						<artifactId>ant-nodeps</artifactId>
-						<version>1.6.5</version>
-					</dependency>
-				</dependencies>
-			</plugin> -->
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -79,8 +33,8 @@
 					<execution>
 						<id>windowsx86</id>
 						<configuration>
-							<descriptor>src/main/resources/assembly_windows_x86.xml</descriptor>
-							<finalName>stackmaster_novoflex_windows_x86_${project.version}</finalName>
+							<descriptor>src/main/resources/assembly_windows_32bit.xml</descriptor>
+							<finalName>stackmaster_novoflex_windows_32bit_${project.version}</finalName>
 						</configuration>
 						<phase>package</phase>
 						<goals>
@@ -90,8 +44,8 @@
 					<execution>
 						<id>windowsx64</id>
 						<configuration>
-							<descriptor>src/main/resources/assembly_windows_x64.xml</descriptor>
-							<finalName>stackmaster_novoflex_windows_x64_${project.version}</finalName>
+							<descriptor>src/main/resources/assembly_windows_64bit.xml</descriptor>
+							<finalName>stackmaster_novoflex_windows_64bit_${project.version}</finalName>
 						</configuration>
 						<phase>package</phase>
 						<goals>
@@ -101,8 +55,8 @@
 					<execution>
 						<id>macx64</id>
 						<configuration>
-							<descriptor>src/main/resources/assembly_mac_x64.xml</descriptor>
-							<finalName>stackmaster_novoflex_mac_x64_${project.version}</finalName>
+							<descriptor>src/main/resources/assembly_mac_64bit.xml</descriptor>
+							<finalName>stackmaster_novoflex_mac_64bit_${project.version}</finalName>
 						</configuration>
 						<phase>package</phase>
 						<goals>

@@ -15,13 +15,12 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import net.miginfocom.swing.MigLayout;
-
 import org.apache.log4j.Logger;
 
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionProperties;
 import de.dennismaass.emp.stonemaster.stackmaster.common.util.Constants;
 import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicator.ComCommunicator;
+import net.miginfocom.swing.MigLayout;
 
 public class StepPanel extends JPanel {
 
@@ -281,8 +280,8 @@ public class StepPanel extends JPanel {
 
 	public void refreshSleep() {
 		long sleepSum = properties.getSleepPictureMovement() + properties.getSleepMovementMirror()
-				+ (long) (properties.getSleepWhileMove() * (double) stepsizeTF.getValue())
-				+ properties.getPulseDuration();
+		+ (long) (properties.getSleepWhileMove() * (double) stepsizeTF.getValue())
+		+ properties.getPulseDuration();
 		if (mirrorCB.isSelected()) {
 			sleepSum += properties.getSleepMirrorPicture() + properties.getPulseDuration();
 		}
@@ -475,8 +474,8 @@ public class StepPanel extends JPanel {
 
 	protected boolean validate(double stepSize) {
 		LOGGER.info("validation given step size : " + stepSize);
-		if (stepSize > Constants.MIN_STEP && stepSize < Constants.MAX_STEP) {
-			LOGGER.info("stepSize is between " + Constants.MIN_STEP + " and " + Constants.MAX_STEP + " and is valid");
+		if (stepSize > ComCommunicator.MIN_STEP && stepSize < ComCommunicator.MAX_STEP) {
+			LOGGER.info("stepSize is between " + ComCommunicator.MIN_STEP + " and " + ComCommunicator.MAX_STEP + " and is valid");
 			return true;
 		}
 		return false;

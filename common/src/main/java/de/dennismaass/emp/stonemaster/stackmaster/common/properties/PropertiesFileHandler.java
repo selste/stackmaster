@@ -14,21 +14,20 @@ import org.apache.log4j.Logger;
 
 public class PropertiesFileHandler {
 	private static Logger LOGGER = Logger.getLogger(PropertiesFileHandler.class);
+	private static final String ENCODING = "UTF-8";
+	private static final String ZIP_ENTRY_NAME = "application.properties";
 
 	protected void writeProperties(File file, Properties properties) {
 		try {
 			FileOutputStream fos = new FileOutputStream(file);
 			ZipOutputStream zos = new ZipOutputStream(fos);
-			ZipEntry ze = new ZipEntry("application.properties");
+			ZipEntry ze = new ZipEntry(ZIP_ENTRY_NAME);
 			zos.putNextEntry(ze);
-			properties.storeToXML(zos, "application properties", "UTF-8");
-
+			properties.storeToXML(zos, ENCODING);
 			zos.closeEntry();
-
 			zos.close();
-
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			LOGGER.error("Error while writing properties file", ex);
 		}
 	}
 
