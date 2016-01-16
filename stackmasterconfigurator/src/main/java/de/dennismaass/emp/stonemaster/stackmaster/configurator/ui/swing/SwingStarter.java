@@ -49,7 +49,7 @@ import net.miginfocom.swing.MigLayout;
 public class SwingStarter extends JFrame {
 	private final static long serialVersionUID = -6032729218147398086L;
 
-	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
+	private static final Logger LOGGER = Logger.getLogger(SwingStarter.class);
 
 	public static final int MIN_HARDWARE_MODE = 1;
 	public static final int MAX_HARDWARE_MODE = 8;

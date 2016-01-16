@@ -36,7 +36,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class PropertiesDialog extends JDialog {
 	private static long serialVersionUID = 8974001888731772934L;
-	private static Logger LOGGER = Logger.getLogger(PropertiesDialog.class);
+	private static final Logger LOGGER = Logger.getLogger(PropertiesDialog.class);
 
 	private JPanel contentPanel = new JPanel();
 	private JCheckBox reverseCB;
@@ -51,6 +51,7 @@ public class PropertiesDialog extends JDialog {
 	private JSpinner sleepMovementMirrorTF, sleepMirrorPictureTF, sleepPictureMovementTF;
 	private JSpinner pulseDurationTF;
 	private JSpinner translateTF,maxSpeedTF,maxAccelerationTF;
+	private JSpinner baseTranslateTF,stepsPerMmTF;
 
 	boolean cancel;
 
@@ -69,7 +70,7 @@ public class PropertiesDialog extends JDialog {
 		setBounds(100, 100, 391, 431);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		getContentPane().add(contentPanel, BorderLayout.WEST);
 		contentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		addWindowListener(new WindowAdapter() {
@@ -126,6 +127,33 @@ public class PropertiesDialog extends JDialog {
 		maxAccelerationTF.setFont(actualFont);
 		panel_2.add(maxAccelerationTF, "cell 1 2,growx");
 
+		JLabel label_5 = new JLabel("");
+		label_5.setPreferredSize(new Dimension(0, 25));
+		panel_2.add(label_5, "cell 0 3");
+
+		JLabel lblbaseTranslation = new JLabel("Basis-Steigung");
+		lblbaseTranslation.setFont(actualFont);
+		panel_2.add(lblbaseTranslation, "cell 0 4");
+
+		baseTranslateTF = new JSpinner();
+		baseTranslateTF.setMinimumSize(new Dimension(100, 22));
+		baseTranslateTF.setModel(new SpinnerNumberModel(0.0,-1000.0 ,1000.0,0.1));
+		baseTranslateTF.setFont(actualFont);
+		panel_2.add(baseTranslateTF, "cell 1 4,growx");
+
+
+		JLabel lblBaseStepPerMm= new JLabel("Schritte pro mm");
+		lblBaseStepPerMm.setFont(actualFont);
+		panel_2.add(lblBaseStepPerMm, "cell 0 5");
+
+		stepsPerMmTF = new JSpinner();
+		stepsPerMmTF.setMinimumSize(new Dimension(100, 22));
+		stepsPerMmTF.setFont(actualFont);
+		panel_2.add(stepsPerMmTF, "cell 1 5,growx");
+
+
+
+
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Relativ", null, panel, null);
 		panel.setLayout(new MigLayout("", "[][grow]", "[][][][][][][][][]"));
@@ -137,7 +165,7 @@ public class PropertiesDialog extends JDialog {
 		JLabel lblNewLabel_5 = new JLabel("");
 		panel.add(lblNewLabel_5, "cell 1 0,grow");
 
-		JLabel lblSchnelleGeschw = new JLabel("schnelle Geschw.");
+		JLabel lblSchnelleGeschw = new JLabel("schnelle Geschwindigkeit");
 		lblSchnelleGeschw.setFont(actualFont);
 		panel.add(lblSchnelleGeschw, "cell 0 1,grow");
 
@@ -148,7 +176,7 @@ public class PropertiesDialog extends JDialog {
 		fastUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		panel.add(fastUpSpeedTF, "cell 1 1,growx");
 
-		JLabel lblNewLabel = new JLabel("mittlere Geschw.");
+		JLabel lblNewLabel = new JLabel("mittlere Geschwindigkeit");
 		lblNewLabel.setFont(actualFont);
 		panel.add(lblNewLabel, "cell 0 2,grow");
 
@@ -159,7 +187,7 @@ public class PropertiesDialog extends JDialog {
 		middleUpSpeedTF.setMinimumSize(new Dimension(100, 22));
 		panel.add(middleUpSpeedTF, "cell 1 2,growx");
 
-		JLabel lblNewLabel_1 = new JLabel("langsame Geschw.");
+		JLabel lblNewLabel_1 = new JLabel("langsame Geschwindigkeit");
 		lblNewLabel_1.setFont(actualFont);
 		panel.add(lblNewLabel_1, "cell 0 3,grow");
 
@@ -169,14 +197,15 @@ public class PropertiesDialog extends JDialog {
 				new Integer(1), new Integer(ComCommunicator.MAX_HARDWARE_SPEED), new Integer(100)));
 		panel.add(slowUpSpeedTF, "cell 1 3,growx");
 
-		JLabel lblNewLabel_7 = new JLabel("");
-		panel.add(lblNewLabel_7, "cell 1 4,grow");
+		JLabel label_3 = new JLabel("");
+		label_3.setPreferredSize(new Dimension(0, 25));
+		panel.add(label_3, "cell 0 4");
 
 		JLabel lblNewLabel_8 = new JLabel("Runter");
 		lblNewLabel_8.setFont(actualFont);
 		panel.add(lblNewLabel_8, "cell 0 5,grow");
 
-		JLabel lblNewLabel_2 = new JLabel("schnelle Geschw.");
+		JLabel lblNewLabel_2 = new JLabel("schnelle Geschwindigkeit");
 		lblNewLabel_2.setFont(actualFont);
 		panel.add(lblNewLabel_2, "cell 0 6,grow");
 
@@ -187,7 +216,7 @@ public class PropertiesDialog extends JDialog {
 		fastDownSpeedTF.setMinimumSize(new Dimension(100, 22));
 		panel.add(fastDownSpeedTF, "cell 1 6,growx");
 
-		JLabel lblNewLabel_3 = new JLabel("mittlere Geschw.");
+		JLabel lblNewLabel_3 = new JLabel("mittlere Geschwindigkeit");
 		lblNewLabel_3.setFont(actualFont);
 		panel.add(lblNewLabel_3, "cell 0 7,grow");
 
@@ -198,7 +227,7 @@ public class PropertiesDialog extends JDialog {
 		middleDownSpeedTF.setMinimumSize(new Dimension(100, 22));
 		panel.add(middleDownSpeedTF, "cell 1 7,growx");
 
-		JLabel lblNewLabel_4 = new JLabel("langsame Geschw.");
+		JLabel lblNewLabel_4 = new JLabel("langsame Geschwindigkeit");
 		lblNewLabel_4.setFont(actualFont);
 		panel.add(lblNewLabel_4, "cell 0 8,grow");
 
@@ -382,11 +411,17 @@ public class PropertiesDialog extends JDialog {
 		int maxSpeed = (int) maxSpeedTF.getValue();
 		comConnectionProperties.setMaxSpeed(maxSpeed);
 
-		int translation = (int) translateTF.getValue();
+		double translation = (double) translateTF.getValue();
 		comConnectionProperties.setTranslation(translation);
 
 		int maxAcceleration = (int) maxAccelerationTF.getValue();
 		comConnectionProperties.setMaxAcceleration(maxAcceleration);
+
+		double baseTranslate = (double) baseTranslateTF.getValue();
+		comConnectionProperties.setBaseTranslation(baseTranslate);
+
+		int baseStepsPerMm = (int) stepsPerMmTF.getValue();
+		comConnectionProperties.setBaseStepsPerMm(baseStepsPerMm);
 
 		return comConnectionProperties;
 
@@ -513,5 +548,7 @@ public class PropertiesDialog extends JDialog {
 		translateTF.setValue(connectionProperties.getTranslation());
 		maxSpeedTF.setValue(connectionProperties.getMaxSpeed());
 		maxAccelerationTF.setValue(connectionProperties.getMaxAcceleration());
+		baseTranslateTF.setValue(connectionProperties.getBaseTranslation());
+		stepsPerMmTF.setValue(connectionProperties.getBaseStepsPerMm());
 	}
 }

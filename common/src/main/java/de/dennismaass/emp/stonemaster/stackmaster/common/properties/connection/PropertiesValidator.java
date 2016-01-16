@@ -8,7 +8,7 @@ public class PropertiesValidator {
 	public static final int MIN_HARDWARE_MODE = 1;
 	public static final int MAX_HARDWARE_MODE = 8;
 	public static final int MIN_HARDWARE_SPEED = 1;
-	public static final int MAX_HARDWARE_SPEED = 800;
+	public static final int MAX_HARDWARE_SPEED = 1024;
 
 	public PropertiesValidator() {
 
@@ -33,7 +33,7 @@ public class PropertiesValidator {
 		if (!isValidSpeed(comConnectionProperties.getSlowDownSpeed())) {
 			return false;
 		}
-		if (!isValidStepcount(comConnectionProperties.getStepsPerMm())) {
+		if (!isValidStepcount(comConnectionProperties.getBaseStepsPerMm())) {
 			return false;
 		}
 		if (!isValidMicrostepResolutionMode(comConnectionProperties.getMicrostepResolutionMode())) {

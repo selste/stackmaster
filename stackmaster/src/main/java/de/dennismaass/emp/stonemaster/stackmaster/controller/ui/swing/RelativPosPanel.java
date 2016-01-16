@@ -22,7 +22,7 @@ public class RelativPosPanel extends JPanel {
 
 	private static final long serialVersionUID = 287824350037456067L;
 
-	private static Logger LOGGER = Logger.getLogger(RelativPosPanel.class);
+	private static final Logger LOGGER = Logger.getLogger(RelativPosPanel.class);
 
 	protected static String upSlowTooltip = "langsam [hoch]";
 	protected static String upMiddleTooltip = "mittel [hoch]";

@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.PropertiesFileHandler;
 
 public class ApplicationPropertiesFileHandler extends PropertiesFileHandler {
-	private static Logger LOGGER = Logger.getLogger(ApplicationPropertiesFileHandler.class);
+	private static final Logger LOGGER = Logger.getLogger(ApplicationPropertiesFileHandler.class);
 
 	public ApplicationProperties read(File file) {
 		LOGGER.info("Loading application.properties: " + file.getAbsolutePath());

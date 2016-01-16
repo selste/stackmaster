@@ -20,22 +20,19 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection.
 import gnu.io.PortInUseException;
 
 public class ComCommunicator implements ByteMessageListener {
+	private static final Logger LOGGER = Logger.getLogger(ComCommunicator.class);
 
 	public static final int MIN_HARDWARE_MODE = 1;
 	public static final int MAX_HARDWARE_MODE = 8;
 	public static final int MIN_HARDWARE_SPEED = 1;
-	public static final int MAX_HARDWARE_SPEED = 800;
+	public static final int MAX_HARDWARE_SPEED = 1024;
 
 	public static double MIN_STEP = -250.0, MAX_STEP = 250.0;
-	public static long MIN_SLEEP = MIN_HARDWARE_SPEED;
+	public static long MIN_SLEEP = 1;
 	public static long MAX_SLEEP = Long.MAX_VALUE;
 	public static int MAX_SPEED = MAX_HARDWARE_SPEED;
 
-
-	private static Logger LOGGER = Logger.getLogger(ComCommunicator.class);
-
 	private static Map<String, ComCommunicator> communicatorMap = new HashMap<>();
-
 
 	private ComConnection connector;
 
@@ -44,7 +41,6 @@ public class ComCommunicator implements ByteMessageListener {
 	private List<ComAnswerListener> answerListener = new ArrayList<>();
 
 	private ComCommunicator(String comPort, double stepsPerMm) {
-		super();
 		connector = ComConnection.getInstance(comPort);
 		calculator = new Calculator(stepsPerMm, 1.0);
 	}
@@ -243,5 +239,7 @@ public class ComCommunicator implements ByteMessageListener {
 	public void setStepsPerMm(double stepsPerMm) {
 		calculator = new Calculator(stepsPerMm, 1.0);
 	}
+
+
 
 }

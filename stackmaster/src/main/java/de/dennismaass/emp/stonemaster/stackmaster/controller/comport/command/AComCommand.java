@@ -10,7 +10,6 @@ public abstract class AComCommand {
 	protected int value;
 
 	public AComCommand(int address, int instruction, int value) {
-		super();
 		this.address = address;
 		this.instruction = instruction;
 		this.value = value;

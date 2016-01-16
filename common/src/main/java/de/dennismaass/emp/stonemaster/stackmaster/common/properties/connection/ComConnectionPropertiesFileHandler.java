@@ -9,10 +9,11 @@ import org.apache.log4j.Logger;
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.PropertiesFileHandler;
 
 public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
-	private static Logger LOGGER = Logger.getLogger(ComConnectionPropertiesFileHandler.class);
+	private static final Logger LOGGER = Logger.getLogger(ComConnectionPropertiesFileHandler.class);
 
 	private static final String MAX_ACCELERATION = "maxAcceleration";
 	private static final String TRANSLATION = "translation";
+	private static final String BASE_TRANSLATION = "baseTranslation";
 	private static final String MAX_SPEED = "maxSpeed";
 	private static final String PULSE_DURATION = "pulseDuration";
 	private static final String SLEEP_PICTURE_MOVEMENT = "sleepPictureMovement";
@@ -22,7 +23,7 @@ public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
 	private static final String LAST_STEP = "lastStep";
 	private static final String MICROSTEP_RESOLUTION_MODE = "microstepResolutionMode";
 	private static final String REVERSE = "reverse";
-	private static final String STEPS_PER_MM = "stepsPerMm";
+	private static final String BASE_STEPS_PER_MM = "baseStepsPerMm";
 	private static final String FAST_DOWN_SPEED = "fastDownSpeed";
 	private static final String MIDDLE_DOWN_SPEED = "middleDownSpeed";
 	private static final String SLOW_DOWN_SPEED = "slowDownSpeed";
@@ -89,10 +90,10 @@ public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
 		}
 
 		try {
-			Integer stepsPerMm = Integer.parseInt(properties.getProperty(STEPS_PER_MM));
-			comConnectionProperties.setStepsPerMm(stepsPerMm);
+			Integer stepsPerMm = Integer.parseInt(properties.getProperty(BASE_STEPS_PER_MM));
+			comConnectionProperties.setBaseStepsPerMm(stepsPerMm);
 		} catch (NumberFormatException e) {
-			LOGGER.error("error by parsing "+STEPS_PER_MM, e);
+			LOGGER.error("error by parsing "+BASE_STEPS_PER_MM, e);
 		}
 
 		try {
@@ -166,6 +167,13 @@ public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
 		}
 
 		try {
+			Double baseTranslation = Double.parseDouble(properties.getProperty(BASE_TRANSLATION));
+			comConnectionProperties.setBaseTranslation(baseTranslation);
+		} catch (NumberFormatException e) {
+			LOGGER.error("error by parsing "+BASE_TRANSLATION, e);
+		}
+
+		try {
 			Integer maxAcceleration = Integer.parseInt(properties.getProperty(MAX_ACCELERATION));
 			comConnectionProperties.setMaxAcceleration(maxAcceleration);
 		} catch (NumberFormatException e) {
@@ -195,8 +203,8 @@ public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
 		properties.setProperty(MIDDLE_DOWN_SPEED, Integer.toString(middleDownSpeed));
 		int slowDownSpeed = comConnectionProperties.getSlowDownSpeed();
 		properties.setProperty(SLOW_DOWN_SPEED, Integer.toString(slowDownSpeed));
-		int stepsPerMm = comConnectionProperties.getStepsPerMm();
-		properties.setProperty(STEPS_PER_MM, Integer.toString(stepsPerMm));
+		int stepsPerMm = comConnectionProperties.getBaseStepsPerMm();
+		properties.setProperty(BASE_STEPS_PER_MM, Integer.toString(stepsPerMm));
 		boolean reverse = comConnectionProperties.isReverseSteps();
 		properties.setProperty(REVERSE, Boolean.toString(reverse));
 		int microstepResolutionMode = comConnectionProperties.getMicrostepResolutionMode();
@@ -221,6 +229,9 @@ public class ComConnectionPropertiesFileHandler extends PropertiesFileHandler {
 
 		double translation = comConnectionProperties.getTranslation();
 		properties.setProperty(TRANSLATION, Double.toString(translation));
+
+		double baseTranslation = comConnectionProperties.getBaseTranslation();
+		properties.setProperty(BASE_TRANSLATION, Double.toString(baseTranslation));
 
 		int maxSpeed = comConnectionProperties.getMaxSpeed();
 		properties.setProperty(MAX_SPEED, Integer.toString(maxSpeed));
