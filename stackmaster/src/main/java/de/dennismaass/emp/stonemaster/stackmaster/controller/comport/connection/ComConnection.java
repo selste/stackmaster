@@ -45,8 +45,6 @@ public class ComConnection implements SerialPortEventListener {
 	private boolean stopWhenChecksumError = true;
 
 	private ComConnection(String comPortName) {
-		super();
-
 		setComPortName(comPortName);
 	}
 

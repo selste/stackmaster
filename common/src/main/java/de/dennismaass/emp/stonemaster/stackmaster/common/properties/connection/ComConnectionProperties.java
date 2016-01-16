@@ -11,13 +11,14 @@ public class ComConnectionProperties {
 	private int slowDownSpeed = 100, middleDownSpeed = 300, fastDownSpeed = 600;
 	private boolean reverseRelativ = false;
 
-	private int stepsPerMm = 6403;
+	private double baseTranslation = 0.05;
+	private int baseStepsPerMm = 6403;
 	private boolean reverseSteps = false;
 	private int microstepResolutionMode = 4;
 
 	private long sleepMovementMirror = 1000;
 	private long sleepMirrorPicture = 1000;
-	private long sleepWhileMove = 1000;
+	private long sleepWhileMove = 600;
 	private long sleepPictureMovement = 1000;
 	private long pulseDuration = 1000;
 
@@ -51,7 +52,8 @@ public class ComConnectionProperties {
 		setSlowDownSpeed(connectionProperties.getSlowDownSpeed());
 		setSlowUpSpeed(connectionProperties.getSlowUpSpeed());
 		setStepSize(connectionProperties.getStepSize());
-		setStepsPerMm(connectionProperties.getStepsPerMm());
+		setBaseStepsPerMm(connectionProperties.getBaseStepsPerMm());
+		setBaseTranslation(connectionProperties.getBaseTranslation());
 		setTranslation(connectionProperties.getTranslation());
 		setMaxSpeed(connectionProperties.getMaxSpeed());
 		setMaxAcceleration(connectionProperties.getMaxAcceleration());
@@ -69,7 +71,11 @@ public class ComConnectionProperties {
 		stringBuilder.append(", slowDownSpeed=" + slowDownSpeed);
 		stringBuilder.append(", middleDownSpeed=" + middleDownSpeed);
 
-		stringBuilder.append(", stepsPerMm=" + stepsPerMm);
+		stringBuilder.append(", baseStepsPerMm=" + baseStepsPerMm);
+		stringBuilder.append(", baseTranslation=" + baseTranslation);
+
+		stringBuilder.append(", translation=" + translation);
+
 		stringBuilder.append(", reverseSteps=" + reverseSteps);
 		stringBuilder.append(", microstepResolutionMode=" + microstepResolutionMode);
 
@@ -83,7 +89,6 @@ public class ComConnectionProperties {
 		stringBuilder.append(", pictureCount=" + pictureCount);
 		stringBuilder.append(", mirrorActivated=" + mirrorActivated);
 		stringBuilder.append(", comConnectionName=" + comConnectionName);
-		stringBuilder.append(", translation=" + translation);
 		stringBuilder.append(", maxSpeed=" + maxSpeed);
 		stringBuilder.append(", maxAcceleration=" + maxAcceleration);
 

@@ -8,7 +8,7 @@ import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.C
 import de.dennismaass.emp.stonemaster.stackmaster.common.properties.connection.ComConnectionPropertiesFileHandler;
 
 public class ProfileFileHandler {
-	private static Logger LOGGER = Logger.getLogger(ProfileFileHandler.class);
+	private static final Logger LOGGER = Logger.getLogger(ProfileFileHandler.class);
 
 	private ComConnectionPropertiesFileHandler propertiesFileHandler = new ComConnectionPropertiesFileHandler();
 

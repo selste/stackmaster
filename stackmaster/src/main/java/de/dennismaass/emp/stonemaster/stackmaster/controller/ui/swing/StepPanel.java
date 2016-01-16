@@ -26,7 +26,7 @@ public class StepPanel extends JPanel {
 
 	private static final long serialVersionUID = -2489089765486689116L;
 
-	private static Logger LOGGER = Logger.getLogger(StepPanel.class);
+	private static final Logger LOGGER = Logger.getLogger(StepPanel.class);
 
 	private ComCommunicator communicator;
 	private ComConnectionProperties properties;

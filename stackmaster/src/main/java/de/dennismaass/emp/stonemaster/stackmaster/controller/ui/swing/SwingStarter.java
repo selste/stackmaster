@@ -1,7 +1,6 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -67,15 +66,14 @@ import lombok.Getter;
 import lombok.Setter;
 import net.miginfocom.swing.MigLayout;
 
-public class SwingStarter extends JFrame implements ComAnswerListener, CommPortIdentifierNotificationListener,
-ComConnectionPropertiesListener {
+public class SwingStarter extends JFrame
+implements ComAnswerListener, CommPortIdentifierNotificationListener, ComConnectionPropertiesListener {
 
 	private static final long serialVersionUID = 4155209335768313320L;
 
-	private static final Color CONTENTCOLOR = new Color(0, 141, 212);
-	//	private static final Color PANELCOLOR = new Color(221, 236, 250);
+	//	private static final Color CONTENTCOLOR = new Color(0, 141, 212);
 
-	private static Logger LOGGER = Logger.getLogger(SwingStarter.class);
+	private static final Logger LOGGER = Logger.getLogger(SwingStarter.class);
 
 	private ComCommunicator communicator;
 
@@ -111,12 +109,6 @@ ComConnectionPropertiesListener {
 
 	private RelativPosPanel2 relativPosPanel2;
 
-
-
-
-
-
-
 	public SwingStarter() {
 
 		List<CommPortIdentifier> actualPortList = RxtxUtils.getCommPortIdentifier();
@@ -126,10 +118,11 @@ ComConnectionPropertiesListener {
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-
 		LOGGER.info("--------------------------------------------------------");
-		LOGGER.info("os: name=" + Constants.OS_NAME + ", architecture=" + Constants.OS_ARCH + ", version="+ Constants.OS_VERSION);
-		LOGGER.info("java: version=" + Constants.JAVA_VERSION + ", home=" + Constants.JAVA_HOME + ", vendor="+ Constants.JAVA_VENDOR);
+		LOGGER.info("os: name=" + Constants.OS_NAME + ", architecture=" + Constants.OS_ARCH + ", version="
+				+ Constants.OS_VERSION);
+		LOGGER.info("java: version=" + Constants.JAVA_VERSION + ", home=" + Constants.JAVA_HOME + ", vendor="
+				+ Constants.JAVA_VENDOR);
 		LOGGER.info("--------------------------------------------------------");
 
 		addWindowListener(new WindowAdapter() {
@@ -156,6 +149,8 @@ ComConnectionPropertiesListener {
 		propertiesHandler = new ProfileFileHandler();
 		defaultProfile = propertiesHandler.readProfile(defaultFile);
 
+
+		//		applicationProperties.getLocationOfLastPropertyFile();
 		propertiesDialog = createPropertiesDialog(defaultProfile.getProperties(), defaultProfile.getProperties());
 		setTitle(UiConstants.TITLE + " - defaults");
 
@@ -163,7 +158,7 @@ ComConnectionPropertiesListener {
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBackground(CONTENTCOLOR);
+		//		contentPane.setBackground(CONTENTCOLOR);
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(10, 10));
 
@@ -171,11 +166,8 @@ ComConnectionPropertiesListener {
 
 		initStatePanel();
 
-
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout(new MigLayout());
-
-
 
 		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 		centerPanel.add(tabbedPane);
@@ -187,9 +179,8 @@ ComConnectionPropertiesListener {
 		relativPosPanel2.setMaximumSize(new Dimension(300, 200));
 		centerPanel.add(relativPosPanel2);
 
-
 		manualModePanel = new ManualModePanel(defaultProfile.getProperties(), stateLine);
-		tabbedPane.addTab("Anzahl Bilder Schritte", null, manualModePanel, null);
+		tabbedPane.addTab("Anzahl Bilder", null, manualModePanel, null);
 
 		autoModePanel = new AutoModePanel(defaultProfile.getProperties(), stateLine, this);
 		tabbedPane.addTab("Start- und Endpunkt", null, autoModePanel, null);
@@ -314,6 +305,7 @@ ComConnectionPropertiesListener {
 
 					manualModePanel.setCommunicator(communicator);
 					autoModePanel.setCommunicator(communicator);
+					relativPosPanel2.setCommunicator(communicator);
 				}
 			}
 		}
@@ -332,7 +324,6 @@ ComConnectionPropertiesListener {
 				LOGGER.info("connection etablished with " + communicator.getComPort());
 				ComConnectionProperties defaultProperties = defaultProfile.getProperties();
 
-
 				connectButton.setText("Trennen");
 				stateLine.setText("Verbindung mit " + communicator.getComPort() + " hergestellt");
 				setAllComponentsDisableState(false);
@@ -340,7 +331,7 @@ ComConnectionPropertiesListener {
 
 				connectThread.setRunning(false);
 
-				sendInitCommandsAfterConnection(defaultProperties);
+				sendInitCommands(defaultProperties);
 			} else {
 				LOGGER.info("connection not etablished with " + communicator.getComPort());
 			}
@@ -360,20 +351,36 @@ ComConnectionPropertiesListener {
 		}
 	}
 
-	private void sendInitCommandsAfterConnection(ComConnectionProperties defaultProperties) {
-		communicator.setMicrostepResolution(defaultProperties.getMicrostepResolutionMode());
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	private void sendInitCommands(ComConnectionProperties defaultProperties) {
+		if (communicator != null) {
+			LOGGER.info("set new connection properties");
+			LOGGER.info(defaultProperties);
+
+			double stepsPerMm = calculateStepsPerMm(defaultProperties.getBaseStepsPerMm(),
+					defaultProperties.getBaseTranslation(), defaultProperties.getTranslation());
+
+			LOGGER.info("set "+stepsPerMm+" steps per mm");
+			communicator.setStepsPerMm(stepsPerMm);
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			communicator.setMicrostepResolution(defaultProperties.getMicrostepResolutionMode());
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			communicator.setMaxSpeed(defaultProperties.getMaxSpeed());
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			communicator.setMaxAcceleration(defaultProperties.getMaxAcceleration());
 		}
-		communicator.setMaxSpeed(defaultProperties.getMaxSpeed());
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		communicator.setMaxAcceleration(defaultProperties.getMaxAcceleration());
+
 	}
 
 	public void setCommunicator(ComCommunicator communicator) {
@@ -437,7 +444,6 @@ ComConnectionPropertiesListener {
 		mnDatei.add(mntmProfilSpeichernAls);
 		mnDatei.add(mntmExit);
 
-
 		mnEinstellungen = new JMenu("Extras");
 		menuBar.add(mnEinstellungen);
 
@@ -480,7 +486,7 @@ ComConnectionPropertiesListener {
 		ComConnectionProperties defaultProperties = defaultProfile.getProperties();
 		LOGGER.info("set connection properties in communicator");
 
-		ComCommunicator communicator = ComCommunicator.getInstance(comPortName, defaultProperties.getStepsPerMm());
+		ComCommunicator communicator = ComCommunicator.getInstance(comPortName, defaultProperties.getBaseStepsPerMm());
 		communicator.addAnswerListener(this);
 		return communicator;
 	}
@@ -583,9 +589,7 @@ ComConnectionPropertiesListener {
 	}
 
 	protected void handleOverUs() {
-		JOptionPane
-		.showMessageDialog(
-				getFrame(),
+		JOptionPane.showMessageDialog(getFrame(),
 				"\"StackMaster\" ist ein Produkt aus der Produktreihe \"stonemaster\" \n der Firma E-mP Ernst-mechanische Produkte.\n\n"
 						+ "Das Programm zur Steuerung des Stackmasters wurde in Zusammenarbeit\nvon Dennis Maaß, Karlsruhe und Johannes Müller, Saarwellingen entwickelt.",
 						"Über", JOptionPane.PLAIN_MESSAGE);
@@ -628,24 +632,16 @@ ComConnectionPropertiesListener {
 		relativPosPanel2.setProperties(connectionProperties);
 		propertiesDialog.setConnectionProperties(connectionProperties);
 
-		if (communicator != null) {
-			LOGGER.info("set connection properties in communicator");
-
-
-			//			calculateStepsPerMm(connectionProperties.getStepsPerMm(), connectionProperties.getTranslation());
-
-			communicator.setStepsPerMm(connectionProperties.getStepsPerMm());
-			communicator.setMicrostepResolution(connectionProperties.getMicrostepResolutionMode());
-			communicator.setMaxAcceleration(connectionProperties.getMaxAcceleration());
-			communicator.setMaxSpeed(connectionProperties.getMaxSpeed());
-		}
-
 		defaultProfile.setProperties(connectionProperties);
+
+		sendInitCommands(connectionProperties);
 	}
 
-	//	private double calculateStepsPerMm(int stepsPerMm, double translation) {
-	//		return translation/0.5*64024;
-	//	}
+	private double calculateStepsPerMm(int baseStepsPerMm, double baseTranslation, double translation) {
+		double stepsPerMm = (baseTranslation/translation) *baseStepsPerMm;
+		LOGGER.info("baseStepsPerMm= "+baseStepsPerMm+", baseTranslation="+baseTranslation+",translation="+translation+" -> stepsPerMm="+stepsPerMm);
+		return stepsPerMm;
+	}
 
 	protected void handleSaveProperties() {
 		LOGGER.info("chosen file: " + actualOpenedProfileFile.getAbsolutePath());

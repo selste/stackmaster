@@ -1,11 +1,10 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.comport.connection;
 
-import gnu.io.CommPortIdentifier;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.RxtxUtils;
+import gnu.io.CommPortIdentifier;
 
 public class ConnectionThread extends Thread {
 	private List<CommPortIdentifier> portList = new ArrayList<>();
@@ -15,13 +14,10 @@ public class ConnectionThread extends Thread {
 	private boolean running = true;
 
 	public ConnectionThread(int delay) {
-		this();
 		this.delay = delay;
 	}
 
-	public ConnectionThread() {
-		super();
-	}
+	public ConnectionThread() {}
 
 	@Override
 	public void run() {

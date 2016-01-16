@@ -1,10 +1,12 @@
 package de.dennismaass.emp.stonemaster.stackmaster.controller.ui.swing;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -26,10 +28,9 @@ public class ManualModePanel extends JPanel {
 
 	private static final long serialVersionUID = 5989898071317069721L;
 
-	private static Logger LOGGER = Logger.getLogger(ManualModePanel.class);
+	private static final Logger LOGGER = Logger.getLogger(ManualModePanel.class);
 
-	private JButton pauseButton,
-	stopButton, resetButton, executeButton;
+	private JButton pauseButton,stopButton, resetButton, executeButton;
 
 	public Font actualFont = new Font("Arial", Font.PLAIN, 20);
 
@@ -49,23 +50,26 @@ public class ManualModePanel extends JPanel {
 	private JSpinner stepSpinner, picSpinner;
 
 	private DecimalFormat df = new DecimalFormat("0.0000");
+	private DecimalFormat df2 = new DecimalFormat("0.0000");
 
 	protected boolean pause, stop, reverseStep = false;
 
 	protected double lastManStep;
 
-	private long sleepMovementMirror = 1000l, sleepMirrorPicture = 1000l, sleepWhileMove = 1000l,
-			sleepPictureMovement = 1000l, pulseDuration = 1000l;
+	private long sleepMovementMirror = 1000;
+	private long sleepMirrorPicture = 1000;
+	private long sleepOneMmWhileMoveWithThousand = 600;
+	private long sleepPictureMovement = 1000;
+	private long pulseDuration = 1000;
 
 	public ManualModePanel(ComConnectionProperties properties, final JLabel stateLine) {
 		this.properties = properties;
 
 		sleepMovementMirror = properties.getSleepMovementMirror();
 		sleepMirrorPicture = properties.getSleepMirrorPicture();
-		sleepWhileMove = properties.getSleepWhileMove();
+		sleepOneMmWhileMoveWithThousand = properties.getSleepWhileMove();
 		sleepPictureMovement = properties.getSleepPictureMovement();
 		pulseDuration = properties.getPulseDuration();
-
 		this.setLayout(new MigLayout("", "[] []30[] [] []", "[]20[] [] [] [] [] [] []10[] []"));
 
 		checkMirror = new JCheckBox("Spiegelvorauslösung");
@@ -104,18 +108,29 @@ public class ManualModePanel extends JPanel {
 		add(pauseButton, "wrap");
 		pauseButton.setEnabled(false);
 
-		add(picsTakenLabel, "cell 2 5, right");
+		JLabel label_5 = new JLabel("");
+		label_5.setPreferredSize(new Dimension(0, 25));
+		add(label_5, "cell 2 6");
+
+
+		add(picsTakenLabel, "cell 2 7, right");
 		add(picsNumberLabel, "left, wrap");
 
-		add(pathTraveledLabel, "cell 2 6, right");
+		add(pathTraveledLabel, "cell 2 8, right");
 		add(pathDistanceLabel, "left, wrap");
 
-		add(resetButton, "cell 3 7, left, wrap");
+		add(resetButton, "cell 3 9, left, wrap");
 
-		add(assumedTimeLabel, "cell 2 8, right");
+
+		JLabel label_6 = new JLabel("");
+		label_6.setPreferredSize(new Dimension(0, 25));
+		add(label_6, "cell 2 10");
+
+
+		add(assumedTimeLabel, "cell 2 11, right");
 		add(timeNumberLabel, "wrap");
 
-		add(nessecaryPathLengthLabel, "cell 2 9, right");
+		add(nessecaryPathLengthLabel, "cell 2 12, right");
 		add(pathLengthLabel, "wrap");
 
 	}
@@ -135,7 +150,7 @@ public class ManualModePanel extends JPanel {
 		picsNumberLabel.setFont(actualFont);
 		pathTraveledLabel = new JLabel("Zurückgelegter Weg: ");
 		pathTraveledLabel.setFont(actualFont);
-		pathDistanceLabel = new JLabel("0.0 mm");
+		pathDistanceLabel = new JLabel("0,0000 mm");
 		pathDistanceLabel.setFont(actualFont);
 		assumedTimeLabel = new JLabel("Geschätze Dauer: ");
 		assumedTimeLabel.setFont(actualFont);
@@ -150,13 +165,13 @@ public class ManualModePanel extends JPanel {
 	private void declareButtons() {
 		LOGGER.debug("creating normal Buttons.");
 
-		pauseButton = new JButton("pause");
+		pauseButton = new JButton("Pause");
 		pauseButton.setFont(actualFont);
-		stopButton = new JButton("stop");
+		stopButton = new JButton("Stop");
 		stopButton.setFont(actualFont);
-		resetButton = new JButton("reset");
+		resetButton = new JButton("Reset");
 		resetButton.setFont(actualFont);
-		executeButton = new JButton("ausführen");
+		executeButton = new JButton("Start");
 		executeButton.setFont(actualFont);
 	}
 
@@ -218,7 +233,7 @@ public class ManualModePanel extends JPanel {
 								if (countOfPictures > 1) {
 
 									Thread job = createJob(stepSize, countOfPictures, sleepMovementMirror,
-											sleepMirrorPicture, sleepPictureMovement, sleepWhileMove, pulseDuration);
+											sleepMirrorPicture, sleepPictureMovement, sleepOneMmWhileMoveWithThousand, pulseDuration,properties.getMaxSpeed());
 									job.start();
 								}
 
@@ -273,7 +288,7 @@ public class ManualModePanel extends JPanel {
 	}
 
 	protected void resetAutoSum() {
-		pathDistanceLabel.setText("0.0 mm");
+		pathDistanceLabel.setText("0,0000 mm");
 	}
 
 	protected void resetAutoCountOfRepeats() {
@@ -281,8 +296,8 @@ public class ManualModePanel extends JPanel {
 	}
 
 	protected Thread createJob(final double stepSize, final int countOfPictures, final long sleepMovementMirror,
-			final long sleepMirrorPicture, final long sleepPictureMovement, final long sleepWhileMove,
-			final long pulseDuration) {
+			final long sleepMirrorPicture, final long sleepPictureMovement, final long sleepOneMmWhileMoveWithThousand,
+			final long pulseDuration,final int maxSpeed) {
 		Thread job = new Thread() {
 			@Override
 			public void run() {
@@ -321,7 +336,7 @@ public class ManualModePanel extends JPanel {
 
 					refreshAutoSumLabel();
 
-					pause((int) (sleepWhileMove * Math.abs(moveStep)) + sleepMovementMirror);
+					pause((int) ((sleepOneMmWhileMoveWithThousand*1000/maxSpeed) * Math.abs(moveStep)) + sleepMovementMirror);
 				}
 				//picture
 				if (!stop) {
@@ -345,7 +360,13 @@ public class ManualModePanel extends JPanel {
 	protected void refreshAutoSumLabel() {
 		double stepDouble = (double) stepSpinner.getValue();
 		String[] val = pathDistanceLabel.getText().split(" ", 2);
-		double sumDouble = Double.parseDouble(val[0]);
+
+		double sumDouble=0.0;
+		try {
+			sumDouble = df2.parse(val[0]).doubleValue();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		double value = sumDouble + stepDouble;
 		double multiplicateValue = value * Constants.ROUNDER;
@@ -356,7 +377,7 @@ public class ManualModePanel extends JPanel {
 	}
 
 	protected void setAutoSumLabel(double value) {
-		pathDistanceLabel.setText(Double.toString(value) + " mm");
+		pathDistanceLabel.setText(df2.format(value) + " mm");
 	}
 
 	protected void move(double moveStep) {
@@ -447,7 +468,7 @@ public class ManualModePanel extends JPanel {
 
 	public void refreshSleep() {
 		long sleepSum = properties.getSleepPictureMovement() + properties.getSleepMovementMirror()
-		+ (long) (properties.getSleepWhileMove() * (double) stepSpinner.getValue())
+		+ (long) ((properties.getSleepWhileMove()*1000/properties.getMaxSpeed()) * (double) stepSpinner.getValue())
 		+ properties.getPulseDuration();
 		if (checkMirror.isSelected()) {
 			sleepSum += properties.getSleepMirrorPicture() + properties.getPulseDuration();
@@ -487,7 +508,7 @@ public class ManualModePanel extends JPanel {
 	public void setVariablesFromProperties(ComConnectionProperties properties) {
 		sleepMovementMirror = properties.getSleepMovementMirror();
 		sleepMirrorPicture = properties.getSleepMirrorPicture();
-		sleepWhileMove = properties.getSleepWhileMove();
+		sleepOneMmWhileMoveWithThousand = properties.getSleepWhileMove();
 		sleepPictureMovement = properties.getSleepPictureMovement();
 		pulseDuration = properties.getPulseDuration();
 		reverseStep = properties.isReverseSteps();

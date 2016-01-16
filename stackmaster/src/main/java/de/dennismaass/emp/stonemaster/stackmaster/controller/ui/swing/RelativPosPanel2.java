@@ -22,7 +22,7 @@ import de.dennismaass.emp.stonemaster.stackmaster.controller.comport.communicato
 import de.dennismaass.emp.stonemaster.stackmaster.controller.util.ImageUtils;
 
 public class RelativPosPanel2 extends JPanel {
-	private static Logger LOGGER = Logger.getLogger(ManualModePanel.class);
+	private static final Logger LOGGER = Logger.getLogger(RelativPosPanel2.class);
 
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private static final String IMAGES = "/images/";
@@ -153,10 +153,10 @@ public class RelativPosPanel2 extends JPanel {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// if (communicator != null) {
-				LOGGER.info("stopping motor");
-				// communicator.stop();
-				// }
+				if (communicator != null) {
+					LOGGER.info("stopping motor");
+					communicator.stop();
+				}
 			}
 		});
 	}
