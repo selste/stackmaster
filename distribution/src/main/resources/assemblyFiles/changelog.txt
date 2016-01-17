@@ -1,6 +1,6 @@
 Version 2.0.3:
 - delete configuration project
-- delete web projec
+- delete web project
 - bugfixings
 - build in base-translation and stepsPerMM
 - improve UI
